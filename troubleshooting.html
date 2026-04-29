@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Printing Troubleshooting Guide — Fix Common Print Problems | 3D Print Starter</title>
+  <meta name="description" content="Fix common 3D printing problems: bed adhesion, stringing, warping, layer shifting, and more. Visual troubleshooting guide with step-by-step solutions for beginners.">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="getting-started.html">Getting Started</a></li>
+      <li><a href="printers.html">Best Printers</a></li>
+      <li><a href="filament-guide.html">Filament Guide</a></li>
+      <li><a href="troubleshooting.html" class="active">Troubleshooting</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container"><div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Troubleshooting</div></div>
+
+<div class="container content-layout">
+  <main class="content-main">
+    <h1>3D Printing Troubleshooting: Fix Every Common Problem</h1>
+    <p class="meta">📅 Updated April 2026 · ⏱️ 10 min read</p>
+    <p>Every 3D printer owner runs into problems. The key is knowing <strong>why</strong> the problem happened and how to fix it — fast. This guide covers the 8 most common issues.</p>
+
+    <div class="ad-placeholder inline">📢 Advertisement</div>
+
+    <h2 id="adhesion">#1: Print Not Sticking to the Bed</h2>
+    <p><strong>What you see:</strong> The first layer lifts off, curls up, or the print completely detaches mid-print.</p>
+    <p><strong>This is the #1 beginner problem.</strong> Here's how to fix it:</p>
+    <ol>
+      <li><strong>Clean the bed</strong> — Wipe with 90%+ isopropyl alcohol. Finger oils are invisible adhesion killers.</li>
+      <li><strong>Level your bed</strong> — Even with auto-leveling, a poorly trammed bed causes adhesion issues. Re-level manually.</li>
+      <li><strong>Adjust Z-offset</strong> — The nozzle is probably too far from the bed. Lower Z-offset by 0.05-0.1mm.</li>
+      <li><strong>Increase bed temperature</strong> — PLA: 60°C, PETG: 80°C</li>
+      <li><strong>Use adhesion aids</strong> — Glue stick (for PETG on glass), blue painter's tape, or PEI sheet upgrade</li>
+      <li><strong>Add a brim</strong> — In your slicer, add a 5-8mm brim for extra first-layer surface area</li>
+    </ol>
+
+    <div class="tip-box"><strong>💡 Quick Fix:</strong> If nothing else works, slow down the first layer to 20mm/s and increase first layer height to 0.3mm. This alone fixes 50% of adhesion problems.</div>
+
+    <h2 id="stringing">#2: Stringing / Oozing</h2>
+    <p><strong>What you see:</strong> Thin plastic strands between parts of your print, like spider webs.</p>
+    <ol>
+      <li><strong>Enable retraction</strong> — In Cura, set Retraction Distance to 5-6mm (Bowden) or 1-2mm (Direct Drive)</li>
+      <li><strong>Lower nozzle temperature</strong> — Try dropping 5°C at a time. Less heat = less oozing.</li>
+      <li><strong>Increase travel speed</strong> — Set travel speed to 150-200mm/s</li>
+      <li><strong>Dry your filament</strong> — Wet filament strings more</li>
+    </ol>
+
+    <h2 id="warping">#3: Warping / Curling</h2>
+    <p><strong>What you see:</strong> The bottom corners of your print curl upward, lifting off the bed.</p>
+    <ol>
+      <li><strong>Use a heated bed</strong> — PLA at 60°C is the minimum</li>
+      <li><strong>Eliminate drafts</strong> — Turn off fans, close windows, avoid AC vents near the printer</li>
+      <li><strong>Add a brim or raft</strong> — Gives the corners something to hold onto</li>
+      <li><strong>Use an enclosure</strong> — Even a cardboard box over the printer helps for ABS/PETG</li>
+      <li><strong>Reduce infill</strong> — Less internal plastic = less shrinkage force</li>
+    </ol>
+
+    <div class="ad-placeholder inline">📢 Advertisement</div>
+
+    <h2 id="layer-shift">#4: Layer Shifting</h2>
+    <p><strong>What you see:</strong> The print suddenly shifts horizontally, like a misaligned stack of pancakes.</p>
+    <ol>
+      <li><strong>Check belt tension</strong> — Belts should be tight like a guitar string, not loose</li>
+      <li><strong>Check for obstructions</strong> — Make sure cables aren't snagging</li>
+      <li><strong>Lower acceleration & jerk</strong> — Start with acceleration at 500mm/s²</li>
+      <li><strong>Check stepper drivers</strong> — Overheating drivers cause missed steps</li>
+    </ol>
+
+    <h2 id="blobs">#5: Blobs & Zits</h2>
+    <p><strong>What you see:</strong> Random bumps and blobs on the surface of your print.</p>
+    <ol>
+      <li><strong>Dry your filament</strong> — Moisture popping causes blobs</li>
+      <li><strong>Adjust retraction</strong> — Too much retraction can cause blobs on resume</li>
+      <li><strong>Disable "Power Loss Recovery"</strong> — On some printers, this causes micro-pauses</li>
+      <li><strong>Reduce print speed</strong> — If your printer's processor can't keep up</li>
+    </ol>
+
+    <h2 id="under-extrusion">#6: Under-Extrusion</h2>
+    <p><strong>What you see:</strong> Thin layers, gaps in walls, weak and brittle prints.</p>
+    <ol>
+      <li><strong>Check for clogs</strong> — Perform a cold pull to clean the nozzle</li>
+      <li><strong>Check extruder tension</strong> — The extruder gear should grip the filament firmly</li>
+      <li><strong>Check filament diameter</strong> — Should be 1.75mm (measure with calipers)</li>
+      <li><strong>Calibrate E-steps</strong> — Mark 100mm of filament, tell printer to extrude 100mm, measure actual</li>
+      <li><strong>Increase flow rate</strong> — In slicer, bump flow to 105%</li>
+    </ol>
+
+    <h2 id="overheating">#7: Overheating / Poor Overhangs</h2>
+    <p><strong>What you see:</strong> Droopy bridges, curled overhangs, melted-looking details.</p>
+    <ol>
+      <li><strong>Improve cooling</strong> — Make sure the part cooling fan is at 100% for PLA</li>
+      <li><strong>Print a temperature tower</strong> — Find the lowest temp that still works for your filament</li>
+      <li><strong>Print cooler</strong> — Drop nozzle temp 5-10°C</li>
+      <li><strong>Slow down for overhangs</strong> — Set overhang speed to 50% in your slicer</li>
+    </ol>
+
+    <h2 id="elephant-foot">#8: Elephant's Foot</h2>
+    <p><strong>What you see:</strong> The bottom layers bulge outward more than the rest of the print.</p>
+    <ol>
+      <li><strong>Lower bed temperature</strong> — Drop 5°C at a time (PLA: 50°C may work)</li>
+      <li><strong>Adjust Z-offset</strong> — You might be too close to the bed</li>
+      <li><strong>Use "Initial Layer Horizontal Expansion"</strong> — Set to -0.15mm in Cura</li>
+      <li><strong>Add a chamfer</strong> — If designing your own models, add a 0.5mm chamfer to bottom edges</li>
+    </ol>
+
+    <div class="ad-placeholder inline">📢 Advertisement</div>
+
+    <h2>When to Ask for Help</h2>
+    <p>Some problems are beyond basic troubleshooting. If you've tried every fix and nothing works, post in <strong>r/3Dprinting</strong> or <strong>r/FixMyPrint</strong> on Reddit. Include a clear photo and details about your printer, filament, and settings.</p>
+    <p>The 3D printing community is incredibly helpful — don't be shy about asking!</p>
+
+  </main>
+  <aside class="content-sidebar">
+    <div class="sidebar-card"><h4>📑 Common Problems</h4><ul>
+      <li><a href="#adhesion">#1 Bed Adhesion</a></li>
+      <li><a href="#stringing">#2 Stringing</a></li>
+      <li><a href="#warping">#3 Warping</a></li>
+      <li><a href="#layer-shift">#4 Layer Shift</a></li>
+      <li><a href="#blobs">#5 Blobs & Zits</a></li>
+      <li><a href="#under-extrusion">#6 Under-Extrusion</a></li>
+      <li><a href="#overheating">#7 Overheating</a></li>
+      <li><a href="#elephant-foot">#8 Elephant's Foot</a></li>
+    </ul></div>
+    <div class="ad-placeholder sidebar">📢 Ad Space</div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Honest reviews and easy tutorials for 3D printing beginners.</p></div>
+      <div class="footer-col"><h4>Learn</h4><ul><li><a href="getting-started.html">Getting Started</a></li><li><a href="printers.html">Best Printers</a></li><li><a href="filament-guide.html">Filament Guide</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="troubleshooting.html">Troubleshooting</a></li><li><a href="projects.html">Project Ideas</a></li><li><a href="about.html">About Us</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="about.html#contact">Contact</a></li><li><a href="about.html#privacy">Privacy Policy</a></li><li><a href="about.html#terms">Terms of Use</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

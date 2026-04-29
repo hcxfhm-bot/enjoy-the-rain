@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with 3D Printing — The Complete Beginner's Guide | 3D Print Starter</title>
+  <meta name="description" content="A complete step-by-step guide to 3D printing for absolute beginners. Learn what 3D printing is, how to choose your first printer, essential tools, and get your first successful print.">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="getting-started.html" class="active">Getting Started</a></li>
+      <li><a href="printers.html">Best Printers</a></li>
+      <li><a href="filament-guide.html">Filament Guide</a></li>
+      <li><a href="troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Getting Started</div>
+</div>
+
+<div class="container content-layout">
+  <main class="content-main">
+    <h1>The Complete Beginner's Guide to 3D Printing</h1>
+    <p class="meta">📅 Updated April 2026 · ⏱️ 12 min read</p>
+
+    <p>So you want to get into 3D printing? You've come to the right place. This guide walks you through <strong>everything</strong> you need to know — no prior experience required.</p>
+
+    <div class="ad-placeholder inline">📢 Advertisement</div>
+
+    <h2 id="what-is">What Is 3D Printing?</h2>
+    <p>3D printing (also called additive manufacturing) is the process of creating a physical object from a digital 3D model. Think of it like a hot glue gun controlled by a robot — it builds objects <strong>layer by layer</strong> from the bottom up.</p>
+    <p>The most common type for beginners is FDM (Fused Deposition Modeling). It works by melting plastic filament and extruding it through a tiny nozzle, tracing each layer until the object is complete.</p>
+
+    <div class="tip-box">
+      <strong>💡 Quick Tip:</strong> If you've ever used a hot glue gun, you already understand the basic concept of FDM 3D printing. The printer just does it with incredible precision.
+    </div>
+
+    <h2 id="types">FDM vs Resin: Which Is Best for Beginners?</h2>
+    <p>There are two main types of consumer 3D printers:</p>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>FDM (Filament)</th><th>Resin (SLA/DLP)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>How it works</strong></td><td>Melts plastic filament</td><td>Cures liquid resin with UV light</td></tr>
+        <tr><td><strong>Cost</strong></td><td>$150 - $500+</td><td>$200 - $600+</td></tr>
+        <tr><td><strong>Ease of use</strong></td><td>⭐ Beginner-friendly</td><td>⚠️ Messy, requires safety gear</td></tr>
+        <tr><td><strong>Detail level</strong></td><td>Good for functional parts</td><td>Excellent for miniatures</td></tr>
+        <tr><td><strong>Best for</strong></td><td>Tools, toys, prototypes</td><td>Miniatures, jewelry, dental</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Our recommendation for beginners:</strong> Start with FDM. It's cheaper, safer, easier to learn, and the filament is widely available.</p>
+
+    <div class="ad-placeholder inline">📢 Advertisement</div>
+
+    <h2 id="first-printer">How to Choose Your First 3D Printer</h2>
+    <p>When buying your first 3D printer, focus on these factors:</p>
+    <ol>
+      <li><strong>Budget</strong> — A good beginner printer costs $200-$350. The sweet spot is around $250.</li>
+      <li><strong>Build volume</strong> — Most beginners are happy with 220×220×250mm. Bigger isn't always better.</li>
+      <li><strong>Auto bed leveling</strong> — This feature alone will save you hours of frustration. Get it.</li>
+      <li><strong>Community support</strong> — Printers like the Ender 3 and Neptune 4 have massive communities. This matters when you need help.</li>
+      <li><strong>Assembly required vs pre-built</strong> — Pre-built is easier, but kits teach you how the machine works.</li>
+    </ol>
+    <p>👉 Check our <a href="printers.html">Best 3D Printers for Beginners</a> guide for detailed comparisons.</p>
+
+    <h2 id="filament">Understanding 3D Printing Filament</h2>
+    <p>The most important consumable in FDM printing is filament — the plastic "ink" your printer uses. As a beginner, you should start with <strong>PLA (Polylactic Acid)</strong>.</p>
+    <p>PLA is:</p>
+    <ul>
+      <li>✅ Easy to print — sticks to the bed well</li>
+      <li>✅ No toxic fumes — safe for home use</li>
+      <li>✅ Biodegradable — made from corn starch</li>
+      <li>✅ Available in hundreds of colors</li>
+      <li>❌ Not heat-resistant — don't use for hot car parts</li>
+    </ul>
+    <p>Once you're comfortable with PLA, you can explore PETG, TPU, and other materials. Check our <a href="filament-guide.html">complete filament guide</a>.</p>
+
+    <h2 id="software">Essential Software for Beginners</h2>
+    <p>You'll need two types of software:</p>
+    <h3>Slicers (Required)</h3>
+    <p>A slicer converts your 3D model into instructions the printer can understand (G-code). The best free options:</p>
+    <ul>
+      <li><strong>Ultimaker Cura</strong> — Most popular, huge community, great defaults</li>
+      <li><strong>PrusaSlicer</strong> — Excellent for advanced users too</li>
+      <li><strong>OrcaSlicer</strong> — Modern interface, gaining popularity fast</li>
+    </ul>
+    <h3>3D Modeling (Optional, for designing your own stuff)</h3>
+    <ul>
+      <li><strong>Tinkercad</strong> — Free, browser-based, dead simple. Perfect for beginners.</li>
+      <li><strong>Fusion 360</strong> — Free for hobbyists, professional-grade CAD</li>
+      <li><strong>Blender</strong> — Free, powerful, but steeper learning curve</li>
+    </ul>
+
+    <div class="ad-placeholder inline">📢 Advertisement</div>
+
+    <h2 id="models">Where to Find Free 3D Models</h2>
+    <p>You don't need to design everything yourself. These sites have millions of free downloadable models:</p>
+    <ul>
+      <li><strong><a href="https://www.thingiverse.com" target="_blank" rel="nofollow noopener">Thingiverse</a></strong> — The largest library of free STL files</li>
+      <li><strong><a href="https://www.printables.com" target="_blank" rel="nofollow noopener">Printables</a></strong> — Prusa's platform, high-quality models</li>
+      <li><strong><a href="https://cults3d.com" target="_blank" rel="nofollow noopener">Cults3D</a></strong> — Mix of free and paid models</li>
+      <li><strong><a href="https://www.myminifactory.com" target="_blank" rel="nofollow noopener">MyMiniFactory</a></strong> — Curated, guaranteed printable files</li>
+    </ul>
+
+    <h2 id="first-print">Your First Print: A Step-by-Step Walkthrough</h2>
+    <ol>
+      <li><strong>Level your bed</strong> — Use the printer's auto-leveling or manual paper method</li>
+      <li><strong>Load filament</strong> — Heat the nozzle to 200°C, insert PLA filament</li>
+      <li><strong>Download a test model</strong> — Search "Benchy" or "calibration cube" on Thingiverse</li>
+      <li><strong>Slice the model</strong> — Import the STL into Cura, use default PLA settings, click "Slice"</li>
+      <li><strong>Transfer to printer</strong> — Save G-code to SD card (or send via USB/WiFi)</li>
+      <li><strong>Start printing</strong> — Insert SD card, select the file, and hit print!</li>
+      <li><strong>Watch the first layer</strong> — Stay for the first 5 minutes. If it's not sticking, stop and relevel.</li>
+    </ol>
+
+    <div class="warn-box">
+      <strong>⚠️ Important:</strong> Never leave a 3D printer completely unattended. While rare, fires can happen. Always be within earshot.
+    </div>
+
+    <h2 id="tools">7 Essential Tools Every Beginner Needs</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Why You Need It</th></tr></thead>
+      <tbody>
+        <tr><td>Isopropyl Alcohol (90%+)</td><td>Cleaning the print bed for better adhesion</td></tr>
+        <tr><td>Flush Cutters</td><td>Trimming filament and removing supports</td></tr>
+        <tr><td>Needle Nose Pliers</td><td>Removing stubborn prints and cleaning the nozzle</td></tr>
+        <tr><td>Digital Calipers</td><td>Measuring for dimensional accuracy</td></tr>
+        <tr><td>Glue Stick</td><td>Extra bed adhesion for tricky filaments</td></tr>
+        <tr><td>Deburring Tool</td><td>Smoothing rough edges on finished prints</td></tr>
+        <tr><td>SD Card Reader</td><td>If your computer doesn't have an SD slot</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <strong>💡 Pro Tip:</strong> Buy a filament dry box or store your filament in airtight containers with silica gel. Wet filament causes 90% of print quality issues.
+    </div>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-question">How much does it cost to start 3D printing? <span>▾</span></div>
+      <div class="faq-answer"><p>Plan on spending about $300 total: $200-250 for a beginner printer, $20-30 for a spool of PLA filament, and $20-30 for essential tools. That's all you need to get started.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Is 3D printing hard to learn? <span>▾</span></div>
+      <div class="faq-answer"><p>Not really! Most people get their first successful print within 1-2 hours of unboxing. The learning curve is more about troubleshooting (which this guide helps with) than basic operation.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">How long does a 3D print take? <span>▾</span></div>
+      <div class="faq-answer"><p>Small objects (like a chess piece) take 30-60 minutes. Medium objects (phone stand) take 2-4 hours. Large objects can take 8-20+ hours. Speed depends on your settings and the model's complexity.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Does 3D printing smell bad? <span>▾</span></div>
+      <div class="faq-answer"><p>PLA has a mild, slightly sweet smell — most people don't mind it. ABS produces fumes that can be irritating, so it needs ventilation. Stick with PLA as a beginner and you'll be fine.</p></div>
+    </div>
+
+  </main>
+
+  <aside class="content-sidebar">
+    <div class="sidebar-card">
+      <h4>📑 On This Page</h4>
+      <ul>
+        <li><a href="#what-is">What Is 3D Printing?</a></li>
+        <li><a href="#types">FDM vs Resin</a></li>
+        <li><a href="#first-printer">Choosing Your First Printer</a></li>
+        <li><a href="#filament">Understanding Filament</a></li>
+        <li><a href="#software">Essential Software</a></li>
+        <li><a href="#models">Where to Find Models</a></li>
+        <li><a href="#first-print">Your First Print</a></li>
+        <li><a href="#tools">Essential Tools</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="ad-placeholder sidebar">📢 Ad Space</div>
+    <div class="sidebar-card">
+      <h4>🔗 Related Guides</h4>
+      <ul>
+        <li><a href="printers.html">Best Printers Under $300</a></li>
+        <li><a href="filament-guide.html">Complete Filament Guide</a></li>
+        <li><a href="troubleshooting.html">Fix Common Problems</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<section class="container"><div class="newsletter">
+  <h2>📬 Ready to Start Printing?</h2>
+  <p>Get our free beginner's checklist and weekly tips delivered to your inbox.</p>
+  <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+    <input type="email" placeholder="Your email" required>
+    <button type="submit" class="btn btn-primary">Send Me Tips</button>
+  </form>
+</div></section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Honest reviews and easy tutorials for 3D printing beginners.</p></div>
+      <div class="footer-col"><h4>Learn</h4><ul><li><a href="getting-started.html">Getting Started</a></li><li><a href="printers.html">Best Printers</a></li><li><a href="filament-guide.html">Filament Guide</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="troubleshooting.html">Troubleshooting</a></li><li><a href="projects.html">Project Ideas</a></li><li><a href="about.html">About Us</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="about.html#contact">Contact</a></li><li><a href="about.html#privacy">Privacy Policy</a></li><li><a href="about.html#terms">Terms of Use</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
