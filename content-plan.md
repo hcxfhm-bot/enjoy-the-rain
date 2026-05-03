@@ -5,7 +5,7 @@
 ### 批次 1：PRINTER 相关 (5篇)
 - [x] best-budget-3d-printer-under-200 — Best Budget 3D Printer Under $200 (2026 Guide)
 - [x] ender-3-v3-se-review — Ender 3 V3 SE Review: Best Beginner Printer for $150?
-- [ ] bambu-lab-a1-mini-review — Bambu Lab A1 Mini Review: Worth the Hype?
+- [x] bambu-lab-a1-mini-review — Bambu Lab A1 Mini Review: Worth the Hype?
 - [ ] resin-vs-fdm-3d-printing — Resin vs FDM 3D Printing: Which Is Right for You?
 - [ ] how-to-choose-first-3d-printer — How to Choose Your First 3D Printer (6 Things to Know)
 
@@ -30,6 +30,10 @@
 - [ ] how-to-design-3d-print-models — How to Design Your Own 3D Print Models (Free Tools)
 - [ ] 3d-printing-for-cosplay-beginners — 3D Printing for Cosplay: A Beginner's Guide
 
+### 信息差专批：CHINESE ECOSYSTEM (2篇) ✅
+- [x] chinese-3d-printer-brands-guide — Chinese 3D Printer Brands: Complete Guide to Shenzhen's Empire
+- [x] aliexpress-3d-printer-buying-guide — How to Buy 3D Printer Parts from AliExpress (2026 Guide)
+
 ### 批次 5：MIXED / 进阶 (5篇)
 - [ ] 3d-printing-toxic-fumes-safety — Is 3D Printing Toxic? Fumes, Safety & Ventilation
 - [ ] how-to-paint-3d-prints — How to Paint 3D Prints: Sanding, Priming & Finishing
@@ -40,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 2
-- **当前批次**: 1
+- **已完成**: 5
+- **当前批次**: 1 (完成) + 信息差2篇
 
 ## 生成规则
 
