@@ -6,8 +6,8 @@
 - [x] best-budget-3d-printer-under-200 — Best Budget 3D Printer Under $200 (2026 Guide)
 - [x] ender-3-v3-se-review — Ender 3 V3 SE Review: Best Beginner Printer for $150?
 - [x] bambu-lab-a1-mini-review — Bambu Lab A1 Mini Review: Worth the Hype?
-- [ ] resin-vs-fdm-3d-printing — Resin vs FDM 3D Printing: Which Is Right for You?
-- [ ] how-to-choose-first-3d-printer — How to Choose Your First 3D Printer (6 Things to Know)
+- [x] resin-vs-fdm-3d-printing — Resin vs FDM 3D Printing: Which Is Right for You?
+- [x] how-to-choose-first-3d-printer — How to Choose Your First 3D Printer (6 Things to Know)
 
 ### 批次 2：FILAMENT 相关 (5篇)
 - [ ] pla-filament-temperature-guide — PLA Filament Temperature Guide: Bed & Nozzle Settings
@@ -44,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 5
-- **当前批次**: 1 (完成) + 信息差2篇
+- **已完成**: 7
+- **当前批次**: 批次1完成 + 信息差2篇 + 批次2进行中 
 
 ## 生成规则
 
