@@ -10,9 +10,9 @@
 - [x] how-to-choose-first-3d-printer — How to Choose Your First 3D Printer (6 Things to Know)
 
 ### 批次 2：FILAMENT 相关 (5篇)
-- [ ] pla-filament-temperature-guide — PLA Filament Temperature Guide: Bed & Nozzle Settings
-- [ ] petg-vs-pla-comparison — PETG vs PLA: Strength, Ease of Use & When to Switch
-- [ ] tpu-flexible-filament-beginners — TPU Flexible Filament Guide for Beginners
+- [x] pla-filament-temperature-guide — PLA Filament Temperature Guide: Bed & Nozzle Settings
+- [x] petg-vs-pla-comparison — PETG vs PLA: Strength, Ease of Use & When to Switch
+- [x] tpu-flexible-filament-beginners — TPU Flexible Filament Guide for Beginners
 - [ ] how-to-dry-3d-printer-filament — How to Dry 3D Printer Filament (4 Methods That Work)
 - [ ] best-filament-brands-2026 — Best 3D Printer Filament Brands in 2026
 
@@ -44,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 7
-- **当前批次**: 批次1完成 + 信息差2篇 + 批次2进行中 
+- **已完成**: 10 (批次1: 5 + 信息差: 2 + 批次2: 3)
+- **当前状态**: 批次1✅ 信息差✅ 批次2进行中 (3/5) 
 
 ## 生成规则
 
