@@ -13,8 +13,8 @@
 - [x] pla-filament-temperature-guide — PLA Filament Temperature Guide: Bed & Nozzle Settings
 - [x] petg-vs-pla-comparison — PETG vs PLA: Strength, Ease of Use & When to Switch
 - [x] tpu-flexible-filament-beginners — TPU Flexible Filament Guide for Beginners
-- [ ] how-to-dry-3d-printer-filament — How to Dry 3D Printer Filament (4 Methods That Work)
-- [ ] best-filament-brands-2026 — Best 3D Printer Filament Brands in 2026
+- [x] how-to-dry-3d-printer-filament — How to Dry 3D Printer Filament (4 Methods That Work) ✅ 2026-05-07
+- [x] best-filament-brands-2026 — Best 3D Printer Filament Brands in 2026 ✅ 2026-05-07
 
 ### 批次 3：TROUBLESHOOTING 相关 (5篇)
 - [ ] 3d-print-first-layer-not-sticking — 3D Print First Layer Not Sticking? 7 Fixes
@@ -44,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 10 (批次1: 5 + 信息差: 2 + 批次2: 3)
-- **当前状态**: 批次1✅ 信息差✅ 批次2进行中 (3/5) 
+- **已完成**: 12 (批次1: 5 + 信息差: 2 + 批次2: 5)
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 
 
 ## 生成规则
 
