@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Fix Stringing in 3D Prints: Cura Settings That Work</title>
+  <meta name="description" content="Stringing ruining your prints? Learn the exact Cura settings to eliminate strings and blobs. Retraction, wipe, coast, and more — tested solutions for PLA, PETG, and TPU.">
+  <meta name="keywords" content="3d print stringing, retraction settings cura, how to fix stringing, 3d printer stringing fix, cura retraction settings, pla stringing, petg stringing">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Troubleshooting</span>
+      </nav>
+
+      <h1>How to Fix Stringing in 3D Prints: Cura Settings That Work</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 8, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🕷️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+        <h2>What Causes Stringing?</h2>
+        <p>Stringing happens when filament oozes out of the nozzle during travel moves, leaving thin cobweb-like threads between parts of your print. It's one of the most annoying 3D printing problems — turning clean models into hairy messes that require hours of post-processing to fix.</p>
+        <p>The root cause is always the same: <strong>molten plastic continues to flow when it shouldn't</strong>. When the nozzle moves between two points without printing, some filament drips out. If retraction isn't working correctly, or if your temperature and speed settings encourage oozing, you'll get strings.</p>
+        <p>The good news is that stringing is almost entirely a settings problem. With the right Cura configuration, you can eliminate most strings entirely. This guide covers the specific settings that make the biggest difference, tested across <a href="pla-filament-temperature-guide.html">PLA</a>, <a href="petg-vs-pla-comparison.html">PETG</a>, and <a href="tpu-flexible-filament-beginners.html">TPU</a>.</p>
+
+        <h2>Setting 1: Retraction Distance</h2>
+        <p>Retraction is the most important setting for controlling stringing. When enabled, the printer pulls filament back into the nozzle before travel moves, creating a vacuum that prevents oozing. The key is finding the right distance — too little and you'll still ooze, too much and you'll get clogs or under-extrusion.</p>
+        <p><strong>Recommended retraction distance by printer type:</strong></p>
+        <ul>
+          <li><strong>Direct drive:</strong> 0.5–2.0mm (start at 1.0mm)</li>
+          <li><strong>Bowden (Ender 3 style):</strong> 4.0–6.0mm (start at 5.0mm)</li>
+        </ul>
+        <p>Direct drive printers have the extruder mounted on the print head, so filament travels a short distance. Bowden setups have the extruder mounted on the frame, with a PTFE tube carrying filament to the hot end. The longer path requires more retraction.</p>
+        <p><strong>How to tune:</strong> Print a stringing test model (a series of towers with gaps between them). If you see strings, increase retraction distance by 0.5mm and test again. If you see gaps or under-extrusion at the start of lines, decrease by 0.5mm.</p>
+
+        <h2>Setting 2: Retraction Speed</h2>
+        <p>How fast the filament gets pulled back matters as much as how far. Too slow, and oozing happens during the retraction itself. Too fast, and the filament can snap or cause extruder grinding.</p>
+        <p><strong>Recommended retraction speed:</strong></p>
+        <ul>
+          <li><strong>PLA:</strong> 40–60 mm/s (45 mm/s is a safe starting point)</li>
+          <li><strong>PETG:</strong> 35–50 mm/s (PETG is stickier, so slightly slower)</li>
+          <li><strong>TPU:</strong> 20–35 mm/s (flexible filament needs gentler handling)</li>
+        </ul>
+        <p>In Cura, this is under Travel → Retraction Speed. Many printers have a maximum retraction speed set in firmware — going above this won't make a difference. Check your printer's documentation if you're unsure.</p>
+
+        <h2>Setting 3: Combing Mode</h2>
+        <p>Combing changes how the nozzle travels between points. Instead of taking the shortest path (which often cuts through open air and creates stringing opportunities), combing routes the nozzle over already-printed surfaces when possible. This way, any oozing lands on the model, not between parts.</p>
+        <p><strong>Cura combing options:</strong></p>
+        <ul>
+          <li><strong>Off:</strong> Nozzle takes shortest path (worst for stringing)</li>
+          <li><strong>All:</strong> Always travel over printed areas when possible (best for stringing)</li>
+          <li><strong>No Skin:</strong> Avoid traveling over top surfaces to prevent scarring</li>
+          <li><strong>Within Infill:</strong> Only comb through infill areas</li>
+        </ul>
+        <p>For most prints with stringing issues, set Combing Mode to "All". The slight increase in travel distance is worth the cleaner result. You can switch to "No Skin" for models with large flat tops where surface finish matters.</p>
+
+        <h2>Setting 4: Retraction Extra Prime Amount</h2>
+        <p>Sometimes retraction works too well — the filament gets pulled back so far that when the printer resumes, there's a delay before plastic starts flowing again. This causes under-extrusion at the start of lines after travel moves.</p>
+        <p>The solution is Extra Prime Amount: a small amount of additional filament pushed through after retraction to compensate. In Cura, this is under Travel → Retraction Extra Prime Amount.</p>
+        <p><strong>Recommended values:</strong></p>
+        <ul>
+          <li><strong>Default:</strong> 0mm³ (start here)</li>
+          <li><strong>If you see gaps after travels:</strong> 0.06–0.2mm³</li>
+        </ul>
+        <p>Use this sparingly. Adding too much causes blobs and zits at the start of lines. If you need more than 0.2mm³, your retraction distance is probably too high — dial it back instead of compensating with extra prime.</p>
+
+        <h2>Setting 5: Travel Speed</h2>
+        <p>Faster travel moves mean less time for oozing. If your nozzle spends 2 seconds moving between points instead of 5, there's less opportunity for stringing. However, travel speed has limits — going too fast can cause vibrations, missed steps, and layer shifts.</p>
+        <p><strong>Recommended travel speed:</strong></p>
+        <ul>
+          <li><strong>Bed slingers (Ender 3, etc.):</strong> 100–150 mm/s</li>
+          <li><strong>CoreXY and enclosed printers:</strong> 150–250 mm/s</li>
+        </ul>
+        <p>In Cura, this is under Speed → Travel Speed. Increase gradually and watch for print quality issues. A travel speed of 150 mm/s is a reasonable target for most printers.</p>
+
+        <h2>Setting 6: Temperature</h2>
+        <p>Lower temperatures mean thicker, less runny filament — which oozes less. If your stringing problems persist despite good retraction settings, try dropping your nozzle temperature by 5–10°C.</p>
+        <p><strong>Optimal temperature ranges (less stringing):</strong></p>
+        <ul>
+          <li><strong>PLA:</strong> 190–210°C (lower end for less stringing)</li>
+          <li><strong>PETG:</strong> 230–245°C (PETG is inherently stringier; accept some and clean up)</li>
+          <li><strong>TPU:</strong> 210–230°C</li>
+        </ul>
+        <p>Don't go too low, or you'll get under-extrusion and weak layer bonding. Finding the sweet spot is a balance — print a temperature tower to identify the lowest temperature that still gives good layer adhesion.</p>
+
+        <h2>Setting 7: Wipe and Coasting</h2>
+        <p>These are advanced techniques that can help with stubborn stringing, but they add complexity and can cause other issues if not tuned carefully.</p>
+        <p><strong>Wipe:</strong> After retracting, the nozzle wipes across the last printed area before moving. This cleans any remaining ooze off the tip. Enable in Cura under Travel → Wipe Retraction. A wipe distance of 2–4mm works well.</p>
+        <p><strong>Coasting:</strong> Reduces pressure in the nozzle at the end of a line by stopping extrusion slightly early. This reduces the amount of plastic available to ooze during travel. Enable under Travel → Coasting Volume. Start with 0.2–0.4mm³.</p>
+        <p><strong>Warning:</strong> Coasting can cause gaps and under-extrusion if overdone. Use it as a last resort when other settings haven't solved the problem.</p>
+
+        <h2>Quick Settings Reference</h2>
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0; font-family: Inter, sans-serif; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">Setting</th>
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">PLA</th>
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">PETG</th>
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">TPU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Retraction Distance (Bowden)</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">5–6mm</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">5–6mm</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">2–4mm</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Retraction Distance (Direct)</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">0.8–1.5mm</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">1.0–2.0mm</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">1.5–2.5mm</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Retraction Speed</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">45 mm/s</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">40 mm/s</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">25 mm/s</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Temperature</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">195–205°C</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">235–245°C</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">215–225°C</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>When Nothing Works: Check Your Filament</h2>
+        <p>If you've tried all the settings above and still have severe stringing, your filament might be the problem. Wet filament stringing is different from settings-based stringing — it tends to come with popping sounds and rough surfaces, not just thin cobwebs.</p>
+        <p><strong>Symptoms of wet filament:</strong></p>
+        <ul>
+          <li>Popping or crackling from the nozzle</li>
+          <li>Stringing that gets worse over time</li>
+          <li>Bubbles visible in extruded plastic</li>
+          <li>Poor surface finish overall</li>
+        </ul>
+        <p>If this sounds like your problem, check our guide on <a href="how-to-dry-3d-printer-filament.html">how to dry 3D printer filament</a>. Dry your spool and test again — many "impossible" stringing cases turn out to be moisture problems.</p>
+
+        <h2>Conclusion</h2>
+        <p>Stringing is frustrating but almost always fixable with the right settings. Start with retraction distance and speed — these two settings solve 80% of stringing problems. Add combing mode to route travel moves over printed surfaces. Adjust temperature and travel speed if needed. For stubborn cases, try wipe and coasting, but tune carefully.</p>
+        <p>Remember that different materials have different stringing tendencies. PLA is the easiest to control; PETG will always have some stringing even with perfect settings. With TPU, expect to spend extra time dialing in retraction. The settings in this guide are starting points — your specific printer and filament may require fine-tuning.</p>
+        <p>Once you've found settings that work, save them as a profile in Cura. Future prints will come out clean without re-tuning.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="3d-print-first-layer-not-sticking.html">3D Print First Layer Not Sticking? 7 Fixes</a></li>
+          <li><a href="how-to-dry-3d-printer-filament.html">How to Dry 3D Printer Filament</a></li>
+          <li><a href="pla-filament-temperature-guide.html">PLA Filament Temperature Guide</a></li>
+          <li><a href="../troubleshooting.html">Troubleshooting Guide</a></li>
+          <li><a href="best-filament-brands-2026.html">Best Filament Brands in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

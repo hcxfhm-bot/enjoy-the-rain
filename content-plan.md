@@ -17,9 +17,9 @@
 - [x] best-filament-brands-2026 — Best 3D Printer Filament Brands in 2026 ✅ 2026-05-07
 
 ### 批次 3：TROUBLESHOOTING 相关 (5篇)
-- [ ] 3d-print-first-layer-not-sticking — 3D Print First Layer Not Sticking? 7 Fixes
-- [ ] how-to-fix-stringing-3d-prints — How to Fix Stringing in 3D Prints (Cura Settings)
-- [ ] 3d-print-warping-solutions — 3D Print Warping: Causes and 5 Simple Solutions
+- [x] 3d-print-first-layer-not-sticking — 3D Print First Layer Not Sticking? 7 Fixes ✅ 2026-05-08
+- [x] how-to-fix-stringing-3d-prints — How to Fix Stringing in 3D Prints (Cura Settings) ✅ 2026-05-08
+- [x] 3d-print-warping-solutions — 3D Print Warping: Causes and 5 Simple Solutions ✅ 2026-05-08
 - [ ] 3d-print-layer-shift-fix — Layer Shift in 3D Printing: How to Diagnose and Fix
 - [ ] under-extrusion-causes-and-fixes — Under-Extrusion: Causes and Fixes for Beginners
 
@@ -44,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 12 (批次1: 5 + 信息差: 2 + 批次2: 5)
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 
+- **已完成**: 15 (批次1: 5 + 信息差: 2 + 批次2: 5 + 批次3: 3)
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3进行中 (3/5) 
 
 ## 生成规则
 
