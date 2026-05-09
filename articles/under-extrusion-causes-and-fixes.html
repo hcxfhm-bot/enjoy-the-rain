@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Under-Extrusion in 3D Printing: Causes and Fixes for Beginners</title>
+  <meta name="description" content="Under-extrusion leaves gaps and weak layers in your prints. Learn the 6 common causes (clogs, temperature, flow rate) and how to fix each one for solid, strong prints.">
+  <meta name="keywords" content="under extrusion 3d printing, 3d printer under extrusion, gaps in print, weak layers, extrusion problems, flow rate 3d printing, nozzle clog">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Troubleshooting</span>
+      </nav>
+
+      <h1>Under-Extrusion in 3D Printing: Causes and Fixes for Beginners</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 9, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⬇️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+        <h2>What Is Under-Extrusion?</h2>
+        <p>Under-extrusion happens when your 3D printer doesn't push enough filament through the nozzle to fill the space it's supposed to. Instead of solid walls, you get gaps, missing sections, and weak layer bonding. The print looks incomplete — thin walls, holes in solid layers, and top surfaces that don't close properly.</p>
+        <p>This is one of the most common problems for beginners, and it has many possible causes. The good news is that most are easy to diagnose and fix once you understand what's happening. <strong>Under-extrusion is always a supply problem</strong> — something is preventing enough filament from reaching the nozzle at the right time.</p>
+        <p>This guide covers the six most common causes, starting with the easiest to check and fix.</p>
+
+        <h2>Signs of Under-Extrusion</h2>
+        <p>Learn to recognize under-extrusion early:</p>
+        <ul>
+          <li><strong>Gaps between lines:</strong> Infill and walls don't touch each other</li>
+          <li><strong>Thin, weak walls:</strong> Walls that should be solid feel fragile</li>
+          <li><strong>Holes in top layers:</strong> Top surfaces have gaps instead of being smooth</li>
+          <li><strong>Missing layers:</strong> Sections where no filament was deposited at all</li>
+          <li><strong>Poor layer adhesion:</strong> Layers separate easily when you stress the part</li>
+          <li><strong>Clicking extruder:</strong> The feeder gear skips back, making a clicking sound</li>
+        </ul>
+        <p>If you see these symptoms, your printer isn't extruding enough plastic. Time to find out why.</p>
+
+        <h2>Cause 1: Nozzle Clog or Partial Blockage</h2>
+        <p>The most common cause of under-extrusion is a clogged nozzle. Dust, debris, or burnt filament accumulates inside the nozzle opening, restricting flow. The printer tries to push filament through, but the blockage limits how much can pass.</p>
+        <p><strong>How to check:</strong></p>
+        <ul>
+          <li>Heat the nozzle to printing temperature and manually extrude filament. Does it come out smoothly in a straight line, or does it curl and sputter?</li>
+          <li>Look at the filament coming out of the nozzle. Is the diameter consistent, or does it vary?</li>
+          <li>Try a cold pull (heat to 200°C, insert filament, cool to 90°C, pull out quickly) to see if debris comes out with it.</li>
+        </ul>
+        <p><strong>How to fix:</strong></p>
+        <ul>
+          <li>Use a needle or nozzle cleaning wire to clear the opening while hot</li>
+          <li>Perform a cold pull with nylon filament to clean the inside</li>
+          <li>If the clog persists, replace the nozzle (they're cheap — keep spares)</li>
+        </ul>
+        <p>Prevention: Use filament from a clean source, and avoid leaving the nozzle hot without filament for extended periods.</p>
+
+        <h2>Cause 2: Nozzle Temperature Too Low</h2>
+        <p>Filament needs to be hot enough to flow properly. If your nozzle temperature is set too low, the plastic stays viscous and doesn't flow fast enough to keep up with the print speed. The result: gaps and under-extrusion, especially during faster sections.</p>
+        <p><strong>Recommended temperatures:</strong></p>
+        <ul>
+          <li><strong>PLA:</strong> 190–220°C (start at 200°C, increase if under-extruding)</li>
+          <li><strong>PETG:</strong> 230–250°C</li>
+          <li><strong>TPU:</strong> 210–240°C</li>
+          <li><strong>ABS:</strong> 230–260°C</li>
+        </ul>
+        <p><strong>How to fix:</strong></p>
+        <ul>
+          <li>Increase nozzle temperature by 5–10°C and test again</li>
+          <li>Print a temperature tower to find the optimal range for your specific filament</li>
+          <li>Check the filament manufacturer's recommendation — different brands need different temperatures</li>
+        </ul>
+        <p>For detailed temperature settings by material, see our <a href="pla-filament-temperature-guide.html">PLA Filament Temperature Guide</a>.</p>
+
+        <h2>Cause 3: Incorrect Flow Rate (Extrusion Multiplier)</h2>
+        <p>Your slicer has a flow rate setting (also called extrusion multiplier) that determines how much filament gets pushed. If this is set below 100%, the printer deliberately under-extrudes. This can be useful for fine-tuning, but if set incorrectly, it causes problems.</p>
+        <p><strong>Default values:</strong></p>
+        <ul>
+          <li><strong>Most filaments:</strong> 95–100%</li>
+          <li><strong>PLA:</strong> Usually 100%</li>
+          <li><strong>PETG:</strong> 95–100% (some benefit from slight over-extrusion)</li>
+          <li><strong>TPU:</strong> 100–105%</li>
+        </ul>
+        <p><strong>How to fix:</strong></p>
+        <ul>
+          <li>Check your slicer's flow rate setting — make sure it's at 100% or slightly above</li>
+          <li>Calibrate your extruder steps-per-mm (see Cause 5) for accurate flow</li>
+          <li>Don't compensate for other problems with flow rate — fix the root cause instead</li>
+        </ul>
+
+        <h2>Cause 4: Wet Filament</h2>
+        <p>Filament absorbs moisture from the air, especially <a href="petg-vs-pla-comparison.html">PETG</a>, <a href="tpu-flexible-filament-beginners.html">TPU</a>, and nylon. When wet filament is heated, the water turns to steam, creating bubbles and reducing the amount of plastic that gets deposited. You'll hear popping sounds and see rough surfaces.</p>
+        <p><strong>Symptoms of wet filament:</strong></p>
+        <ul>
+          <li>Popping or crackling sounds during extrusion</li>
+          <li>Steam or bubbles visible in the extruded filament</li>
+          <li>Stringing that gets worse over time</li>
+          <li>Poor surface finish and weak parts</li>
+        </ul>
+        <p><strong>How to fix:</strong></p>
+        <ul>
+          <li>Dry your filament using an oven, dehydrator, or filament dryer</li>
+          <li>Store filament in sealed bags with desiccant packets</li>
+          <li>See our guide on <a href="how-to-dry-3d-printer-filament.html">how to dry 3D printer filament</a> for detailed instructions</li>
+        </ul>
+        <p>Wet filament is one of the most overlooked causes of print problems. If nothing else explains your under-extrusion, check your filament.</p>
+
+        <h2>Cause 5: Extruder Calibration (E-Steps)</h2>
+        <p>Your extruder is calibrated to push a specific amount of filament per rotation. If the steps-per-mm (E-steps) value is wrong, the printer won't push the amount it thinks it's pushing. A misconfigured extruder can cause chronic under-extrusion across all your prints.</p>
+        <p><strong>How to calibrate:</strong></p>
+        <ol>
+          <li>Mark your filament 120mm from the extruder entrance</li>
+          <li>In your printer's control panel, extrude 100mm of filament</li>
+          <li>Measure how much filament was actually extruded (120 - remaining distance)</li>
+          <li>If less than 100mm was extruded, increase E-steps proportionally</li>
+          <li>Repeat until exactly 100mm is extruded when 100mm is commanded</li>
+        </ol>
+        <p><strong>Example:</strong> If you commanded 100mm but only 95mm came out, your E-steps need to increase by 100/95 = 5.3%</p>
+        <p>This is especially important after changing extruders or if you're using a printer that wasn't calibrated at the factory.</p>
+
+        <h2>Cause 6: Bowden Tube Issues</h2>
+        <p>For Bowden setups (where the extruder is separate from the hot end), the PTFE tube guides filament to the nozzle. If this tube is damaged, too long, or not seated properly, it adds resistance that causes under-extrusion.</p>
+        <p><strong>Common Bowden problems:</strong></p>
+        <ul>
+          <li><strong>Gap at the nozzle:</strong> The tube doesn't seat flush against the nozzle, creating a pocket where filament accumulates</li>
+          <li><strong>Kinked tube:</strong> Sharp bends add friction</li>
+          <li><strong>Worn tube:</strong> Inner surface becomes rough over time, increasing drag</li>
+          <li><strong>Too long:</strong> Extra tube length means more friction</li>
+        </ul>
+        <p><strong>How to fix:</strong></p>
+        <ul>
+          <li>Cut the tube at a perfect 90° angle and reseat it firmly against the nozzle</li>
+          <li>Replace tubes that are more than a year old or show signs of wear</li>
+          <li>Route the tube with gentle curves, not sharp bends</li>
+          <li>Use high-quality Capricorn tubing for lower friction</li>
+        </ul>
+
+        <h2>Quick Diagnosis Table</h2>
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0; font-family: Inter, sans-serif; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">Symptom</th>
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">Likely Cause</th>
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">Quick Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Filament curls from nozzle</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Nozzle clog</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Clean or replace nozzle</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Popping sounds</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Wet filament</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Dry the filament</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Clicking extruder</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Clog or temperature too low</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Check nozzle + increase temp</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Consistent under-extrusion</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">E-steps wrong</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Calibrate extruder</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Worse at high speeds</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Temperature too low</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Increase nozzle temp</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Conclusion</h2>
+        <p>Under-extrusion has many causes, but the diagnosis process is systematic. Start with the easiest: check for nozzle clogs and increase temperature if needed. Then move to flow rate settings, filament condition, and extruder calibration. For Bowden printers, inspect the PTFE tube.</p>
+        <p>Most under-extrusion problems are solved by one of these six fixes. Work through them in order, and you'll be back to solid, strong prints quickly. The key is not to compensate with slicer settings — find and fix the root cause.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-dry-3d-printer-filament.html">How to Dry 3D Printer Filament</a></li>
+          <li><a href="3d-print-first-layer-not-sticking.html">First Layer Not Sticking? 7 Fixes</a></li>
+          <li><a href="how-to-fix-stringing-3d-prints.html">How to Fix Stringing in 3D Prints</a></li>
+          <li><a href="pla-filament-temperature-guide.html">PLA Filament Temperature Guide</a></li>
+          <li><a href="../troubleshooting.html">Complete Troubleshooting Guide</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
