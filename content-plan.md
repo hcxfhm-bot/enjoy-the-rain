@@ -26,8 +26,8 @@
 ### 批次 4：PROJECTS 相关 (5篇)
 - [x] easy-3d-printing-projects-beginners — 10 Easy 3D Printing Projects for Beginners ✅ 2026-05-10
 - [x] useful-things-to-3d-print — 15 Actually Useful Things to 3D Print at Home ✅ 2026-05-10
-- [ ] 3d-printed-gifts-ideas — 3D Printed Gifts: 12 Ideas Your Friends Will Love
-- [ ] how-to-design-3d-print-models — How to Design Your Own 3D Print Models (Free Tools)
+- [x] 3d-printed-gifts-ideas — 3D Printed Gifts: 12 Ideas Your Friends Will Love ✅ 2026-05-11
+- [x] how-to-design-3d-print-models — How to Design Your Own 3D Print Models (Free Tools) ✅ 2026-05-11
 - [ ] 3d-printing-for-cosplay-beginners — 3D Printing for Cosplay: A Beginner's Guide
 
 ### 信息差专批：CHINESE ECOSYSTEM (2篇) ✅
@@ -44,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 19 (批次1: 5 + 信息差: 2 + 批次2: 5 + 批次3: 5 + 批次4: 2)
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4进行中 (2/5)
+- **已完成**: 21 (批次1: 5 + 信息差: 2 + 批次2: 5 + 批次3: 5 + 批次4: 4)
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4进行中 (4/5)
 
 ## 生成规则
 
