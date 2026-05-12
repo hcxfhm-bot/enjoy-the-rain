@@ -28,14 +28,14 @@
 - [x] useful-things-to-3d-print — 15 Actually Useful Things to 3D Print at Home ✅ 2026-05-10
 - [x] 3d-printed-gifts-ideas — 3D Printed Gifts: 12 Ideas Your Friends Will Love ✅ 2026-05-11
 - [x] how-to-design-3d-print-models — How to Design Your Own 3D Print Models (Free Tools) ✅ 2026-05-11
-- [ ] 3d-printing-for-cosplay-beginners — 3D Printing for Cosplay: A Beginner's Guide
+- [x] 3d-printing-for-cosplay-beginners — 3D Printing for Cosplay: A Beginner's Guide ✅ 2026-05-12
 
 ### 信息差专批：CHINESE ECOSYSTEM (2篇) ✅
 - [x] chinese-3d-printer-brands-guide — Chinese 3D Printer Brands: Complete Guide to Shenzhen's Empire
 - [x] aliexpress-3d-printer-buying-guide — How to Buy 3D Printer Parts from AliExpress (2026 Guide)
 
 ### 批次 5：MIXED / 进阶 (5篇)
-- [ ] 3d-printing-toxic-fumes-safety — Is 3D Printing Toxic? Fumes, Safety & Ventilation
+- [x] 3d-printing-toxic-fumes-safety — Is 3D Printing Toxic? Fumes, Safety & Ventilation ✅ 2026-05-12
 - [ ] how-to-paint-3d-prints — How to Paint 3D Prints: Sanding, Priming & Finishing
 - [ ] 3d-printer-maintenance-checklist — 3D Printer Maintenance Checklist (Monthly)
 - [ ] best-free-3d-modeling-software — 5 Best Free 3D Modeling Software for Beginners
@@ -44,8 +44,8 @@
 ## 进度
 
 - **总目标**: 25 篇
-- **已完成**: 21 (批次1: 5 + 信息差: 2 + 批次2: 5 + 批次3: 5 + 批次4: 4)
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4进行中 (4/5)
+- **已完成**: 23 (批次1: 5 + 信息差: 2 + 批次2: 5 + 批次3: 5 + 批次4: 5 + 批次5: 1)
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5进行中 (1/5)
 
 ## 生成规则
 
