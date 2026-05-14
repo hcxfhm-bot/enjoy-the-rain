@@ -34,18 +34,18 @@
 - [x] chinese-3d-printer-brands-guide — Chinese 3D Printer Brands: Complete Guide to Shenzhen's Empire
 - [x] aliexpress-3d-printer-buying-guide — How to Buy 3D Printer Parts from AliExpress (2026 Guide)
 
-### 批次 5：MIXED / 进阶 (5篇)
+### 批次 5：MIXED / 进阶 (5篇) ✅
 - [x] 3d-printing-toxic-fumes-safety — Is 3D Printing Toxic? Fumes, Safety & Ventilation ✅ 2026-05-12
 - [x] how-to-paint-3d-prints — How to Paint 3D Prints: Sanding, Priming & Finishing ✅ 2026-05-13
 - [x] 3d-printer-maintenance-checklist — 3D Printer Maintenance Checklist (Monthly) ✅ 2026-05-13
 - [x] best-free-3d-modeling-software — 5 Best Free 3D Modeling Software for Beginners ✅ 2026-05-13
-- [ ] 3d-printing-cost-per-hour — How Much Does 3D Printing Really Cost?
+- [x] 3d-printing-cost-per-hour — How Much Does 3D Printing Really Cost? ✅ 2026-05-14
 
 ## 进度
 
-- **总目标**: 25 篇
-- **已完成**: 26 (批次1: 5 + 信息差: 2 + 批次2: 5 + 批次3: 5 + 批次4: 5 + 批次5: 4)
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5进行中 (4/5)
+- **总目标**: 27 篇
+- **已完成**: 27 ✅ 全部完成！
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅
 
 ## 生成规则
 
