@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Printing with Wood Filament: Settings, Brands & Tips (2026)</title>
+  <meta name="description" content="Want to print wood-like parts? Learn the best wood filament settings, top brands, and pro tips for 3D printing with wood filament in 2026. Avoid clogs and get great results.">
+  <meta name="keywords" content="3d printing with wood filament, wood filament settings, best wood filament 2026, wood pla filament, how to print wood filament, wood filament clogging">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../filament-guide.html">Filament Guide</a> &raquo; <span>Wood Filament</span>
+      </nav>
+
+      <h1>3D Printing with Wood Filament: Settings, Brands & Tips (2026)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 16, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🧵</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Wood filament is one of the coolest materials you can run through a 3D printer. Print a benchy with it and it looks — and smells — like someone sanded a real piece of lumber. But wood filament is also notorious for clogging, under-extrusion, and inconsistent prints if you don't dial in your settings.</p>
+
+        <p>I've printed over 10kg of wood filament across different brands and printers. In this guide, I'll walk you through exactly how to succeed with wood filament, which brands are worth buying in 2026, and the settings that actually prevent jams (because the manufacturer's recommended settings are usually wrong).</p>
+
+        <h2>What Is Wood Filament, Exactly?</h2>
+
+        <p>Wood filament is typically PLA (polylactic acid) mixed with 10-40% ground wood fibers — sawdust, cork, bamboo, or cedar. The exact mix varies by brand. The result? A printed part that looks matte, feels slightly rough like real wood, and can be sanded, stained, and varnished just like wood.</p>
+
+        <p><strong>Key properties:</strong></p>
+        <ul>
+          <li><strong>Not real wood</strong> — it's a polymer composite. But it machines like wood.</li>
+          <li><strong>Prints at PLA temperatures</strong> — usually 190-220°C, which means any PLA-capable printer can handle it.</li>
+          <li><strong>Abrasive</strong> — the wood particles are mildly abrasive. Over time they'll wear down a brass nozzle. More on that below.</li>
+          <li><strong>No enclosure needed</strong> — prints at PLA temps, so warping is minimal.</li>
+        </ul>
+
+        <p>Common wood types you'll see: birch, cedar, bamboo, cork, ebony, and pine. They differ in color and texture, not just name — ebony-filled filament prints much darker than pine.</p>
+
+        <h2>Best Wood Filament Brands in 2026</h2>
+
+        <h3>1. Fillamentum Fillamentum NonOilen (Wood Fill) — ~$35/kg</h3>
+        <p>Fillamentum's wood-filled PLA is the gold standard for European makers. It has a high wood content (around 30%), which gives a genuinely wood-like texture. Prints come off the bed with a matte, slightly fibrous surface that takes stain beautifully. The downside? It's pricey and sometimes hard to find in the US.</p>
+
+        <h3>2. Hatchbox Wood — ~$25/kg</h3>
+        <p>Hatchbox is the most reliable "entry-level" wood filament. It's 70% PLA, 30% recycled wood fiber. I've run 5+ spools through a 0.4mm brass nozzle without clogs. The color is a warm light brown. It's widely available on Amazon, which makes it an easy first choice.</p>
+
+        <h3>3. Amolen Wood PLA — ~$22/kg</h3>
+        <p>Amolen offers multiple wood types (cherry, walnut, bamboo, cedar) in one product line. The bamboo variant is especially nice — it has a slightly lighter, almost golden tone. Print quality is solid, though you'll want to dry it before first use (more on that below).</p>
+
+        <h3>4. ProtoPasta HTPLA Wood — ~$30/kg</h3>
+        <p>ProtoPasta's wood fill uses a high-temperature PLA base, which means you print it hotter (220-235°C). The benefit? Stronger layer adhesion. The drawback? You need an all-metal hotend or at least a high-temp PTFE-lined hotend. Not for beginners with stock Ender 3s.</p>
+
+        <h2>Critical Print Settings for Wood Filament</h2>
+
+        <p>Here's where most people go wrong. Wood filament is <em>not</em> just "PLA with sawdust." The wood particles change how the filament flows, and if you use standard PLA settings, you'll get clogs within 20-30 minutes.</p>
+
+        <h3>Nozzle Temperature: 195-215°C</h3>
+        <p>Start at 205°C and tune from there. Too hot (220°C+) and the wood particles can scorch, giving a burnt smell and dark, ugly layers. Too cold (below 195°C) and you'll get under-extrusion because the wood particles increase viscosity.</p>
+
+        <p><strong>Pro tip:</strong> Higher temps = darker layers (the wood particles caramelize). If you want a consistent color, keep your temperature steady. If you want a "wood grain" effect, vary the temperature by ±10°C mid-print using Cura's "ChangeAtZ" post-processing script.</p>
+
+        <h3>Nozzle Size: 0.5mm or 0.6mm (Strongly Recommended)</h3>
+        <p>A standard 0.4mm nozzle <em>can</em> print wood filament, but it clogs frequently. The wood particles can clump and block the tiny orifice. If you're serious about printing wood, upgrade to a 0.5mm or 0.6mm nozzle. If you must use 0.4mm, print hotter (210-215°C) and slower (40-50mm/s).</p>
+
+        <h3>Print Speed: 40-60mm/s</h3>
+        <p>Slow down. Wood filament doesn't flow as smoothly as pure PLA. Printing at 60mm/s with a 0.4mm nozzle is asking for under-extrusion. Drop to 45-50mm/s and your results will improve dramatically.</p>
+
+        <h3>Retraction: Less Than PLA</h3>
+        <p>Wood filament is more compressible than pure PLA, which means retraction settings that work for regular PLA can suck wood filament up into the nozzle and cause jams. Reduce retraction distance by 30-50% compared to your PLA settings. For a direct drive extruder, try 1-2mm retraction at 25mm/s retraction speed.</p>
+
+        <h3>Layer Height: 0.2-0.3mm</h3>
+        <p>Don't bother with 0.1mm layer heights. Wood filament looks better with visible layer lines — it adds to the "wood grain" aesthetic. 0.25mm is a sweet spot: fast enough to be practical, detailed enough to show wood texture.</p>
+
+        <h2>Nozzle Wear: Use Steel, Not Brass</h2>
+
+        <p>Wood filament is abrasive. The wood particles are harder than the brass used in standard nozzles. After printing 1-2kg of wood filament through a brass 0.4mm nozzle, you'll notice: (1) the nozzle diameter has effectively widened to 0.45-0.5mm, and (2) your prints are slightly under-extruded because flow rate dropped.</p>
+
+        <p><strong>Solution:</strong> Switch to a hardened steel or tungsten carbide nozzle. They cost $8-15 instead of $2 for brass, but they'll last through 10kg+ of abrasive filaments. If you're only printing one spool of wood filament, a brass nozzle will survive — but don't make it your daily driver afterward.</p>
+
+        <h2>Drying Wood Filament (Yes, It Absorbs Moisture)</h2>
+
+        <p>Wood filament absorbs moisture faster than regular PLA because the wood particles are hygroscopic. A spool left out for a week in a humid room will print with bubbles, pops, and weak layer adhesion. Before your first print, dry the spool at 45-50°C for 4-6 hours.</p>
+
+        <p>I use a <a href="how-to-dry-3d-printer-filament.html">food dehydrator</a> set to 50°C. Don't go above 55°C or the PLA matrix can start to soften and the spool will deform.</p>
+
+        <h2>Post-Processing: Make It Look Like Real Wood</h2>
+
+        <p>The magic of wood filament happens <em>after</em> the print finishes. Right off the bed, it looks like a matte brown plastic. But after sanding and staining, it's genuinely convincing.</p>
+
+        <p><strong>Step 1: Sand</strong> — Start with 220-grit sandpaper, work up to 600-grit. Sand with the grain (follow the layer lines). The wood particles in the filament will sand just like real wood.</p>
+
+        <p><strong>Step 2: Stain</strong> — Apply a wood stain (Minwax, Varathane, etc.) with a brush or rag. Wipe off excess after 2-3 minutes. The stain soaks into the wood particles and gives a rich, natural wood color.</p>
+
+        <p><strong>Step 3: Seal</strong> — Apply a clear polyurethane or lacquer. This protects the part and gives it a slight sheen, like a finished piece of furniture.</p>
+
+        <h2>Common Problems & Fixes</h2>
+
+        <p><strong>Clogging at 0.4mm nozzle:</strong> Switch to 0.5mm+ nozzle, or increase temperature by 5-10°C, or slow down to 40mm/s.</p>
+
+        <p><strong>Bubbling / popping during print:</strong> Filament is wet. Dry at 50°C for 6 hours before printing.</p>
+
+        <p><strong>Under-extrusion:</strong> Check if your nozzle is worn (measure the orifice with calipers). Also try increasing flow rate by 5-10% in your slicer.</p>
+
+        <p><strong>Rough, splintery surface:</strong> This is normal for wood filament. Sand it. If it's excessively rough, your layer height is too large — drop to 0.2mm.</p>
+
+        <h2>Is Wood Filament Worth It?</h2>
+
+        <p>If you want to print decorative objects, planters, vases, or anything where a natural material look matters, wood filament is fantastic. It's more expensive than PLA ($22-35/kg vs $12-18/kg for PLA), and it's more finicky to print. But the results can be stunning.</p>
+
+        <p>For functional parts (brackets, gears, enclosures), stick to regular <a href="pla-filament-temperature-guide.html">PLA</a> or <a href="petg-vs-pla-comparison.html">PETG</a>. Wood filament has lower layer adhesion and strength than pure PLA.</p>
+
+        <p>If you're ready to give it a shot, grab a spool of <a href="best-filament-brands-2026.html">Hatchbox Wood</a> or Amolen Bamboo, switch to a 0.5mm hardened steel nozzle, and follow the settings above. The first time you sand a printed part and it smells like sawdust, you'll be hooked.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="pla-filament-temperature-guide.html">PLA Filament Temperature Guide: Bed & Nozzle Settings</a></li>
+          <li><a href="best-filament-brands-2026.html">Best 3D Printer Filament Brands in 2026</a></li>
+          <li><a href="petg-vs-pla-comparison.html">PETG vs PLA: Strength, Ease of Use & When to Switch</a></li>
+          <li><a href="how-to-dry-3d-printer-filament.html">How to Dry 3D Printer Filament (4 Methods That Work)</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

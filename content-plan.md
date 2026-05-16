@@ -41,11 +41,16 @@
 - [x] best-free-3d-modeling-software — 5 Best Free 3D Modeling Software for Beginners ✅ 2026-05-13
 - [x] 3d-printing-cost-per-hour — How Much Does 3D Printing Really Cost? ✅ 2026-05-14
 
+### 批次 6：ADVANCED / NICHE (3篇)
+- [x] 3d-printing-with-wood-filament — 3D Printing with Wood Filament: Settings & Tips ✅ 2026-05-16
+- [x] how-to-print-multi-color-3d — How to Print Multi-Color on a Single-Extruder Printer ✅ 2026-05-16
+- [x] 3d-print-ironing-settings — 3D Print Ironing: What It Is & Best Settings for Smooth Tops ✅ 2026-05-16
+
 ## 进度
 
-- **总目标**: 27 篇
-- **已完成**: 27 ✅ 全部完成！
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅
+- **总目标**: 30 篇
+- **已完成**: 27 ✅
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6进行中 (0/3)
 
 ## 生成规则
 

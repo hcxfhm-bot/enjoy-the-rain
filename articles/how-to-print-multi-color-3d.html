@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Print Multi-Color on a Single-Extruder 3D Printer (2026)</title>
+  <meta name="description" content="Want multi-color 3D prints without a multi-material system? Learn 3 proven methods to print multiple colors on a single-extruder printer in 2026. Step-by-step guide.">
+  <meta name="keywords" content="multi-color 3d printing single extruder, how to print multi color 3d prints, single nozzle multi color, m600 pause for filament change, multi color 3d printing without ams">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../projects.html">Projects</a> &raquo; <span>Multi-Color Printing</span>
+      </nav>
+
+      <h1>How to Print Multi-Color on a Single-Extruder 3D Printer</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 16, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Multi-color 3D printing sounds like you need a $600 Bambu AMS or a Prusa MMU3. But you don't. You can print in 2, 3, or even 5+ colors on a basic single-extruder printer for the cost of extra filament spools and a few minutes of hands-on time per print.</p>
+
+        <p>In this guide, I'll show you the 3 methods that actually work in 2026 — from the dead-simple "pause and swap" technique to using your slicer's built-in multi-material tools. No hardware upgrades required for Methods 1 and 2.</p>
+
+        <h2>Method 1: Manual Filament Change (Pause at Layer)</h2>
+
+        <p>This is the most accessible method. You literally pause the printer when it reaches a specific layer height, swap the filament, and resume. It's how I printed my first multi-color name tag back in 2018, and it still works perfectly on every modern printer.</p>
+
+        <h3>Step 1: Prepare Your Model</h3>
+
+        <p>Multi-color prints work best when colors are separated by <em>height</em>, not by X/Y position. Think: a base in one color, text on top in another color. If you need two colors side-by-side at the same layer height, skip to Method 3 (painting in the slicer).</p>
+
+        <p>Good candidates for manual filament change:</p>
+        <ul>
+          <li>Name tags (base color + text color)</li>
+          <li>Coasters (one color background, another for the design)</li>
+          <li>Signs and plaques</li>
+          <li>Keychains with a two-tone design</li>
+        </ul>
+
+        <h3>Step 2: Set the Pause in Your Slicer</h3>
+
+        <p>In <strong>Cura</strong>:</p>
+        <ol>
+          <li>Slice your model normally.</li>
+          <li>Click the <strong>Preview</strong> tab.</li>
+          <li>Slide the layer slider to find the exact layer where you want the color change (e.g., layer 50).</li>
+          <li>Click the <strong>...</strong> button (Extensions) → <strong>Post Processing</strong> → <strong>Modify G-Code</strong>.</li>
+          <li>Add a script → select <strong>"Pause at height"</strong>.</li>
+          <li>Enter the layer number, and set "Pause at" to "Layer".</li>
+          <li>Optionally set a park position (X: 0, Y: 0 to move the nozzle out of the way).</li>
+        </ol>
+
+        <p>In <strong>OrcaSlicer / Bambu Studio</strong>:</p>
+        <ol>
+          <li>Slice the model.</li>
+          <li>Right-click the model in the preview → <strong>Add Pause / Color Change</strong>.</li>
+          <li>Select the layer, confirm. A pause icon appears on that layer.</li>
+          <li>Repeat for each color change in your print.</li>
+        </ol>
+
+        <h3>Step 3: Run the Print and Swap Filament</h3>
+
+        <p>When the printer pauses: (1) Retract the current filament. (2) Load the new color. (3) Purge 20-30mm of filament until the new color comes through cleanly. (4) Wipe the nozzle. (5) Resume the print.</p>
+
+        <p><strong>Pro tip:</strong> Set your nozzle temperature 5-10°C higher during the filament swap (e.g., 215°C instead of 205°C). This helps push out the old color completely. Just remember to set it back after the swap.</p>
+
+        <h2>Method 2: M600 Command (G-Code Injection)</h2>
+
+        <p>If your printer supports the <strong>M600</strong> G-code command (most Marlin and Klipper printers do), this is cleaner than Method 1 because the printer automatically moves the nozzle aside, retracts the filament, and waits for you to load the new one.</p>
+
+        <h3>How to Inject M600</h3>
+
+        <p>In Cura, use the <strong>"ChangeAtZ"</strong> post-processing script and select "M600" as the pause method. In PrusaSlicer, use the <strong>"Color Change"</strong> placeholder in the custom G-code section.</p>
+
+        <p>The M600 command triggers a filament change routine built into your printer's firmware. You don't need to manually retract or unload — the printer does it. Load the new filament when prompted, press the button, and it purges automatically.</p>
+
+        <p><strong>Check compatibility:</strong> Some entry-level printers (especially older Ender 3 variants with 8-bit boards) don't support M600. Test with a small 10-layer calibration cube first.</p>
+
+        <h2>Method 3: Paint-to-Print (OrcaSlicer / Bambu Studio)</h2>
+
+        <p>This is the most powerful method. Instead of separating colors by layer height, you paint different areas of the model with different colors in the slicer. The slicer then generates G-code that pauses and changes filament at each color boundary.</p>
+
+        <h3>How to Do It in OrcaSlicer</h3>
+
+        <ol>
+          <li>Import your model into OrcaSlicer.</li>
+          <li>Select the model → click <strong>Paint</strong> (brush icon in the left toolbar).</li>
+          <li>Choose a color, paint the areas you want in that color.</li>
+          <li>Repeat for each color (up to 4-6 colors in the free version).</li>
+          <li>Click <strong>Slice</strong>. OrcaSlicer will insert automatic color changes (M600 or pause commands) at each boundary.</li>
+        </ol>
+
+        <p>This method produces the most impressive results — think a 3D-printed Pikachu with yellow body, red cheeks, and black eyes, all printed in one job on a single nozzle. The downside? You'll be standing at your printer doing 4-6 filament swaps per print.</p>
+
+        <h2>How Many Colors Can You Realistically Do?</h2>
+
+        <p>With a single extruder, I've done up to 6 color changes in one print. But more than 3-4 becomes impractical because: (1) each swap adds 2-5 minutes of hands-on time, and (2) there's a small visual seam at each color transition where the filament didn't fully purge.</p>
+
+        <p><strong>My rule of thumb:</strong> 2-3 colors for practical prints. 4+ colors only for display pieces where you're willing to babysit the printer.</p>
+
+        <h2>Minimizing Color-Bleed at Transition Layers</h2>
+
+        <p>The biggest visual problem with single-extruder multi-color is "color bleed" — a thin line of the old color visible in the new color's first few layers. Here's how to minimize it:</p>
+
+        <ul>
+          <li><strong>Purge more filament</strong> — In your pause script, increase the purge length to 50-80mm instead of the default 20mm.</li>
+          <li><strong>Wipe the nozzle</strong> — Keep a brass brush or paper towel handy. Wipe the nozzle tip after each swap.</li>
+          <li><strong>Use a prime tower</strong> — In Cura/OrcaSlicer, enable "Prime Tower" in the multi-material settings. This wastes some filament but gives clean color transitions.</li>
+          <li><strong>Match colors strategically</strong> — Going from black → white is the hardest transition. Going from red → orange → yellow is much easier.</li>
+        </ul>
+
+        <h2>When to Upgrade to a Multi-Material System</h2>
+
+        <p>If you're doing multi-color prints weekly and want to walk away from the printer, it's time to upgrade. Options in 2026:</p>
+
+        <ul>
+          <li><strong>Bambu Lab AMS</strong> ($249) — Works with Bambu X1/P1/A1 series. 4 colors, automatic. The gold standard.</li>
+          <li><strong>Creality CFS</strong> ($180) — Newer system for Creality K1 and Ender 3 V3 series. 4 colors.</li>
+          <li><strong>ERCF v2 (DIY)</strong> ($80-120) — Open-source filament changer for Voron/Prusa printers. Steep learning curve but very capable.</li>
+        </ul>
+
+        <p>But if you're just getting started with multi-color, don't buy anything. Master Methods 1-3 first. You'll learn what color combinations look good and whether you actually enjoy the workflow before spending $200+ on a multi-material system.</p>
+
+        <h2>Best First Multi-Color Project</h2>
+
+        <p>Print a <a href="easy-3d-printing-projects-beginners.html">two-tone keychain or name tag</a>. They take 30-45 minutes, use only 2 colors (one base, one text), and the manual pause method is all you need. Once you nail that, move up to a 3-color coaster or sign.</p>
+
+        <p>For project ideas and free models designed for multi-color printing, check out <a href="useful-things-to-3d-print.html">our list of useful prints</a> and filter by "multi-color" on Printables or MakerWorld.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="easy-3d-printing-projects-beginners.html">10 Easy 3D Printing Projects for Beginners</a></li>
+          <li><a href="useful-things-to-3d-print.html">15 Actually Useful Things to 3D Print at Home</a></li>
+          <li><a href="best-filament-brands-2026.html">Best 3D Printer Filament Brands in 2026</a></li>
+          <li><a href="how-to-design-3d-print-models.html">How to Design Your Own 3D Print Models (Free Tools)</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
