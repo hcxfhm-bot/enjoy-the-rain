@@ -46,16 +46,20 @@
 - [x] how-to-print-multi-color-3d — How to Print Multi-Color on a Single-Extruder Printer ✅ 2026-05-16
 - [x] 3d-print-ironing-settings — 3D Print Ironing: What It Is & Best Settings for Smooth Tops ✅ 2026-05-16
 
-### 批次 7：CALIBRATION & QUALITY (3篇) 🔄 IN PROGRESS
+### 批次 7：CALIBRATION & QUALITY (3篇) ✅ COMPLETED
 - [x] how-to-calibrate-3d-printer — How to Calibrate Your 3D Printer: A Step-by-Step Guide ✅ 2026-05-19
 - [x] best-3d-printer-settings — Best 3D Printer Settings for Every Filament (PLA, PETG, TPU) ✅ 2026-05-19
-- [ ] 3d-printing-failure-types-guide — 7 Most Common 3D Printing Failures and How to Fix Them
+- [x] 3d-printing-failure-types-guide — 7 Most Common 3D Printing Failures and How to Fix Them ✅ 2026-05-19
+
+### 批次 8：MONETIZATION & UPGRADES (2篇) ✅
+- [x] how-to-sell-3d-prints-online — How to Sell 3D Prints Online: Turn Your Printer into Profit ✅ 2026-05-19
+- [x] best-3d-printer-upgrades — Best 3D Printer Upgrades: 7 Mods That Actually Improve Print Quality ✅ 2026-05-19
 
 ## 进度
 
 - **总目标**: 30 篇
-- **已完成**: 27 ✅
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅
+- **已完成**: 30 ✅
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 🎉 GOAL REACHED!
 
 ## 生成规则
 

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 Most Common 3D Printing Failures and How to Fix Them (2026)</title>
+  <meta name="description" content="Stop wasting filament. Learn the 7 most common 3D printing failures, why they happen, and exactly how to fix each one. Includes troubleshooting flowchart.">
+  <meta name="keywords" content="3d printing failures, common 3d print problems, fix 3d print failures, 3d printing troubleshooting guide, 3d print repair">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../troubleshooting.html">Troubleshooting</a> &raquo; <span>Failure Types Guide</span>
+      </nav>
+
+      <h1>7 Most Common 3D Printing Failures and How to Fix Them</h1>
+
+      <div class="article-meta">
+        <span>📅 May 19, 2026</span>
+        <span>⏱️ 10 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <div class="article-body">
+        <p>Every 3D printer owner faces failures. Even after 10 years of printing, you'll still occasionally peel a spaghetti monster off your build plate. The difference between a beginner and an expert isn't avoiding failures — it's knowing how to diagnose and fix them fast.</p>
+
+        <p>This guide covers the 7 failures that account for 90% of wasted filament. For each one, you'll get the cause, the fix, and — most importantly — how to prevent it next time.</p>
+
+        <h2>1. First Layer Adhesion Failure</h2>
+
+        <p><strong>Symptoms:</strong> Print won't stick, corners lift, entire first layer peels up, or print shifts mid-layer.</p>
+
+        <p><strong>Why it happens:</strong> Your nozzle is too far from the bed, the bed is unlevel, or your bed surface is contaminated with oil or dust.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Level your bed properly.</strong> Use a piece of paper — you want slight resistance when pulling it between nozzle and bed.</li>
+          <li><strong>Clean your bed.</strong> Wipe with isopropyl alcohol (IPA) and a lint-free cloth. No fingerprints = better adhesion.</li>
+          <li><strong>Adjust Z-offset.</strong> If your first layer looks like a series of round dots instead of a flat squished line, you're too far. If it's so squished you can't see the gap between lines, you're too close.</li>
+          <li><strong>Use a brim.</strong> A 5-10mm brim adds surface area and prevents warping on tricky prints.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Run a <a href="how-to-calibrate-3d-printer.html">full calibration routine</a> monthly. Your bed level changes with temperature and use.</p>
+
+        <div class="adsense-in-article">
+          <!-- Google AdSense -->
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>2. Stringing (Oozing)</h2>
+
+        <p><strong>Symptoms:</strong> Thin "hairs" of filament connecting different parts of your print. Looks like a spider web on your model.</p>
+
+        <p><strong>Why it happens:</strong> While the print head moves between sections, molten plastic drips from the nozzle because retraction isn't pulling filament back far enough or fast enough.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Increase retraction distance.</strong> Start at 5mm for Bowden setups, 2mm for direct drive. Increase in 0.5mm increments.</li>
+          <li><strong>Increase retraction speed.</strong> Faster retraction = less time for oozing. Try 40-60mm/s.</li>
+          <li><strong>Enable Z-hop.</strong> This lifts the nozzle slightly during travel moves, preventing it from dragging through stringy plastic.</li>
+          <li><strong>Lower print temperature.</strong> Hotter plastic = runnier plastic. Drop your temp by 5°C and retest.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Different filaments need different retraction settings. <a href="pla-filament-temperature-guide.html">PLA</a> is easy; <a href="tpu-flexible-filament-beginners.html">TPU</a> is a nightmare. Create a test profile for each spool.</p>
+
+        <h2>3. Warping and Curling</h2>
+
+        <p><strong>Symptoms:</strong> Corners lift up, print detaches from bed, or the entire model curves like a potato chip.</p>
+
+        <p><strong>Why it happens:</strong> Plastic shrinks as it cools. If the bottom layers cool faster than the top, they contract and pull the print off the bed. ABS is notorious for this; PLA rarely warps.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Use an enclosure.</strong> Keeps ambient temperature stable and prevents drafts.</li>
+          <li><strong>Turn off part cooling for first layers.</strong> Let the bottom layers cool slowly.</li>
+          <li><strong>Use a heated chamber.</strong> Some printers (like <a href="bambu-lab-a1-mini-review.html">Bambu Lab</a>) have this built-in.</li>
+          <li><strong>Switch to PLA.</strong> If you're printing in ABS and fighting warping, ask yourself why. PLA warps 10x less than ABS.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Use a brim (again) and make sure your bed is hot enough. 60°C for PLA, 80-100°C for ABS.</p>
+
+        <h2>4. Layer Shift</h2>
+
+        <p><strong>Symptoms:</strong> Layers are offset from each other, creating a "staircase" effect. Print looks like it shifted to the left or right halfway through.</p>
+
+        <p><strong>Why it happens:</strong> The print head or bed hit an obstacle, the belt is loose, or a stepper motor skipped steps due to excessive friction or speed.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Check for obstructions.</strong> Did a stray piece of plastic block the print head? Remove it and restart.</li>
+          <li><strong>Tighten your belts.</strong> They should make a "twang" sound when plucked, like a guitar string. Too loose = layer shift. Too tight = motor strain.</li>
+          <li><strong>Lower acceleration and jerk settings.</strong> Your printer might be moving faster than the motors can handle.</li>
+          <li><strong>Check pulley grub screws.</strong> If the pulley is slipping on the motor shaft, you'll get layer shift. Tighten the set screw.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Do a <a href="3d-printer-maintenance-checklist.html">monthly maintenance check</a>. Loose belts are the #1 cause of layer shift.</p>
+
+        <div class="adsense-in-article">
+          <!-- Google AdSense -->
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>5. Under-Extrusion</h2>
+
+        <p><strong>Symptoms:</strong> Gaps between layers, thin walls, or the printer "clicking" as the extruder gear slips on the filament.</p>
+
+        <p><strong>Why it happens:</strong> The extruder can't push enough filament. This could be a clogged nozzle, tangled filament, or incorrect extrusion multiplier.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Check for tangles.</strong> Make sure your filament unspools smoothly. A single tangle can cause under-extrusion halfway through a print.</li>
+          <li><strong>Cold pull or atomic pull.</strong> Heat your nozzle to 220°C, push filament through, then quickly yank it out when it cools to 90°C. This pulls clogs out with it.</li>
+          <li><strong>Calibrate your E-steps.</strong> Your printer thinks it's pushing 100mm of filament, but it's actually only pushing 90mm. <a href="how-to-calibrate-3d-printer.html">Here's how to calibrate.</a></li>
+          <li><strong>Increase flow rate.</strong> In your slicer, bump flow from 100% to 105% and see if layers fill in better.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Store filament in a dry box. Wet filament bubbles and pops, causing under-extrusion and surface defects.</p>
+
+        <h2>6. Over-Extrusion</h2>
+
+        <p><strong>Symptoms:</strong> Blobby dimensions, rounded corners instead of sharp edges, or plastic squishing out between layers.</p>
+
+        <p><strong>Why it happens:</strong> Opposite of under-extrusion — your printer is pushing too much plastic.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Calibrate E-steps.</strong> Same as above, but in reverse. Make sure your printer pushes exactly as much plastic as it thinks it is.</li>
+          <li><strong>Lower flow rate.</strong> Drop from 100% to 95% in your slicer.</li>
+          <li><strong>Check nozzle size.</strong> If your slicer thinks you have a 0.4mm nozzle but you're actually using 0.6mm, you'll over-extrude.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Print a <a href="https://www.thingiverse.com/thing:909901" target="_blank" rel="noopener">calibration cube</a> and measure it with calipers. If X/Y dimensions are too big, you're over-extruding.</p>
+
+        <h2>7. Elephant Foot (First Layer Squish)</h2>
+
+        <p><strong>Symptoms:</strong> The bottom layer is wider than the rest of the print, creating a "flared" look like an elephant's foot.</p>
+
+        <p><strong>Why it happens:</strong> The first layer is squished too hard into the bed to ensure adhesion. This makes the perimeter wider than intended.</p>
+
+        <p><strong>The fix:</strong></p>
+        <ol>
+          <li><strong>Enable "Elephant Foot Compensation" in your slicer.</strong> Cura, PrusaSlicer, and Bambu Studio all have this. It shrinks the first layer's outline slightly to compensate.</li>
+          <li><strong>Raise your Z-offset slightly.</strong> Less squish = less flare.</li>
+          <li><strong>Use a chamfer on the model.</strong> If you're designing your own parts, add a 45° chamfer to the bottom edge. This hides elephant foot completely.</li>
+        </ol>
+
+        <p><strong>Prevention:</strong> Don't go overboard on first layer squish. You want adhesion, not a pancake.</p>
+
+        <h2>Troubleshooting Flowchart</h2>
+
+        <p>When a print fails, don't just restart and hope. Follow this decision tree:</p>
+
+        <ol>
+          <li><strong>Did the first layer stick?</strong> No → Fix bed leveling and Z-offset.</li>
+          <li><strong>Are there strings?</strong> Yes → Adjust retraction settings.</li>
+          <li><strong>Are layers shifting?</strong> Yes → Check belts and pulleys.</li>
+          <li><strong>Are there gaps in walls?</strong> Yes → Calibrate E-steps and check for clogs.</li>
+          <li><strong>Is the print warping?</strong> Yes → Use an enclosure or switch to PLA.</li>
+        </ol>
+
+        <p>If none of these fix it, <a href="../troubleshooting.html">check our full troubleshooting guide</a> or ask the community. Every failure is a lesson — document what you tried and what worked.</p>
+
+        <div class="adsense-in-article">
+          <!-- Google AdSense -->
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>Final Thoughts</h2>
+
+        <p>3D printing is 20% printing and 80% troubleshooting. The more failures you work through, the better you'll understand how your machine behaves. Keep a notebook (or a <a href="3d-printer-maintenance-checklist.html">maintenance checklist</a>) and record what works.</p>
+
+        <p>And remember: every failed print is just a $2 lesson in what not to do next time.</p>
+
+        <p><strong>Want fewer failures?</strong> Start with a <a href="best-budget-3d-printer-under-200.html">reliable budget printer</a> and <a href="pla-filament-temperature-guide.html">dial in your PLA settings</a> before moving to trickier materials like <a href="petg-vs-pla-comparison.html">PETG</a> or ABS.</p>
+
+      </div>
+
+      <div class="article-tags">
+        <span class="tag">Troubleshooting</span>
+        <span class="tag">Failures</span>
+        <span class="tag">Fix Guide</span>
+        <span class="tag">Beginner</span>
+      </div>
+
+      <div class="article-nav">
+        <a href="how-to-calibrate-3d-printer.html" class="prev">← Calibrate Your 3D Printer</a>
+        <a href="3d-print-first-layer-not-sticking.html" class="next">First Layer Not Sticking →</a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 3D Print Starter. Built for makers, by makers.</p>
+    <p style="font-size:0.85rem; color:#666; margin-top:0.5rem;">Amazon Associates Disclaimer: As an Amazon Associate, we earn from qualifying purchases.</p>
+  </div>
+</footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
