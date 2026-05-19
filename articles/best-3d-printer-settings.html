@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best 3D Printer Settings for Every Filament: PLA, PETG & TPU (2026)</title>
+  <meta name="description" content="Get perfect prints every time with the best 3D printer settings for PLA, PETG, and TPU. Includes nozzle temp, bed temp, speeds, and cooling — all in one place.">
+  <meta name="keywords" content="best 3d printer settings, pla settings, petg settings, tpu settings, 3d printer slicer settings, optimal 3d print settings, cura settings">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../filament-guide.html">Filament Guide</a> &raquo; <span>Optimal Settings</span>
+      </nav>
+
+      <h1>Best 3D Printer Settings for Every Filament: PLA, PETG & TPU</h1>
+
+      <div class="article-meta">
+        <span>📅 May 19, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">📊</span>
+      </div>
+
+      <div class="article-body">
+        <p>Copying someone else's slicer profile is like using their glasses — it might help, but it's probably not exactly right for your machine, your filament, and your goal. This guide gives you the starting profiles that work on most modern printers, then explains why each setting matters so you can tune from a solid baseline instead of starting blind.</p>
+
+        <h2>The Universal Starting Point</h2>
+
+        <p>Before diving into per-filament settings, every profile should start here:</p>
+        <ul>
+          <li><strong>Layer height:</strong> 0.2mm (the sweet spot of speed vs quality)</li>
+          <li><strong>Wall count:</strong> 3 perimeters minimum for structural parts</li>
+          <li><strong>Infill:</strong> 15-20% for functional parts, 5-10% for decorative</li>
+          <li><strong>Wall ordering:</strong> Outside to Inside (most compatible)</li>
+          <li><strong>Retraction:</strong> Enabled, distance 4-8mm (tune per printer)</li>
+        </ul>
+
+        <p>If your first layer is off, nothing else matters. <a href="how-to-calibrate-3d-printer.html">Read our calibration guide</a> before you start tweaking these settings.</p>
+
+        <h2>PLA Settings — The Easiest Filament to Print</h2>
+
+        <p>PLA is forgiving and fast. It's the filament you learn on, and the one you'll return to for 80% of your prints.</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 10px 14px; text-align:left;">Setting</th>
+              <th style="padding: 10px 14px; text-align:left;">Recommended</th>
+              <th style="padding: 10px 14px; text-align:left;">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Nozzle Temperature</td>
+              <td style="padding: 10px 14px;">195 – 215°C</td>
+              <td style="padding: 10px 14px;">Start at 205°C, adjust</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Bed Temperature</td>
+              <td style="padding: 10px 14px;">55 – 65°C</td>
+              <td style="padding: 10px 14px;">PEI sheet or glass works great</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Print Speed</td>
+              <td style="padding: 10px 14px;">50 – 80 mm/s</td>
+              <td style="padding: 10px 14px;">Slow = better quality on fine details</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Cooling Fan</td>
+              <td style="padding: 10px 14px;">100% from layer 2</td>
+              <td style="padding: 10px 14px;">Essential for bridging and small parts</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Flow Rate</td>
+              <td style="padding: 10px 14px;">95 – 100%</td>
+              <td style="padding: 10px 14px;">Run a calibration cube to check</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px;">Retraction Distance</td>
+              <td style="padding: 10px 14px;">4 – 6mm (direct drive)</td>
+              <td style="padding: 10px 14px;">Bowden: 5-8mm</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>PLA tips: If you see elephant's foot (top of walls wider than bottom), lower bed temp by 5°C. If corners are lifting (warping), lower bed temp but increase part cooling. For transparent PLA prints, reduce layer height to 0.12mm and increase nozzle temp to 215-220°C.</p>
+
+        <h2>PETG Settings — The Balanced Engineering Filament</h2>
+
+        <p>PETG bridges PLA and ABS — it's strong, slightly flexible, and food-safe with some caveats. But it's also more prone to stringing and needs different cooling settings than PLA.</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 10px 14px; text-align:left;">Setting</th>
+              <th style="padding: 10px 14px; text-align:left;">Recommended</th>
+              <th style="padding: 10px 14px; text-align:left;">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Nozzle Temperature</td>
+              <td style="padding: 10px 14px;">235 – 250°C</td>
+              <td style="padding: 10px 14px;">Higher than PLA — PETG needs heat</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Bed Temperature</td>
+              <td style="padding: 10px 14px;">70 – 80°C</td>
+              <td style="padding: 10px 14px;">PETG sticks harder than PLA — PEI is ideal</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Print Speed</td>
+              <td style="padding: 10px 14px;">40 – 60 mm/s</td>
+              <td style="padding: 10px 14px;">Too fast = poor layer adhesion</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Cooling Fan</td>
+              <td style="padding: 10px 14px;">30 – 50% from layer 3</td>
+              <td style="padding: 10px 14px;">Too much cooling = delamination</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Flow Rate</td>
+              <td style="padding: 10px 14px;">95 – 98%</td>
+              <td style="padding: 10px 14px;">PETG over-extrusion is very visible</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px;">Retraction Distance</td>
+              <td style="padding: 10px 14px;">3 – 5mm</td>
+              <td style="padding: 10px 14px;">Too much = hot-end clogs</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <p>PETG tips: If PETG sticks too hard to the bed, reduce bed temp to 60°C next time. Use a draft shield or brim for large prints — PETG shrinks slightly and corners can lift. PETG absorbs moisture fast; <a href="how-to-dry-3d-printer-filament.html">dry your filament before printing</a> if you hear hissing or pop sounds.</p>
+
+        <h2>TPU Settings — Printing Flexible Filaments</h2>
+
+        <p>TPU (Thermoplastic Polyurethane) is durable, flexible, and resistant to chemicals and impacts. But it's also the most demanding filament to print well. A direct drive extruder is strongly recommended.</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 10px 14px; text-align:left;">Setting</th>
+              <th style="padding: 10px 14px; text-align:left;">Recommended</th>
+              <th style="padding: 10px 14px; text-align:left;">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Nozzle Temperature</td>
+              <td style="padding: 10px 14px;">220 – 245°C</td>
+              <td style="padding: 10px 14px;">Softer TPU (95A) = lower temp</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Bed Temperature</td>
+              <td style="padding: 10px 14px;">45 – 60°C</td>
+              <td style="padding: 10px 14px;">Lower bed = less warping on TPU</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Print Speed</td>
+              <td style="padding: 10px 14px;">15 – 30 mm/s</td>
+              <td style="padding: 10px 14px;">Slow. Very slow. No shortcuts here.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Cooling Fan</td>
+              <td style="padding: 10px 14px;">50 – 80%</td>
+              <td style="padding: 10px 14px;">Helps set layers before next pass</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 10px 14px;">Flow Rate</td>
+              <td style="padding: 10px 14px;">100 – 105%</td>
+              <td style="padding: 10px 14px;">TPU compacts under pressure</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px;">Retraction Distance</td>
+              <td style="padding: 10px 14px;">1 – 2mm or OFF</td>
+              <td style="padding: 10px 14px;">Retraction often causes clogs in TPU</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>TPU tips: If you're using a Bowden extruder and prints are failing, there's no setting fix — upgrade to direct drive. Store TPU in an airtight bag with descant. For very hard TPU (85D shore), you can push speed to 40mm/s. <a href="../filament-guide.html">Our full filament guide covers TPU in more detail</a>.</p>
+
+        <h2>Quick Settings Cheat Sheet</h2>
+
+        <p>Bookmark this comparison:</p>
+        <ul>
+          <li><strong>PLA</strong> → 205°C nozzle, 60°C bed, 60mm/s, full fan — fast, easy, forgiving</li>
+          <li><strong>PETG</strong> → 245°C nozzle, 75°C bed, 50mm/s, 40% fan — strong, slightly tricky</li>
+          <li><strong>TPU</strong> → 235°C nozzle, 50°C bed, 20mm/s, 60% fan, no retraction — slow but rewarding</li>
+        </ul>
+
+        <p>The most common mistake: printing PETG with PLA settings. If your PETG prints are stringing and delaminating, your nozzle temp is probably too low. Bump it up 10°C and try again. And always — always — dry your filament before printing PETG and TPU. Moisture is the silent killer of print quality.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer: Step-by-Step Guide</a></li>
+          <li><a href="../filament-guide.html">PLA vs PETG vs TPU: Which Filament Should You Use?</a></li>
+          <li><a href="../printers.html">Best 3D Printers Under $300 — Full Buying Guide</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

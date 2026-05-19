@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Calibrate Your 3D Printer: A Step-by-Step Guide (2026)</title>
+  <meta name="description" content="Learn how to calibrate your 3D printer step by step. Covers bed leveling, e-steps, flow rate, and temperature tuning — everything you need for perfect prints every time.">
+  <meta name="keywords" content="how to calibrate 3d printer, 3d printer calibration, bed leveling, e-steps calibration, flow rate calibration, 3d printer tuning">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>Calibration Guide</span>
+      </nav>
+
+      <h1>How to Calibrate Your 3D Printer: A Complete Step-by-Step Guide</h1>
+
+      <div class="article-meta">
+        <span>📅 May 19, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚙️</span>
+      </div>
+
+      <div class="article-body">
+        <p>If your prints are coming out stringy, off-dimension, or with gaps — the problem is almost always calibration. A well-calibrated printer doesn't need you to babysit every print. You set it, walk away, and come back to a perfect part.</p>
+
+        <p>This guide covers the four calibration steps that matter most: bed leveling, e-steps (extruder steps), flow rate, and temperature tuning. Do these once when you set up your printer, and again whenever you switch filaments or move the machine.</p>
+
+        <h2>1. Bed Leveling — The Foundation of Every Print</h2>
+
+        <p>No other setting matters if your first layer isn't sticking. Modern printers have auto bed leveling (ABL), but even then you need to understand the basics.</p>
+
+        <p><strong>If your printer has auto bed leveling:</strong> Run the ABL routine from your printer's menu. Then do a manual paper test at the four corners and center — the paper should drag slightly with just a hint of resistance. If one corner is way off, adjust that knob and re-run ABL.</p>
+
+        <p><strong>If your printer has no ABL:</strong> Home all axes, then slide a piece of paper under the nozzle at each corner. Adjust the knobs until the paper drags with consistent resistance at all four points. The front-left corner is usually your reference point — start there and work around.</p>
+
+        <p>After leveling, print a <a href="https://www.thingiverse.com/thing:5552" target="_blank" rel="noopener">first layer test square</a>. If it looks smooth and glossy with no gaps, you're good. If you see lines or gaps, <a href="../troubleshooting.html">check our troubleshooting guide</a> for specific patterns.</p>
+
+        <h2>2. E-Steps — How Much Filament Is Your Extruder Actually Pushing?</h2>
+
+        <p>E-steps control how much filament the extruder pushes per millimeter of movement. Wrong e-steps cause under-extrusion (gaps and missing layers) or over-extrusion (blobby corners, stringing).</p>
+
+        <p><strong>How to calibrate e-steps:</strong></p>
+        <ul>
+          <li>Mark your filament 120mm from the entrance of your extruder with a marker or piece of tape</li>
+          <li>In your slicer terminal (or directly via Pronterface/OctoPrint), send: <code>G92 E0</code> then <code>G1 E100 F100</code></li>
+          <li>Measure the remaining distance from your mark to the extruder entrance</li>
+          <li>If it used 97mm instead of 100mm, your e-steps are 3% low</li>
+          <li>Calculate: <code>New E-Steps = Current E-Steps × (100 / Actual Extruded)</code></li>
+          <li>Update via: <code>M92 E[new_value]</code> and <code>M500</code> to save</li>
+        </ul>
+
+        <p>The exact e-step value varies by extruder type. Direct drive extruders typically sit around 90-100 steps/mm. Bowden setups usually run 400-500 steps/mm. Your slicer shows the current value — write it down before you change anything.</p>
+
+        <h2>3. Flow Rate — Fine-Tuning Extrusion Width</h2>
+
+        <p>Flow rate adjusts how much plastic is extruded relative to the slicer's calculated amount. Most printers come from the factory slightly over-extruding. Reducing flow by 2-5% often fixes stringing and corner gaps.</p>
+
+        <p><strong>Calibration method: The Cube Method</strong></p>
+        <ul>
+          <li>Slice a 20mm calibration cube with 0 top/bottom layers and 2 perimeters, no infill</li>
+          <li>Measure each wall with digital calipers (target: 0.48mm nominal for 0.4mm nozzle)</li>
+          <li>Formula: <code>New Flow = 100 × (Measured / Target)</code></li>
+          <li>Example: walls measure 0.50mm but target is 0.48mm → <code>New Flow = 100 × (0.48 / 0.50) = 96%</code></li>
+        </ul>
+
+        <p>Enter this value as your default flow rate in your slicer profile. Different filaments may need slight tweaks — we'll cover that in the next section.</p>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>4. Temperature Tuning — Getting the Best Print Quality</h2>
+
+        <p>Temperature affects layer adhesion, surface finish, stringing, and strength. The temperature on the spool label is a starting point, not a guarantee.</p>
+
+        <p><strong>For PLA:</strong> Start at 200°C for the nozzle, 60°C for the bed. Print a temperature tower — a single print that changes temperature every 10°C across its height. Look for the height where stringing disappears and surface finish looks glossy without blobbing. Most PLA prints best between 195-215°C.</p>
+
+        <p><strong>For PETG:</strong> Raise to 235-250°C nozzle and 70-80°C bed. PETG needs slower print speeds (60% of your PLA speed) and less cooling. Too much cooling causes delamination; too little causes stringing.</p>
+
+        <p><strong>For TPU:</strong> Drop to 220-240°C with minimal cooling and very slow speeds (20-30mm/s). Direct drive extruders handle TPU much better than Bowden setups — if your TPU prints are squishing inconsistently, <a href="../printers.html">consider upgrading to a direct drive printer</a>.</p>
+
+        <p>Need help choosing the right filament? <a href="../filament-guide.html">Our filament guide explains PLA, PETG, and TPU in depth</a>.</p>
+
+        <h2>Save Your Settings — Don't Lose Calibration</h2>
+
+        <p>After you've tuned everything, save your settings:</p>
+        <ul>
+          <li>In Marlin firmware: send <code>M500</code> to save to EEPROM</li>
+          <li>In Klipper: settings save automatically to config file</li>
+          <li>In your slicer: create a named profile for each filament type</li>
+        </ul>
+
+        <p>The single biggest mistake beginners make: calibrating once, then changing one variable without re-checking. Keep notes on what you changed and why — a simple spreadsheet works great. Your future self will thank you.</p>
+
+        <h2>How Often Should You Recalibrate?</h2>
+
+        <p>You don't need to redo every step constantly. Use this schedule:</p>
+        <ul>
+          <li><strong>Every new spool</strong>: Quick temperature check (print a small object and inspect)</li>
+          <li><strong>Every filament brand switch</strong>: Full e-steps + flow check</li>
+          <li><strong>After moving the printer</strong>: Full bed leveling + first layer test</li>
+          <li><strong>Every 6 months</strong>: Complete calibration from scratch</li>
+        </ul>
+
+        <p>Once your printer is calibrated, <a href="../projects.html">browse our project ideas</a> and start printing something real. Calibration pays off the moment you pull a perfect print off the build plate.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started with 3D Printing: Complete Beginner Roadmap</a></li>
+          <li><a href="../filament-guide.html">PLA vs PETG vs TPU: Which Filament Should Beginners Use?</a></li>
+          <li><a href="../troubleshooting.html">3D Printing Troubleshooting: Every Common Problem Solved</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
