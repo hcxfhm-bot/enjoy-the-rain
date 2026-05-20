@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OctoPrint Setup Guide: Install and Configure in 20 Minutes (2026)</title>
+  <meta name="description" content="Step-by-step OctoPrint setup guide for Raspberry Pi. Covers installation, webcam, plugins, remote access, and tips for reliable 3D printer monitoring.">
+  <meta name="keywords" content="octoprint setup, octoprint raspberry pi, octoprint plugins, 3d printer monitoring, octoprint remote access, octopi install">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>OctoPrint Setup Guide</span>
+      </nav>
+
+      <h1>OctoPrint Setup Guide: Install and Configure in 20 Minutes</h1>
+
+      <div class="article-meta">
+        <span>📅 May 20, 2026</span>
+        <span>⏱️ 11 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🖥️</span>
+      </div>
+
+      <div class="article-body">
+        <p>If you're still walking to your printer to start prints, check temperatures, and hit "cancel" when something goes wrong, you're missing out. OctoPrint transforms any 3D printer into a smart, connected device you control from your phone, tablet, or laptop.</p>
+
+        <p>This guide covers everything: hardware setup, software installation, must-have plugins, and remote access from anywhere.</p>
+
+        <h2>What Is OctoPrint?</h2>
+
+        <p>OctoPrint is free, open-source server software that runs on a <a href="https://www.raspberrypi.org/" target="_blank" rel="noopener">Raspberry Pi</a> connected to your printer via USB. It gives you:</p>
+
+        <ul>
+          <li><strong>Web interface:</strong> Start, stop, pause, and monitor prints from any browser</li>
+          <li><strong>Webcam streaming:</strong> Watch your print in real-time, create time-lapses</li>
+          <li><strong>Push notifications:</strong> Get alerts when a print finishes or fails</li>
+          <li><strong>G-code viewer:</strong> See exactly what the printer will do before it starts</li>
+          <li><strong>Plugin ecosystem:</strong> 300+ plugins for temperature graphs, filament tracking, and more</li>
+          <li><strong>Remote access:</strong> Control your printer from anywhere with an internet connection</li>
+        </ul>
+
+        <p><strong>Don't have a Raspberry Pi?</strong> Some modern printers like the <a href="bambu-lab-a1-mini-review.html">Bambu Lab A1 Mini</a> have similar features built-in via their companion apps. But for Ender 3, Prusa, and most other printers, OctoPrint is the way to go.</p>
+
+        <h2>What You Need</h2>
+
+        <p><strong>Hardware:</strong></p>
+        <ul>
+          <li>Raspberry Pi 4B (2GB minimum, 4GB recommended) — $35-55</li>
+          <li>MicroSD card (16GB+, Class 10) — $8-12</li>
+          <li>USB webcam (Logitech C270 or similar) — $15-25</li>
+          <li>USB-A to USB-C cable (for Pi 4) — $5-8</li>
+          <li>5V/3A USB-C power supply — $10-15</li>
+          <li>Case (optional but recommended) — $8-15</li>
+        </ul>
+
+        <p><strong>Total cost:</strong> $80-130 for a complete setup. Worth every penny for the convenience.</p>
+
+        <h2>Step 1: Install OctoPi on Your Raspberry Pi</h2>
+
+        <p>OctoPi is a pre-built SD card image that includes Raspberry Pi OS and OctoPrint pre-installed. It's the easiest way to get started.</p>
+
+        <ol>
+          <li><strong>Download OctoPi</strong> from <a href="https://octoprint.org/download/" target="_blank" rel="noopener">octoprint.org/download</a></li>
+          <li><strong>Flash it to your SD card</strong> using <a href="https://www.balena.io/etcher/" target="_blank" rel="noopener">Balena Etcher</a> (free, works on Windows/Mac/Linux)</li>
+          <li><strong>Insert the SD card</strong> into your Pi and power it on</li>
+          <li><strong>Wait 2-3 minutes</strong> for the first boot (it needs to set up the filesystem)</li>
+          <li><strong>Find your Pi's IP address</strong> — check your router's connected devices list, or use the <code>http://octopi.local</code> address if mDNS works</li>
+          <li><strong>Open a browser</strong> and go to <code>http://YOUR_PI_IP</code></li>
+        </ol>
+
+        <p>You should see the OctoPrint setup wizard. Follow the prompts to create an admin account and set your timezone.</p>
+
+
+        <div class="adsense-in-article">
+          <!-- Google AdSense -->
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>Step 2: Connect Your Printer</h2>
+
+        <ol>
+          <li>Plug a USB cable between your Pi and your printer</li>
+          <li>In OctoPrint, go to <strong>Connection &rarr; Serial Connection</strong></li>
+          <li>Select your printer's serial port (usually <code>/dev/ttyUSB0</code> or <code>/dev/ttyACM0</code>)</li>
+          <li>Set baud rate to <strong>115200</strong> (standard for most printers)</li>
+          <li>Click <strong>Connect</strong></li>
+        </ol>
+
+        <p>If the connection fails, try a different baud rate (250000 for some Ender 3 variants) or a different USB cable. Some cheap cables are power-only and don't carry data.</p>
+
+        <h2>Step 3: Add a Webcam</h2>
+
+        <ol>
+          <li>Plug your USB webcam into the Pi</li>
+          <li>Go to <strong>Settings &rarr; Webcam & Timelapse</strong></li>
+            <li>Set stream URL to <code>/webcam/?action=stream</code></li>
+            <li>Set snapshot URL to <code>/webcam/?action=snapshot</code></li>
+          </li>
+          <li>Check "Enable webcam support" and save</li>
+          <li>The webcam feed should appear in the OctoPrint control tab</li>
+        </ol>
+
+        <p><strong>Time-lapse tip:</strong> Enable "Timelapse" in the webcam settings and select "Z-change" trigger. OctoPrint captures a photo every time the Z-axis moves, creating a smooth stop-motion video of your print.</p>
+
+        <h2>Must-Have Plugins</h2>
+
+        <p>OctoPrint's real power comes from plugins. Here are the 5 you should install immediately:</p>
+
+        <p><strong>1. OctoKlipper</strong> — Connects OctoPrint to Klipper firmware. Klipper is faster and quieter than stock Marlin. Together, they're a game-changer.</p>
+
+        <p><strong>2. PrintTimeGenius</strong> — Accurate time estimates. Stock OctoPrint estimates are wildly wrong. This plugin uses G-code analysis to give realistic completion times.</p>
+
+        <p><strong>3. Filament Manager</strong> — Tracks your filament spools. Tells you if you have enough filament for a print before you start. No more mid-print runouts.</p>
+
+        <p><strong>4. Dashboard</strong> — A beautiful, customizable dashboard that replaces the default OctoPrint interface. Shows temperatures, progress, and camera feed at a glance.</p>
+
+        <p><strong>5. Pushover / Telegram Notifications</strong> — Get a notification on your phone when a print finishes or fails. Essential if your printer is in another room.</p>
+
+
+        <div class="adsense-in-article">
+          <!-- Google AdSense -->
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>Remote Access (Control from Anywhere)</h2>
+
+        <p>Want to start a print from work? You need remote access. Here are your options:</p>
+
+        <p><strong>Option 1: Tailscale (Recommended, Free)</strong><br>
+        Tailscale creates a secure VPN between your devices. Install it on your Pi and your phone — no port forwarding, no router configuration, just works.</p>
+
+        <p><strong>Option 2: OctoEverywhere (Free tier)</strong><br>
+        A cloud service that tunnels your OctoPrint instance through their servers. Free tier includes remote access and notifications.</p>
+
+        <p><strong>Option 3: Port forwarding</strong><br>
+        Open port 80 on your router and point it to your Pi. <strong>Warning:</strong> This is insecure unless you set up HTTPS and authentication. Not recommended for beginners.</p>
+
+        <h2>Tips for Reliable Operation</h2>
+
+        <ul>
+          <li><strong>Use a dedicated power supply.</strong> Don't power your Pi from your printer's USB port — it's not stable enough and can cause disconnects.</li>
+          <li><strong>Use a high-quality SD card.</strong> Cheap cards corrupt easily and will crash OctoPrint. Samsung EVO Plus or SanDisk Extreme are safe bets.</li>
+          <li><strong>Enable "Safe Mode" in OctoPrint.</strong> This prevents OctoPrint from sending commands while the printer is busy (e.g., during a print from the SD card).</li>
+          <li><strong>Keep OctoPrint updated.</strong> New versions fix bugs and add features. Set up automatic updates or check monthly.</li>
+        </ul>
+
+        <h2>Final Thoughts</h2>
+
+        <p>OctoPrint isn't optional — it's how 3D printing should work. Once you've used it, going back to walking to your printer and squinting at a tiny LCD screen will feel primitive.</p>
+
+        <p>If your <a href="best-budget-3d-printer-under-200.html">budget printer</a> doesn't have WiFi or a companion app, OctoPrint is the best $80 you can spend. It adds smart features that rival printers costing three times as much.</p>
+
+        <p><strong>Setup time:</strong> 20 minutes if everything goes smoothly. 2 hours if you fight with USB cables. Either way, it's a one-time investment that pays off every single day.</p>
+      </div>
+
+      <div class="article-tags">
+        <span class="tag">OctoPrint</span> <span class="tag">Raspberry Pi</span> <span class="tag">Setup</span> <span class="tag">Smart Printing</span>
+      </div>
+
+      <div class="article-nav">
+        <a href="best-3d-printer-upgrades.html" class="prev">&larr; Best Upgrades</a>
+        <a href="how-to-calibrate-3d-printer.html" class="next">Calibrate Your Printer &rarr;</a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 3D Print Starter. Built for makers, by makers.</p>
+    <p style="font-size:0.85rem; color:#666; margin-top:0.5rem;">Amazon Associates Disclaimer: As an Amazon Associate, we earn from qualifying purchases.</p>
+  </div>
+</footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -55,15 +55,24 @@
 - [x] how-to-sell-3d-prints-online — How to Sell 3D Prints Online: Turn Your Printer into Profit ✅ 2026-05-19
 - [x] best-3d-printer-upgrades — Best 3D Printer Upgrades: 7 Mods That Actually Improve Print Quality ✅ 2026-05-19
 
+### 批次 9：FILAMENT & SOFTWARE (6篇) ✅
+- [x] abs-filament-guide — ABS Filament Guide: Settings, Tips & When to Use It ✅ 2026-05-20
+- [x] octoprint-setup-guide — OctoPrint Setup Guide: Install and Configure in 20 Minutes ✅ 2026-05-20
+- [x] 3d-print-support-settings — 3D Print Support Settings: Everything You Need to Know ✅ 2026-05-20
+- [x] how-to-remove-3d-print-supports — How to Remove 3D Print Supports Without Ruining Your Model ✅ 2026-05-20
+- [x] 3d-printing-speed-vs-quality — 3D Printing Speed vs Quality: Finding the Sweet Spot ✅ 2026-05-20
+- [x] cura-vs-prusaslicer-vs-bambu-studio — Cura vs PrusaSlicer vs Bambu Studio: Which Slicer Is Best? ✅ 2026-05-20
+
 ## 进度
 
-- **总目标**: 30 篇
-- **已完成**: 30 ✅
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 🎉 GOAL REACHED!
+- **总目标**: 200 篇
+- **已完成**: 41 篇 ✅
+- **剩余**: 159 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅
 
 ## 生成规则
 
-- 每篇 800-1500 字
+- 每篇 1000-2000 字（rich content, competitive SERP quality）
 - 统一模板（articles/template.html）
 - 包含内部链接（至少3个链到本站其他页面）
 - 包含 AdSense 广告位
