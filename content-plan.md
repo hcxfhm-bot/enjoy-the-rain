@@ -63,12 +63,20 @@
 - [x] 3d-printing-speed-vs-quality — 3D Printing Speed vs Quality: Finding the Sweet Spot ✅ 2026-05-20
 - [x] cura-vs-prusaslicer-vs-bambu-studio — Cura vs PrusaSlicer vs Bambu Studio: Which Slicer Is Best? ✅ 2026-05-20
 
+### 批次 10：ACCESSORIES & HARDWARE (6篇) ✅
+- [x] best-3d-printer-bed-leveling-methods — Best 3D Printer Bed Leveling Methods: Manual, Auto & ABL ✅ 2026-05-21
+- [x] best-heated-bed-3d-printer — Do You Need a Heated Bed for 3D Printing? (2026 Guide) ✅ 2026-05-21
+- [x] 3d-printer-nozzle-types-guide — 3D Printer Nozzle Types: Brass, Steel, Hardened Steel & More ✅ 2026-05-21
+- [x] best-3d-printer-enclosure — Best 3D Printer Enclosures: Buy vs DIY (2026 Guide) ✅ 2026-05-21
+- [x] 3d-printer-hotend-upgrade-guide — Best 3D Printer Hotend Upgrades: Dragon, Mosquito & More ✅ 2026-05-21
+- [x] how-to-level-3d-printer-bed — How to Level a 3D Printer Bed: Paper Method, Knobs & Tips ✅ 2026-05-21
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 41 篇 ✅
-- **剩余**: 159 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅
+- **已完成**: 47 篇 ✅
+- **剩余**: 153 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅
 
 ## 生成规则
 
