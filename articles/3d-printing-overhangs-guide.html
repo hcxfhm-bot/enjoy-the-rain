@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to 3D Print Overhangs Without Supports (Tips & Settings)</title>
+  <meta name="description" content="Overhangs ruining your 3D prints? Learn how to print steep overhangs without supports using cooling, speed, and orientation tricks that actually work.">
+  <meta name="keywords" content="3d printing overhangs, how to print overhangs without supports, overhang angle 3d printing, 3d print overhang settings, improve overhang quality">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../troubleshooting.html">Troubleshooting</a> &raquo; <span>Overhangs</span>
+      </nav>
+
+      <h1>How to 3D Print Overhangs Without Supports (Tips & Settings)</h1>
+
+      <div class="article-meta">
+        <span>📅 May 22, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">📐</span>
+      </div>
+
+      <div class="article-body">
+        <p>Overhangs are the bane of FDM 3D printing. That 45-degree bridge that looks fine on screen turns into a droopy, stringy mess on your print bed. The default fix? Slap supports everywhere — then spend 30 minutes picking them off, leaving ugly scars on your model.</p>
+
+        <p>But here's the thing: most overhang problems aren't caused by the model. They're caused by wrong settings and bad orientation. With the right tweaks, you can print surprisingly steep overhangs without any supports at all.</p>
+
+        <h2>The 45-Degree Rule (And Why It's Wrong)</h2>
+
+        <p>Every beginner guide says "keep overhangs under 45 degrees." This comes from a simple geometric fact: at 45°, each layer extends exactly one nozzle-width past the previous layer. The new layer has 50% support from below.</p>
+
+        <p>In practice, you can often push well beyond 45° with the right technique. Good printers with strong cooling can handle 55–60° overhangs cleanly. The key is understanding what makes overhangs fail and controlling those variables.</p>
+
+        <h2>Why Overhangs Fail</h2>
+
+        <p>Three things kill overhangs:</p>
+        <ol>
+          <li><strong>Gravity</strong> — Extruded plastic sags before it solidifies if there's nothing underneath</li>
+          <li><strong>Insufficient cooling</strong> — The filament stays soft too long and droops</li>
+          <li><strong>Speed</strong> — Moving too fast gives the plastic less time to bond to the layer below</li>
+        </ol>
+
+        <p>Fix all three and overhangs become dramatically better.</p>
+
+        <h2>5 Tips to Print Better Overhangs Without Supports</h2>
+
+        <h3>1. Max Out Your Cooling Fan</h3>
+        <p>This is the single biggest improvement. Set your part cooling fan to <strong>100% for all overhang layers</strong> (and honestly, for most of the print with PLA). The faster the plastic solidifies, the less it sags.</p>
+        <p>In Cura: <strong>Cooling → Fan Speed → Set to 100%</strong><br>
+        In PrusaSlicer: <strong>Cooling → Fan Speed → 255 (max)</strong></p>
+        <p><strong>Note:</strong> This works great for PLA and PETG. For <a href="abs-filament-guide.html">ABS</a>, too much cooling causes layer delamination — you'll need supports instead.</p>
+
+        <h3>2. Slow Down Overhang Layers</h3>
+        <p>Modern slicers let you set a different speed for overhangs. The idea is simple: print overhang sections slower so the plastic has time to adhere before gravity pulls it down.</p>
+        <p><strong>Recommended overhang speeds:</strong></p>
+        <ul>
+          <li>0–45° overhang: normal speed (50–60mm/s)</li>
+          <li>45–55° overhang: 50% speed (25–30mm/s)</li>
+          <li>55°+ overhang: 30% speed (15–20mm/s)</li>
+        </ul>
+        <p>In Cura: <strong>Speed → Overhang Speed → Set per-angle thresholds</strong><br>
+        In Bambu Studio: <strong>Speed → Overhang speed → Set slow-down for overhangs</strong></p>
+
+        <h3>3. Use Variable Layer Height</h3>
+        <p>Thinner layers mean each overhang step extends less past the previous layer. A 0.12mm layer height overhang looks much cleaner than 0.20mm at the same angle.</p>
+        <p>Use adaptive/variable layer height to print thin layers only where the overhangs are, and normal layers everywhere else. This keeps print time reasonable. See our <a href="best-3d-printer-settings.html">best printer settings guide</a> for more on layer height optimization.</p>
+
+        <h3>4. Rotate the Model</h3>
+        <p>The simplest fix: don't print overhangs at all. Rotate the model so that steep angles face upward instead of outward. A 60° overhang becomes a 30° overhang with a simple 30° rotation.</p>
+        <p>Things to consider when orienting:</p>
+        <ul>
+          <li>Flat faces should touch the build plate</li>
+          <li>Overhangs should face the back of the printer (less airflow turbulence)</li>
+          <li>Important detail faces should point up or sideways — never down</li>
+        </ul>
+
+        <h3>5. Use the Arc Overhang Technique</h3>
+        <p>A clever trick: some slicers (and custom scripts) can print overhangs as concentric arcs instead of straight lines. The curved path is shorter and has more support from adjacent lines. Cura's "Bridge Settings" and PrusaSlicer's overhang detection both use variations of this approach.</p>
+        <p>Enable <strong>Cura → Bridge Settings → Bridge has outline → Enable</strong> for better overhang edges.</p>
+
+        <div class="adsense-in-article">
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>When You Absolutely Need Supports</h2>
+
+        <p>Sometimes supports are unavoidable. Flat horizontal surfaces, internal cavities, and anything past 65° overhang on PLA (50° on PETG) needs support material. For a complete guide on when and how to use supports, see our <a href="3d-print-support-settings.html">3D print support settings guide</a>.</p>
+
+        <p>To minimize support damage:</p>
+        <ul>
+          <li>Use tree/organic supports instead of grid supports (easier removal, less scarring)</li>
+          <li>Set support Z-distance to 0.2mm (creates a gap that makes supports pop off)</li>
+          <li>Use support interface layers for cleaner tops</li>
+          <li>Position supports on non-visible faces whenever possible</li>
+        </ul>
+
+        <h2>Best Slicer Settings for Overhangs</h2>
+
+        <p>Here's a quick reference for the three major slicers. For a full comparison of these tools, check our <a href="cura-vs-prusaslicer-vs-bambu-studio.html">Cura vs PrusaSlicer vs Bambu Studio</a> guide.</p>
+
+        <h3>Cura</h3>
+        <ul>
+          <li>Cooling → Fan Speed: 100%</li>
+          <li>Speed → Overhang Speed: Enable, set 25mm/s for 45°+</li>
+          <li>Bridge Settings → Enable bridge wall outline: On</li>
+          <li>Support → Support Type: Tree (if needed)</li>
+        </ul>
+
+        <h3>PrusaSlicer</h3>
+        <ul>
+          <li>Cooling → Fan speed: 255 (max for overhangs)</li>
+          <li>Speed → Overhang speed: Auto-calculated, set multiplier to 0.5</li>
+          <li>Support → Support style: Organic</li>
+        </ul>
+
+        <h3>Bambu Studio</h3>
+        <ul>
+          <li>Cooling → Part cooling fan: 100% for overhangs</li>
+          <li>Speed → Overhang speed: Enable, slow down to 30%</li>
+          <li>Support → Type: Tree (smooth)</li>
+        </ul>
+
+        <h2>Quick Checklist</h2>
+
+        <p>Before printing a model with overhangs:</p>
+        <ol>
+          <li>✅ Check overhang angles in the slicer preview</li>
+          <li>✅ Rotate to minimize steep angles</li>
+          <li>✅ Set cooling fan to 100%</li>
+          <li>✅ Enable overhang speed slow-down</li>
+          <li>✅ Consider thinner layer height for overhang sections</li>
+          <li>✅ Only add supports where absolutely necessary</li>
+        </ol>
+
+        <p>Follow these steps and you'll cut your support usage in half — which means faster prints, less waste, and cleaner surfaces.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="3d-print-support-settings.html">3D Print Support Settings: Everything You Need to Know</a></li>
+          <li><a href="how-to-remove-3d-print-supports.html">How to Remove 3D Print Supports Without Ruining Your Model</a></li>
+          <li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+          <li><a href="3d-printing-speed-vs-quality.html">3D Printing Speed vs Quality: Finding the Sweet Spot</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

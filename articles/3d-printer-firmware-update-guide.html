@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Update Your 3D Printer Firmware (Marlin, Klipper & Bambu)</title>
+  <meta name="description" content="Scared of updating your 3D printer firmware? This step-by-step guide covers Marlin, Klipper, and Bambu Lab firmware updates — no bricking, no guessing.">
+  <meta name="keywords" content="3d printer firmware update, marlin firmware guide, klipper firmware install, bambu lab firmware update, how to flash 3d printer">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>Firmware</span>
+      </nav>
+
+      <h1>How to Update Your 3D Printer Firmware (Marlin, Klipper & Bambu)</h1>
+
+      <div class="article-meta">
+        <span>📅 May 22, 2026</span>
+        <span>⏱️ 11 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💾</span>
+      </div>
+
+      <div class="article-body">
+        <p>"I bricked my printer" is the scariest sentence in 3D printing. Firmware updates feel risky because they are — flash the wrong file and your printer won't boot. But staying on outdated firmware means missing bug fixes, safety improvements, and features that make printing better.</p>
+
+        <p>This guide walks you through updating the three most common firmware types, with safety checks at every step. Follow along and you won't brick anything.</p>
+
+        <h2>Why Update Firmware?</h2>
+
+        <ul>
+          <li><strong>Safety fixes:</strong> Thermal runaway protection, power-loss recovery</li>
+          <li><strong>New features:</strong> Better bed leveling, input shaping, pressure advance</li>
+          <li><strong>Bug fixes:</strong> Random freezes, print pauses, temperature fluctuations</li>
+          <li><strong>Hardware support:</strong> New hotends, extruders, ABL sensors</li>
+        </ul>
+
+        <p>If your printer is running fine and you don't need any of the above, you can skip updates. "If it ain't broke, don't fix it" applies here — especially on production machines.</p>
+
+        <h2>Which Firmware Does Your Printer Use?</h2>
+
+        <table style="width:100%; border-collapse:collapse; margin:1rem 0;">
+          <tr style="background:#252640;"><th style="padding:8px; text-align:left;">Printer</th><th style="padding:8px;">Firmware</th><th style="padding:8px;">Update Method</th></tr>
+          <tr><td style="padding:8px;">Ender 3 / V2 / V3 SE</td><td style="padding:8px;">Marlin</td><td style="padding:8px;">SD card or USB</td></tr>
+          <tr style="background:#1a1b30;"><td style="padding:8px;">Prusa MK3/S/4</td><td style="padding:8px;">Marlin (Prusa fork)</td><td style="padding:8px;">SD card or USB</td></tr>
+          <tr><td style="padding:8px;">Sovol SV07 / Ender with Klipper</td><td style="padding:8px;">Klipper</td><td style="padding:8px;">SSH / Fluidd / Mainsail</td></tr>
+          <tr style="background:#1a1b30;"><td style="padding:8px;">Bambu Lab (all models)</td><td style="padding:8px;">Proprietary</td><td style="padding:8px;">OTA (over-the-air)</td></tr>
+          <tr><td style="padding:8px;">Anycubic / Artillery</td><td style="padding:8px;">Marlin or Klipper</td><td style="padding:8px;">SD card or USB</td></tr>
+        </table>
+
+        <h2>How to Update Marlin Firmware</h2>
+
+        <p>Marlin is the most common open-source firmware. Updating it ranges from "drop a file on an SD card" to "compile from source," depending on your printer.</p>
+
+        <h3>Method 1: Pre-compiled Firmware (Easiest)</h3>
+
+        <p>Many printer manufacturers release pre-compiled .bin or .hex files. This is the safest approach.</p>
+
+        <ol>
+          <li><strong>Find your firmware:</strong> Check your printer manufacturer's GitHub releases page (e.g., Creality, Prusa, Anycubic)</li>
+          <li><strong>Download the .bin or .hex file</strong> for your exact printer model</li>
+          <li><strong>Format an SD card</strong> as FAT32 (not exFAT, not NTFS)</li>
+          <li><strong>Copy the firmware file</strong> to the root of the SD card</li>
+          <li><strong>Power off the printer</strong>, insert the SD card, power on</li>
+          <li><strong>Wait for the update:</strong> The screen may go blank for 30–60 seconds. Don't power off!</li>
+          <li><strong>Verify:</strong> Check the firmware version in your printer's menu (Settings → About or Info)</li>
+        </ol>
+
+        <p><strong>⚠️ Critical:</strong> Use the firmware for YOUR exact model. Ender 3 V2 firmware on an Ender 3 Pro will cause problems.</p>
+
+        <h3>Method 2: Compile Marlin from Source</h3>
+
+        <p>If you've installed <a href="best-3d-printer-upgrades.html">upgrades</a> like a BLTouch or new hotend, you may need to compile custom Marlin with the right configuration.</p>
+
+        <ol>
+          <li><strong>Install VS Code</strong> and the PlatformIO extension</li>
+          <li><strong>Download Marlin source</strong> from github.com/MarlinFirmware/Marlin</li>
+          <li><strong>Download example configs</strong> from github.com/MarlinFirmware/Configurations</li>
+          <li><strong>Copy Configuration.h and Configuration_adv.h</strong> from the example configs to your Marlin/Marlin folder</li>
+          <li><strong>Customize:</strong> Enable/disable features in Configuration.h (ABL sensor type, hotend temp range, etc.)</li>
+          <li><strong>Build:</strong> Click the checkmark in PlatformIO to compile</li>
+          <li><strong>Flash:</strong> The compiled .bin or .hex file appears in .pio/build/ — copy to SD card as above</li>
+        </ol>
+
+        <p>This takes 1–2 hours the first time but gives you complete control over your printer's behavior.</p>
+
+        <div class="adsense-in-article">
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>How to Install/Update Klipper</h2>
+
+        <p>Klipper is a modern firmware that splits the work between a Raspberry Pi (or similar board) and your printer's MCU. It's faster, more configurable, and supports features like input shaping and pressure advance natively.</p>
+
+        <h3>Fresh Install</h3>
+
+        <ol>
+          <li><strong>Flash Raspberry Pi OS</strong> to a microSD card (use Raspberry Pi Imager)</li>
+          <li><strong>Install KIAUH</strong> (Klipper Install And Update Helper):
+            <pre style="background:#1a1b30; padding:12px; border-radius:8px; overflow-x:auto;"><code>git clone https://github.com/dw-cc/kiauh.git ~/kiauh
+~/kiauh/kiauh.sh</code></pre>
+          </li>
+          <li><strong>In KIAUH menu:</strong> Install Klipper → Install Moonraker → Install Fluidd (or Mainsail)</li>
+          <li><strong>Build firmware for your MCU:</strong> In KIAUH, select your board type and compile</li>
+          <li><strong>Flash the MCU:</strong> Connect your printer board via USB, use KIAUH to flash</li>
+          <li><strong>Configure printer.cfg:</strong> This is where you define your printer's physical properties — stepper positions, thermistors, endstops, etc.</li>
+        </ol>
+
+        <p><strong>Updating Klipper</strong> is much simpler — just run KIAUH and select "Update." It pulls the latest code from GitHub and restarts the service.</p>
+
+        <p>Klipper works great with <a href="octoprint-setup-guide.html">OctoPrint</a>, though most users prefer the built-in Fluidd or Mainsail web interfaces.</p>
+
+        <h2>How to Update Bambu Lab Firmware</h2>
+
+        <p>This is the easiest update process by far. Bambu Lab handles everything over-the-air:</p>
+
+        <ol>
+          <li><strong>Open Bambu Studio</strong> or the Bambu Handy app</li>
+          <li><strong>Go to Device → Firmware</strong></li>
+          <li><strong>Click "Update"</strong> if a new version is available</li>
+          <li><strong>Wait 3–5 minutes</strong> while the printer downloads and installs</li>
+          <li><strong>Printer reboots automatically</strong></li>
+        </ol>
+
+        <p>That's it. No SD cards, no compilation, no terminal commands. The trade-off is you can't customize the firmware — Bambu controls what features are available.</p>
+
+        <h2>Common Mistakes That Brick Printers</h2>
+
+        <ol>
+          <li><strong>Wrong firmware file:</strong> Using Ender 3 firmware on an Ender 3 V2. Always double-check the model name.</li>
+          <li><strong>Power loss during flash:</strong> Never unplug the printer while the firmware is writing. Use a UPS if your power is unreliable.</li>
+          <li><strong>Interrupted SD card read:</strong> Don't touch the SD card while the printer is flashing.</li>
+          <li><strong>Compiled for wrong board:</strong> Marlin compiled for SKR 1.4 won't work on a Creality v4.2.7 board. Check your board version before compiling.</li>
+          <li><strong>Skipping configuration validation:</strong> If Marlin won't compile, there's a configuration error. Don't force it — fix the error first.</li>
+        </ol>
+
+        <h2>How to Recover from a Bad Flash</h2>
+
+        <p>If your printer won't boot after a firmware update:</p>
+
+        <ol>
+          <li><strong>Don't panic.</strong> Most boards have a bootloader that survives bad flashes.</li>
+          <li><strong>Try the SD card method again</strong> with the correct firmware file. Most boards will read from SD even if the main firmware is corrupt.</li>
+          <li><strong>Try USB flashing:</strong> Connect to a PC and use tools like <code>dfu-util</code> (STM32 boards) or <code>avrdude</code> (AVR boards) to flash via serial.</li>
+          <li><strong>Bootloader reset:</strong> Some boards have a bootloader button or jumper. Check your board's documentation.</li>
+          <li><strong>Last resort:</strong> If the bootloader is corrupt, you may need an ISP programmer (~$10) to reflash it. Or just buy a replacement board ($20–40).</li>
+        </ol>
+
+        <p>After any firmware update, always <a href="how-to-calibrate-3d-printer.html">recalibrate your printer</a>. Firmware changes can affect steps/mm, PID tuning, and other calibration values.</p>
+
+        <h2>Quick Reference</h2>
+
+        <table style="width:100%; border-collapse:collapse; margin:1rem 0;">
+          <tr style="background:#252640;"><th style="padding:8px; text-align:left;">Firmware</th><th style="padding:8px;">Difficulty</th><th style="padding:8px;">Customization</th><th style="padding:8px;">Best For</th></tr>
+          <tr><td style="padding:8px;">Marlin</td><td style="padding:8px;">⭐⭐⭐</td><td style="padding:8px;">Full</td><td style="padding:8px;">Ender 3, Prusa, most printers</td></tr>
+          <tr style="background:#1a1b30;"><td style="padding:8px;">Klipper</td><td style="padding:8px;">⭐⭐⭐⭐</td><td style="padding:8px;">Full + advanced</td><td style="padding:8px;">Speed, input shaping, advanced tuning</td></tr>
+          <tr><td style="padding:8px;">Bambu (proprietary)</td><td style="padding:8px;">⭐</td><td style="padding:8px;">None</td><td style="padding:8px;">Hassle-free printing</td></tr>
+        </table>
+
+        <p>Pick the firmware that matches your comfort level. There's no shame in sticking with stock — a working printer is always better than a bricked one.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="octoprint-setup-guide.html">OctoPrint Setup Guide: Install and Configure in 20 Minutes</a></li>
+          <li><a href="how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer: A Step-by-Step Guide</a></li>
+          <li><a href="best-3d-printer-upgrades.html">Best 3D Printer Upgrades: 7 Mods That Actually Improve Print Quality</a></li>
+          <li><a href="3d-printer-maintenance-checklist.html">3D Printer Maintenance Checklist (Monthly)</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

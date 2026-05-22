@@ -71,12 +71,20 @@
 - [x] 3d-printer-hotend-upgrade-guide — Best 3D Printer Hotend Upgrades: Dragon, Mosquito & More ✅ 2026-05-21
 - [x] how-to-level-3d-printer-bed — How to Level a 3D Printer Bed: Paper Method, Knobs & Tips ✅ 2026-05-21
 
+### 批次 11：MINIATURES, TECHNIQUES & EDUCATION (6篇) ✅
+- [x] best-3d-printer-for-miniatures — Best 3D Printer for Miniatures & Tabletop Gaming (2026 Guide) ✅ 2026-05-22
+- [x] 3d-printing-overhangs-guide — How to 3D Print Overhangs Without Supports (Tips & Settings) ✅ 2026-05-22
+- [x] carbon-fiber-filament-guide — Carbon Fiber Filament Guide: Settings, Tips & Best Uses ✅ 2026-05-22
+- [x] 3d-printer-firmware-update-guide — How to Update Your 3D Printer Firmware (Marlin, Klipper & Bambu) ✅ 2026-05-22
+- [x] 3d-printing-threaded-inserts — How to Use Threaded Inserts in 3D Prints (Step-by-Step Guide) ✅ 2026-05-22
+- [x] best-3d-printer-for-schools — Best 3D Printers for Schools & Classrooms (2026 Guide) ✅ 2026-05-22
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 47 篇 ✅
-- **剩余**: 153 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅
+- **已完成**: 53 篇 ✅
+- **剩余**: 147 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅
 
 ## 生成规则
 
