@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Print Layer Height Guide: How It Affects Quality & Speed (2026)</title>
+  <meta name="description" content="Layer height is the biggest lever for print quality vs. speed. This guide explains what layer height to use, how it affects detail and strength, and the best settings for PLA, PETG, and TPU.">
+  <meta name="keywords" content="3d print layer height, layer height guide, best layer height PLA, 3d printing resolution, 0.2mm layer height, layer height quality speed, 3d print detail">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>Layer Height</span>
+      </nav>
+
+      <h1>3D Print Layer Height Guide: How It Affects Quality & Speed</h1>
+
+      <div class="article-meta">
+        <span>📅 May 23, 2026</span>
+        <span>⏱️ 6 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🎯</span>
+      </div>
+
+      <div class="article-body">
+        <p>Layer height is the distance between each horizontal layer of your print. It's the single most impactful setting for balancing quality against speed. Lower layers = more detail but slower. Higher layers = faster but more visible layer lines.</p>
+
+        <p>But layer height does more than affect looks. It changes print strength, surface quality, and even how well overhangs print. This guide breaks down exactly what each layer height range does, when to use it, and what the trade-offs are.</p>
+
+        <h2>How Layer Height Works</h2>
+
+        <p>Your printer deposits filament in thin horizontal bands. Each band is one layer. At 0.20mm layer height, a 20mm tall object has 100 layers. At 0.12mm, the same object has 167 layers — 67% more layers, 67% more time, but noticeably smoother surfaces.</p>
+
+        <p><strong>Key rule:</strong> Layer height must be between 25% and 75% of your nozzle diameter. For a standard 0.4mm nozzle:</p>
+        <ul>
+          <li>Minimum practical: 0.08-0.10mm</li>
+          <li>Maximum practical: 0.28-0.32mm</li>
+          <li>Sweet spot: 0.16-0.20mm</li>
+        </ul>
+
+        <p>Going below 0.08mm with a 0.4mm nozzle doesn't improve quality — the filament can't be squished thin enough to form proper layers. For ultra-fine detail, you need a smaller nozzle (0.2mm or 0.25mm).</p>
+
+        <h2>Layer Height Ranges Explained</h2>
+
+        <h3>0.08-0.12mm — Ultra Fine</h3>
+        <p>Near-invisible layer lines on most prints. Used for miniatures, jewelry, and display pieces where surface quality is everything.</p>
+        <ul>
+          <li><strong>Quality:</strong> Excellent. Smooth surfaces, sharp details.</li>
+          <li><strong>Speed:</strong> Very slow. A print that takes 2 hours at 0.20mm takes 3.5-4 hours at 0.10mm.</li>
+          <li><strong>Strength:</strong> Slightly weaker. More layers = more layer boundaries = more potential failure points.</li>
+        </ul>
+
+        <h3>0.16-0.20mm — Standard (Most Popular)</h3>
+        <p>The default for a reason. Good quality at reasonable speed. Layer lines are visible up close but not distracting.</p>
+        <ul>
+          <li><strong>Quality:</strong> Good. Suitable for most prints.</li>
+          <li><strong>Speed:</strong> Balanced. A typical benchy prints in 1.5-2 hours.</li>
+          <li><strong>Strength:</strong> Good. The standard baseline.</li>
+        </ul>
+
+        <h3>0.24-0.28mm — Draft / Fast</h3>
+        <p>Obvious layer lines, but fast. Use for prototypes, test fits, and functional parts where looks don't matter.</p>
+        <ul>
+          <li><strong>Quality:</strong> Rough. Layer lines clearly visible.</li>
+          <li><strong>Speed:</strong> Fast. That same benchy prints in under an hour.</li>
+          <li><strong>Strength:</strong> Slightly stronger per-layer, but interlayer bonding is the same.</li>
+        </ul>
+
+        <h2>Layer Height vs. Strength: The Surprise</h2>
+
+        <p>Many people assume thinner layers = stronger prints. The reality is more nuanced:</p>
+
+        <ul>
+          <li><strong>Tensile strength (pulling layers apart):</strong> Thinner layers are actually slightly <em>stronger</em> because each layer is pressed harder into the one below (more squish = better bonding).</li>
+          <li><strong>Impact resistance:</strong> Thicker layers resist impact slightly better — more material per layer absorbs energy.</li>
+          <li><strong>Z-axis strength:</strong> All FDM prints are weakest between layers, regardless of height. If you need Z-strength, <a href="3d-printing-tolerances-guide.html">orient the part</a> so stress isn't pulling layers apart.</li>
+        </ul>
+
+        <p><strong>Bottom line:</strong> Layer height doesn't dramatically change strength. Don't choose 0.28mm "for strength" — it won't help noticeably. Choose based on quality and speed needs instead.</p>
+
+        <h2>Best Layer Height by Filament</h2>
+
+        <table>
+          <tr><th>Filament</th><th>Recommended</th><th>Fine Detail</th><th>Fast Draft</th></tr>
+          <tr><td>PLA</td><td>0.20mm</td><td>0.12mm</td><td>0.28mm</td></tr>
+          <tr><td>PETG</td><td>0.20mm</td><td>0.16mm</td><td>0.24mm</td></tr>
+          <tr><td>TPU</td><td>0.20mm</td><td>0.16mm</td><td>0.24mm</td></tr>
+          <tr><td>ABS</td><td>0.20mm</td><td>0.14mm</td><td>0.28mm</td></tr>
+        </table>
+
+        <p>PETG and TPU don't benefit much from ultra-fine layers. Their natural viscosity means 0.12mm doesn't look dramatically better than 0.16mm. Save the fine settings for PLA. For more per-filament settings, see our <a href="best-3d-printer-settings.html">complete settings guide</a>.</p>
+
+        <h2>Variable Layer Height (Adaptive Slicing)</h2>
+
+        <p>Most modern slicers support variable layer height — using fine layers on detailed areas and coarse layers on flat or hidden areas. This is a massive time-saver.</p>
+
+        <p><strong>Example:</strong> A figurine with detailed facial features and a smooth robe. Use 0.12mm on the face, 0.20mm on the robe, and 0.28mm on the base. You get the detail where it matters and the speed where it doesn't.</p>
+
+        <ul>
+          <li><strong>Cura:</strong> "Adaptive Layers" experimental setting</li>
+          <li><strong>PrusaSlicer:</strong> "Variable layer height" with the slider tool</li>
+          <li><strong>Bambu Studio:</strong> Built-in adaptive layer height</li>
+        </ul>
+
+        <h2>Layer Height and Overhangs</h2>
+
+        <p>Lower layer heights improve overhang printing because each layer extends less far outward from the one below. At 0.12mm, you can print 50° overhangs cleanly. At 0.28mm, even 45° overhangs start to sag.</p>
+
+        <p>If your prints have droopy overhangs, try reducing layer height before adding more supports. It's often the simpler fix. Our <a href="3d-printing-overhangs-guide.html">overhang printing guide</a> goes deeper into this.</p>
+
+        <h2>5 Common Layer Height Mistakes</h2>
+
+        <ul>
+          <li><strong>Always using 0.12mm "for quality":</strong> You're wasting 50% more time on parts that don't need it. Use fine layers only for visible, detailed surfaces.</li>
+          <li><strong>Going below nozzle limits:</strong> 0.06mm with a 0.4mm nozzle doesn't work well. The extruder can't push filament precisely enough.</li>
+          <li><strong>Ignoring first layer height:</strong> Your first layer should be 0.20-0.30mm regardless of the rest of the print. A thicker first layer squishes into the build plate for better adhesion. If your first layer fails, our <a href="3d-print-first-layer-not-sticking.html">first layer troubleshooting guide</a> can help.</li>
+          <li><strong>Not matching speed to layer height:</strong> Fine layers need slower speeds (30-40mm/s). Fast speeds + fine layers = vibrations and ringing.</li>
+          <li><strong>Using thick layers for small features:</strong> If your model has 0.4mm detail, 0.28mm layers will miss it entirely.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>Start with <strong>0.20mm</strong> as your default. It's the sweet spot for quality and speed with every filament. Move to 0.12mm for display pieces and miniatures. Use 0.28mm for quick prototypes and functional parts. And when you want the best of both worlds, try variable layer height — it's the single most underrated feature in modern slicers.</p>
+
+        <p>For the complete picture of how layer height interacts with other settings, check our guides on <a href="3d-printing-speed-vs-quality.html">speed vs. quality</a> and <a href="how-to-slice-3d-model.html">slicing basics</a>.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-slice-3d-model.html">How to Slice a 3D Model: A Beginner's Guide</a></li>
+          <li><a href="3d-printing-speed-vs-quality.html">3D Printing Speed vs Quality: Finding the Sweet Spot</a></li>
+          <li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+          <li><a href="3d-printing-overhangs-guide.html">How to 3D Print Overhangs Without Supports</a></li>
+          <li><a href="../getting-started.html">Getting Started: Print Your First Model</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

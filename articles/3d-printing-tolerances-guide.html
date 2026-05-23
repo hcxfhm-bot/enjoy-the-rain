@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Printing Tolerances: How to Get Parts That Fit Together (2026)</title>
+  <meta name="description" content="Your 3D printed parts don't fit? This tolerance guide explains why, with exact clearance values for press-fit, sliding, and loose assemblies — plus calibration tips to dial in your printer's accuracy.">
+  <meta name="keywords" content="3d printing tolerances, 3d print fit tolerance, clearance 3d printing, press fit 3d print, dimensional accuracy 3d printer, 3d print parts that fit, tolerance guide">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>Tolerances</span>
+      </nav>
+
+      <h1>3D Printing Tolerances: How to Get Parts That Fit Together</h1>
+
+      <div class="article-meta">
+        <span>📅 May 23, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚙️</span>
+      </div>
+
+      <div class="article-body">
+        <p>You designed two parts that should snap together — but they don't. The hole is too tight, or the peg is too loose. This is a <strong>tolerance problem</strong>, and it's the #1 frustration for anyone moving from decorative prints to functional parts.</p>
+
+        <p>FDM 3D printers are not perfectly accurate. Every printer has a slight dimensional error, and understanding how much — and compensating for it — is the difference between parts that fit and parts that go in the trash.</p>
+
+        <h2>What Are 3D Printing Tolerances?</h2>
+
+        <p>Tolerance is the allowed deviation from a designed dimension. In 3D printing, it means how close your printed part is to the size you specified in your CAD model.</p>
+
+        <p>A well-tuned FDM printer can hold ±0.20mm tolerance on most dimensions. A poorly calibrated one might be off by ±0.50mm or more. That difference is the gap between "slides in perfectly" and "doesn't fit at all."</p>
+
+        <h2>Why FDM Prints Aren't Dimensionally Perfect</h2>
+
+        <p>Several factors cause dimensional error in FDM printing:</p>
+
+        <ul>
+          <li><strong>Extrusion width:</strong> Your nozzle deposits a line slightly wider than the nozzle diameter. A 0.4mm nozzle typically creates a 0.42-0.45mm line, making external dimensions slightly larger and holes slightly smaller.</li>
+          <li><strong>Shrinkage:</strong> Filament shrinks as it cools. PLA shrinks ~0.3%, ABS ~0.8%. A 100mm part in ABS shrinks to 99.2mm.</li>
+          <li><strong>Over-extrusion:</strong> Too much flow makes everything bigger. Even 5% over-extrusion adds 0.10mm to each side of a part.</li>
+          <li><strong>Belt slack and backlash:</strong> Loose belts cause positional errors, especially on reversals (direction changes). This makes circles slightly oval.</li>
+        </ul>
+
+        <h2>The Hole vs. Peg Problem</h2>
+
+        <p>Here's the core issue: <strong>holes always print smaller than designed, and pegs always print larger.</strong> This double-whammy means you need more clearance than you'd expect.</p>
+
+        <p>A 10mm hole typically prints at 9.6-9.8mm. A 10mm peg prints at 10.1-10.3mm. So your "10mm peg in a 10mm hole" has an actual interference of 0.3-0.7mm — that's why it doesn't fit.</p>
+
+        <h2>Clearance Values That Actually Work</h2>
+
+        <p>These values assume a reasonably well-tuned printer (±0.20mm). Adjust up or down based on your printer's accuracy.</p>
+
+        <table>
+          <tr><th>Fit Type</th><th>Clearance (per side)</th><th>Total Clearance</th><th>Example Use</th></tr>
+          <tr><td>Press fit</td><td>0.05-0.10mm</td><td>0.10-0.20mm</td><td>Snap-fit connectors, permanent joints</td></tr>
+          <tr><td>Snug sliding</td><td>0.10-0.15mm</td><td>0.20-0.30mm</td><td>Drawers, lids, caps</td></tr>
+          <tr><td>Smooth sliding</td><td>0.15-0.25mm</td><td>0.30-0.50mm</td><td>Moving parts, rails, sliders</td></tr>
+          <tr><td>Loose / clearance</td><td>0.25-0.40mm</td><td>0.50-0.80mm</td><td>Pivot points, rotating joints</td></tr>
+        </table>
+
+        <p><strong>Example:</strong> For a 10mm peg that needs to slide smoothly through a hole, make the hole 10.4-10.5mm in your CAD model.</p>
+
+        <h2>How to Calibrate Your Printer's Tolerance</h2>
+
+        <p>Before you design parts with tight tolerances, you need to know your printer's actual accuracy. Here's a quick calibration process:</p>
+
+        <h3>Step 1: Print a Tolerance Test</h3>
+        <p>Download a tolerance test model (search Thingiverse or Printables for "tolerance test"). These typically have a series of pegs and holes with decreasing clearance. The smallest peg that still fits tells you your printer's practical tolerance.</p>
+
+        <h3>Step 2: Measure with Calipers</h3>
+        <p>Use digital calipers (a $10 pair is fine) to measure both the pegs and holes on your test print. Write down:</p>
+        <ul>
+          <li>Designed peg size vs. actual peg size</li>
+          <li>Designed hole size vs. actual hole size</li>
+          <li>The difference = your printer's dimensional offset</li>
+        </ul>
+
+        <h3>Step 3: Adjust Flow Rate</h3>
+        <p>If your pegs are consistently 0.1-0.2mm oversized, you're over-extruding. Reduce flow rate by 2-3% in your slicer and re-test. For a full calibration walkthrough, see our <a href="how-to-calibrate-3d-printer.html">3D printer calibration guide</a>.</p>
+
+        <h3>Step 4: Apply Horizontal Expansion</h3>
+        <p>Most slicers have a "horizontal expansion" or "XY compensation" setting. If your external dimensions are consistently 0.15mm oversized, set horizontal expansion to -0.15mm. This scales all external dimensions down automatically.</p>
+
+        <h2>Tolerance by Filament Type</h2>
+
+        <p>Different filaments need different clearance because of shrinkage:</p>
+
+        <ul>
+          <li><strong>PLA:</strong> Minimal shrinkage (0.3%). Use the standard clearance values above.</li>
+          <li><strong>PETG:</strong> Slight shrinkage (0.3-0.5%). Add 0.05mm extra clearance. PETG is also slightly more elastic, so press fits grip harder than expected.</li>
+          <li><strong>ABS/ASA:</strong> Significant shrinkage (0.7-1.0%). Add 0.15-0.20mm extra clearance. Parts designed on screen will be noticeably smaller when printed. Enclosed printers with stable temps help. Check our <a href="abs-filament-guide.html">ABS filament guide</a> for more.</li>
+          <li><strong>TPU:</strong> Very forgiving — flexible material compresses. You can use tighter tolerances (0.05-0.10mm less clearance) because TPU deforms to fit.</li>
+        </ul>
+
+        <h2>Design Tips for Better-Fitting Parts</h2>
+
+        <ul>
+          <li><strong>Add chamfers, not sharp edges:</strong> A 0.5mm chamfer on peg edges helps them slide into holes without catching.</li>
+          <li><strong>Use alignment pins:</strong> Instead of one large peg, use two small ones. They're easier to print accurately and guide the parts together.</li>
+          <li><strong>Print parts in the same orientation:</strong> Tolerances vary depending on layer direction. If you print a peg flat and a hole standing up, they'll have different dimensional errors.</li>
+          <li><strong>Account for elephant foot:</strong> The first few layers are slightly wider due to squish. Either add a small chamfer at the base or use <a href="3d-print-ironing-settings.html">ironing settings</a> to reduce it.</li>
+          <li><strong>Use threaded inserts for precision joints:</strong> When parts need to be disassembled, <a href="3d-printing-threaded-inserts.html">threaded inserts</a> give you metal-thread precision that printed threads can't match.</li>
+        </ul>
+
+        <h2>When to Blame the Printer vs. the Design</h2>
+
+        <p>Before tweaking your printer, check your design first:</p>
+
+        <ul>
+          <li><strong>Hole comes out oval:</strong> Loose belt. Tighten the belt for that axis.</li>
+          <li><strong>Everything is uniformly oversized:</strong> Over-extrusion. Reduce flow rate.</li>
+          <li><strong>Parts don't fit but dimensions measure correct:</strong> Design issue — your clearance values are too tight. Add 0.1mm more per side.</li>
+          <li><strong>One axis is consistently off:</strong> Your steps/mm calibration is wrong on that axis. Follow our <a href="how-to-calibrate-3d-printer.html">calibration guide</a> to fix e-steps and XYZ steps.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>Getting parts that fit together comes down to three things: <strong>knowing your printer's tolerance, designing with the right clearance, and compensating for filament shrinkage.</strong> Print a tolerance test, measure with calipers, and apply those offsets to every design. For PLA, start with 0.20mm clearance per side for sliding fits. For ABS, bump that to 0.35mm.</p>
+
+        <p>Once your printer is dialed in, functional prints become just as reliable as decorative ones. For more on getting the best out of your printer, see our <a href="best-3d-printer-settings.html">complete settings guide</a> and <a href="3d-printing-speed-vs-quality.html">speed vs. quality tips</a>.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer: Step by Step</a></li>
+          <li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+          <li><a href="3d-printing-threaded-inserts.html">How to Use Threaded Inserts in 3D Prints</a></li>
+          <li><a href="abs-filament-guide.html">ABS Filament Guide: Settings, Tips & When to Use It</a></li>
+          <li><a href="../getting-started.html">Getting Started: Print Your First Model</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

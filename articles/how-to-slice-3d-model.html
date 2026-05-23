@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Slice a 3D Model for Printing: A Beginner's Guide (2026)</title>
+  <meta name="description" content="Learn how to slice a 3D model step by step. Covers import, orientation, supports, infill, and key slicer settings — everything you need to turn an STL into a print-ready G-code file.">
+  <meta name="keywords" content="how to slice 3d model, 3d printing slicer, slicer settings, Cura tutorial, STL to G-code, 3d print slicing, beginner slicer guide">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>Slicing Guide</span>
+      </nav>
+
+      <h1>How to Slice a 3D Model for Printing: A Beginner's Guide</h1>
+
+      <div class="article-meta">
+        <span>📅 May 23, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💻</span>
+      </div>
+
+      <div class="article-body">
+        <p>You downloaded a cool 3D model — now what? Before your printer can do anything, you need to <strong>slice</strong> that model into instructions the printer understands. Slicing converts your STL or 3MF file into G-code: the step-by-step commands that tell your printer where to move, how fast, and how much filament to extrude.</p>
+
+        <p>This beginner's guide walks you through every step of the slicing process. By the end, you'll know exactly how to take a model from download to print-ready G-code — without guessing at settings.</p>
+
+        <h2>What Is Slicing, Exactly?</h2>
+
+        <p>A slicer is software that cuts your 3D model into thin horizontal layers (hence the name). Each layer becomes a set of instructions: where to deposit filament, how fast to move, and what path to follow. The slicer also adds supports, infill, and other structures your print needs.</p>
+
+        <p><strong>Think of it this way:</strong> The 3D model is the blueprint. The slicer is the translator. The G-code is the instruction manual your printer actually reads.</p>
+
+        <p>Popular slicers include <a href="cura-vs-prusaslicer-vs-bambu-studio.html">Cura, PrusaSlicer, and Bambu Studio</a> — all free. If you're not sure which one to pick, Cura is the most beginner-friendly.</p>
+
+        <h2>Step 1: Import Your Model</h2>
+
+        <p>Open your slicer and drag in your STL, OBJ, or 3MF file. The model appears on a virtual build plate. If it's way too big or tiny, most slicers auto-scale it, but always double-check the dimensions.</p>
+
+        <p><strong>Quick tip:</strong> If the model is floating above the build plate, click "Drop to Build Plate" or "Place on Bed" — every slicer has this button. Prints must start from the build surface.</p>
+
+        <h2>Step 2: Orient the Model</h2>
+
+        <p>How you orient a model on the build plate dramatically affects print quality and strength. A few rules of thumb:</p>
+
+        <ul>
+          <li><strong>Flat side down:</strong> The largest flat surface should touch the build plate for better adhesion and fewer supports.</li>
+          <li><strong>Minimize overhangs:</strong> Rotate to reduce areas that need supports. For more on this, see our <a href="3d-printing-overhangs-guide.html">overhang printing guide</a>.</li>
+          <li><strong>Layer direction matters:</strong> Parts are weakest between layers. If a part needs to bear load vertically, orient it so the stress doesn't pull layers apart.</li>
+        </ul>
+
+        <h2>Step 3: Choose Your Layer Height</h2>
+
+        <p>Layer height is the single biggest factor in print quality vs. speed trade-off:</p>
+
+        <ul>
+          <li><strong>0.12mm:</strong> Fine detail, slow print. Good for miniatures and display pieces.</li>
+          <li><strong>0.20mm:</strong> The default sweet spot. Good quality at reasonable speed.</li>
+          <li><strong>0.28mm:</strong> Fast and rough. Fine for functional parts where looks don't matter.</li>
+        </ul>
+
+        <p>For a deeper dive, check out our <a href="3d-print-layer-height-guide.html">layer height guide</a> with real comparison photos.</p>
+
+        <h2>Step 4: Set Infill</h2>
+
+        <p>Infill is the internal structure of your print. You don't need 100% — almost no one prints solid. Common settings:</p>
+
+        <ul>
+          <li><strong>10-15%:</strong> Light, fast prints. Fine for decorative objects.</li>
+          <li><strong>20%:</strong> The default for most prints. Good balance of strength and speed.</li>
+          <li><strong>50%+:</strong> Functional parts that need to handle stress or weight.</li>
+        </ul>
+
+        <p>The infill pattern matters too. Grid and gyroid are the most popular — gyroid is stronger in every direction. See our full breakdown of <a href="3d-print-infill-patterns.html">infill patterns and when to use each one</a>.</p>
+
+        <h2>Step 5: Add Supports (If Needed)</h2>
+
+        <p>Any area of your model that extends outward more than 45° from vertical needs support underneath. Your slicer can auto-generate supports — just toggle them on.</p>
+
+        <p><strong>Support settings to know:</strong></p>
+        <ul>
+          <li><strong>Support type:</strong> "Normal" (from build plate only) or "Tree" (organic branches that touch less of your model). Tree supports save material and are easier to remove.</li>
+          <li><strong>Support density:</strong> 10-15% is usually enough. Higher density = harder to remove.</li>
+          <li><strong>Support Z distance:</strong> Set 0.2mm gap between support and model surface for easier removal.</li>
+        </ul>
+
+        <p>For the full support workflow, read our <a href="3d-print-support-settings.html">3D print support settings guide</a> and how to <a href="how-to-remove-3d-print-supports.html">remove supports cleanly</a>.</p>
+
+        <h2>Step 6: Configure Print Temperature and Speed</h2>
+
+        <p>Match your temperature to the filament you're using:</p>
+
+        <ul>
+          <li><strong>PLA:</strong> 200-210°C nozzle, 60°C bed</li>
+          <li><strong>PETG:</strong> 230-245°C nozzle, 80°C bed</li>
+          <li><strong>TPU:</strong> 210-230°C nozzle, 40-50°C bed</li>
+        </ul>
+
+        <p>For speed, start with your slicer's default profile (usually 50-60mm/s for PLA). Once you're comfortable, you can push speed higher — our <a href="3d-printing-speed-vs-quality.html">speed vs. quality guide</a> shows you where the sweet spot is.</p>
+
+        <h2>Step 7: Slice and Preview</h2>
+
+        <p>Hit the Slice button. Your slicer generates the G-code and shows a layer-by-layer preview. Use this to:</p>
+
+        <ul>
+          <li>Check for gaps or missing sections</li>
+          <li>Verify supports are where you need them</li>
+          <li>Estimate print time and filament usage</li>
+        </ul>
+
+        <p><strong>Always preview before printing.</strong> It takes 30 seconds and saves you from failed prints that waste hours of time and filament.</p>
+
+        <h2>Step 8: Export and Print</h2>
+
+        <p>Save the G-code file to your SD card, USB drive, or send it wirelessly through <a href="octoprint-setup-guide.html">OctoPrint</a>. Load it on your printer and start the job.</p>
+
+        <h2>Common Slicing Mistakes to Avoid</h2>
+
+        <ul>
+          <li><strong>Printing too fast on the first layer:</strong> Slow down to 20mm/s for layer one. Adhesion is everything. If your first layer isn't sticking, check our <a href="3d-print-first-layer-not-sticking.html">first layer fixes</a>.</li>
+          <li><strong>Skipping the preview:</strong> The preview catches 90% of problems before you waste filament.</li>
+          <li><strong>Using default supports everywhere:</strong> Sometimes re-orienting the model eliminates the need for supports entirely.</li>
+          <li><strong>Wrong filament profile:</strong> Make sure your slicer knows what filament you're using. PLA settings will fail badly on PETG.</li>
+        </ul>
+
+        <h2>Quick Start Slicer Cheat Sheet</h2>
+
+        <table>
+          <tr><th>Setting</th><th>PLA Default</th><th>PETG Default</th></tr>
+          <tr><td>Layer Height</td><td>0.20mm</td><td>0.20mm</td></tr>
+          <tr><td>Infill</td><td>15-20%</td><td>20%</td></tr>
+          <tr><td>Nozzle Temp</td><td>200-210°C</td><td>230-245°C</td></tr>
+          <tr><td>Bed Temp</td><td>60°C</td><td>80°C</td></tr>
+          <tr><td>Print Speed</td><td>50-60mm/s</td><td>40-50mm/s</td></tr>
+          <tr><td>Supports</td><td>As needed</td><td>As needed</td></tr>
+        </table>
+
+        <h2>Conclusion</h2>
+
+        <p>Slicing is the bridge between a digital model and a physical print. Once you understand the basics — orientation, layer height, infill, supports, and temperature — you can reliably turn any STL into a successful print. Start with your slicer's default profile, preview every time, and adjust one setting at a time as you learn what each one does.</p>
+
+        <p>For more detailed settings per filament type, check our <a href="best-3d-printer-settings.html">complete printer settings guide</a>. Happy printing!</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="cura-vs-prusaslicer-vs-bambu-studio.html">Cura vs PrusaSlicer vs Bambu Studio: Which Slicer Is Best?</a></li>
+          <li><a href="3d-print-layer-height-guide.html">3D Print Layer Height Guide: Quality & Speed</a></li>
+          <li><a href="3d-print-support-settings.html">3D Print Support Settings: Everything You Need to Know</a></li>
+          <li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+          <li><a href="../getting-started.html">Getting Started: Print Your First Model</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -79,12 +79,20 @@
 - [x] 3d-printing-threaded-inserts — How to Use Threaded Inserts in 3D Prints (Step-by-Step Guide) ✅ 2026-05-22
 - [x] best-3d-printer-for-schools — Best 3D Printers for Schools & Classrooms (2026 Guide) ✅ 2026-05-22
 
+### 批次 12：SLICING, SETTINGS & MATERIALS (6篇)
+- [x] how-to-slice-3d-model — How to Slice a 3D Model for Printing: A Beginner's Guide ✅ 2026-05-23
+- [x] 3d-print-infill-patterns — 3D Print Infill Patterns: Which One Should You Use? ✅ 2026-05-23
+- [x] best-build-plate-3d-printer — Best Build Plate for 3D Printing: PEI, Glass & More Compared ✅ 2026-05-23
+- [x] 3d-print-layer-height-guide — 3D Print Layer Height Guide: How It Affects Quality & Speed ✅ 2026-05-23
+- [x] how-to-store-3d-printer-filament — How to Store 3D Printer Filament So It Lasts for Years ✅ 2026-05-23
+- [x] 3d-printing-tolerances-guide — 3D Printing Tolerances: How to Get Parts That Fit Together ✅ 2026-05-23
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 53 篇 ✅
-- **剩余**: 147 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅
+- **已完成**: 59 篇 ✅
+- **剩余**: 141 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅
 
 ## 生成规则
 

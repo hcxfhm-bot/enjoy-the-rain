@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Print Infill Patterns: Which One Should You Use? (2026)</title>
+  <meta name="description" content="Not sure which infill pattern to use? This guide compares grid, gyroid, cubic, lines, and more — showing when each pattern saves time, material, or adds strength to your 3D prints.">
+  <meta name="keywords" content="3d print infill patterns, gyroid infill, grid infill, best infill pattern, 3d printing infill, infill settings, 3d printer infill strength">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Getting Started</a> &raquo; <span>Infill Patterns</span>
+      </nav>
+
+      <h1>3D Print Infill Patterns: Which One Should You Use?</h1>
+
+      <div class="article-meta">
+        <span>📅 May 23, 2026</span>
+        <span>⏱️ 6 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🧵</span>
+      </div>
+
+      <div class="article-body">
+        <p>When you slice a 3D model, you choose how much material fills the inside — and just as importantly, <strong>what shape that fill takes</strong>. The infill pattern affects print time, material usage, and how strong the final part is in different directions.</p>
+
+        <p>Most beginners just leave it on the default and never think about it. But switching your infill pattern can cut print time by 20% or double the strength of a functional part — without changing anything else.</p>
+
+        <h2>Why Infill Pattern Matters</h2>
+
+        <p>Infill isn't just "stuff inside your print." Different patterns distribute force differently:</p>
+
+        <ul>
+          <li><strong>2D patterns</strong> (grid, lines, rectilinear) are strong in two directions but weak in the third.</li>
+          <li><strong>3D patterns</strong> (gyroid, cubic) resist force from every direction — better for parts under real stress.</li>
+        </ul>
+
+        <p>Pattern choice also changes how fast your printer moves. Simpler paths = faster prints. Complex 3D paths = slower but stronger.</p>
+
+        <h2>The 6 Most Common Infill Patterns</h2>
+
+        <h3>1. Grid (Lines)</h3>
+        <p>The default in most slicers. Crisscrossing lines form squares, alternating direction each layer. Simple, fast, and good enough for most decorative prints.</p>
+        <ul>
+          <li><strong>Best for:</strong> Quick prototypes, display models, everyday prints</li>
+          <li><strong>Weakness:</strong> No strength in the Z-axis. Layers can delaminate under vertical load</li>
+          <li><strong>Speed:</strong> ⚡⚡⚡ Fast</li>
+        </ul>
+
+        <h3>2. Gyroid</h3>
+        <p>An organic, wavy 3D structure that looks like brain coral. It's the strongest pattern per gram of filament — period. Gyroid distributes force equally in all three axes.</p>
+        <ul>
+          <li><strong>Best for:</strong> Functional parts, anything under load, parts that need to be strong in every direction</li>
+          <li><strong>Weakness:</strong> Slightly slower to print than grid. The curved paths take more time.</li>
+          <li><strong>Speed:</strong> ⚡⚡ Medium</li>
+        </ul>
+
+        <h3>3. Cubic</h3>
+        <p>Stacked cubes rotated 45° each layer. A solid 3D pattern that's stronger than grid but not quite as efficient as gyroid.</p>
+        <ul>
+          <li><strong>Best for:</strong> Parts needing good all-around strength where gyroid isn't available</li>
+          <li><strong>Weakness:</strong> More material than gyroid at the same density for slightly less strength</li>
+          <li><strong>Speed:</strong> ⚡⚡ Medium</li>
+        </ul>
+
+        <h3>4. Triangles</h3>
+        <p>Triangular grid pattern. Triangles are inherently rigid shapes, making this pattern stronger than grid in shear.</p>
+        <ul>
+          <li><strong>Best for:</strong> Parts under shear stress, structural brackets</li>
+          <li><strong>Weakness:</strong> Still a 2D pattern — weak in Z</li>
+          <li><strong>Speed:</strong> ⚡⚡⚡ Fast</li>
+        </ul>
+
+        <h3>5. Honeycomb</h3>
+        <p>Hexagonal cells like a beehive. Popular for aesthetic reasons, and reasonably strong. Each cell distributes stress well within its layer.</p>
+        <ul>
+          <li><strong>Best for:</strong> Visible infill (transparent or translucent prints), moderate strength</li>
+          <li><strong>Weakness:</strong> 2D pattern. Not as efficient as gyroid for pure strength.</li>
+          <li><strong>Speed:</strong> ⚡⚡ Medium</li>
+        </ul>
+
+        <h3>6. Lightning</h3>
+        <p>A Cura-exclusive pattern that only places infill where it's needed to support the top surfaces. Uses dramatically less material and time.</p>
+        <ul>
+          <li><strong>Best for:</strong> Busts, figurines, decorative prints where only the shell matters</li>
+          <li><strong>Weakness:</strong> Almost zero internal strength. Don't use for functional parts.</li>
+          <li><strong>Speed:</strong> ⚡⚡⚡⚡ Fastest</li>
+        </ul>
+
+        <h2>Quick Comparison Table</h2>
+
+        <table>
+          <tr><th>Pattern</th><th>Type</th><th>Strength</th><th>Speed</th><th>Material</th><th>Best Use</th></tr>
+          <tr><td>Grid</td><td>2D</td><td>⭐⭐</td><td>Fast</td><td>Medium</td><td>Default everyday</td></tr>
+          <tr><td>Gyroid</td><td>3D</td><td>⭐⭐⭐⭐⭐</td><td>Medium</td><td>Low</td><td>Functional parts</td></tr>
+          <tr><td>Cubic</td><td>3D</td><td>⭐⭐⭐⭐</td><td>Medium</td><td>Medium</td><td>Strong parts</td></tr>
+          <tr><td>Triangles</td><td>2D</td><td>⭐⭐⭐</td><td>Fast</td><td>Medium</td><td>Shear loads</td></tr>
+          <tr><td>Honeycomb</td><td>2D</td><td>⭐⭐⭐</td><td>Medium</td><td>Medium</td><td>Visible infill</td></tr>
+          <tr><td>Lightning</td><td>2D</td><td>⭐</td><td>Fastest</td><td>Lowest</td><td>Display only</td></tr>
+        </table>
+
+        <h2>Infill Density vs. Pattern: Which Matters More?</h2>
+
+        <p>Here's the thing most guides don't tell you: <strong>pattern matters more at low densities, density matters more at high densities.</strong></p>
+
+        <p>At 10% infill, gyroid is roughly 40% stronger than grid. But at 50% infill, the difference drops to about 10% — there's so much material that the pattern shape barely matters.</p>
+
+        <p><strong>Practical takeaway:</strong> If you want strength without weight, use gyroid at 15-20%. You'll get more strength than grid at 30% with less filament and faster print time.</p>
+
+        <h2>When to Use Each Pattern</h2>
+
+        <ul>
+          <li><strong>Decorative figurines:</strong> Lightning at 5-10%. Saves tons of time, looks the same on the outside.</li>
+          <li><strong>Everyday prints (phone stands, cable holders):</strong> Grid at 15-20%. Simple and fast.</li>
+          <li><strong>Mechanical parts (brackets, mounts):</strong> Gyroid at 20-30%. Strong in every direction.</li>
+          <li><strong>Transparent or translucent prints:</strong> Honeycomb at 20%. Looks great through clear filament.</li>
+          <li><strong>Flexible parts (TPU):</strong> Gyroid at 10-15%. Compresses evenly in all directions.</li>
+        </ul>
+
+        <p>For more on how infill interacts with other settings like layer height and speed, check our <a href="best-3d-printer-settings.html">complete settings guide</a> and <a href="3d-printing-speed-vs-quality.html">speed vs. quality breakdown</a>.</p>
+
+        <h2>Common Mistakes</h2>
+
+        <ul>
+          <li><strong>Using 100% infill:</strong> Almost never necessary. 50% gyroid is stronger than 100% grid in real-world tests, and takes half the time.</li>
+          <li><strong>Wrong pattern for flexible filament:</strong> Grid infill makes TPU prints stiff in one direction. Gyroid keeps flexibility uniform.</li>
+          <li><strong>Ignoring the preview:</strong> Always check your slicer's preview to see how the infill fills the model. Some shapes leave large unsupported gaps at certain patterns.</li>
+        </ul>
+
+        <p>If your prints are warping or the top surface looks rough, the issue might be too little infill supporting it. Our <a href="3d-print-warping-solutions.html">warping solutions guide</a> covers this and other common fixes.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>For most prints, <strong>gyroid at 15-20%</strong> is the best all-around choice — strong, efficient, and available in every major slicer. Use lightning for decorative-only prints, grid for quick everyday items, and bump density up to 30%+ only when you need real structural strength.</p>
+
+        <p>The right pattern can save you 20-40% on print time and filament without sacrificing any strength. It's one of the easiest wins in 3D printing.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-slice-3d-model.html">How to Slice a 3D Model: A Beginner's Guide</a></li>
+          <li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+          <li><a href="3d-printing-speed-vs-quality.html">3D Printing Speed vs Quality: Finding the Sweet Spot</a></li>
+          <li><a href="3d-print-layer-height-guide.html">3D Print Layer Height Guide</a></li>
+          <li><a href="../filament-guide.html">Filament Guide: PLA, PETG, TPU Settings</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
