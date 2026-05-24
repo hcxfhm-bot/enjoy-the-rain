@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use G-Code to Control Your 3D Printer</title>
+  <meta name="description" content="Learn to use G-code commands to control your 3D printer directly. From basic movements to calibration scripts, master the language that runs your machine.">
+  <meta name="keywords" content="3d printer gcode, gcode commands, gcode tutorial, 3d printer commands, marlin gcode, cura gcode, 3d printing gcode guide">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Advanced Techniques</span>
+      </nav>
+
+      <h1>How to Use G-Code to Control Your 3D Printer</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 25, 2026</span>
+        <span>⏱️ 9 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💻</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+        <h2>What Is G-Code?</h2>
+        <p>G-code is the programming language that tells your 3D printer what to do. Every movement, temperature change, and extrusion command in a print file is written in G-code. While slicer software generates G-code automatically from your 3D models, understanding G-code commands lets you control your printer directly, troubleshoot issues, and customize behavior beyond what slicers offer.</p>
+        <p>Think of G-code as the bridge between your digital design and the physical print. When you click "print" in your slicer, it generates thousands of lines of G-code that your printer's firmware interprets and executes. Learning to read and write basic G-code gives you deeper control over your machine.</p>
+        <p>Most consumer 3D printers use <strong>Marlin firmware</strong>, which follows a standardized set of G-code commands. Other firmware like Klipper and Bambu's proprietary system use similar conventions with some extensions.</p>
+
+        <h2>Sending G-Code to Your Printer</h2>
+        <p>Before diving into commands, you need a way to send G-code to your printer. There are several options:</p>
+
+        <h3>Via USB Connection</h3>
+        <p>Connect your printer to a computer via USB and use a terminal program. Popular options include:</p>
+        <ul>
+          <li><strong>OctoPrint:</strong> Web interface with a terminal tab (highly recommended)</li>
+          <li><strong>Pronterface:</strong> Desktop application for direct printer control</li>
+          <li><strong>Cura:</strong> Has a printer console under the Monitor tab</li>
+          <li><strong>Arduino IDE Serial Monitor:</strong> Basic but functional</li>
+        </ul>
+        <p>If you're using OctoPrint, check out our <a href="octoprint-setup-guide.html">OctoPrint setup guide</a> to get started.</p>
+
+        <h3>Via SD Card</h3>
+        <p>Write G-code commands in a text file, save with a .gcode extension, and run it from your printer's SD card menu. This is useful for calibration scripts and maintenance routines.</p>
+
+        <h3>Via Printer LCD</h3>
+        <p>Some printers with advanced screens allow entering G-code commands directly through the menu interface.</p>
+
+        <h2>Essential G-Code Commands</h2>
+        <p>Here are the fundamental commands you'll use most often:</p>
+
+        <h3>Movement Commands</h3>
+        <p><strong>G0 and G1 — Linear Move</strong></p>
+        <p>The most basic commands. G0 is for rapid (non-printing) moves, G1 for printing moves. In practice, most firmware treats them identically.</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G0 X50 Y50    ; Move to X=50, Y=50 rapidly
+G1 Z5         ; Move Z to 5mm height
+G1 X100 E10   ; Move X to 100, extrude 10mm</code></pre>
+        <p>Parameters: X, Y, Z for coordinates; E for extruder position; F for feedrate (speed).</p>
+
+        <h3>Home Commands</h3>
+        <p><strong>G28 — Auto Home</strong></p>
+        <p>Moves all axes to their endstop positions, establishing the zero point.</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G28           ; Home all axes
+G28 X Y       ; Home X and Y only
+G28 Z         ; Home Z only</code></pre>
+
+        <h3>Temperature Commands</h3>
+        <p><strong>M104/M109 — Set Hotend Temperature</strong></p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M104 S200     ; Set hotend to 200°C (no wait)
+M109 S200     ; Set hotend to 200°C and wait</code></pre>
+
+        <p><strong>M140/M190 — Set Bed Temperature</strong></p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M140 S60      ; Set bed to 60°C (no wait)
+M190 S60      ; Set bed to 60°C and wait</code></pre>
+        <p>For temperature recommendations by filament, see our <a href="pla-filament-temperature-guide.html">PLA temperature guide</a> and <a href="petg-vs-pla-comparison.html">PETG vs PLA comparison</a>.</p>
+
+        <h3>Position and Information</h3>
+        <p><strong>M114 — Report Position</strong></p>
+        <p>Shows current position of all axes. Useful for debugging and manual calibration.</p>
+
+        <p><strong>M105 — Report Temperature</strong></p>
+        <p>Returns current temperatures of hotend and bed.</p>
+
+        <p><strong>G92 — Set Position</strong></p>
+        <p>Sets the current position to specified values without moving. Used at print start to define zero.</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G92 E0        ; Reset extruder position to 0</code></pre>
+
+        <h3>Extruder Control</h3>
+        <p><strong>G92 E0 — Reset Extruder</strong></p>
+        <p>Standard command at the start of prints to reset extruder position tracking.</p>
+
+        <p><strong>M82/M83 — Extruder Mode</strong></p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M82           ; Absolute extruder mode
+M83           ; Relative extruder mode</code></pre>
+
+        <h3>Fan Control</h3>
+        <p><strong>M106/M107 — Part Cooling Fan</strong></p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M106 S255     ; Fan on at 100% (0-255 range)
+M106 S128     ; Fan on at 50%
+M107          ; Fan off</code></pre>
+
+        <h2>Practical G-Code Scripts</h2>
+        <p>Here are useful scripts you can save and run on your printer:</p>
+
+        <h3>Heating Script</h3>
+        <p>Pre-heat your printer before starting a print:</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>; Pre-heat for PLA
+M140 S60        ; Start heating bed
+M104 S200       ; Start heating hotend
+M190 S60        ; Wait for bed
+M109 S200       ; Wait for hotend
+M300 S1000 P500 ; Beep when ready</code></pre>
+
+        <h3>Bed Leveling Test</h3>
+        <p>Move nozzle to corners for manual bed leveling:</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G28           ; Home all
+G0 Z5         ; Raise Z
+G0 X10 Y10    ; Front-left corner
+G0 Z0.2       ; Lower to paper height
+; Adjust knob here
+G0 Z5         ; Raise
+G0 X200 Y10   ; Front-right corner
+G0 Z0.2
+; Adjust knob here
+; Repeat for back corners</code></pre>
+        <p>For more on bed leveling, see our guide on <a href="how-to-level-3d-printer-bed.html">how to level a 3D printer bed</a>.</p>
+
+        <h3>Nozzle Cleaning Script</h3>
+        <p>Move to a convenient position for nozzle cleaning:</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G28 X Y       ; Home X and Y
+G0 X100 Y150  ; Move to accessible position
+M104 S200     ; Heat to cleaning temp
+M109 S200     ; Wait for temp
+; Clean nozzle now
+G28           ; Re-home when done</code></pre>
+
+        <h3>Extruder Calibration Script</h3>
+        <p>For measuring and calibrating extruder steps:</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G28           ; Home
+M104 S200     ; Heat nozzle
+M109 S200     ; Wait for temp
+G92 E0        ; Reset extruder
+G1 E100 F100  ; Extrude 100mm slowly
+; Measure actual extrusion and calculate
+; new steps-per-mm</code></pre>
+
+        <h2>Understanding Slicer-Generated G-Code</h2>
+        <p>When you slice a model, the resulting G-code file starts with setup commands and then contains thousands of movement commands. Here's what a typical print file looks like:</p>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0; font-size: 0.85rem;"><code>; Generated by Cura
+G28 ; Home
+M140 S60 ; Heat bed
+M104 S200 ; Heat nozzle
+M190 S60 ; Wait for bed
+M109 S200 ; Wait for nozzle
+G92 E0 ; Reset extruder
+G1 Z5 F3000 ; Move Z up
+G1 X10 Y10 F6000 ; Move to start
+; Layer 1
+G1 X20 Y10 E2.5 F1500 ; Print first line
+G1 X30 Y10 E5.0 ; Continue...
+; ... thousands more lines ...</code></pre>
+        <p>Understanding this structure helps you modify start/end G-code in your slicer for custom behaviors.</p>
+
+        <h2>Start and End G-Code Customization</h2>
+        <p>Most slicers let you customize the G-code that runs before and after each print. This is powerful for tailoring behavior to your specific needs.</p>
+
+        <h3>Custom Start G-Code Example</h3>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G28 ; Home all axes
+M140 S{material_bed_temperature_layer_0} ; Start bed heating
+M104 S{material_print_temperature_layer_0} ; Start nozzle heating
+M190 S{material_bed_temperature_layer_0} ; Wait for bed
+M109 S{material_print_temperature_layer_0} ; Wait for nozzle
+G92 E0 ; Reset extruder
+G1 Z2 F3000 ; Raise Z
+G1 X5 Y5 F6000 ; Move to corner
+G1 Z0.3 F3000 ; Lower to first layer height
+G1 X100 E20 F1000 ; Prime line
+G92 E0 ; Reset again
+G1 Z2 F3000 ; Raise Z</code></pre>
+
+        <h3>Custom End G-Code Example</h3>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>G91 ; Relative mode
+G1 E-2 F2700 ; Retract
+G1 E-2 Z0.2 F2400 ; Retract and raise
+G90 ; Absolute mode
+G1 X0 Y200 F6000 ; Move bed forward
+M106 S0 ; Fan off
+M104 S0 ; Hotend off
+M140 S0 ; Bed off
+M84 ; Disable motors</code></pre>
+
+        <h2>Advanced G-Code Commands</h2>
+        <p>For more advanced control, these commands are useful:</p>
+
+        <h3>Acceleration and Jerk</h3>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M201 X500 Y500 ; Set max acceleration
+M204 P500 R1000 T500 ; Set print acceleration
+M205 X8 Y8 ; Set jerk</code></pre>
+
+        <h3>Steps Per MM (Calibration)</h3>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M92 X80 Y80 Z400 E93 ; Set steps per mm
+M500 ; Save to EEPROM</code></pre>
+
+        <h3>Baby Stepping (Z Adjustment During Print)</h3>
+        <pre style="background: #1e1f35; padding: 1rem; border-radius: 8px; overflow-x: auto; color: #e0e0f0;"><code>M290 Z0.05 ; Raise Z by 0.05mm
+M290 Z-0.05 ; Lower Z by 0.05mm</code></pre>
+
+        <h2>Safety Tips for G-Code</h2>
+        <ul>
+          <li><strong>Always verify positions:</strong> Before moving, make sure the path is clear. A G0 command won't stop for collisions.</li>
+          <li><strong>Don't exceed limits:</strong> Moving beyond your bed size can crash the gantry. Know your printer's dimensions.</li>
+          <li><strong>Watch temperatures:</strong> Setting a temperature too high can damage your hotend. Stay within safe ranges for your hardware.</li>
+          <li><strong>Save before experimenting:</strong> Use M500 to save settings to EEPROM before making permanent changes.</li>
+          <li><strong>Test movements slow:</strong> When testing new scripts, use slow feedrates (F1000 or lower) until you're confident.</li>
+        </ul>
+
+        <h2>Common G-Code Commands Reference</h2>
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0; font-family: Inter, sans-serif; font-size: 0.95rem;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">Command</th>
+              <th style="padding: 10px 16px; text-align: left; border: 1px solid #3a3a5c;">Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">G0/G1</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Linear move</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">G28</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Home axes</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">G29</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Auto bed level</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">M104/M109</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Set hotend temp</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">M140/M190</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Set bed temp</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">M106/M107</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Fan control</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">M82/M83</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Extruder mode</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">G92</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Set position</td>
+            </tr>
+            <tr style="background: #1e1f35; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">M500</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Save to EEPROM</td>
+            </tr>
+            <tr style="background: #252640; color: #e0e0f0;">
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">M84</td>
+              <td style="padding: 10px 16px; border: 1px solid #3a3a5c;">Disable motors</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Conclusion</h2>
+        <p>Understanding G-code opens up a new level of control over your 3D printer. From simple commands like homing and heating to complex calibration scripts, G-code lets you interact directly with your machine's firmware. Start by experimenting with basic movement and temperature commands, then progress to writing your own start/end scripts and calibration routines.</p>
+        <p>For more advanced printer control, explore <a href="3d-printer-firmware-update-guide.html">updating your printer firmware</a> and our guide to <a href="how-to-calibrate-3d-printer.html">calibrating your 3D printer</a>.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer: Step-by-Step</a></li>
+          <li><a href="octoprint-setup-guide.html">OctoPrint Setup Guide: Install in 20 Minutes</a></li>
+          <li><a href="3d-printer-firmware-update-guide.html">How to Update Your 3D Printer Firmware</a></li>
+          <li><a href="how-to-level-3d-printer-bed.html">How to Level a 3D Printer Bed</a></li>
+          <li><a href="../troubleshooting.html">Troubleshooting Guide</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

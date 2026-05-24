@@ -95,12 +95,20 @@
 - [x] how-to-3d-print-hollow-objects — How to 3D Print Hollow Objects: Settings & Tips ✅ 2026-05-24
 - [x] best-3d-printer-for-small-business — Best 3D Printer for Small Business & Side Hustles (2026) ✅ 2026-05-24
 
+### 批次 14：ADVANCED TECHNIQUES & MATERIALS (6篇) ✅ COMPLETED
+- [x] 3d-printing-retraction-settings — 3D Printing Retraction Settings: How to Eliminate Stringing ✅ 2026-05-25
+- [x] how-to-use-3d-printer-gcode — How to Use G-Code to Control Your 3D Printer ✅ 2026-05-25
+- [x] pla-plus-vs-regular-pla — PLA+ vs Regular PLA: Which Filament Should You Choose? ✅ 2026-05-25
+- [x] 3d-printing-bridging-guide — 3D Printing Bridging: How to Print Over Gaps Without Supports ✅ 2026-05-25
+- [x] best-3d-printer-for-prototyping — Best 3D Printer for Prototyping & Product Development (2026) ✅ 2026-05-25
+- [x] how-to-fix-clogged-3d-printer-nozzle — How to Fix a Clogged 3D Printer Nozzle (5 Methods) ✅ 2026-05-25
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 65 篇 ✅
-- **剩余**: 135 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅
+- **已完成**: 71 篇 ✅
+- **剩余**: 129 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅
 
 ## 生成规则
 
