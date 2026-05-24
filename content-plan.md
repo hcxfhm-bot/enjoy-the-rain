@@ -87,12 +87,20 @@
 - [x] how-to-store-3d-printer-filament — How to Store 3D Printer Filament So It Lasts for Years ✅ 2026-05-23
 - [x] 3d-printing-tolerances-guide — 3D Printing Tolerances: How to Get Parts That Fit Together ✅ 2026-05-23
 
+### 批次 13：PRINTERS, EXTRUDERS & MATERIALS (6篇)
+- [x] best-3d-printer-under-500 — Best 3D Printer Under $500 (2026 Mid-Range Guide) ✅ 2026-05-24
+- [x] bowden-vs-direct-drive-extruder — Bowden vs Direct Drive Extruder: Which Is Better? ✅ 2026-05-24
+- [x] nylon-filament-guide — Nylon Filament Guide: Settings, Tips & Best Uses ✅ 2026-05-24
+- [x] 3d-print-bed-adhesion-tips — 3D Print Bed Adhesion: Glue Stick, Tape & Hairspray Tips ✅ 2026-05-24
+- [x] how-to-3d-print-hollow-objects — How to 3D Print Hollow Objects: Settings & Tips ✅ 2026-05-24
+- [x] best-3d-printer-for-small-business — Best 3D Printer for Small Business & Side Hustles (2026) ✅ 2026-05-24
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 59 篇 ✅
-- **剩余**: 141 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅
+- **已完成**: 65 篇 ✅
+- **剩余**: 135 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅
 
 ## 生成规则
 

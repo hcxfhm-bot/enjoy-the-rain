@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nylon Filament Guide: Settings, Tips & Best Uses for 3D Printing</title>
+  <meta name="description" content="Nylon filament guide for 3D printing: nozzle temp, bed settings, drying tips, and when to use nylon over PLA or PETG. Get strong, flexible prints with these proven settings.">
+  <meta name="keywords" content="nylon filament, nylon 3d printing, nylon filament settings, nylon vs PETG, nylon print settings, PA filament, nylon bed adhesion">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Filament Guide</span>
+      </nav>
+
+      <h1>Nylon Filament Guide: Settings, Tips & Best Uses for 3D Printing</h1>
+
+      <div class="article-meta">
+        <span>📅 May 24, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🧵</span>
+      </div>
+
+      <div class="article-body">
+        <p>Nylon (PA) is one of the strongest and most versatile 3D printing filaments available. It's flexible, impact-resistant, and can survive conditions that would crack PLA or warp PETG. But <strong>nylon filament is also one of the hardest materials to print</strong> — it absorbs moisture from the air like a sponge, requires high temperatures, and needs an enclosure to print well. This guide covers everything you need to get nylon right.</p>
+
+        <h2>Why Print with Nylon?</h2>
+        <p>Nylon isn't for everyone. But if you need parts that take real abuse, it's hard to beat:</p>
+        <ul>
+          <li><strong>Impact resistance:</strong> Nylon absorbs energy instead of cracking. Drop a nylon part and it bounces; drop a PLA part and it shatters.</li>
+          <li><strong>Flexibility:</strong> Nylon bends rather than breaks. Great for living hinges, clips, and gear parts.</li>
+          <li><strong>Layer adhesion:</strong> When printed correctly, nylon layers fuse almost as strong as the material itself. Z-axis strength is far better than PLA.</li>
+          <li><strong>Wear resistance:</strong> Nylon gears and bearings outlast plastic alternatives by 5–10×.</li>
+          <li><strong>Chemical resistance:</strong> Resists oils, greases, and many solvents.</li>
+        </ul>
+
+        <h2>Types of Nylon Filament</h2>
+        <ul>
+          <li><strong>PA6 (Nylon 6):</strong> Most common. Strong, flexible, high temp (240–260°C). Hardest to print — warps badly without enclosure.</li>
+          <li><strong>PA12 (Nylon 12):</strong> Lower moisture absorption, easier to print, slightly less strong. Good starting point.</li>
+          <li><strong>PA-CF (Carbon Fiber Nylon):</strong> Nylon mixed with chopped carbon fiber. Stiffer, less warping, beautiful matte finish. See our <a href="carbon-fiber-filament-guide.html">carbon fiber filament guide</a> for details.</li>
+          <li><strong>PA-GF (Glass Fiber Nylon):</strong> Similar benefits to PA-CF but with glass fiber. Easier on nozzles than carbon fiber.</li>
+        </ul>
+
+        <h2>Essential Nylon Print Settings</h2>
+        <p>These settings are starting points for PA6 and PA12 on a printer with an all-metal hotend and heated bed:</p>
+        <table>
+          <tr><th>Setting</th><th>PA6</th><th>PA12</th><th>PA-CF</th></tr>
+          <tr><td>Nozzle temp</td><td>250–260°C</td><td>230–250°C</td><td>260–280°C</td></tr>
+          <tr><td>Bed temp</td><td>70–80°C</td><td>60–70°C</td><td>70–80°C</td></tr>
+          <tr><td>Bed surface</td><td>PEI + glue stick</td><td>PEI</td><td>PEI + glue</td></tr>
+          <tr><td>Enclosure</td><td>Required</td><td>Recommended</td><td>Recommended</td></tr>
+          <tr><td>Print speed</td><td>30–50 mm/s</td><td>40–60 mm/s</td><td>30–50 mm/s</td></tr>
+          <tr><td>Part cooling</td><td>0–20%</td><td>10–30%</td><td>0–20%</td></tr>
+          <tr><td>Retraction</td><td>1–2 mm (DD)</td><td>1–1.5 mm (DD)</td><td>1–2 mm</td></tr>
+        </table>
+        <p><strong>Key rule:</strong> Keep cooling fan low. Nylon needs heat to bond layers properly. Too much cooling = weak layer adhesion and <a href="3d-print-warping-solutions.html">warping</a>.</p>
+
+        <h2>Bed Adhesion for Nylon</h2>
+        <p>Nylon is notorious for poor bed adhesion. Here's what works:</p>
+        <ul>
+          <li><strong>PEI sheet + glue stick:</strong> Apply a thin layer of PVA glue stick to a heated PEI sheet. This is the most reliable method.</li>
+          <li><strong>Garolite (G10) sheet:</strong> Nylon bonds well to garolite at 70°C. Popular in the community.</li>
+          <li><strong>Painter's tape + glue:</strong> Budget option. Blue tape with a glue stick layer.</li>
+          <li><strong>Brim:</strong> Always use a 5–10mm brim. Nylon's warp force is stronger than PLA — don't skip this.</li>
+        </ul>
+        <p>For more adhesion tips that apply across materials, see our <a href="3d-print-bed-adhesion-tips.html">bed adhesion guide</a>.</p>
+
+        <h2>Drying Nylon Filament (Critical!)</h2>
+        <p>Nylon absorbs moisture faster than any other common filament. <strong>Wet nylon hisses, pops, and produces stringy, weak prints</strong> with bubbles in the extrusion. You must dry it before every print if it's been exposed to air for more than a few hours.</p>
+        <ul>
+          <li><strong>Oven method:</strong> 80°C for 4–6 hours. Use a food dehydrator if your oven can't hold a stable low temp.</li>
+          <li><strong>Filament dryer:</strong> Sunlu, Polymaker, or any dryer at 70–80°C for 6+ hours.</li>
+          <li><strong>Storage:</strong> Keep in a sealed bag with desiccant. Print directly from a dryer if possible.</li>
+        </ul>
+        <p>The full process is covered in our <a href="how-to-dry-3d-printer-filament.html">filament drying guide</a> — the same methods work, just at higher temperatures for nylon.</p>
+
+        <h2>Nylon vs PETG vs PLA</h2>
+        <table>
+          <tr><th>Property</th><th>Nylon</th><th>PETG</th><th>PLA</th></tr>
+          <tr><td>Tensile strength</td><td>High</td><td>Medium</td><td>Medium</td></tr>
+          <tr><td>Impact resistance</td><td>Very high</td><td>Medium</td><td>Low</td></tr>
+          <tr><td>Flexibility</td><td>High</td><td>Low</td><td>Very low</td></tr>
+          <tr><td>Print difficulty</td><td>Hard</td><td>Easy</td><td>Easiest</td></tr>
+          <tr><td>Moisture sensitivity</td><td>Very high</td><td>Low</td><td>Low</td></tr>
+          <tr><td>Requires enclosure</td><td>Yes</td><td>No</td><td>No</td></tr>
+        </table>
+        <p>If you don't need nylon's strength and flexibility, <a href="petg-vs-pla-comparison.html">PETG vs PLA</a> is an easier place to start.</p>
+
+        <h2>Common Nylon Printing Problems</h2>
+        <ul>
+          <li><strong>Warping:</strong> Use an enclosure and a brim. Pre-heat the enclosure to 45°C before starting.</li>
+          <li><strong>Stringing:</strong> Dry the filament first. If still stringy, increase retraction by 0.5mm.</li>
+          <li><strong>Weak layers:</strong> Reduce cooling fan. Increase nozzle temp by 5–10°C.</li>
+          <li><strong>Bubbles/spitting:</strong> Filament is wet. Dry it immediately.</li>
+          <li><strong>Nozzle wear:</strong> Pure nylon is soft on nozzles, but PA-CF will wear brass nozzles fast. Use hardened steel or ruby.</li>
+        </ul>
+
+        <h2>Best Nylon Filament Brands (2026)</h2>
+        <ul>
+          <li><strong>Polymaker Polymide PA6-CF:</strong> Easiest carbon fiber nylon to print. Low warp, great bed adhesion.</li>
+          <li><strong>eSun ePA-CF:</strong> Budget-friendly PA-CF. Good results, but dries slower.</li>
+          <li><strong>MatterHackers NylonX:</strong> Carbon fiber reinforced, consistent quality, US-made.</li>
+          <li><strong>Taulman Alloy 910:</strong> Pure nylon (PA6), extremely strong. Harder to print but worth it for functional parts.</li>
+        </ul>
+        <p>See our full <a href="best-filament-brands-2026.html">filament brands guide</a> for more options across all materials.</p>
+
+        <h2>Is Nylon Right for You?</h2>
+        <p>Print nylon if you need <strong>functional, durable parts</strong> — gears, brackets, clips, drone frames, or anything that will be stressed or dropped. Skip it for decorative prints, display models, or if you don't have an enclosure and a filament dryer. The learning curve is real, but once you nail the settings, nylon opens up applications that no other filament can match.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="carbon-fiber-filament-guide.html">Carbon Fiber Filament Guide: Settings, Tips & Best Uses</a></li>
+          <li><a href="petg-vs-pla-comparison.html">PETG vs PLA: Strength, Ease of Use & When to Switch</a></li>
+          <li><a href="how-to-dry-3d-printer-filament.html">How to Dry 3D Printer Filament (4 Methods That Work)</a></li>
+          <li><a href="3d-print-bed-adhesion-tips.html">3D Print Bed Adhesion: Glue Stick, Tape & Hairspray Tips</a></li>
+          <li><a href="../filament-guide.html">Complete Filament Guide</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to 3D Print Hollow Objects: Settings, Tips & Wall Thickness</title>
+  <meta name="description" content="Learn how to 3D print hollow objects with the right wall thickness, infill, and vase mode settings. Avoid leaks, collapsed walls, and weak prints with this practical guide.">
+  <meta name="keywords" content="3d print hollow, hollow 3d printing, vase mode, spiralize, wall thickness 3d print, hollow infill, print hollow object">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Techniques</span>
+      </nav>
+
+      <h1>How to 3D Print Hollow Objects: Settings, Tips & Wall Thickness</h1>
+
+      <div class="article-meta">
+        <span>📅 May 24, 2026</span>
+        <span>⏱️ 6 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🎨</span>
+      </div>
+
+      <div class="article-body">
+        <p>Printing hollow objects saves filament, reduces print time, and creates lightweight parts. But there's a catch — <strong>hollow prints collapse, leak, or crack</strong> if your wall thickness or settings are wrong. This guide covers two ways to print hollow (infill-based and vase mode), the minimum wall thickness for each material, and how to avoid the most common failures.</p>
+
+        <h2>Two Ways to Print Hollow</h2>
+        <p>There are fundamentally different approaches to hollow 3D printing, and they suit different use cases:</p>
+
+        <h3>Method 1: Low or Zero Infill</h3>
+        <p>Set infill to 0% (or 5–10% for stability). The printer builds the outer walls normally but leaves the interior empty. This works for boxes, enclosures, and containers where you need defined top and bottom surfaces.</p>
+        <ul>
+          <li><strong>Best for:</strong> Enclosures, containers, hollow figurines, lamp shades</li>
+          <li><strong>Pros:</strong> Full design freedom, closed top/bottom surfaces</li>
+          <li><strong>Cons:</strong> Very thin walls can sag or collapse during printing</li>
+        </ul>
+
+        <h3>Method 2: Vase Mode (Spiralize)</h3>
+        <p>Vase mode (called "Spiralize Outer Contour" in Cura) prints a single continuous wall that spirals upward. No Z-seam, no layer transitions — just one smooth, unbroken line. It produces <strong>watertight, seamless vessels</strong>.</p>
+        <ul>
+          <li><strong>Best for:</strong> Vases, cups, hollow cylinders, decorative containers</li>
+          <li><strong>Pros:</strong> Seamless, fast, beautiful surface finish</li>
+          <li><strong>Cons:</strong> Only works on models with a single continuous outer wall. No internal features, no closed top surface.</li>
+        </ul>
+
+        <h2>Minimum Wall Thickness by Material</h2>
+        <p>Going too thin is the #1 reason hollow prints fail. Here are the practical minimums for a standard 0.4mm nozzle:</p>
+        <table>
+          <tr><th>Material</th><th>Min Wall (mm)</th><th>Wall Line Count</th><th>Notes</th></tr>
+          <tr><td>PLA</td><td>0.8</td><td>2 lines</td><td>Most forgiving. 0.8mm prints reliably.</td></tr>
+          <tr><td>PETG</td><td>1.0</td><td>2–3 lines</td><td>Slightly more sag; 1.0mm is safer.</td></tr>
+          <tr><td>ABS</td><td>1.2</td><td>3 lines</td><td>Warp risk at thin walls. Needs enclosure.</td></tr>
+          <tr><td>TPU</td><td>1.0</td><td>2–3 lines</td><td>Flexible = more wall sag. Thicker is better.</td></tr>
+          <tr><td>Nylon</td><td>1.2</td><td>3 lines</td><td>Warps if too thin. See <a href="nylon-filament-guide.html">nylon settings</a>.</td></tr>
+        </table>
+        <p><strong>Rule of thumb:</strong> Always use at least 2 wall lines (0.8mm with a 0.4mm nozzle). For functional parts that take stress, use 3 lines (1.2mm).</p>
+
+        <h2>Settings for Low-Infill Hollow Prints</h2>
+        <p>When you want a hollow object with top/bottom surfaces (like a box):</p>
+        <ul>
+          <li><strong>Infill:</strong> 0% (completely hollow) or 5% (light grid support)</li>
+          <li><strong>Wall count:</strong> 3–4 lines for structural parts, 2 for display-only</li>
+          <li><strong>Top/bottom layers:</strong> 4–6 layers (prevents sagging on the top surface)</li>
+          <li><strong>Print speed:</strong> Reduce to 80% of normal — thin walls need more time to cool</li>
+          <li><strong>Part cooling:</strong> 80–100% for PLA, 40–60% for PETG</li>
+          <li><strong><a href="3d-print-infill-patterns.html">Infill pattern</a>:</strong> If using 5% infill, gyroid distributes force better than grid</li>
+        </ul>
+        <p><strong>Common problem:</strong> The top surface sags into the hollow interior. Fix this by increasing top layer count to 6–8, or add 5% infill as a support scaffold.</p>
+
+        <h2>Settings for Vase Mode</h2>
+        <p>Vase mode requires specific settings to work correctly:</p>
+        <ul>
+          <li><strong>Enable Spiralize:</strong> Yes (Cura: Special Modes → Spiralize Outer Contour)</li>
+          <li><strong>Wall line count:</strong> 1 (that's the whole point — single wall)</li>
+          <li><strong>Bottom layers:</strong> 4–6 (seals the base)</li>
+          <li><strong>Top layers:</strong> 0 (vase mode can't close the top)</li>
+          <li><strong>Infill:</strong> 0% (ignored by vase mode anyway)</li>
+          <li><strong>Z-hop:</strong> Disable — vase mode should never lift</li>
+          <li><strong>Flow rate:</strong> 95–100% (over-extrusion creates rough surfaces)</li>
+        </ul>
+        <p><strong>Wall thickness in vase mode:</strong> Controlled by line width, not wall count. Set line width to 0.4–0.6mm for a standard nozzle. A wider line (0.6mm) gives a sturdier wall at the cost of a slightly rougher exterior.</p>
+
+        <h2>When Vase Mode Doesn't Work</h2>
+        <p>Vase mode only works on models with <strong>one continuous outer contour per layer</strong>. It fails if your model has:</p>
+        <ul>
+          <li>Internal walls or partitions</li>
+          <li>Multiple separate bodies on the same layer</li>
+          <li>Holes that go all the way through (like a donut shape with changing inner diameter)</li>
+          <li>Overhangs that need <a href="3d-print-support-settings.html">supports</a></li>
+        </ul>
+        <p>If your model has any of these, use low-infill hollow instead.</p>
+
+        <h2>Common Hollow Print Problems & Fixes</h2>
+        <ul>
+          <li><strong>Walls collapse inward:</strong> Increase wall count to 3. Reduce speed. Increase cooling.</li>
+          <li><strong>Top surface sags:</strong> Add more top layers (6–8). Or use 5% infill as internal support.</li>
+          <li><strong>Print is not watertight:</strong> In vase mode, increase line width. In normal mode, increase flow to 102%. Check for <a href="under-extrusion-causes-and-fixes.html">under-extrusion</a>.</li>
+          <li><strong>Stringing inside hollow space:</strong> Enable retraction. Increase retraction distance by 0.5mm. See our <a href="how-to-fix-stringing-3d-prints.html">stringing fix guide</a>.</li>
+          <li><strong>Warping at base:</strong> Use a brim. Increase bed temp by 5°C. See <a href="3d-print-warping-solutions.html">warping solutions</a>.</li>
+        </ul>
+
+        <h2>Best Hollow Print Ideas</h2>
+        <ul>
+          <li><strong>Vases & planters:</strong> Classic vase mode project. Try the "Twisted Vase" on Thingiverse.</li>
+          <li><strong>Lamp shades:</strong> Low-infill with thin walls lets light through beautifully. Use white PLA.</li>
+          <li><strong>Storage boxes:</strong> 0% infill with 3 walls and a lid. Lightweight but functional.</li>
+          <li><strong>Hollow figurines:</strong> Save filament on large display models. 0% infill, 2 walls.</li>
+          <li><strong>Floats & buoys:</strong> Vase mode creates watertight objects. Perfect for pool toys.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>Hollow 3D printing is a skill that pays off immediately — you'll save filament and time on every large print. Start with vase mode for simple vessels (it's almost foolproof), then experiment with low-infill hollow for boxes and enclosures. The key rules: never go below 2 wall lines, add extra top layers to prevent sagging, and slow down when walls are thin. With these basics, your hollow prints will come out clean, strong, and filament-efficient.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="3d-print-infill-patterns.html">3D Print Infill Patterns: Which One Should You Use?</a></li>
+          <li><a href="3d-print-support-settings.html">3D Print Support Settings: Everything You Need to Know</a></li>
+          <li><a href="useful-things-to-3d-print.html">15 Actually Useful Things to 3D Print at Home</a></li>
+          <li><a href="easy-3d-printing-projects-beginners.html">10 Easy 3D Printing Projects for Beginners</a></li>
+          <li><a href="../projects.html">More Project Ideas</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
