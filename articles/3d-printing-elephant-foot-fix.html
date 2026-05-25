@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Fix Elephant Foot on 3D Prints: 7 Proven Solutions</title>
+  <meta name="description" content="Elephant foot ruining your 3D prints? Learn 7 proven fixes — from Z-offset adjustments to chamfered edges — that eliminate the bulging bottom layer problem.">
+  <meta name="keywords" content="elephant foot 3d printing, elephant foot fix, 3d print bottom bulging, first layer too wide, z offset 3d printer, 3d print elephant foot compensation">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav"><div class="container"><a href="../index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><ul class="nav-links"><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Projects</a></li></ul></div></nav>
+<main class="section"><div class="container"><article class="article-page">
+<nav class="breadcrumb"><a href="../index.html">Home</a> &raquo; <span>Troubleshooting</span></nav>
+<h1>How to Fix Elephant Foot on 3D Prints: 7 Proven Solutions</h1>
+<div class="article-meta"><span>📅 May 25, 2026</span><span>⏱️ 7 min read</span><span>✍️ 3D Print Starter Team</span></div>
+<div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;"><span style="font-size: 4rem;">🔧</span></div>
+<div class="article-body"><p>You pull a print off the build plate and the bottom edge flares outward like a flat foot — wider than every layer above it. That's elephant foot, and it's one of the most common first-layer problems in FDM printing. It ruins dimensional accuracy on the bottom of functional parts and makes cosmetic prints look sloppy.</p>
+
+<p>In this guide, you'll learn exactly why elephant foot happens and walk through seven fixes you can apply right now. Most people only need one or two of these to solve the problem completely.</p>
+
+<h2>What Is Elephant Foot?</h2>
+
+<p>Elephant foot is the outward bulge on the bottom edge of a 3D print. The first one or two layers spread wider than the rest, creating a flared base that looks (you guessed it) like the flat bottom of an elephant's foot.</p>
+
+<p>It shows up on almost every printer to some degree, but it becomes a real problem when you need tight dimensional tolerances — think snap-fit connectors, threaded inserts, or parts that slot into an enclosure.</p>
+
+<h2>Why Does It Happen?</h2>
+
+<p>Two forces are at work:</p>
+
+<p><strong>1. Nozzle pressure.</strong> The first layer gets squished against the heated bed. The nozzle is close to the surface, so the extruded filament has nowhere to go but outward. This is actually intentional — you want good bed adhesion — but it goes too far when the nozzle is too close or the first layer is too wide.</p>
+
+<p><strong>2. Thermal expansion.</strong> The bottom layers stay hot longer because the heated bed keeps them warm. Hot plastic is softer and more deformable, so the weight of the layers above presses down and pushes the still-soft bottom outward.</p>
+
+<p>The bigger the print and the hotter the bed, the worse this gets. A small 20 mm calibration cube might show almost no elephant foot, but a large flat part printed at 100 °C bed temperature can flare by 0.5 mm or more.</p>
+
+<p>Now let's fix it. Start with method one and work down — most people stop after the first two.</p>
+
+<h2>Fix 1: Adjust Your Z-Offset</h2>
+
+<p>The most common cause of severe elephant foot is a nozzle that's sitting too close to the bed. When the first layer gets over-compressed, the filament spreads excessively.</p>
+
+<p><strong>How to do it:</strong></p>
+
+<ol>
+<li>Home your printer and run a first-layer calibration test (a single-layer square printed slowly).</li>
+<li>If the lines look flattened into ribbons with no gap between them and the width is clearly wider than your nozzle diameter, your Z-offset is too low.</li>
+<li>Increase the Z-offset by 0.05 mm increments. On most printers this is done through the firmware's motion settings or a knob during the first layer.</li>
+<li>Re-run the test. You want lines that are touching but not so flattened that they spread. The extrusion should look like a slightly oval bead, not a pancake.</li>
+</ol>
+
+<p>For a <a href="3d-print-first-layer-not-sticking.html">deeper look at first-layer calibration</a>, check our dedicated guide. The goal here is finding the sweet spot between adhesion and over-squish.</p>
+
+<h2>Fix 2: Use a Chamfer in Your CAD Model</h2>
+
+<p>This is the cleanest fix because it accounts for elephant foot at the design stage rather than fighting it in the slicer.</p>
+
+<p><strong>How to do it:</strong></p>
+
+<ol>
+<li>At the bottom edge of your model, add a chamfer (angled edge) of 0.2–0.5 mm at 45°.</li>
+<li>The first layer prints the chamfer, which absorbs the outward spread. The visible vertical wall starts at the chamfer's top, which sits above the deformed zone.</li>
+<li>The chamfer width should roughly match the expected elephant foot size — start at 0.3 mm and adjust based on your results.</li>
+</ol>
+
+<p>This works especially well for functional parts where you need the bottom edge dimensionally accurate. A 0.3 mm chamfer is invisible on most prints but eliminates the bulge entirely.</p>
+
+<h2>Fix 3: Print with a Raft</h2>
+
+<p>A raft lifts the actual print slightly off the bed surface. The raft takes the brunt of the over-compression and thermal expansion, so your part's bottom layer stays clean.</p>
+
+<p><strong>How to do it:</strong></p>
+
+<ol>
+<li>In your slicer, enable raft support. Cura, PrusaSlicer, and Orca Slicer all have this option.</li>
+<li>Set the raft air gap to 0.2–0.3 mm. This creates a small gap between the raft and the first real layer of your part.</li>
+<li>Print as normal. Remove the raft after printing — the bottom of your part will have a slightly rougher texture from the raft interface, but the elephant foot will be gone.</li>
+</ol>
+
+<p>Trade-off: rafts use extra filament and add 5–10 minutes to your print. Reserve this for parts where dimensional accuracy on the bottom matters. For <a href="3d-print-bed-adhesion-tips.html">general bed adhesion improvements</a>, a brim (Fix 7) is often the better first choice.</p>
+
+<h2>Fix 4: Lower Your Bed Temperature</h2>
+
+<p>Higher bed temperature keeps the bottom layers soft for longer, which means they deform more under the weight of the print. Lowering the bed temp lets the bottom layers cool and solidify faster.</p>
+
+<p><strong>Suggested adjustments:</strong></p>
+
+<ul>
+<li><strong>PLA:</strong> 55–60 °C (instead of 65 °C)</li>
+<li><strong>PETG:</strong> 70–75 °C (instead of 80–85 °C)</li>
+<li><strong>ABS/ASA:</strong> 90–95 °C (instead of 100–110 °C)</li>
+</ul>
+
+<p>Drop the bed temp in 5 °C increments and check whether the elephant foot shrinks. Don't go so low that your <a href="3d-print-bed-adhesion-tips.html">bed adhesion suffers</a> — if the print starts lifting at the corners, you've gone too far. A good enclosure helps maintain adhesion even at lower bed temperatures for ABS and ASA.</p>
+
+<h2>Fix 5: Reduce First Layer Width (or Line Width)</h2>
+
+<p>Many slicers default to a first layer width that's 120–200 % of the standard nozzle width. A wider extrusion line spreads more, which directly amplifies elephant foot.</p>
+
+<p><strong>How to do it:</strong></p>
+
+<ol>
+<li>In your slicer, find the "Initial layer line width" or "First layer width" setting.</li>
+<li>Set it to 100 % (same as normal layers) or no more than 110 %.</li>
+<li>Re-slice and print.</li>
+</ol>
+
+<p>If reducing first layer width hurts your bed adhesion, compensate by slightly increasing the first layer height instead — for example, set first layer height to 0.25 mm with a 0.2 mm layer height profile. Thicker lines grip the bed better without spreading outward as much.</p>
+
+<h2>Fix 6: Use Horizontal Expansion Compensation in Your Slicer</h2>
+
+<p>Most modern slicers have a built-in setting to counteract elephant foot by shrinking the bottom layers slightly.</p>
+
+<p><strong>How to do it:</strong></p>
+
+<ul>
+<li><strong>Cura:</strong> Search for "Elephant Foot Compensation" — this setting insets the first few layers inward by the specified amount (try 0.2–0.4 mm).</li>
+<li><strong>PrusaSlicer / Orca Slicer:</strong> Look for "Elephant foot compensation" under Print Settings → Advanced. Same concept.</li>
+<li><strong>SuperSlicer:</strong> Also has "Elephant foot compensation" with configurable layer count.</li>
+</ol>
+
+<p>This is a slicer-level chamfer. It works, but it doesn't look as clean as a real chamfer in your CAD model because the slicer just shrinks the cross-section — the bottom edge ends up slightly rounded rather than having a clean angled face.</p>
+
+<p>Use this when you can't modify the source CAD file (downloaded models, for example).</p>
+
+<h2>Fix 7: Switch from Brim to Skirt (or Reduce Brim Width)</h2>
+
+<p>A brim improves bed adhesion by adding extra material around the base of your print — but it also contributes to elephant foot because that extra material holds heat at the bottom edge and can fuse with the first layer.</p>
+
+<p><strong>How to do it:</strong></p>
+
+<ol>
+<li>If you're using a wide brim (10+ lines), try reducing it to 3–5 lines or switching to a skirt (no contact with the part at all).</li>
+<li>If adhesion is still fine without a brim, print without one.</li>
+<li>If you need a brim for adhesion on a tricky geometry, try fixing the elephant foot with Z-offset adjustment (Fix 1) and keep the brim — the two together often give the best balance.</li>
+</ol>
+
+<p>For parts where you're already using good bed prep (clean glass, PEI sheet, or adhesive), a skirt alone is often enough.</p>
+
+<h2>Which Fix Should You Try First?</h2>
+
+<p>Here's the order that solves most people's elephant foot with the least hassle:</p>
+
+<ol>
+<li><strong>Z-offset adjustment</strong> — takes 2 minutes, fixes the majority of cases.</li>
+<li><strong>CAD chamfer</strong> — best long-term solution for functional parts.</li>
+<li><strong>Lower bed temp</strong> — quick slicer change, big effect on larger prints.</li>
+<li><strong>Slicer elephant foot compensation</strong> — no re-printing of models needed.</li>
+<li><strong>Reduce first layer width</strong> — tune if adhesion allows.</li>
+<li><strong>Raft</strong> — use for critical tolerance parts.</li>
+<li><strong>Adjust brim</strong> — fine-tuning step.</li>
+</ol>
+
+<p>Most prints will look clean after applying just the first two fixes. Save the raft and brim adjustments for when you're dialing in a specific difficult material or large part.</p>
+
+<h2>When to Worry About Elephant Foot</h2>
+
+<p>Not all elephant foot needs fixing. If you're printing a decorative figure or a phone stand, a 0.2 mm flare is invisible and irrelevant. Focus your effort on these cases:</p>
+
+<ul>
+<li>Parts that mate with other parts at the base</li>
+<li>Enclosure walls that need to fit inside a chassis</li>
+<li>Calibration cubes and test prints where you're measuring accuracy</li>
+<li>Any print where the bottom dimension is a critical tolerance</li>
+</ul>
+
+<p>For everything else, a slightly wider base is just a normal part of FDM printing and not worth chasing.</p>
+
+<p>Understanding how <a href="3d-print-layer-height-guide.html">layer height affects print quality</a> also helps you balance surface finish with dimensional accuracy across your entire print, not just the first layer.</p>
+</div>
+<div class="ad-placeholder inline" style="margin: 2rem 0;">📢 Advertisement — Ad Placeholder (Google AdSense)</div>
+<div class="related-articles"><h2>📖 You Might Also Like</h2><ul><li><a href="3d-print-first-layer-not-sticking.html">First Layer Not Sticking? Complete Fix Guide</a></li><li><a href="3d-print-bed-adhesion-tips.html">10 Bed Adhesion Tips for Perfect First Layers</a></li><li><a href="3d-print-layer-height-guide.html">Layer Height Guide: Finding the Right Setting</a></li><li><a href="../troubleshooting.html">All Troubleshooting Articles</a></li></ul></div>
+</article></div></main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Your trusted guide to getting started with 3D printing.</p></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Project Ideas</a></li><li><a href="../about.html">About Us</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div></div></footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

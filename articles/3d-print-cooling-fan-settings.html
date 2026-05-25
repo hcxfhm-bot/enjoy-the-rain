@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Print Cooling Fan Settings: Complete Guide to Better Prints</title>
+<meta name="description" content="Cooling fan settings can make or break your 3D print quality. Learn the ideal fan speeds for PLA, PETG, ABS, and TPU — plus when to turn cooling off.">
+<meta name="keywords" content="3d print cooling fan, part cooling fan settings, pla cooling fan speed, petg cooling settings, 3d printer fan speed, bridging cooling, overhang cooling">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav"><div class="container"><a href="../index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><ul class="nav-links"><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Projects</a></li></ul></div></nav>
+<main class="section"><div class="container"><article class="article-page">
+<nav class="breadcrumb"><a href="../index.html">Home</a> &raquo; <span>Advanced Techniques</span></nav>
+<h1>3D Print Cooling Fan Settings: Complete Guide to Better Prints</h1>
+<div class="article-meta"><span>📅 May 25, 2026</span><span>⏱️ 5 min read</span><span>✍️ 3D Print Starter Team</span></div>
+<div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;"><span style="font-size: 4rem;">🎨</span></div>
+<div class="article-body">
+<h2>Why Part Cooling Matters</h2>
+<p>The part cooling fan is one of the most powerful tools on your <a href="best-3d-printer-settings.html">3D printer</a>, yet many beginners treat it as an afterthought. When your extruder deposits a layer of molten plastic, that material needs to solidify quickly enough to hold its shape before the next layer goes on top.</p>
+<p>Without adequate cooling, the plastic stays soft and can deform under its own weight. This causes sagging overhangs, blobbing on vertical walls, and loss of fine detail. The part cooling fan solves this by blowing a stream of air directly at the freshly extruded filament, rapidly reducing its temperature below the glass transition point.</p>
+<p>The tricky part? <strong>Different filaments need completely different cooling strategies.</strong> What works perfectly for PLA can cause layer separation in ABS. This guide covers the ideal fan speeds for every common filament type and explains when to break the rules.</p>
+
+<h2>Cooling Fan Speeds by Filament Type</h2>
+<p>Every slicer lets you control fan speed as a percentage (0–100%). Here are the starting points that work for most printers:</p>
+
+<h3>PLA: 100% Fan Speed</h3>
+<p>PLA benefits from maximum cooling. It solidifies quickly and has a low glass transition temperature around 60°C, making it ideal for aggressive cooling. Running your fan at 100% gives you the sharpest details, cleanest overhangs, and most consistent bridging.</p>
+<p>If you notice <a href="3d-printing-overhangs-guide.html">overhangs</a> curling or bridges drooping with PLA, the fan is almost always the culprit. Check that your fan duct is properly aimed at the nozzle tip — some printers ship with ducts that miss the target entirely.</p>
+
+<h3>PETG: 20–50% Fan Speed</h3>
+<p>PETG is where cooling gets nuanced. Too little cooling and your prints look glossy but lose detail. Too much cooling and layers delaminate, especially on tall prints. <strong>Start at 30% and adjust from there.</strong></p>
+<p>Reduce fan speed on the first 2–3 layers to improve bed adhesion, then ramp up to 30–50% for the rest of the print. For <a href="3d-printing-bridging-guide.html">bridging</a>, temporarily boost to 80–100% just like with PLA.</p>
+
+<h3>ABS: 0% Fan Speed (or Minimal)</h3>
+<p>ABS is the opposite of PLA when it comes to cooling. This material is prone to warping and cracking, and cool air makes both problems worse. Keep the fan at 0% for the entire print, ideally with an enclosure to maintain ambient temperature.</p>
+<p>The only exception is small details or bridges on ABS prints — you can briefly pulse the fan to 15–20%, but shut it off immediately after. Some advanced users enable the fan only above a certain layer height to protect lower layers from warping.</p>
+
+<h3>TPU (Flexible): 0–20% Fan Speed</h3>
+<p>TPU is a flexible filament that extrudes best with minimal cooling. Excessive fan speed can cause the rubbery material to skip in the extruder or produce brittle layers. Keep it at 0–20% unless you are printing fine details or bridges.</p>
+
+<h2>Special Cooling Rules for Tricky Geometries</h2>
+<h3>Bridging: Always Max Out the Fan</h3>
+<p>When your printer spans a gap between two points, the filament has nothing underneath to support it. Cranking the fan to 100% — regardless of filament type — helps the plastic freeze in mid-air before gravity pulls it down. Most slicers have a "bridge fan speed" setting specifically for this.</p>
+<p><strong>Pro tip:</strong> Set your bridge flow to 90–95% of normal flow rate. Slightly less material combined with maximum cooling produces the flattest bridges.</p>
+
+<h3>Overhangs: Gradual Cooling Increase</h3>
+<p>Unlike bridges, overhangs have some support from previous layers. Set the fan to increase progressively as overhang angle steepens. In Cura, this is handled automatically by the "regular fan speed" and "maximum fan speed" settings with the "fan speed at height" option.</p>
+
+<h3>Small Layers and Towers: Slow Down, Not Cool Down</h3>
+<p>When printing thin towers or small features, each layer takes very little time. If a layer completes in under 3 seconds, the previous layer has not cooled enough and the nozzle drags through soft plastic. Instead of increasing cooling, <strong>set a minimum layer time of 6–8 seconds.</strong> The printer will slow down automatically to give each layer time to cool.</p>
+
+<h2>Common Cooling Mistakes to Avoid</h2>
+<ul>
+<li><strong>Never blow air on the heated bed:</strong> If your fan duct is aimed too low, it cools the bed surface and causes first-layer adhesion failures. Realign the duct to point at the nozzle, not the bed.</li>
+<li><strong>Don't forget the first few layers:</strong> Many slicers let you set a different fan speed for the first layer. Disable or reduce cooling for the first 2–3 layers to help the print stick to the bed. Review our <a href="pla-filament-temperature-guide.html">PLA temperature guide</a> for optimal first-layer heat settings.</li>
+<li><strong>Check your actual fan output:</strong> Some printer fans run at lower voltage than advertised. If you set 100% in your slicer but prints still look sloppy, your fan might be underpowered. Consider upgrading to a 5015 blower fan.</li>
+<li><strong>Avoid cooling ABS from below:</strong> Even ambient drafts from an open window or air conditioning can cause ABS to crack. Print in a stable, warm environment or use an enclosure.</li>
+</ul>
+
+<h2>Quick Reference: Optimal Fan Settings</h2>
+<ul>
+<li><strong>PLA:</strong> 100% normal, 50% first layer, 100% bridges</li>
+<li><strong>PETG:</strong> 30% normal, 0% first layer, 80% bridges</li>
+<li><strong>ABS:</strong> 0% normal, 0% first layer, 20% bridges</li>
+<li><strong>TPU:</strong> 10% normal, 0% first layer, 50% bridges</li>
+<li><strong>Nylon:</strong> 0–10% normal, 0% first layer, 30% bridges</li>
+</ul>
+<p>These values are starting points. Fine-tune in 5–10% increments based on your specific printer, nozzle size, and ambient temperature. The difference between a good print and a great print often comes down to getting these numbers right.</p>
+
+<h2>Conclusion</h2>
+<p>Part cooling is not optional — it is one of the most impactful settings in your slicer. PLA wants maximum air, ABS wants none, and PETG sits somewhere in the middle. Pair the right fan speed with proper minimum layer times, and your prints will show immediate improvement in surface finish, detail sharpness, and dimensional accuracy.</p>
+<p>Start with the values in our quick reference table, then adjust based on your results. Within a few test prints, you will find the sweet spot for your specific setup.</p>
+</div>
+<div class="ad-placeholder inline" style="margin: 2rem 0;">📢 Advertisement — Ad Placeholder (Google AdSense)</div>
+<div class="related-articles"><h2>📖 You Might Also Like</h2><ul>
+<li><a href="3d-printing-overhangs-guide.html">How to 3D Print Overhangs Without Supports</a></li>
+<li><a href="3d-printing-bridging-guide.html">3D Printing Bridging: How to Print Over Gaps</a></li>
+<li><a href="pla-filament-temperature-guide.html">PLA Filament Temperature Guide: Bed &amp; Nozzle Settings</a></li>
+<li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+</ul></div>
+</article></div></main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Your trusted guide to getting started with 3D printing.</p></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Project Ideas</a></li><li><a href="../about.html">About Us</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div></div></footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

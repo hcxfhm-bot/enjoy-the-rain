@@ -103,12 +103,20 @@
 - [x] best-3d-printer-for-prototyping — Best 3D Printer for Prototyping & Product Development (2026) ✅ 2026-05-25
 - [x] how-to-fix-clogged-3d-printer-nozzle — How to Fix a Clogged 3D Printer Nozzle (5 Methods) ✅ 2026-05-25
 
+### 批次 15：REVIEW, RESOURCES, TECHNIQUES & MAINTENANCE (6篇) ✅ COMPLETED
+- [x] best-resin-3d-printer-2026 — Best Resin 3D Printers in 2026: Top Picks for Every Budget ✅ 2026-05-25
+- [x] best-3d-printing-websites-for-models — 10 Best Websites for Free 3D Print Models (2026) ✅ 2026-05-25
+- [x] 3d-printing-elephant-foot-fix — How to Fix Elephant Foot on 3D Prints: 7 Proven Solutions ✅ 2026-05-25
+- [x] 3d-print-cooling-fan-settings — 3D Print Cooling Fan Settings: Complete Guide to Better Prints ✅ 2026-05-25
+- [x] best-3d-printer-for-jewelry-making — Best 3D Printer for Jewelry Making in 2026: Resin & Castable Guide ✅ 2026-05-25
+- [x] how-to-clean-3d-printer-nozzle — How to Clean a 3D Printer Nozzle: 5 Methods (Quick & Easy) ✅ 2026-05-25
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 71 篇 ✅
-- **剩余**: 129 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅
+- **已完成**: 77 篇 ✅
+- **剩余**: 123 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅ 批次15✅
 
 ## 生成规则
 
