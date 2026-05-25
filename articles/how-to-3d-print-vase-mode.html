@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to 3D Print in Vase Mode: Settings, Tips & Stunning Results</title>
+  <meta name="description" content="Learn how to 3D print in vase mode for stunning spiral vases and hollow objects. Complete guide with Cura settings, tips, and troubleshooting for perfect results.">
+  <meta name="keywords" content="vase mode 3d printing, spiral vase mode, cura vase mode settings, 3d print vase, continuous spiral printing">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Techniques</span>
+      </nav>
+
+      <h1>How to 3D Print in Vase Mode: Settings, Tips & Stunning Results</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 25, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🏺</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Vase mode 3D printing is one of the most satisfying techniques you can try with your FDM printer. It turns a simple model into a smooth, seamless, spiral-printed object — perfect for vases, cups, lampshades, and decorative pieces. If you've never tried vase mode, you're missing out on one of the easiest ways to create stunning prints with minimal material and zero layer lines.</p>
+
+<p>In this guide, we'll walk through exactly how to set up vase mode in your slicer, the best settings for different filaments, and pro tips to get flawless results every time. Whether you're using <a href="cura-vs-prusaslicer-vs-bambu-studio.html">Cura, PrusaSlicer, or Bambu Studio</a>, the principles are the same.</p>
+
+<h2>What Is Vase Mode (Spiralize Outer Contour)?</h2>
+
+<p>Vase mode — also called "Spiralize Outer Contour" in Cura or "Spiral vase" in PrusaSlicer — is a special slicing mode that prints your model as a single continuous spiral from bottom to top. Instead of laying down layer after layer with discrete Z-height jumps, the nozzle smoothly rises as it traces the perimeter.</p>
+
+<p><strong>The result?</strong> No visible layer lines on the outside wall, because there are no layer start/stop points. The print looks smooth and continuous, almost like it was blown from glass.</p>
+
+<h3>How Vase Mode Differs from Normal Printing</h3>
+
+<ul>
+<li><strong>Single wall only</strong> — the model is printed with just one perimeter, no infill</li>
+<li><strong>Continuous Z movement</strong> — the nozzle rises gradually instead of stepping up layer by layer</li>
+<li><strong>No seams</strong> — because the extrusion never stops, there's no Z-seam</li>
+<li><strong>Hollow interior</strong> — the print is completely hollow inside</li>
+</ul>
+
+<h2>When to Use Vase Mode (and When Not To)</h2>
+
+<p>Vase mode shines for decorative and functional hollow objects:</p>
+
+<ul>
+<li><strong>Vases and planters</strong> — the classic use case</li>
+<li><strong>Lampshades</strong> — thin walls let light through beautifully</li>
+<li><strong>Cups and tumblers</strong> — with food-safe coatings</li>
+<li><strong>Bell-shaped ornaments</strong> — smooth curves look amazing</li>
+</ul>
+
+<p><strong>Don't use vase mode for:</strong> structural parts, anything that needs infill for strength, or models with overhangs greater than 45° (since there are no supports in vase mode). If you need strong functional parts, check our guide on <a href="3d-print-infill-patterns.html">infill patterns</a> instead.</p>
+
+<h2>Vase Mode Settings in Cura (Step-by-Step)</h2>
+
+<p>Cura makes it easy to enable vase mode. Here's how:</p>
+
+<ol>
+<li>Open Cura and load your model</li>
+<li>Go to <strong>Settings → Special Modes</strong></li>
+<li>Enable <strong>"Spiralize Outer Contour"</strong></li>
+<li>Adjust the settings below for best results</li>
+</ol>
+
+<h3>Recommended Cura Vase Mode Settings</h3>
+
+<table>
+<tr><th>Setting</th><th>Recommended Value</th><th>Notes</th></tr>
+<tr><td>Layer Height</td><td>0.15–0.20 mm</td><td>Lower = smoother walls</td></tr>
+<tr><td>Line Width</td><td>0.4–0.8 mm</td><td>Wider = stronger walls</td></tr>
+<tr><td>Bottom Layers</td><td>4–6</td><td>Creates a solid base</td></tr>
+<tr><td>Top Layers</td><td>0</td><td>No top — it's open!</td></tr>
+<tr><td>Infill</td><td>0%</td><td>Not used in vase mode</td></tr>
+<tr><td>Print Speed</td><td>30–50 mm/s</td><td>Slower = cleaner walls</td></tr>
+<tr><td>Flow Rate</td><td>100–110%</td><td>Slight over-extrusion for watertight seams</td></tr>
+</table>
+
+<p><strong>Pro tip:</strong> Increase your line width to 0.6mm or even 0.8mm for a stronger, more watertight vase. This makes the single wall thicker without changing nozzle size. Learn more about this in our <a href="best-3d-printer-settings.html">best 3D printer settings guide</a>.</p>
+
+<h2>Vase Mode Settings in PrusaSlicer & Bambu Studio</h2>
+
+<h3>PrusaSlicer</h3>
+
+<ol>
+<li>Go to <strong>Print Settings → Advanced → Spiral vase</strong></li>
+<li>Check the box to enable</li>
+<li>Set <strong>Perimeters</strong> to 1</li>
+<li>Set <strong>Top solid layers</strong> to 0</li>
+<li>Set <strong>Infill</strong> to 0%</li>
+</ol>
+
+<h3>Bambu Studio</h3>
+
+<ol>
+<li>Open <strong>Quality → Spiral vase</strong></li>
+<li>Enable the toggle</li>
+<li>Adjust wall loops to 1</li>
+<li>Set sparse infill to 0%</li>
+</ol>
+
+<h2>Best Filaments for Vase Mode Printing</h2>
+
+<p>Not all filaments perform equally in vase mode. Since you're printing a single thin wall, material choice matters a lot.</p>
+
+<h3>PLA — The Best Choice for Beginners</h3>
+
+<p><strong>PLA is the top pick</strong> for vase mode. It prints easily, adheres well, and produces smooth, glossy walls. The low warping risk means your vase won't lift off the bed mid-print. Check our <a href="pla-filament-temperature-guide.html">PLA temperature guide</a> for optimal settings.</p>
+
+<h3>PETG — For Functional/Watertight Vases</h3>
+
+<p>PETG is stronger and more heat-resistant than PLA, making it better for vases that will hold water. It's slightly stringier, so reduce retraction distance and slow down for the cleanest spiral.</p>
+
+<h3>TPU — Flexible Vases</h3>
+
+<p>Flexible vases? Yes, it's possible with TPU. Use a direct drive extruder and print very slowly (20–30 mm/s). The result is a squeezable, unbreakable vase. See our <a href="tpu-flexible-filament-beginners.html">TPU beginner guide</a> for more.</p>
+
+<h2>5 Pro Tips for Perfect Vase Mode Prints</h2>
+
+<ol>
+<li><strong>Use a wider line width</strong> — 0.6–0.8mm makes the wall thicker and stronger without any downsides in vase mode</li>
+<li><strong>Over-extrude slightly</strong> — Set flow to 105–110% to ensure the spiral extrusion overlaps enough for a watertight seal</li>
+<li><strong>Choose the right model</strong> — Only models with a single continuous perimeter work. Complex models with internal geometry won't slice correctly</li>
+<li><strong>Slow down</strong> — 30–40 mm/s gives the extruder time to lay down a consistent bead</li>
+<li><strong>Use a bottom layer or two</strong> — 4–6 bottom layers create a solid base so your vase actually stands up</li>
+</ol>
+
+<h2>Troubleshooting Vase Mode Problems</h2>
+
+<h3>Print Doesn't Look Smooth</h3>
+
+<p>If you see ripples or wavy walls, your print speed is too high. Drop it to 30 mm/s and make sure your <a href="3d-printing-retraction-settings.html">retraction settings</a> aren't causing unnecessary stops.</p>
+
+<h3>Vase Leaks Water</h3>
+
+<p>Increase flow rate to 110% and line width to 0.6mm+. You can also coat the inside with epoxy or food-safe sealant for a truly watertight finish.</p>
+
+<h3>Print Shifts or Wobbles</h3>
+
+<p>A tall, single-wall print is top-heavy. Slow down, especially in the upper layers. Make sure your <a href="3d-printer-belt-tension-guide.html">belt tension</a> is properly adjusted.</p>
+
+<h3>Model Slices with Gaps</h3>
+
+<p>This means your model has multiple shells or internal geometry. Vase mode requires a model with exactly one continuous outer wall. Use a simple vase-shaped STL designed for spiral printing.</p>
+
+<h2>Where to Find Vase Mode Models</h2>
+
+<p>Thousands of vase-mode-ready models are available for free. Check out our list of the <a href="best-3d-printing-websites-for-models.html">best websites for free 3D print models</a> — search for "vase mode" or "spiral vase" on Thingiverse, Printables, and Thangs.</p>
+
+<p>Many designers specifically label their models as "vase mode compatible," which takes the guesswork out of whether the STL will slice correctly.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>Vase mode is one of those 3D printing techniques that feels like magic the first time you try it. A single continuous spiral, no visible layer lines, and results that look far more polished than a normal FDM print. Start with PLA, use the settings above, and you'll have a beautiful vase in under two hours.</p>
+
+<p>Once you master the basics, experiment with different shapes, gradient filaments, and transparent materials. The possibilities are genuinely stunning. Happy printing! 🏺</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-3d-print-hollow-objects.html">How to 3D Print Hollow Objects: Settings & Tips</a></li>
+          <li><a href="cura-vs-prusaslicer-vs-bambu-studio.html">Cura vs PrusaSlicer vs Bambu Studio: Which Slicer Is Best?</a></li>
+          <li><a href="3d-printing-speed-vs-quality.html">3D Printing Speed vs Quality: Finding the Sweet Spot</a></li>
+          <li><a href="pla-filament-temperature-guide.html">PLA Filament Temperature Guide: Bed & Nozzle Settings</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

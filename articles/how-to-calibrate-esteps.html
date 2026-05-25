@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Calibrate E-Steps on Your 3D Printer (Step-by-Step)</title>
+  <meta name="description" content="Calibrating your extruder steps (E-steps) is the single most impactful adjustment you can make for consistent, accurate 3D prints. Complete step-by-step guide.">
+  <meta name="keywords" content="calibrate e-steps, extruder calibration, e-step calibration 3d printer, flow rate calibration, 3d printer extruder steps">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Calibration</span>
+      </nav>
+
+      <h1>How to Calibrate E-Steps on Your 3D Printer (Step-by-Step)</h1>
+
+      <div class="article-meta">
+        <span>📅 May 25, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <div class="article-body">
+        <p>If your 3D prints are consistently underextruded — leaving gaps, weak top layers, or missing walls — then your extruder steps are almost certainly off. <strong>E-step calibration</strong> is the single most important adjustment you can make for consistent, high-quality prints, and it takes less than 15 minutes.</p>
+
+<p>The good news? You don't need any special tools. Just a ruler, a marker, and a few terminal commands. Once you've calibrated your E-steps, every single print you make will benefit — better dimensional accuracy, stronger parts, and fewer print failures overall.</p>
+
+<h2>What Are E-Steps?</h2>
+
+<p>E-steps (extruder steps) define how many motor steps the extruder needs to push exactly 1mm of filament through your hotend. Your printer's firmware ships with a default E-step value, but these are rarely accurate for your specific setup.</p>
+
+<p><strong>Why does it matter?</strong> If your E-steps are set too low, you'll get under-extrusion — gaps in walls, stringy top layers, and fragile prints. Too high, and you get over-extrusion — blobs, oozing, and layer adhesion problems.</p>
+
+<p>The factory E-step value assumes a certain gear ratio, hobbed bolt sharpness, and filament diameter. Your actual setup differs. That's why calibration is essential — especially after installing a new extruder, changing gears, or switching to a different filament brand.</p>
+
+<h2>Before You Start — What You Need</h2>
+
+<ul>
+<li>A ruler or caliper (caliper preferred)</li>
+<li>A marker or piece of tape</li>
+<li>Access to your printer's terminal (via OctoPrint, Pronterface, or LCD menu)</li>
+<li>Your slicer's input shaft diameter setting (usually 1.75mm for most printers)</li>
+</ul>
+
+<h2>Step 1: Mark Your Filament</h2>
+
+<p>The classic marker method is quick and accurate enough for most setups:</p>
+
+<ol>
+<li>Heat your hotend to your filament's printing temperature (e.g., 200°C for PLA)</li>
+<li>Feed filament through until it extrudes cleanly</li>
+<li><strong>Wait for the extruder motor to stop</strong></li>
+<li>Mark the filament at the entrance to your extruder housing with a piece of tape or a marker line</li>
+<li>Mark a second line exactly <strong>120mm further</strong> down the filament</li>
+</ol>
+
+<p>Write the measurement clearly — 120mm is the standard test length because it multiplies small errors, making them easier to measure accurately.</p>
+
+<h2>Step 2: Send the E-Step Test Command</h2>
+
+<p>Now you'll tell your printer to extrude exactly 100mm of filament. How you do this depends on your setup:</p>
+
+<h3>Via OctoPrint or Pronterface (Terminal)</h3>
+
+<p>Connect to your printer and send this G-code command:</p>
+
+<pre><code>G91          ; Set relative positioning
+G1 E100 F100 ; Extrude 100mm at 100mm/min</code></pre>
+
+<p>Wait for the extrusion to finish completely before measuring.</p>
+
+<h3>Via LCD Menu</h3>
+
+<p>On many printers (Ender 3, Prusa, etc.), you can find this in:</p>
+
+<p><strong>Prepare → Move Axis → Extruder → Extrude 100mm</strong></p>
+
+<h3>Via Pronterface (Printrun)</h3>
+
+<p>Download Pronterface, connect your printer, and use the Extrude button — enter 100mm and press it once.</p>
+
+<h2>Step 3: Measure the Actual Extrusion</h2>
+
+<p>Once the extruder has finished moving, measure the distance between your two marks.</p>
+
+<p>Ideally, the second mark should be exactly at the extruder entrance — meaning 120mm - 100mm = 20mm from where you started.</p>
+
+<p><strong>Record your measurement:</strong></p>
+
+<ul>
+<li>If 20mm of filament remains between your marks → E-steps are already correct!</li>
+<li>If more than 20mm remains → <strong>under-extrusion</strong> — your E-steps need to increase</li>
+<li>If less than 20mm remains → <strong>over-extrusion</strong> — your E-steps need to decrease</li>
+</ul>
+
+<h2>Step 4: Calculate Your New E-Step Value</h2>
+
+<p>Use this formula:</p>
+
+<pre><code>New E-steps = (Actual length / 100mm) × Current E-steps</code></pre>
+
+<p><strong>Example:</strong></p>
+
+<ul>
+<li>Current E-steps: 93 (Ender 3 default)</li>
+<li>You extruded 100mm but only 88mm came through (12mm between marks instead of 20mm)</li>
+<li>New E-steps = (100 / 88) × 93 = <strong>105.7</strong></li>
+</ul>
+
+<p><strong>Another example:</strong></p>
+
+<ul>
+<li>Current E-steps: 93</li>
+<li>You extruded 100mm and 23mm came through (meaning too much was extruded)</li>
+<li>New E-steps = (100 / 103) × 93 = <strong>90.3</strong></li>
+</ul>
+
+<h2>Step 5: Update Your E-Steps</h2>
+
+<p>Once you have your new value, update your firmware. Choose the method that matches your printer:</p>
+
+<h3>Via G-Code (Temporary — resets on power off)</h3>
+
+<pre><code>M92 E105.7   ; Set new E-steps (replace with your value)
+M500         ; Save to EEPROM</code></pre>
+
+<h3>Via LCD Menu</h3>
+
+<p><strong>Control → Motion → Esteps</strong> → adjust the value → <strong>Store Settings</strong></p>
+
+<h3>Via Marlin Firmware Configuration (Permanent)</h3>
+
+<p>Edit your Marlin Configuration.h file:</p>
+
+<pre><code>#define DEFAULT_AXIS_STEPS_PER_UNIT { 80, 80, 400, <strong>105.7</strong> }</code></pre>
+
+<p>Then recompile and flash your firmware. For guidance on updating firmware, see our <a href="3d-printer-firmware-update-guide.html">firmware update guide</a>.</p>
+
+<h2>Step 6: Verify Your Calibration</h2>
+
+<p>Repeat the mark-and-extrude test with your new E-steps. You should now measure exactly 20mm remaining between your marks (assuming 120mm start and 100mm extrusion).</p>
+
+<p>If it's within 1mm, you're good. For perfect accuracy, repeat once more.</p>
+
+<h2>E-Steps vs Flow Rate — What's the Difference?</h2>
+
+<p>Many beginners confuse E-steps with flow rate. Here's the key difference:</p>
+
+<table>
+<tr><th></th><th>E-Steps</th><th>Flow Rate</th></tr>
+<tr><td>What it controls</td><td>How much filament the extruder physically pushes</td><td>How much filament the slicer asks for</td></tr>
+<tr><td>When to adjust</td><td>Once (hardware calibration)</td><td>Per-material (different filaments)</td></tr>
+<tr><td>Set via</td><td>Firmware / E-step command</td><td>Slicer setting (%)</td></tr>
+<tr><td>Example cause</td><td>Gear ratio change, new extruder</td><td>Filament diameter variance</td></tr>
+</table>
+
+<p>Calibrate E-steps first. Then adjust flow rate in your slicer for each new filament type. This is covered in detail in our <a href="best-3d-printer-settings.html">best 3D printer settings guide</a>.</p>
+
+<h2>When to Recalibrate E-Steps</h2>
+
+<p>You should recalibrate E-steps when:</p>
+
+<ul>
+<li>You install a new extruder (Bowden or direct drive)</li>
+<li>You change your hobbed gear or extruder assembly</li>
+<li>You switch from PLA to a significantly different filament (e.g., to TPU or PETG)</li>
+<li>Your prints suddenly start showing consistent under/over-extrusion</li>
+<li>You upgrade to a different size nozzle (e.g., 0.6mm vs 0.4mm)</li>
+</ul>
+
+<h2>Troubleshooting Common E-Step Issues</h2>
+
+<h3>Under-Extrusion Despite Correct E-Steps</h3>
+
+<p>If your E-steps are correct but you're still seeing gaps, the issue is likely:</p>
+
+<ul>
+<li><strong>Clogged nozzle</strong> — heat your hotend and do a cold pull. See our <a href="how-to-fix-clogged-3d-printer-nozzle.html">clogged nozzle guide</a></li>
+<li><strong>Filament slipping</strong> — check your extruder tension, tighten the gear screw</li>
+<li><strong>Insufficient retraction</strong> — see our <a href="3d-printing-retraction-settings.html">retraction settings guide</a></li>
+</ul>
+
+<h3>E-Steps Value Is Way Off (e.g., 200+)</h3>
+
+<p>This usually means you've got a dual-extruder E-step setting (which uses a different gear ratio). Make sure you're using the correct E-step value for extruder 1, not extruder 2.</p>
+
+<h3>Can't Extrude at All</h3>
+
+<p>If your extruder isn't moving filament at all, check for:</p>
+
+<ul>
+<li>Loose motor connector</li>
+<li>Filament jammed in the hotend</li>
+<li>Extruder gear not engaging (too loose tension)</li>
+</ul>
+
+<h2>The Full Calibration Workflow</h2>
+
+<p>E-step calibration is the foundation, but for truly great prints you'll want to run through the full calibration process:</p>
+
+<ol>
+<li><strong>E-steps</strong> — extruder accuracy (this guide)</li>
+<li><strong>Bed leveling</strong> — first layer adhesion (see <a href="best-3d-printer-bed-leveling-methods.html">bed leveling methods</a>)</li>
+<li><strong>Temperature tower</strong> — optimal nozzle temp for your filament</li>
+<li><strong>Retraction settings</strong> — minimize stringing (see <a href="3d-printing-retraction-settings.html">retraction guide</a>)</li>
+<li><strong>Flow rate</strong> — fine-tune extrusion amount per material</li>
+</ol>
+
+<p>For a complete step-by-step walkthrough, read our article on <a href="how-to-calibrate-3d-printer.html">how to calibrate your 3D printer</a>.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>E-step calibration is the foundation of every great 3D print. It's a 15-minute investment that pays dividends on every single print you'll ever make. Once your E-steps are dialed in, your slicer settings become meaningful — because the printer is actually extruding what the slicer tells it to.</p>
+
+<p>Don't skip this step. And if you're running a Bowden setup, recalibrate whenever you change tubes or reroute your filament path. Your prints will thank you. 🔧</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer: A Step-by-Step Guide</a></li>
+          <li><a href="best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+          <li><a href="3d-printing-retraction-settings.html">3D Printing Retraction Settings: How to Eliminate Stringing</a></li>
+          <li><a href="under-extrusion-causes-and-fixes.html">Under-Extrusion: Causes and Fixes for Beginners</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
