@@ -111,12 +111,20 @@
 - [x] best-3d-printer-for-jewelry-making — Best 3D Printer for Jewelry Making in 2026: Resin & Castable Guide ✅ 2026-05-25
 - [x] how-to-clean-3d-printer-nozzle — How to Clean a 3D Printer Nozzle: 5 Methods (Quick & Easy) ✅ 2026-05-25
 
+### 批次 16：TECHNIQUES, FILAMENT & MAINTENANCE (6篇) ✅ COMPLETED
+- [x] how-to-3d-print-vase-mode — How to 3D Print in Vase Mode: Settings, Tips & Stunning Results ✅ 2026-05-25
+- [x] asa-filament-guide — ASA Filament Guide: The Weather-Resistant Alternative to ABS ✅ 2026-05-25
+- [x] how-to-calibrate-esteps — How to Calibrate E-Steps on Your 3D Printer (Step-by-Step) ✅ 2026-05-25
+- [x] 3d-printer-belt-tension-guide — 3D Printer Belt Tension: How to Check, Adjust & When to Replace ✅ 2026-05-25
+- [x] best-3d-printer-for-large-prints — Best 3D Printer for Large Prints in 2026 (300mm+ Build Volume) ✅ 2026-05-25
+- [x] how-to-3d-print-food-safe — Is 3D Printing Food Safe? What You Need to Know Before Printing Kitchen Items ✅ 2026-05-25
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 77 篇 ✅
-- **剩余**: 123 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅ 批次15✅
+- **已完成**: 83 篇 ✅
+- **剩余**: 117 篇
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅ 批次15✅ 批次16✅
 
 ## 生成规则
 
