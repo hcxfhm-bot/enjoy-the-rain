@@ -119,6 +119,14 @@
 - [x] best-3d-printer-for-large-prints — Best 3D Printer for Large Prints in 2026 (300mm+ Build Volume) ✅ 2026-05-25
 - [x] how-to-3d-print-food-safe — Is 3D Printing Food Safe? What You Need to Know Before Printing Kitchen Items ✅ 2026-05-25
 
+### 批次 17：RESIN PRINTING & POST-PROCESSING (6篇)
+- [x] best-resin-3d-printer-beginners — Best Resin 3D Printers for Beginners in 2026 ✅ 2026-05-26
+- [x] how-to-wash-cure-resin-prints — How to Wash and Cure Resin Prints: Complete Guide ✅ 2026-05-26
+- [x] resin-printing-safety-guide — Resin Printing Safety: PPE, Ventilation & Handling Guide ✅ 2026-05-26
+- [x] uv-resin-vs-lcd-3d-printers — UV Resin vs LCD 3D Printers: What's the Difference? ✅ 2026-05-26
+- [x] common-resin-print-failures — Common Resin Print Failures and How to Fix Them ✅ 2026-05-26
+- [x] 3d-printing-with-flexible-resin — Flexible Resin 3D Printing: Applications and Settings Guide ✅ 2026-05-26
+
 ## 进度
 
 - **总目标**: 200 篇

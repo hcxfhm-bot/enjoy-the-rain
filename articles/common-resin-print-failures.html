@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Resin Print Failures and How to Fix Them</title>
+  <meta name="description" content="Troubleshoot common resin 3D print failures including adhesion issues, layer delamination, and failed supports. Complete guide with proven solutions for beginners.">
+  <meta name="keywords" content="resin print failures, troubleshooting, adhesion issues, layer delamination, failed supports, 3D printing problems">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Troubleshooting</span>
+      </nav>
+
+      <h1>Common Resin Print Failures and How to Fix Them</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 26, 2026</span>
+        <span>⏱️ 10 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Resin 3D printing rewards patience and attention to detail, but when things go wrong, they can go very wrong. A failed print wastes resin, time, and can be frustrating for beginners.</p>
+
+        <p>The good news? Most resin print failures follow predictable patterns and have straightforward solutions. This guide covers the most common issues you'll encounter and how to fix them.</p>
+
+        <h2>Understanding Resin Print Failures</h2>
+
+        <p>Before diving into specific problems, it helps to understand the three main categories of failure:</p>
+
+        <ul>
+          <li><strong>Adhesion failures:</strong> The print doesn't stick to the build plate or supports</li>
+          <li><strong>Structural failures:</strong> The print separates, warps, or collapses during printing</li>
+          <li><strong>Quality failures:</strong> The print adheres but has surface or detail problems</li>
+        </ul>
+
+        <p>Each failure type has different causes and solutions, so let's tackle them one by one.</p>
+
+        <h2>1. Print Not Adhering to Build Plate</h2>
+
+        <p>This is the most common failure, especially for beginners. Your print fails to stick and often detaches partway through, potentially damaging your FEP film.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Incorrect Bottom Exposure Time</h4>
+        <p><strong>Problem:</strong> The initial layers don't get enough UV exposure to bond properly.</p>
+        <p><strong>Solution:</strong> Increase bottom exposure time in your slicer. Start with 30-60 seconds for standard resin and adjust based on results. If prints are still not adhering, increase in 10-second increments.</p>
+
+        <h4>Build Plate Not Level</h4>
+        <p><strong>Problem:</strong> Uneven first layer means parts of the model aren't making proper contact.</p>
+        <p><strong>Solution:</strong> Re-level your build plate. Most printers have automated or semi-automated leveling processes—use them. If manual, follow your manufacturer's guide precisely.</p>
+
+        <h4>Contaminated FEP Film</h4>
+        <p><strong>Problem:</strong> Old resin or debris on the FEP film prevents clean release.</p>
+        <p><strong>Solution:</strong> Clean the FEP film with isopropyl alcohol and a soft cloth. Replace if scratched or heavily clouded.</p>
+
+        <h4>Wrong Bottom Layer Count</h4>
+        <p><strong>Problem:</strong> Not enough bottom layers to establish good adhesion.</p>
+        <p><strong>Solution:</strong> Increase bottom layer count to 4-6 layers for most prints.</p>
+
+        <h2>2. Supports Not Adhering to Model</h2>
+
+        <p>Your print sticks to the build plate, but the model separates from the supports, leaving you with a ghostly hollow shell.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Insufficient Support Contact Points</h4>
+        <p><strong>Problem:</strong> Supports don't have enough surface area touching the model.</p>
+        <p><strong>Solution:</strong> Use auto-generation tools with appropriate density settings. For detailed prints, add manual supports to critical areas. Ensure supports have contact points of at least 2-3mm diameter.</p>
+
+        <h4>Support Tip Too Small</h4>
+        <p><strong>Problem:</strong> Point supports sink into the model during printing.</p>
+        <p><strong>Solution:</strong> Use heavier support tips (0.8-1.0mm) especially for flexible or tough resins. Consider switching to "sacrificial" bases that get removed during cleanup.</p>
+
+        <h4>Incorrect Support Exposure</h4>
+        <p><strong>Problem:</strong> Support tips cure before touching the model, preventing fusion.</p>
+        <p><strong>Solution:</strong> Enable "separate support exposure" in your slicer and set support tip exposure to 0 (no pre-cure) or use washable supports designed for this purpose.</p>
+
+        <h2>3. Layer Delamination</h2>
+
+        <p>Your print looks fine during printing, but later you notice layers separating—like a half-melted sandwich.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Low Cure Power (Underexposure)</h4>
+        <p><strong>Problem:</strong> Each layer doesn't fully cure, creating a weak bond with the next.</p>
+        <p><strong>Solution:</strong> Increase normal exposure time by 2-4 seconds. Print an exposure test cube to find optimal settings for your specific resin and printer.</p>
+
+        <h4>Releasing Force Too Strong</h4>
+        <p><strong>Problem:</strong> The peeling force during the build plate's upward movement separates weakly-cured layers.</p>
+        <p><strong>Solution:</strong> Use a slower lift speed for the first few layers, or switch to a flexible FEP film system if your printer supports it.</p>
+
+        <h4>Temperature Issues</h4>
+        <p><strong>Problem:</strong> Printing in a cold environment prevents proper curing.</p>
+        <p><strong>Solution:</strong> Maintain room temperature between 68-77°F (20-25°C). Colder environments slow or prevent complete curing.</p>
+
+        <h2>4. Elephant Foot</h2>
+
+        <p>The bottom of your print flares outward, creating a rounded, elephant-like foot. This is common on resin prints and especially noticeable on models that need to fit together.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Bottom Layers Overexposed</h4>
+        <p><strong>Problem:</strong> Too much UV exposure on bottom layers causes them to swell slightly before curing.</p>
+        <p><strong>Solution:</strong> Reduce bottom exposure time. If your slicer supports it, use a dedicated "bottom" exposure that's slightly lower than standard.</p>
+
+        <h4>Insufficient Bottom Layer Lift Height</h4>
+        <p><strong>Problem:</strong> The build plate doesn't lift high enough before the peel, squishing the first layers.</p>
+        <p><strong>Solution:</strong> Increase bottom layer lift height slightly. The build plate should lift 6-8mm minimum to allow proper release.</p>
+
+        <h4>Post-Processing: Sand the Foot</h4>
+        <p><strong>Quick Fix:</strong> For tolerance-critical prints, sand the foot carefully after curing. Start with 400 grit and work up to 800 grit.</p>
+
+        <h2>5. Incomplete Details</h2>
+
+        <p>Fine details, sharp edges, or small text don't print properly—they're either missing or melted-looking.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Underexposure</h4>
+        <p><strong>Problem:</strong> Not enough UV to fully cure fine details.</p>
+        <p><strong>Solution:</strong> Increase exposure time. Fine details need slightly more exposure than standard layers to ensure complete curing of small cross-sections.</p>
+
+        <h4>Resolution Mismatch</h4>
+        <p><strong>Problem:</strong> Details are smaller than your printer's pixel size.</p>
+        <p><strong>Solution:</strong> Check your slicer's "minimum detail size" setting and ensure your model details are above this threshold. For extremely fine details, consider a higher-resolution printer.</p>
+
+        <h4>Poor Support Placement</h4>
+        <p><strong>Problem:</strong> Fine details break during separation because they lack support.</p>
+        <p><strong>Solution:</strong> Add manual supports specifically for delicate areas. Position supports to hold thin sections without obscuring the detail itself.</p>
+
+        <h2>6. Surface Scarring and Lines</h2>
+
+        <p>Your prints have visible lines, scars, or inconsistent surfaces that shouldn't be there.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Dirty or Scratched FEP Film</h4>
+        <p><strong>Problem:</strong> Debris or scratches on the FEP cause blemishes in every print.</p>
+        <p><strong>Solution:</strong> Inspect your FEP film under good lighting. Clean with IPA or replace if damaged.</p>
+
+        <h4>Resin Flow Issues</h4>
+        <p><strong>Problem:</strong> Resin doesn't flow properly to fill gaps between layers.</p>
+        <p><strong>Solution:</strong> Increase bottom lift and retract speeds slightly. Ensure your vat isn't nearly empty—low resin levels can cause incomplete fills.</p>
+
+        <h4>Contaminated Resin</h4>
+        <p><strong>Problem:</strong> Old resin or resin mixed with debris from failed prints.</p>
+        <p><strong>Solution:</strong> Strain your resin through a fine mesh filter before use. Replace resin that shows signs of degradation (thickening, color change, poor curing).</p>
+
+        <h2>7. Resin Puddling and Incomplete Release</h2>
+
+        <p>Resin collects in certain areas and doesn't fully release from the FEP, causing deformation or failed prints.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>High Viscosity Resin</h4>
+        <p><strong>Problem:</strong> Thick resin doesn't flow fast enough during printing.</p>
+        <p><strong>Solution:</strong> Warm the resin slightly (not above 35°C/95°F) to reduce viscosity. Alternatively, switch to a resin formulated for easier flow.</p>
+
+        <h4>Insufficient Release Film Lubrication</h4>
+        <p><strong>Problem:</strong> The FEP film becomes sticky with repeated use.</p>
+        <p><strong>Solution:</strong> Apply a thin layer of FEP release spray or silicone oil between prints. Some users swear by a thin application of petroleum jelly.</p>
+
+        <h2>8. Supports Fused to Model</h2>
+
+        <p>You can't remove supports without taking chunks out of your print.</p>
+
+        <h3>Causes and Solutions</h3>
+
+        <h4>Overexposed Supports</h4>
+        <p><strong>Problem:</strong> Supports cure so hard they bond permanently to the model.</p>
+        <p><strong>Solution:</strong> Reduce support tip exposure time. In Chitubox and Lychee, look for "light off delay" or "gradient settings" for supports.</p>
+
+        <h4>Supports in Inaccessible Areas</h4>
+        <p><strong>Problem:</strong> You can't reach supports to remove them without damaging the print.</p>
+        <p><strong>Solution:</strong> Reorient your model in the slicer to place supports in accessible areas. Consider a rotatable hinge system if your printer supports one.</p>
+
+        <h2>General Troubleshooting Tips</h2>
+
+        <h3>Keep a Print Log</h3>
+        <p>Record your settings for every print—resin type, exposure times, temperature, and orientation. When something works, you'll know why.</p>
+
+        <h3>Test Regularly</h3>
+        <p>Print an exposure test chart monthly to verify your settings haven't drifted. Resin ages, LCDs degrade, and temperatures change—all affecting optimal settings.</p>
+
+        <h3>Work Clean</h3>
+        <p>Most failures trace back to contamination: dirty FEP, old resin, temperature fluctuations. A clean workspace prevents most problems.</p>
+
+        <h2>Quick Reference: Common Failures and Fixes</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Failure</th>
+              <th>Most Likely Cause</th>
+              <th>First Solution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Print won't stick</td>
+              <td>Low bottom exposure</td>
+              <td>Increase bottom exposure +15 sec</td>
+            </tr>
+            <tr>
+              <td>Model separates from supports</td>
+              <td>Weak support bonds</td>
+              <td>Increase support tip size</td>
+            </tr>
+            <tr>
+              <td>Layers delaminating</td>
+              <td>Underexposure</td>
+              <td>Increase normal exposure +2 sec</td>
+            </tr>
+            <tr>
+              <td>Elephant foot</td>
+              <td>Bottom overexposure</td>
+              <td>Reduce bottom exposure -5 sec</td>
+            </tr>
+            <tr>
+              <td>Fine details missing</td>
+              <td>Insufficient exposure</td>
+              <td>Increase exposure for fine details</td>
+            </tr>
+            <tr>
+              <td>Surface scarring</td>
+              <td>Dirty FEP film</td>
+              <td>Clean or replace FEP</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Conclusion</h2>
+
+        <p>Resin printing failures are frustrating but usually solvable. Keep detailed notes, test regularly, and don't be afraid to experiment with settings. Each printer and resin combination is slightly different.</p>
+
+        <p>For more troubleshooting guides, check out our <a href="../troubleshooting.html">main troubleshooting section</a>, or if you're just getting started, our <a href="best-resin-3d-printer-beginners.html">beginner's guide</a> will help you set up for success.</p>
+
+        <p>What failures have you encountered? Drop your questions in the comments below!</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-wash-cure-resin-prints.html">How to Wash and Cure Resin Prints</a></li>
+          <li><a href="resin-printing-safety-guide.html">Resin Printing Safety Guide</a></li>
+          <li><a href="best-resin-3d-printer-beginners.html">Best Resin 3D Printers for Beginners</a></li>
+          <li><a href="3d-printing-failure-types-guide.html">7 Common 3D Printing Failures and How to Fix Them</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

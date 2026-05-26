@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexible Resin 3D Printing: Applications and Settings Guide</title>
+  <meta name="description" content="Learn about flexible resin 3D printing: best applications, printer settings, and tips for working with TPU-like materials. Complete guide for functional and prototype prints.">
+  <meta name="keywords" content="flexible resin, TPU resin, flexible 3D printing, rubber-like prints, elastic resin settings">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Materials</span>
+      </nav>
+
+      <h1>Flexible Resin 3D Printing: Applications and Settings Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 26, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔄</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>When most people think of resin 3D printing, they imagine rigid, hard parts. But flexible resin opens up an entirely different world—parts that bend, compress, and return to shape just like rubber or TPU.</p>
+
+        <p>From custom gaskets to wearable props, flexible resin gives you capabilities that standard resin simply can't match. In this guide, we'll explore how to print with flexible resins and discover their best applications.</p>
+
+        <h2>What is Flexible Resin?</h2>
+
+        <p>Flexible resin (sometimes called elastic or rubber-like resin) is a photopolymer that cures to a Shore hardness of approximately 60A-85A, giving it rubber-like properties. Unlike FDM's TPU filament, flexible resin cures solid but retains弹性 (elasticity) after UV exposure.</p>
+
+        <h3>Key Properties</h3>
+
+        <ul>
+          <li><strong>Durometer:</strong> 60A to 85A hardness range (varies by brand)</li>
+          <li><strong>Flexibility:</strong> Can bend significantly without cracking</li>
+          <li><strong>Memory:</strong> Returns to original shape after deformation</li>
+          <li><strong>Impact Resistance:</strong> Absorbs shock better than rigid resins</li>
+          <li><strong>Surface Finish:</strong> Smooth like standard resin</li>
+        </ul>
+
+        <h3>How It Differs from Standard Resin</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Standard Resin</th>
+              <th>Flexible Resin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hardness</td>
+              <td>~80D (rigid)</td>
+              <td>~60-85A (rubbery)</td>
+            </tr>
+            <tr>
+              <td>Flexibility</td>
+              <td>None</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Print Difficulty</td>
+              <td>Moderate</td>
+              <td>Higher</td>
+            </tr>
+            <tr>
+              <td>Post-Processing</td>
+              <td>Standard</td>
+              <td>Special care needed</td>
+            </tr>
+            <tr>
+              <td>Typical Uses</td>
+              <td>Miniatures, models</td>
+              <td>Functional parts, wearables</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Best Applications for Flexible Resin</h2>
+
+        <p>Flexible resin excels in specific applications where rigid materials fail:</p>
+
+        <h3>1. Seals and Gaskets</h3>
+
+        <p>Create custom O-rings, gaskets, and seals that need to compress and seal against surfaces. Perfect for custom waterproof enclosures or replacing broken seals.</p>
+
+        <h3>2. Wearables and Cosplay</h3>
+
+        <p>Flexible resin is ideal for:</p>
+        <ul>
+          <li>Comfortable armor padding</li>
+          <li>Mask seals and edges</li>
+          <li>Flexible props and costume pieces</li>
+          <li>Watch bands and straps</li>
+        </ul>
+
+        <h3>3. Phone Cases and Protective Covers</h3>
+
+        <p>Design custom protective cases with built-in flexibility. The material absorbs impact better than hard plastics and provides a premium feel.</p>
+
+        <h3>4. Hinges and Living Joints</h3>
+
+        <p>Print flexible living hinges that bend repeatedly without breaking. Great for box lids, containers, and mechanical prototypes.</p>
+
+        <h3>5. Medical and Dental Applications</h3>
+
+        <p>Some flexible resins are biocompatible, making them suitable for:</p>
+        <ul>
+          <li>Custom dental guards</li>
+          <li>Hearing aid components</li>
+          <li>Medical device prototypes</li>
+        </ul>
+
+        <h3>6. Vibration Dampening</h3>
+
+        <p>Use as washers, bumpers, or vibration dampeners in mechanical assemblies where rigid parts would transfer noise or damage.</p>
+
+        <h2>Printer Settings for Flexible Resin</h2>
+
+        <p>Flexible resin requires different settings than standard resin. Here's what to adjust:</p>
+
+        <h3>Exposure Settings</h3>
+
+        <h4>Bottom Exposure</h4>
+        <ul>
+          <li><strong>Time:</strong> 40-60 seconds (longer than standard resin)</li>
+          <li><strong>Layers:</strong> 5-8 layers for good adhesion</li>
+        </ul>
+
+        <h4>Normal Layer Exposure</h4>
+        <ul>
+          <li><strong>Time:</strong> 8-12 seconds (varies significantly by brand)</li>
+          <li><strong>Layer Height:</strong> 0.05mm recommended</li>
+        </ul>
+
+        <p><strong>Important:</strong> Flexible resin is extremely sensitive to overexposure. Start with the manufacturer's recommended settings and reduce exposure time if prints are brittle.</p>
+
+        <h3>Print Speed Settings</h3>
+
+        <ul>
+          <li><strong>Lift Speed:</strong> Slow (40-50mm/min for lift, 80-100mm/min for retract)</li>
+          <li><strong>Light-off Delay:</strong> 1-2 seconds to allow resin to settle</li>
+        </ul>
+
+        <p>Fast lift speeds can cause delamination in flexible resin because the cured material stretches before releasing from the FEP film.</p>
+
+        <h3>Temperature Considerations</h3>
+
+        <p>Flexible resin performs best in controlled temperatures:</p>
+        <ul>
+          <li><strong>Optimal:</strong> 73-77°F (23-25°C)</li>
+          <li><strong>Too cold:</strong> Resin becomes thick and won't flow properly</li>
+          <li><strong>Too warm:</strong> Can cause overexposure during printing</li>
+        </ul>
+
+        <h3>Settings Quick Reference</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Standard Value</th>
+              <th>Flexible Resin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bottom Exposure</td>
+              <td>30-40 sec</td>
+              <td>40-60 sec</td>
+            </tr>
+            <tr>
+              <td>Normal Exposure</td>
+              <td>2.5-3 sec</td>
+              <td>8-12 sec</td>
+            </tr>
+            <tr>
+              <td>Bottom Layers</td>
+              <td>4-5</td>
+              <td>5-8</td>
+            </tr>
+            <tr>
+              <td>Lift Speed</td>
+              <td>100mm/min</td>
+              <td>40-50mm/min</td>
+            </tr>
+            <tr>
+              <td>Retract Speed</td>
+              <td>150mm/min</td>
+              <td>80-100mm/min</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Working with Flexible Resin: Tips and Tricks</h2>
+
+        <h3>Pre-Print Preparation</h3>
+
+        <ol>
+          <li><strong>Warm the resin:</strong> Let the bottle sit in warm water for 10-15 minutes before printing to reduce viscosity</li>
+          <li><strong>Stir thoroughly:</strong> Flexible resins separate more than standard resins—stir for 2-3 minutes</li>
+          <li><strong>Filter the resin:</strong> Strain through a fine mesh filter to catch any cured bits</li>
+        </ol>
+
+        <h3>Orientation Matters More</h3>
+
+        <p>Flexible parts can behave differently depending on how they're oriented:</p>
+        <ul>
+          <li><strong>Thin walls:</strong> Orient perpendicular to the build plate for maximum strength</li>
+          <li><strong>Living hinges:</strong> Print flat on the build plate for best flexibility</li>
+          <li><strong>Functional parts:</strong> Consider load direction when choosing orientation</li>
+        </ul>
+
+        <h3>Support Strategy</h3>
+
+        <p>Flexible resin requires careful support placement:</p>
+        <ul>
+          <li>Use <strong>heavier support tips</strong> (1.0mm or larger)</li>
+          <li>Place supports <strong>closer together</strong> than with standard resin</li>
+          <li>Avoid supports in areas that need to remain flexible</li>
+          <li>Consider <strong>tip burn-off</strong> for smooth surfaces</li>
+        </ul>
+
+        <h3>Post-Processing Caution</h3>
+
+        <p>Flexible parts require special care during washing and curing:</p>
+
+        <ul>
+          <li><strong>Washing:</strong> Use IPA or dedicated wash station, but limit to 2-3 minutes maximum—longer exposure can cause swelling</li>
+          <li><strong>Curing:</strong> Cure in 30-second intervals, checking flexibility after each. Overcuring makes flexible resin brittle</li>
+          <li><strong>Turn frequently:</strong> Rotate parts during curing for even exposure</li>
+        </ul>
+
+        <h2>Troubleshooting Flexible Resin</h2>
+
+        <h3>Parts are Brittle</h3>
+        <p><strong>Cause:</strong> Overexposure or overcuring</p>
+        <p><strong>Solution:</strong> Reduce exposure time by 1-2 seconds. Shorten curing time. Ensure resin hasn't expired.</p>
+
+        <h3>Parts are Sticky After Curing</h3>
+        <p><strong>Cause:</strong> Underexposure or insufficient curing</p>
+        <p><strong>Solution:</strong> Increase exposure time. Extend UV curing time in 30-second increments.</p>
+
+        <h3>Print Fails to Separate from FEP</h3>
+        <p><strong>Cause:</strong> Slow lift speeds or FEP contamination</p>
+        <p><strong>Solution:</strong> Ensure slow lift speeds. Apply release film or silicone oil to FEP. Check FEP for scratches.</p>
+
+        <h3>Warping During Printing</h3>
+        <p><strong>Cause:</strong> Insufficient bottom adhesion or temperature fluctuation</p>
+        <p><strong>Solution:</strong> Increase bottom exposure and layer count. Maintain consistent room temperature. Add more supports.</p>
+
+        <h2>Popular Flexible Resin Brands</h2>
+
+        <ul>
+          <li><strong>Formlabs Flexible 80A:</strong> Professional grade, excellent properties</li>
+          <li><strong>Siraya Tech Blu:</strong> Good balance of flexibility and ease of printing</li>
+          <li><strong>Phrozen TR300:</strong> Budget-friendly option with decent flexibility</li>
+          <li><strong>Anycubic Flexible:</strong> Good for beginners to flexible printing</li>
+          <li><strong>Elegoo Flexible:</strong> Affordable, prints well on most machines</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>Flexible resin expands your resin printing capabilities beyond miniatures and rigid models. With the right settings and techniques, you can create functional parts, wearables, and prototypes that would be impossible with standard resin.</p>
+
+        <p>Key takeaways:</p>
+        <ul>
+          <li>Start with conservative exposure settings—flexible resin overexposes easily</li>
+          <li>Use slow lift speeds to prevent delamination</li>
+          <li>Handle with care during post-processing</li>
+          <li>Test with simple prints before tackling complex projects</li>
+        </ul>
+
+        <p>Ready to try something new? Browse our <a href="../projects.html">project ideas</a> or check out the <a href="best-resin-3d-printer-beginners.html">best resin printers</a> for your first flexible resin project!</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="common-resin-print-failures.html">Common Resin Print Failures and How to Fix Them</a></li>
+          <li><a href="how-to-wash-cure-resin-prints.html">How to Wash and Cure Resin Prints</a></li>
+          <li><a href="best-resin-3d-printer-beginners.html">Best Resin 3D Printers for Beginners</a></li>
+          <li><a href="tpu-flexible-filament-beginners.html">TPU Flexible Filament Guide for Beginners</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
