@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Fix a 3D Printer Not Heating Up: Bed & Nozzle Troubleshooting</title>
+  <meta name="description" content="Is your 3D printer not heating up? Learn step-by-step troubleshooting for bed and nozzle heating issues. Fix thermistor problems, heater cartridge failure, wiring, and PID tuning yourself.">
+  <meta name="keywords" content="3d printer not heating up, 3d printer bed not heating, nozzle not heating, thermistor issues, heater cartridge, 3d printer troubleshooting">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Troubleshooting</span>
+      </nav>
+
+      <h1>How to Fix a 3D Printer Not Heating Up: Bed & Nozzle Troubleshooting</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 29, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You pressed "Print," but your 3D printer's bed or nozzle isn't heating up. The display shows the target temperature, but the actual temperature stays stubbornly at room temperature. Or worse, the temperature reads as zero or erratic numbers. Don't panic—this is one of the most common 3D printing problems, and in most cases, you can fix it yourself with basic tools and a systematic approach.</p>
+
+        <p>In this guide, I'll walk you through every possible cause of heating failures, from the simplest fixes to more advanced repairs. By the end, you'll know exactly how to diagnose whether you're dealing with a thermistor issue, a failed heater cartridge, dodgy wiring, incorrect firmware settings, or PID tuning problems.</p>
+
+        <h2>🔍 Quick Diagnostic: What's Actually Happening?</h2>
+
+        <p>Before diving into repairs, let's identify your specific symptom. Different symptoms point to different root causes:</p>
+
+        <ul>
+          <li><strong>Temperature reads normal but doesn't rise:</strong> Heater cartridge or wiring issue</li>
+          <li><strong>Temperature reads zero or "ERR":</strong> Thermistor problem</li>
+          <li><strong>Temperature fluctuates wildly:</strong> Thermistor wiring or PID issue</li>
+          <li><strong>Heats slowly then fails:</strong> Underpowered heater or voltage issue</li>
+          <li><strong>Printer shows "MINTEMP" or "MAXTEMP" error:</strong> Thermistor failure</li>
+        </ul>
+
+        <h2>🧪 Safety First: What You Must Know Before Starting</h2>
+
+        <p>3D printers heat their nozzle to 180–260°C and beds to 60–110°C. That's hot enough to cause serious burns. Always:</p>
+
+        <ul>
+          <li>Turn off and unplug the printer before inspecting wiring</li>
+          <li>Wait for all heated parts to cool completely before touching</li>
+          <li>Use a multimeter for continuity tests—never guess</li>
+          <li>If you smell burning or see smoke, stop immediately and unplug</li>
+        </ul>
+
+        <h2>🎯 Cause #1: Thermistor Issues (Most Common)</h2>
+
+        <p>The thermistor is the small temperature sensor that tells your printer's control board what temperature the nozzle or bed is currently at. If the thermistor fails, the printer can't measure temperature, and it will refuse to heat (as a safety feature) or report errors.</p>
+
+        <h3>Symptoms of a Bad Thermistor</h3>
+
+        <ul>
+          <li>The temperature display shows "0" or "ERR"</li>
+          <li>The temperature reading is stuck at a wrong value</li>
+          <li>You get "MINTEMP" (temperature too low) or "MAXTEMP" (temperature too high) firmware errors</li>
+          <li>The reading fluctuates rapidly without the printer actually heating or cooling</li>
+        </ul>
+
+        <h3>How to Test a Thermistor</h3>
+
+        <p>You'll need a multimeter for this. Set it to resistance (Ω) mode.</p>
+
+        <ol>
+          <li>Turn off and unplug your printer.</li>
+          <li>Locate the thermistor wires at the control board (usually plugged into ports labeled "T0" or "TB").</li>
+          <li>Disconnect the thermistor wires from the board.</li>
+          <li>Touch the multimeter probes to the thermistor wires (or directly to the thermistor if accessible at the hotend).</li>
+          <li>At room temperature, a typical NTC 100K thermistor should read approximately 100,000 ohms (100KΩ).</li>
+        </ol>
+
+        <p><strong>What the readings mean:</strong></p>
+        <ul>
+          <li><strong>0Ω or very low resistance:</strong> Short circuit—thermistor is damaged, replace it</li>
+          <li><strong>Infinite resistance (OL on meter):</strong> Broken wire or thermistor—replace it</li>
+          <li><strong>Correct resistance but still reads wrong:</strong> Wiring issue between thermistor and control board, or wrong thermistor type selected in firmware</li>
+        </ul>
+
+        <h3>Replacing a Thermistor</h3>
+
+        <p>Thermistors are cheap (usually $2–$5). If yours is faulty:</p>
+
+        <ol>
+          <li>Order the correct thermistor for your printer model (check your manual).</li>
+          <li>For the nozzle: remove the hotend fan and heatsink, gently pull out the old thermistor, insert the new one, and secure it with the retaining screw or thermal paste as applicable.</li>
+          <li>For the bed: the thermistor is usually taped or glued to the underside. Carefully peel off the old one and attach the new one with kapton tape.</li>
+          <li>Reconnect the wires to the control board, ensuring correct polarity doesn't matter for thermistors (they're resistors).</li>
+        </ol>
+
+        <h2>⚡ Cause #2: Heater Cartridge Failure</h2>
+
+        <p>The heater cartridge is the cylindrical component that actually generates heat. It's a 12V or 24V cartridge (check your printer's specs) that draws significant current. When it fails, the printer may power on normally but the temperature simply won't rise.</p>
+
+        <h3>Symptoms of a Failed Heater Cartridge</h3>
+
+        <ul>
+          <li>The temperature reading is correct, but the heater doesn't warm up</li>
+          <li>You can hear the printer trying to heat (fans may change speed), but no heat</li>
+          <li>The heater cartridge shows no continuity when tested with a multimeter</li>
+        </ul>
+
+        <h3>How to Test a Heater Cartridge</h3>
+
+        <ol>
+          <li>Turn off and unplug the printer.</li>
+          <li>Disconnect the heater cartridge wires from the control board (usually labeled "E0" or "H0").</li>
+          <li>Set your multimeter to resistance (Ω) mode.</li>
+          <li>Touch the probes to the heater cartridge wires.</li>
+        </ol>
+
+        <p><strong>Expected resistance values:</strong></p>
+        <ul>
+          <li><strong>12V 40W cartridge:</strong> ~3.6Ω</li>
+          <li><strong>24V 40W cartridge:</strong> ~14.4Ω</li>
+          <li><strong>24V 60W cartridge:</strong> ~9.6Ω</li>
+        </ul>
+
+        <p>If you read infinite resistance (OL) or 0Ω, the heater cartridge is dead and needs replacement. If the resistance is correct but it's not heating, the problem is likely in the wiring or the control board MOSFET.</p>
+
+        <h3>Replacing a Heater Cartridge</h3>
+
+        <ol>
+          <li>Unscrew the set screw holding the heater cartridge in the heater block.</li>
+          <li>Pull out the old cartridge.</li>
+          <li>Insert the new cartridge of the same voltage and wattage.</li>
+          <li>Tighten the set screw firmly (but don't overtighten).</li>
+          <li>Reconnect the wires, ensuring secure connections.</li>
+        </ol>
+
+        <h2>🔌 Cause #3: Wiring Problems</h2>
+
+        <p>Wiring issues are the sneakiest cause of heating problems. Vibration from printing gradually loosens connections, and wires can fracture from repeated movement.</p>
+
+        <h3>Where to Check Wiring</h3>
+
+        <ul>
+          <li><strong>At the control board:</strong> Ensure heater and thermistor wires are firmly plugged in</li>
+          <li><strong>At the hotend:</strong> Check that the heater cartridge and thermistor are securely seated</li>
+          <li><strong>Strain relief:</strong> Look for broken wires at the point where cables bend during printing</li>
+          <li><strong>Bed wiring (for heated beds):</strong> Check the underside of the bed where wires connect</li>
+        </ul>
+
+        <h3>How to Diagnose Wiring Issues</h3>
+
+        <p>Use your multimeter's continuity mode (the beep mode). Test:</p>
+
+        <ol>
+          <li>From the control board connector to the heater cartridge itself—you should hear a beep (continuity).</li>
+          <li>From the control board to the thermistor—continuity should be present and resistance should change when you warm the thermistor with your fingers.</li>
+          <li>Inspect the wires visually for any sign of melting, burning, or fraying.</li>
+        </ol>
+
+        <p>If continuity is broken, find the break point and either repair it with solder and heat-shrink tubing, or replace the entire wire.</p>
+
+        <h2>⚙️ Cause #4: Firmware/Settings Issues</h2>
+
+        <p>Sometimes the hardware is fine, but the firmware settings are wrong. This is especially common if you've recently updated firmware, compiled your own, or switched printer control boards.</p>
+
+        <h3>Common Firmware-Related Heating Problems</h3>
+
+        <ul>
+          <li><strong>Wrong thermistor type selected:</strong> Marlin firmware lets you specify thermistor type (e.g., "1" for the standard EPCOS 100K). If the wrong type is selected, temperature readings will be inaccurate.</li>
+          <li><strong>Heater pin assignment wrong:</strong> If you compiled your own firmware, you may have assigned the heater output to the wrong pin.</li>
+          <li><strong>Temperature limits set too low:</strong> Marlin has hardcoded limits (HEATER_0_MAXTEMP, BED_MAXTEMP). If your target exceeds these, the printer will refuse to heat.</li>
+          <li><strong>Safety timeout too short:</strong> The "Thermal Runaway" protection may trigger falsely if your heater is slightly underpowered.</li>
+        </ul>
+
+        <h3>How to Fix Firmware Issues</h3>
+
+        <ol>
+          <li>Check your firmware's Configuration.h file for the correct thermistor type.</li>
+          <li>Verify HEATER_0_MAXTEMP and BED_MAXTEMP are set appropriately (typically 260°C for nozzle, 120°C for bed).</li>
+          <li>If using a custom board, verify the pin assignments in pins_YOURBOARD.h.</li>
+          <li>Re-flash the firmware after making changes.</li>
+        </ol>
+
+        <h2>🎛️ Cause #5: PID Tuning Issues</h2>
+
+        <p>PID (Proportional-Integral-Derivative) tuning controls how your printer regulates temperature. If PID values are way off, the printer may heat very slowly, overshoot the target, or oscillate wildly.</p>
+
+        <h3>Symptoms of Bad PID Tuning</h3>
+
+        <ul>
+          <li>Temperature oscillates (e.g., 200°C → 205°C → 195°C → 205°C repeatedly)</li>
+          <li>Heating is very slow to reach target</li>
+          <li>The printer reports "Thermal Runaway" even though nothing is wrong with hardware</li>
+        </ul>
+
+        <h3>How to Perform PID Tuning</h3>
+
+        <p>Most modern printers (Marlin-based) support PID autotuning via G-code:</p>
+
+        <ol>
+          <li>Connect to your printer via USB using Pronterface, OctoPrint, or your printer's LCD interface.</li>
+          <li>Send the command <code>M303 E0 S200 C8</code> (this tunes Extruder 0 at 200°C with 8 cycles).</li>
+          <li>For the bed, send <code>M303 E-1 S60 C8</code> (tunes bed at 60°C).</li>
+          <li>Wait for the process to complete (it may take 10–20 minutes).</li>
+          <li>The printer will output new PID values (Kp, Ki, Kd).</li>
+          <li>Save them with <code>M301 P&lt;Kp&gt; I&lt;Ki&gt; D&lt;Kd&gt;</code> for the nozzle, and <code>M304 P&lt;Kp&gt; I&lt;Ki&gt; D&lt;Kd&gt;</code> for the bed.</li>
+          <li>Save to EEPROM with <code>M500</code>.</li>
+        </ol>
+
+        <p>After PID tuning, your temperature should stabilize quickly and accurately.</p>
+
+        <h2>🛠️ Step-by-Step Troubleshooting Checklist</h2>
+
+        <p>If you're not sure where to start, follow this systematic checklist:</p>
+
+        <ol>
+          <li><strong>Check the display:</strong> Does it show a temperature? Is it accurate?</li>
+          <li><strong>Test the thermistor:</strong> Measure resistance with a multimeter.</li>
+          <li><strong>Test the heater cartridge:</strong> Measure resistance.</li>
+          <li><strong>Inspect all wiring:</strong> Look for loose, broken, or burnt wires.</li>
+          <li><strong>Check firmware settings:</strong> Verify thermistor type and temperature limits.</li>
+          <li><strong>Perform PID tuning:</strong> If hardware checks out but temperature is unstable.</li>
+          <li><strong>Test with a known-good control board:</strong> If all else fails, the MOSFET or control board may be damaged.</li>
+        </ol>
+
+        <h2>🛡️ Prevention: How to Avoid Future Heating Issues</h2>
+
+        <ul>
+          <li><strong>Strain-relieve all wires:</strong> Use cable chains or spiral wrap to prevent wires from flexing at connection points.</li>
+          <li><strong>Check connections monthly:</strong> Vibration loosens screws—check them regularly.</li>
+          <li><strong>Use quality thermistors:</strong> Cheap thermistors fail more often. Buy from reputable suppliers.</li>
+          <li><strong>Don't exceed temperature limits:</strong> Running your printer at maximum temperature shortens component life.</li>
+          <li><strong>Keep your firmware updated:</strong> Thermal runaway protection improvements are added regularly.</li>
+        </ul>
+
+        <h2>✅ When to Call for Help</h2>
+
+        <p>If you've gone through this entire guide and your printer still won't heat, the problem may be on the control board (a blown MOSFET or damaged microcontroller). At that point:</p>
+
+        <ul>
+          <li>Contact your printer manufacturer's support (if under warranty)</li>
+          <li>Post on r/FixMyPrint or the Ender 3 subreddit with photos of your diagnostics</li>
+          <li>Consider replacing the control board (an SKR Mini E3 is a popular upgrade)</li>
+        </ul>
+
+        <p><strong>Remember:</strong> Heating issues are almost always fixable. Don't let a stubborn thermistor or a $5 heater cartridge keep you from printing. Work through the steps systematically, and you'll be back to printing in no time.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="3d-print-warping-solutions.html">3D Print Warping Solutions: How to Fix a Warped First Layer</a></li>
+          <li><a href="how-to-fix-stringing-3d-prints.html">How to Fix Stringing in 3D Prints: Complete Settings Guide</a></li>
+          <li><a href="ender-3-v3-se-review.html">Ender 3 V3 SE Review: Best Budget 3D Printer in 2026?</a></li>
+          <li><a href="../troubleshooting.html">Troubleshooting Guide: Fix Common 3D Printing Problems</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

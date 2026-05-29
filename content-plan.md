@@ -119,7 +119,7 @@
 - [x] best-3d-printer-for-large-prints — Best 3D Printer for Large Prints in 2026 (300mm+ Build Volume) ✅ 2026-05-25
 - [x] how-to-3d-print-food-safe — Is 3D Printing Food Safe? What You Need to Know Before Printing Kitchen Items ✅ 2026-05-25
 
-### 批次 17：RESIN PRINTING & POST-PROCESSING (6篇)
+### 批次 17：RESIN PRINTING & POST-PROCESSING (6篇) ✅ COMPLETED
 - [x] best-resin-3d-printer-beginners — Best Resin 3D Printers for Beginners in 2026 ✅ 2026-05-26
 - [x] how-to-wash-cure-resin-prints — How to Wash and Cure Resin Prints: Complete Guide ✅ 2026-05-26
 - [x] resin-printing-safety-guide — Resin Printing Safety: PPE, Ventilation & Handling Guide ✅ 2026-05-26
@@ -127,12 +127,21 @@
 - [x] common-resin-print-failures — Common Resin Print Failures and How to Fix Them ✅ 2026-05-26
 - [x] 3d-printing-with-flexible-resin — Flexible Resin 3D Printing: Applications and Settings Guide ✅ 2026-05-26
 
+### 批次 18：TROUBLESHOOTING & ADVANCED GUIDES (6篇)
+- [ ] best-3d-printer-for-students — Best 3D Printers for Students in 2026: Budget Picks for School & College
+- [ ] how-to-fix-3d-printer-not-heating — How to Fix a 3D Printer Not Heating Up: Bed & Nozzle Troubleshooting
+- [ ] 3d-printing-calibration-cube-guide — What Is a Calibration Cube and Why Every 3D Printer Needs One
+- [ ] best-budget-resin-3d-printer — Best Budget Resin 3D Printers Under $200 in 2026
+- [ ] how-to-3d-print-without-warping — How to Prevent 3D Print Warping: Complete Prevention Guide
+- [ ] 3d-printer-display-troubleshooting — 3D Printer Display Issues: How to Fix Black Screens and Glitches
+
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 89 篇 ✅
+- **已完成**: 89 篇 ✅ (批次17完成)
 - **剩余**: 111 篇
-- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅ 批次15✅ 批次16✅ 批次17✅
+- **当前批次**: 批次18（生成中）
+- **当前状态**: 批次1✅ 信息差✅ 批次2✅ 批次3✅ 批次4✅ 批次5✅ 批次6✅ 批次7✅ 批次8✅ 批次9✅ 批次10✅ 批次11✅ 批次12✅ 批次13✅ 批次14✅ 批次15✅ 批次16✅ 批次17✅ 批次18进行中...
 
 ## 生成规则
 

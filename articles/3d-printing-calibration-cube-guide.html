@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is a Calibration Cube and Why Every 3D Printer Needs One</title>
+  <meta name="description" content="Discover what a calibration cube is, why every 3D printer needs one, and how to use it to dial in perfect X, Y, Z accuracy. Complete guide with measurements and popular cube files.">
+  <meta name="keywords" content="calibration cube 3d printing, 3d printer calibration, calibration cube measurements, teaching tech calibration, 3d printing accuracy">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Techniques</span>
+      </nav>
+
+      <h1>What Is a Calibration Cube and Why Every 3D Printer Needs One</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 May 29, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🎯</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You just unboxed your first 3D printer, leveled the bed, and printed a cute little benchy. It looks… okay. But when you measure it with calipers, the dimensions are off. A part that should be 20mm comes out as 19.85mm. Or worse, your perfect cube isn't even square—one corner is raised, or the holes are oval instead of round.</p>
+
+        <p>This is where the humble calibration cube comes in. It's the single most important print you can make to understand and improve your 3D printer's accuracy. In this guide, I'll explain what a calibration cube is, which measurements actually matter, where to download the best cube files, and how to interpret your results like a pro.</p>
+
+        <h2>🎯 What Is a Calibration Cube?</h2>
+
+        <p>A calibration cube is a simple 20mm × 20mm × 20mm (or sometimes 30mm) 3D model designed specifically to test your printer's dimensional accuracy, backlash, and mechanical alignment. Think of it as a "report card" for your printer.</p>
+
+        <p>Most calibration cubes include:</p>
+
+        <ul>
+          <li><strong>Perfect right angles:</strong> Tests whether your X, Y, and Z axes are truly perpendicular</li>
+          <li><strong>Known dimensions:</strong> Usually 20mm on each side, so you can measure and compare</li>
+          <li><strong>Features like holes or embossed text:</strong> Tests over/under-extrusion and Z-height accuracy</li>
+          <li><strong>Single-wall thickness:</strong> Some cubes have thin walls to test extrusion flow rate</li>
+        </ul>
+
+        <p>When you print a calibration cube and measure it, you're essentially asking your printer: <em>"Are you moving exactly as far as you think you are?"</em></p>
+
+        <h2>📏 What Measurements Should You Take?</h2>
+
+        <p>Don't just print a cube and look at it—you need to measure it with digital calipers. Here's exactly what to measure and what the numbers tell you:</p>
+
+        <h3>1. X, Y, and Z Dimensions (Dimensional Accuracy)</h3>
+
+        <p>Measure the cube along each axis:</p>
+
+        <ul>
+          <li><strong>X-axis:</strong> Measure left to right across the top face</li>
+          <li><strong>Y-axis:</strong> Measure front to back across the top face</li>
+          <li><strong>Z-axis:</strong> Measure the height of the cube</li>
+        </ul>
+
+        <p><strong>What's acceptable?</strong> For a 20mm cube:</p>
+        <ul>
+          <li><strong>±0.1mm:</strong> Excellent—your printer is very well calibrated</li>
+          <li><strong>±0.2mm:</strong> Good—acceptable for most functional prints</li>
+          <li><strong>±0.3mm or more:</strong> Needs calibration—your parts won't fit together properly</li>
+        </ul>
+
+        <p>If your cube is too small (e.g., 19.8mm instead of 20mm), your printer is under-extruding or has axis steps misconfigured. If it's too large, you're over-extruding or the steps/mm are set too high.</p>
+
+        <h3>2. Backlash (Mechanical Play)</h3>
+
+        <p>Backlash is the slight "slop" or play in your printer's motion system. It shows up as rounded corners or "bulging" on one side of the cube but not the other.</p>
+
+        <p><strong>How to check for backlash:</strong></p>
+        <ol>
+          <li>Measure the cube's width at the very top vs. the very bottom</li>
+          <li>If the top is wider than the bottom (or vice versa) by more than 0.1mm, you have backlash</li>
+          <li>Backlash is usually caused by loose belts, worn bearings, or improperly adjusted V-wheels</li>
+        </ol>
+
+        <p><strong>Fix:</strong> Tighten your belts (they should make a "thrum" sound like a guitar string when plucked). Adjust V-wheels so they have slight resistance when the axis is moved by hand.</p>
+
+        <h3>3. Right Angles (Frame Squaredness)</h3>
+
+        <p>A cube should have perfect 90° corners. If your frame is slightly askew, your cube will be a parallelogram instead of a square.</p>
+
+        <p><strong>How to check:</strong> Measure the diagonal distances across the top face of the cube. They should be identical. If one diagonal is longer than the other, your X and Y axes aren't perfectly perpendicular.</p>
+
+        <p><strong>Fix:</strong> Adjust your printer's frame. On an Ender 3, this means loosening the frame screws, pushing the frame square, and re-tightening. Some printers have adjustment screws specifically for this.</p>
+
+        <h3>4. Hole and Feature Accuracy</h3>
+
+        <p>Many calibration cubes have a 5mm or 10mm hole through the center. Measure the hole with your calipers:</p>
+
+        <ul>
+          <li><strong>Hole too small:</strong> Your printer is over-extruding, or your nozzle temperature is too low</li>
+          <li><strong>Hole too large:</strong> Under-extrusion or excessive nozzle temperature</li>
+          <li><strong>Hole not round:</strong> Backlash or uneven belt tension</li>
+        </ul>
+
+        <h2>📥 Popular Calibration Cube Files</h2>
+
+        <p>Not all calibration cubes are created equal. Here are the most popular and useful ones:</p>
+
+        <h3>1. JH巨蟹 (JH Crab) Calibration Cube</h3>
+
+        <p>This is a community favorite, especially in Chinese 3D printing forums. It's a 20mm cube with:</p>
+
+        <ul>
+          <li>Embossed text on one face (tests Z-height and extrusion)</li>
+          <li>A centered hole (tests hole accuracy)</li>
+          <li>Thin walls (tests extrusion flow)</li>
+        </ul>
+
+        <p><strong>Download:</strong> Search "JH巨蟹 20mm calibration cube" on Thingiverse or Yeggi.</p>
+
+        <h3>2. Teaching Tech Calibration Cube</h3>
+
+        <p>Created by the excellent Teaching Tech YouTube channel, this cube is designed to be printed <em>without</em> supports and includes:</p>
+
+        <ul>
+          <li>Clear X, Y, Z labels on each axis</li>
+          <li>A 0.4mm thin wall section (to calibrate flow rate)</li>
+          <li>Overhang test (from 0° to 45°)</li>
+          <li>Bridge test (tests cooling and over-extrusion)</li>
+        </ul>
+
+        <p><strong>Download:</strong> Search "Teaching Tech calibration cube" on Thingiverse. It's one of the most comprehensive single-piece test prints available.</p>
+
+        <h3>3. The Classic 20mm Cube (No Frills)</h3>
+
+        <p>If you want the simplest possible test, just download a plain 20mm cube. It won't test overhangs or bridges, but it's perfect for quick dimensional checks.</p>
+
+        <p><strong>Download:</strong> Thingiverse has dozens of "20mm calibration cube" files. Pick one with good ratings and plenty of makes.</p>
+
+        <h2>🔧 How to Print Your Calibration Cube</h2>
+
+        <p>Don't just hit "Print" with your default settings. For meaningful results, follow these guidelines:</p>
+
+        <h3>Slicer Settings for a Calibration Cube</h3>
+
+        <ul>
+          <li><strong>Layer height:</strong> 0.2mm (standard) or 0.16mm for higher precision</li>
+          <li><strong>Infill:</strong> 20% (cubic or grid pattern)</li>
+          <li><strong>Perimeters/walls:</strong> 2–3 (standard)</li>
+          <li><strong>Top/bottom layers:</strong> 5–6 (prevents wobbly top surface)</li>
+          <li><strong>Print speed:</strong> 50–60mm/s (don't go too fast—it reduces accuracy)</li>
+          <li><strong>Temperature:</strong> Use your filament's recommended temperature (usually 200–220°C for PLA)</li>
+          <li><strong>Bed temperature:</strong> 60°C for PLA</li>
+        </ul>
+
+        <p><strong>Important:</strong> Disable "Z-hop" if you have it enabled. Z-hop can introduce small inaccuracies in the Z-axis.</p>
+
+        <h2>📊 How to Interpret Your Results</h2>
+
+        <p>Once your cube is printed and cooled, grab your calipers and start measuring. Here's a troubleshooting guide:</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #252640; color: #fff;">
+              <th style="padding: 0.75rem; text-align: left; border: 1px solid #3a3b5a;">Measurement</th>
+              <th style="padding: 0.75rem; text-align: left; border: 1px solid #3a3b5a;">Expected</th>
+              <th style="padding: 0.75rem; text-align: left; border: 1px solid #3a3b5a;">Problem If Off By</th>
+              <th style="padding: 0.75rem; text-align: left; border: 1px solid #3a3b5a;">Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">X dimension</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">20.00mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">>0.2mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Calibrate X steps/mm in firmware</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Y dimension</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">20.00mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">>0.2mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Calibrate Y steps/mm in firmware</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Z dimension</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">20.00mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">>0.3mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Check Z-axis coupling, calibrate Z steps/mm</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Diagonal A vs B</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Equal</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">>0.15mm difference</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Square your frame</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Hole diameter</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">5.00mm or 10.00mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">>0.2mm</td>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b5a;">Adjust flow rate, check temperature</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>⚙️ Advanced: Calibrating Your Steps/mm</h2>
+
+        <p>If your cube is consistently off by a significant amount (e.g., 20mm prints as 19.5mm), you need to adjust your printer's steps/mm setting. This tells the printer exactly how many motor steps are needed to move 1mm.</p>
+
+        <h3>How to Calculate New Steps/mm</h3>
+
+        <ol>
+          <li>Print a calibration cube and measure the actual dimension (let's say X measures 19.6mm).</li>
+          <li>Calculate: <code>new_steps = (current_steps × expected_size) / actual_size</code></li>
+          <li>Example: If your current X steps/mm is 80.0 and the cube measured 19.6mm:
+            <br><code>new_steps = (80.0 × 20.0) / 19.6 = 81.63 steps/mm</code></li>
+          <li>Send the G-code command <code>M92 X81.63</code> (replace with your calculated value).</li>
+          <li>Save with <code>M500</code> (if you have EEPROM enabled).</li>
+          <li>Print another cube to verify.</li>
+        </ol>
+
+        <p><strong>Note:</strong> Repeat this for Y and Z axes separately. Don't assume they're the same.</p>
+
+        <h2>✅ When Is Your Printer "Calibrated Enough"?</h2>
+
+        <p>You don't need perfection. For most hobbyist prints:</p>
+
+        <ul>
+          <li><strong>±0.2mm accuracy:</strong> Good enough for figurines, planters, and decorative items</li>
+          <li><strong>±0.1mm accuracy:</strong> Needed for functional parts that fit together (boxes, enclosures, threaded parts)</li>
+          <li><strong>±0.05mm accuracy:</strong> Only necessary for precision engineering (usually requires a CNC, not a 3D printer)</li>
+        </ul>
+
+        <p>If your cube measures within 0.1–0.2mm of 20mm on all axes, and the corners are square, your printer is calibrated well enough for 95% of prints.</p>
+
+        <h2>🏁 Final Thoughts</h2>
+
+        <p>The calibration cube is the unsung hero of 3D printing. It takes 30 minutes to print and costs pennies in filament, but it tells you more about your printer's health than any software diagnostic.</p>
+
+        <p>Make it a habit to print a calibration cube:</p>
+
+        <ul>
+          <li>After assembling a new printer</li>
+          <li>After changing filament brands (different filaments have different shrinkage)</li>
+          <li>After moving your printer (transport can knock frames out of square)</li>
+          <li>Every few months as routine maintenance</li>
+        </ul>
+
+        <p>Once you've mastered the calibration cube, you'll have the confidence that your printer is accurate, reliable, and ready for any project you throw at it. Happy printing!</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer: Complete Step-by-Step Guide</a></li>
+          <li><a href="3d-printer-maintenance-checklist.html">3D Printer Maintenance Checklist: Daily, Weekly, Monthly Tasks</a></li>
+          <li><a href="../getting-started.html">Getting Started With 3D Printing: The Complete Beginner's Guide</a></li>
+          <li><a href="best-budget-3d-printer-under-200.html">Best Budget 3D Printers Under $200 in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
