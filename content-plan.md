@@ -143,13 +143,13 @@
 - [x] orca-slicer-review — Orca Slicer Review: The Best Free Alternative to Bambu Studio? ✅ 2026-06-01
 - [x] 3d-print-gcode-explained — 3D Print G-Code Explained: What Every Line Means ✅ 2026-06-01
 
-### 批次 20：PRINTER REVIEWS & COMPARISONS (6篇)
-- [ ] creality-ender-3-v3-review — Creality Ender 3 V3 Review: Still the King of Budget Printing?
-- [ ] bambu-lab-p1s-review — Bambu Lab P1S Review: The Best Mid-Range 3D Printer in 2026?
-- [ ] creality-k1-max-review — Creality K1 Max Review: Speed Meets Large Volume
-- [ ] anycubic-kobra-3-review — Anycubic Kobra 3 Review: Budget Speed Demon
-- [ ] elegoo-neptune-4-pro-review — Elegoo Neptune 4 Pro Review: Best Value Under $300?
-- [ ] qidi-tech-x-plus-3-review — Qidi Tech X-Plus 3 Review: Dual Extrusion Made Easy
+### 批次 20：PRINTER REVIEWS & COMPARISONS (6篇) ✅
+- [x] creality-ender-3-v3-review — Creality Ender 3 V3 Review: Still the King of Budget Printing? ✅ 2026-06-01
+- [x] bambu-lab-p1s-review — Bambu Lab P1S Review: The Best Mid-Range 3D Printer in 2026? ✅ 2026-06-01
+- [x] creality-k1-max-review — Creality K1 Max Review: Speed Meets Large Volume ✅ 2026-06-01
+- [x] anycubic-kobra-3-review — Anycubic Kobra 3 Review: Budget Speed Demon ✅ 2026-06-01
+- [x] elegoo-neptune-4-pro-review — Elegoo Neptune 4 Pro Review: Best Value Under $300? ✅ 2026-06-01
+- [x] qidi-tech-x-plus-3-review — Qidi Tech X-Plus 3 Review: Dual Extrusion Made Easy ✅ 2026-06-01
 
 ### 批次 21：ADVANCED MATERIALS & SPECIALTY FILAMENTS (6篇)
 - [ ] pc-polycarbonate-filament-guide — Polycarbonate (PC) Filament Guide: The Strongest Printing Material
@@ -249,9 +249,9 @@
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 102 篇 ✅ (批次1-19完成)
-- **剩余**: 98 篇 (批次20-32)
-- **当前状态**: 批次1✅ ~ 批次19✅ | 批次20-32 待生成
+- **已完成**: 108 篇 ✅ (批次1-20完成)
+- **剩余**: 92 篇 (批次21-32)
+- **当前状态**: 批次1✅ ~ 批次20✅ | 批次21-32 待生成
 
 ## 生成规则
 
