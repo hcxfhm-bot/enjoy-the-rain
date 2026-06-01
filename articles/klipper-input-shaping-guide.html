@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Klipper Input Shaping: How to Eliminate Ringing for Good — 3D Print Starter</title><meta name="description" content="Input shaping is Klipper's secret weapon for vibration-free prints. Learn how to calibrate input shaping with an accelerometer for perfectly smooth surfaces."><meta name="keywords" content="klipper input shaping, input shaping calibration, adxl345 klipper, eliminate ringing klipper, input shaper klipper"><link rel="stylesheet" href="../css/style.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head><body>
+<nav class="nav"><div class="container"><a href="../index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><ul class="nav-links"><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Projects</a></li></ul></div></nav>
+<main class="section"><div class="container"><article class="article-page"><nav class="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Firmware</a> &raquo; <span>Firmware</span></nav><h1>Klipper Input Shaping: How to Eliminate Ringing for Good</h1><div class="article-meta"><span>📅 June 1, 2026</span><span>⏱️ 8 min read</span><span>✍️ 3D Print Starter Team</span></div><div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;"><span style="font-size: 4rem;">📐</span></div><div class="article-body"><p>Input shaping is the single biggest quality improvement you can make to a Klipper printer. It eliminates ringing/ghosting by pre-distorting the movement commands to cancel out the printer's natural vibrations. Here's how to set it up properly.</p>
+<h2>What You Need</h2>
+<ul><li>Klipper installed and working</li><li>ADXL345 accelerometer (~$5 from Amazon/AliExpress)</li><li>Wiring: SPI connection to Raspberry Pi GPIO</li></ul>
+<h2>ADXL345 Wiring</h2>
+<table><tr><th>ADXL345 Pin</th><th>Raspberry Pi GPIO</th></tr>
+<tr><td>VCC</td><td>3.3V (Pin 1)</td></tr>
+<tr><td>GND</td><td>GND (Pin 6)</td></tr>
+<tr><td>CS</td><td>GPIO8 (Pin 24)</td></tr>
+<tr><td>SDO</td><td>GPIO9 (Pin 21)</td></tr>
+<tr><td>SDA</td><td>GPIO10 (Pin 19)</td></tr>
+<tr><td>SCL</td><td>GPIO11 (Pin 23)</td></tr></table>
+<h2>Calibration Steps</h2>
+<ol><li><strong>Mount the accelerometer</strong> on the print head with double-sided tape or a printed mount</li>
+<li><strong>Add to printer.cfg</strong>: <code>[adxl345]</code> section with SPI configuration</li>
+<li><strong>Test connection</strong>: <code>ACCELEROMETER_QUERY</code></li>
+<li><strong>Run calibration</strong>: <code>SHAPER_CALIBRATE</code></li>
+<li><strong>Save results</strong>: <code>SAVE_CONFIG</code></li></ol>
+<h2>Understanding the Results</h2>
+<p>Klipper will recommend a shaper type and frequency. Common recommendations:</p>
+<ul><li><strong>EI shaper at 50-60 Hz</strong> — Good balance of damping and speed</li><li><strong>MZV shaper at 40-50 Hz</strong> — Stronger damping, slightly more speed reduction</li><li><strong>ZV shaper at 60+ Hz</strong> — Minimal speed impact, less damping</li></ul>
+<p>For more Klipper features, see our <a href="../articles/klipper-pressure-advance-guide.html">pressure advance guide</a> and <a href="../articles/klipper-vs-marlin-comparison.html">Klipper vs Marlin comparison</a>.</p></div><div class="ad-placeholder inline" style="margin: 2rem 0;">📢 Advertisement — Ad Placeholder (Google AdSense)</div><div class="related-articles"><h2>📖 You Might Also Like</h2><ul><li><a href="../articles/klipper-pressure-advance-guide.html">Klipper Pressure Advance: Perfect Extrusion Every Time</a></li>
+        <li><a href="../articles/klipper-vs-marlin-comparison.html">Klipper vs Marlin: Which Firmware Is Better?</a></li>
+        <li><a href="../articles/3d-print-ghosting-ringing-fix.html">How to Fix Ghosting/Ringing in 3D Prints</a></li></ul></div></article></div></main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Your trusted guide to getting started with 3D printing.</p></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Project Ideas</a></li><li><a href="../about.html">About Us</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div></div></footer>
+<script src="../js/main.js"></script></body></html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>How to Install Klipper Firmware: Complete Guide for Beginners — 3D Print Starter</title><meta name="description" content="Upgrade your 3D printer with Klipper firmware for faster, better prints. This beginner-friendly guide covers installation, configuration, and first steps."><meta name="keywords" content="install klipper firmware, klipper install guide, klipper firmware 3d printer, how to install klipper, klipper setup guide"><link rel="stylesheet" href="../css/style.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head><body>
+<nav class="nav"><div class="container"><a href="../index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><ul class="nav-links"><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Projects</a></li></ul></div></nav>
+<main class="section"><div class="container"><article class="article-page"><nav class="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Firmware</a> &raquo; <span>Firmware</span></nav><h1>How to Install Klipper Firmware: Complete Guide for Beginners</h1><div class="article-meta"><span>📅 June 1, 2026</span><span>⏱️ 9 min read</span><span>✍️ 3D Print Starter Team</span></div><div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;"><span style="font-size: 4rem;">🚀</span></div><div class="article-body"><p>Klipper is the firmware upgrade that transforms budget printers into speed demons. Instead of running on the printer's limited microcontroller, Klipper offloads calculations to a Raspberry Pi, enabling features like input shaping, pressure advance, and 2-3x faster printing.</p>
+<h2>What You Need</h2>
+<table><tr><th>Component</th><th>Requirement</th></tr>
+<tr><td>Raspberry Pi</td><td>Pi 3B+ or Pi 4 (2GB+ RAM)</td></tr>
+<tr><td>SD Card</td><td>8GB+ Class 10</td></tr>
+<tr><td>USB Cable</td><td>USB-A to USB-C (printer to Pi)</td></tr>
+<tr><td>Printer</td><td>Any Marlin-based FDM printer</td></tr></table>
+<h2>Installation Steps</h2>
+<ol><li><strong>Flash MainsailOS</strong> — Download from mainsail.xyz, flash to SD card with Raspberry Pi Imager</li>
+<li><strong>Boot the Pi</strong> — Insert SD, power on, wait 5 minutes for first boot</li>
+<li><strong>Find Pi IP</strong> — Check your router's DHCP table or use <code>hostname -I</code></li>
+<li><strong>Access Mainsail</strong> — Open browser to http://[PI_IP]</li>
+<li><strong>Compile Klipper firmware</strong> — In Mainsail: <code>cd ~/klipper && make menuconfig</code>, select your MCU</li>
+<li><strong>Flash to printer</strong> — Connect USB, run <code>make flash</code></li>
+<li><strong>Configure printer.cfg</strong> — Start with a template for your printer model from the Klipper config GitHub</li></ol>
+<h2>First Steps After Install</h2>
+<ul><li>Run <code>QUAD_GANTRY_LEVEL</code> or <code>BED_MESH_CALIBRATE</code></li>
+<li>Calibrate PID: <code>PID_CALIBRATE HEATER=extruder TARGET=200</code></li>
+<li>Test with a small calibration cube before your first real print</li></ul>
+<p>For more firmware info, see our <a href="../articles/klipper-vs-marlin-comparison.html">Klipper vs Marlin comparison</a> and <a href="../articles/3d-printer-firmware-update-guide.html">firmware update guide</a>.</p></div><div class="ad-placeholder inline" style="margin: 2rem 0;">📢 Advertisement — Ad Placeholder (Google AdSense)</div><div class="related-articles"><h2>📖 You Might Also Like</h2><ul><li><a href="../articles/klipper-vs-marlin-comparison.html">Klipper vs Marlin: Which Firmware Is Better in 2026?</a></li>
+        <li><a href="../articles/3d-printer-firmware-update-guide.html">How to Update Your 3D Printer Firmware</a></li>
+        <li><a href="../articles/how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer</a></li></ul></div></article></div></main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Your trusted guide to getting started with 3D printing.</p></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Project Ideas</a></li><li><a href="../about.html">About Us</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div></div></footer>
+<script src="../js/main.js"></script></body></html>

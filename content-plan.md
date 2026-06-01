@@ -183,29 +183,29 @@
 - [x] 3d-printing-community-best-forums — Best 3D Printing Communities & Forums in 2026 ✅ 2026-06-01
 - [x] 3d-printing-youtube-channels — Best 3D Printing YouTube Channels to Follow in 2026 ✅ 2026-06-01
 
-### 批次 25：TROUBLESHOOTING DEEP-DIVE 2 (6篇)
-- [ ] 3d-print-z-artifacts-fix — How to Fix Z-Banding and Z-Artifacts on 3D Prints
-- [ ] 3d-printer-extruder-clicking-fix — 3D Printer Extruder Clicking: Causes and Fixes
-- [ ] how-to-fix-3d-print-gaps — How to Fix Gaps in 3D Prints: Under-Extrusion Solutions
-- [ ] 3d-print-blob-fix — How to Fix Blobs and Zits on 3D Prints: Settings Guide
-- [ ] 3d-printer-skipping-steps-fix — 3D Printer Skipping Steps: Motor and Belt Troubleshooting
-- [ ] 3d-print-ghosting-ringing-fix — How to Fix Ghosting/Ringing in 3D Prints: Speed & Acceleration
+### 批次 25：TROUBLESHOOTING DEEP-DIVE 2 (6篇) ✅
+- [x] 3d-print-z-artifacts-fix — How to Fix Z-Banding and Z-Artifacts on 3D Prints ✅ 2026-06-01
+- [x] 3d-printer-extruder-clicking-fix — 3D Printer Extruder Clicking: Causes and Fixes ✅ 2026-06-01
+- [x] how-to-fix-3d-print-gaps — How to Fix Gaps in 3D Prints: Under-Extrusion Solutions ✅ 2026-06-01
+- [x] 3d-print-blob-fix — How to Fix Blobs and Zits on 3D Prints: Settings Guide ✅ 2026-06-01
+- [x] 3d-printer-skipping-steps-fix — 3D Printer Skipping Steps: Motor and Belt Troubleshooting ✅ 2026-06-01
+- [x] 3d-print-ghosting-ringing-fix — How to Fix Ghosting/Ringing in 3D Prints: Speed & Acceleration ✅ 2026-06-01
 
-### 批次 26：KLIPPER & FIRMWARE UPGRADES (6篇)
-- [ ] klipper-firmware-install-guide — How to Install Klipper Firmware: Complete Guide for Beginners
-- [ ] klipper-vs-marlin-comparison — Klipper vs Marlin: Which Firmware Is Better in 2026?
-- [ ] klipper-input-shaping-guide — Klipper Input Shaping: How to Eliminate Ringing for Good
-- [ ] klipper-pressure-advance-guide — Klipper Pressure Advance: Perfect Extrusion Every Time
-- [ ] best-klipper-3d-printer-upgrades — Best Klipper-Compatible 3D Printer Upgrades in 2026
-- [ ] mainsail-vs-fluidd — Mainsail vs Fluidd: Best Klipper Web Interface Compared
+### 批次 26：KLIPPER & FIRMWARE UPGRADES (6篇) ✅
+- [x] klipper-firmware-install-guide — How to Install Klipper Firmware: Complete Guide for Beginners ✅ 2026-06-01
+- [x] klipper-vs-marlin-comparison — Klipper vs Marlin: Which Firmware Is Better in 2026? ✅ 2026-06-01
+- [x] klipper-input-shaping-guide — Klipper Input Shaping: How to Eliminate Ringing for Good ✅ 2026-06-01
+- [x] klipper-pressure-advance-guide — Klipper Pressure Advance: Perfect Extrusion Every Time ✅ 2026-06-01
+- [x] best-klipper-3d-printer-upgrades — Best Klipper-Compatible 3D Printer Upgrades in 2026 ✅ 2026-06-01
+- [x] mainsail-vs-fluidd — Mainsail vs Fluidd: Best Klipper Web Interface Compared ✅ 2026-06-01
 
-### 批次 27：SPECIALTY PRINTING TECHNIQUES (6篇)
-- [ ] 3d-printing-lithophane-guide — How to 3D Print Lithophanes: Photos That Glow in Light
-- [ ] 3d-printing-flexible-objects — 3D Printing Flexible Objects: Hinges, Springs & Living Hinges
-- [ ] how-to-3d-print-molds — How to 3D Print Molds for Casting: Silicone & Resin
-- [ ] 3d-printing-mechanical-parts — 3D Printing Mechanical Parts: Gears, Pulleys & Brackets
-- [ ] how-to-3d-print-phone-case — How to 3D Print a Phone Case: Design Tips & Settings
-- [ ] 3d-printing-mosaic-multi-material — Multi-Material 3D Printing: Palette 3 and Beyond
+### 批次 27：SPECIALTY PRINTING TECHNIQUES (6篇) ✅
+- [x] 3d-printing-lithophane-guide — How to 3D Print Lithophanes: Photos That Glow in Light ✅ 2026-06-01
+- [x] 3d-printing-flexible-objects — 3D Printing Flexible Objects: Hinges, Springs & Living Hinges ✅ 2026-06-01
+- [x] how-to-3d-print-molds — How to 3D Print Molds for Casting: Silicone & Resin ✅ 2026-06-01
+- [x] 3d-printing-mechanical-parts — 3D Printing Mechanical Parts: Gears, Pulleys & Brackets ✅ 2026-06-01
+- [x] how-to-3d-print-phone-case — How to 3D Print a Phone Case: Design Tips & Settings ✅ 2026-06-01
+- [x] 3d-printing-mosaic-multi-material — Multi-Material 3D Printing: Palette 3 and Beyond ✅ 2026-06-01
 
 ### 批次 28：PRINTER MODS & DIY (6篇)
 - [ ] 3d-printer-silent-board-upgrade — Silent Mainboard Upgrade: Make Your 3D Printer Whisper Quiet
@@ -249,9 +249,9 @@
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 132 篇 ✅ (批次1-24完成)
-- **剩余**: 68 篇 (批次25-32)
-- **当前状态**: 批次1✅ ~ 批次24✅ | 批次25-32 待生成
+- **已完成**: 150 篇 ✅ (批次1-27完成)
+- **剩余**: 50 篇 (批次28-32)
+- **当前状态**: 批次1✅ ~ 批次27✅ | 批次28-32 待生成
 
 ## 生成规则
 
