@@ -151,13 +151,13 @@
 - [x] elegoo-neptune-4-pro-review — Elegoo Neptune 4 Pro Review: Best Value Under $300? ✅ 2026-06-01
 - [x] qidi-tech-x-plus-3-review — Qidi Tech X-Plus 3 Review: Dual Extrusion Made Easy ✅ 2026-06-01
 
-### 批次 21：ADVANCED MATERIALS & SPECIALTY FILAMENTS (6篇)
-- [ ] pc-polycarbonate-filament-guide — Polycarbonate (PC) Filament Guide: The Strongest Printing Material
-- [ ] hips-filament-guide — HIPS Filament Guide: The Perfect Dissolvable Support Material
-- [ ] polycarbonate-vs-abs-comparison — Polycarbonate vs ABS: Which Strong Filament Should You Choose?
-- [ ] metallic-filament-guide — Metallic Filament Guide: Print Stunning Metal-Like Objects
-- [ ] glow-in-the-dark-filament-guide — Glow-in-the-Dark Filament Guide: Settings, Tips & Best Brands
-- [ ] pva-filament-guide — PVA Filament Guide: Water-Soluble Supports Explained
+### 批次 21：ADVANCED MATERIALS & SPECIALTY FILAMENTS (6篇) ✅
+- [x] pc-polycarbonate-filament-guide — Polycarbonate (PC) Filament Guide: The Strongest Printing Material ✅ 2026-06-01
+- [x] hips-filament-guide — HIPS Filament Guide: The Perfect Dissolvable Support Material ✅ 2026-06-01
+- [x] polycarbonate-vs-abs-comparison — Polycarbonate vs ABS: Which Strong Filament Should You Choose? ✅ 2026-06-01
+- [x] metallic-filament-guide — Metallic Filament Guide: Print Stunning Metal-Like Objects ✅ 2026-06-01
+- [x] glow-in-the-dark-filament-guide — Glow-in-the-Dark Filament Guide: Settings, Tips & Best Brands ✅ 2026-06-01
+- [x] pva-filament-guide — PVA Filament Guide: Water-Soluble Supports Explained ✅ 2026-06-01
 
 ### 批次 22：POST-PROCESSING & FINISHING (6篇)
 - [ ] how-to-sand-3d-prints — How to Sand 3D Prints: The Complete Guide to Smooth Finishes
@@ -249,9 +249,9 @@
 ## 进度
 
 - **总目标**: 200 篇
-- **已完成**: 108 篇 ✅ (批次1-20完成)
-- **剩余**: 92 篇 (批次21-32)
-- **当前状态**: 批次1✅ ~ 批次20✅ | 批次21-32 待生成
+- **已完成**: 114 篇 ✅ (批次1-21完成)
+- **剩余**: 86 篇 (批次22-32)
+- **当前状态**: 批次1✅ ~ 批次21✅ | 批次22-32 待生成
 
 ## 生成规则
 
