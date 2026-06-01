@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use a 3D Printer Slicer: Complete Beginner Walkthrough — 3D Print Starter</title>
+  <meta name="description" content="Never used a slicer before? This step-by-step walkthrough covers everything from importing an STL to sending G-code to your printer. Perfect for complete beginners.">
+  <meta name="keywords" content="how to use 3d printer slicer, 3d slicer beginner guide, what is a 3d slicer, how to slice stl file, 3d printing slicer tutorial">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Software &amp; Slicing</a> &raquo; <span>Beginner Walkthrough</span>
+      </nav>
+
+      <h1>How to Use a 3D Printer Slicer: Complete Beginner Walkthrough</h1>
+
+      <div class="article-meta">
+        <span>📅 June 1, 2026</span>
+        <span>⏱️ 9 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔪</span>
+      </div>
+
+      <div class="article-body">
+        
+<p>A 3D printer slicer is the software that sits between your 3D model and your printer. It takes an STL or 3MF file and "slices" it into thin horizontal layers, then generates the G-code instructions that tell your printer exactly where to move, how fast to go, and how much filament to extrude.</p>
+
+<p>If you're new to 3D printing, the slicer is where you'll spend most of your time outside of actual printing. This walkthrough covers the complete process from downloading a model to hitting "Print."</p>
+
+<h2>Step 1: Download and Install a Slicer</h2>
+
+<p>The three most popular free slicers in 2026 are:</p>
+<ul>
+<li><strong>Ultimaker Cura</strong> — Best for beginners. Huge community, works with almost every printer.</li>
+<li><strong>PrusaSlicer</strong> — Best for advanced users. Powerful features, great profiles.</li>
+<li><strong>Bambu Studio</strong> — Best for Bambu Lab printers. Auto-calibration, AMS support.</li>
+</ul>
+
+<p>For this guide, we'll use Cura as the example since it's the most beginner-friendly. But the workflow is nearly identical across all three.</p>
+
+<h2>Step 2: Add Your Printer</h2>
+
+<p>When you first open your slicer, it'll ask you to add a printer. Select your brand and model from the list. If your printer isn't listed, choose "Custom FFF Printer" and enter your build volume dimensions.</p>
+
+<p>Key info you'll need:</p>
+<ul>
+<li>Build volume (X × Y × Z in mm)</li>
+<li>Nozzle diameter (usually 0.4 mm)</li>
+<li>Number of extruders (usually 1)</li>
+<li>Heated bed? Yes/No</li>
+</ul>
+
+<h2>Step 3: Import Your 3D Model</h2>
+
+<p>Click File &gt; Open File(s) and select your STL, OBJ, or 3MF file. The model appears on the virtual build plate. You can also drag and drop files directly into the window.</p>
+
+<p>Good sources for free models:</p>
+<ul>
+<li><strong>Printables.com</strong> — Curated, high-quality models</li>
+<li><strong>Thingiverse.com</strong> — Massive library, variable quality</li>
+<li><strong>MakerWorld.com</strong> — Bambu Lab's ecosystem</li>
+<li><strong>MyMiniFactory.com</strong> — Guaranteed printable models</li>
+</ul>
+
+<h2>Step 4: Position and Orient the Model</h2>
+
+<p>Use the move, rotate, and scale tools on the left sidebar:</p>
+
+<ul>
+<li><strong>Move</strong> — Center the model on the build plate</li>
+<li><strong>Rotate</strong> — Orient for the best print quality (minimize overhangs)</li>
+<li><strong>Scale</strong> — Resize if needed (hold Shift for uniform scaling)</li>
+<li><strong>Lay Flat</strong> — Automatically finds the flattest orientation</li>
+</ul>
+
+<p><strong>Pro tip</strong>: The orientation that uses the least support material is almost always the best. Flat face down = easy print.</p>
+
+<h2>Step 5: Choose Your Settings</h2>
+
+<p>In Cura's Recommended mode, you only see a few options:</p>
+
+<table>
+<tr><th>Setting</th><th>What It Does</th><th>Good Starting Value</th></tr>
+<tr><td>Layer Height</td><td>Print resolution (lower = finer)</td><td>0.20 mm</td></tr>
+<tr><td>Infill</td><td>Internal structure density</td><td>15%</td></tr>
+<tr><td>Supports</td><td>Extra material under overhangs</td><td>Enable if model has &gt;45° overhangs</td></tr>
+<tr><td>Adhesion</td><td>Helps print stick to bed</td><td>Brim (5 lines) for most prints</td></tr>
+<tr><td>Filament</td><td>Material type</td><td>Select your filament brand/type</td></tr>
+</table>
+
+<h2>Step 6: Slice and Preview</h2>
+
+<p>Click the "Slice" button. The slicer calculates all the toolpaths and shows you a time estimate. This typically takes 5-30 seconds.</p>
+
+<p>Before printing, use the preview mode to check:</p>
+<ul>
+<li><strong>Layer view</strong> — Scroll through layers to verify everything looks correct</li>
+<li><strong>Speed view</strong> — Check for any suspiciously fast or slow sections</li>
+<li><strong>Support view</strong> — Make sure supports are where you need them</li>
+<li><strong>Travel moves</strong> — Lots of long travels = potential stringing</li>
+</ul>
+
+<h2>Step 7: Send to Your Printer</h2>
+
+<p>Three ways to get the G-code to your printer:</p>
+
+<ol>
+<li><strong>SD Card / USB Drive</strong> — Save the G-code file to a card and insert it into your printer. Most reliable method.</li>
+<li><strong>Wi-Fi (OctoPrint / Bambu Cloud)</strong> — Send directly over your network. Convenient but depends on stable Wi-Fi.</li>
+<li><strong>USB Cable</strong> — Connect directly. Some printers support this, others don't.</li>
+</ol>
+
+<h2>Step 8: Monitor and Learn</h2>
+
+<p>Watch at least the first layer. If it doesn't stick, stop the print and adjust. Common first-layer issues:</p>
+<ul>
+<li>Not sticking: Bed too low ( nozzle too far from bed), bed not clean, bed temp too low</li>
+<li>Too squished: Bed too high (nozzle too close), first layer flow too high</li>
+<li>Skipping/clicking: Extruder can't keep up, nozzle too close to bed</li>
+</ul>
+
+<h2>Common Beginner Mistakes</h2>
+
+<ul>
+<li><strong>Not leveling the bed first</strong> — No slicer setting can fix an unlevel bed</li>
+<li><strong>Using 100% infill</strong> — 15-20% is plenty for almost everything</li>
+<li><strong>Printing too fast</strong> — Slow down for quality, speed up later</li>
+<li><strong>Ignoring supports</strong> — If in doubt, enable them. Wasting a bit of filament beats a failed 6-hour print</li>
+<li><strong>Not cleaning the build plate</strong> — A dirty plate is the #1 adhesion killer</li>
+</ul>
+
+<p>Ready to dive deeper? Check our <a href="../articles/how-to-slice-3d-model.html">detailed slicing guide</a> and <a href="../articles/cura-vs-prusaslicer-vs-bambu-studio.html">slicer comparison</a> to pick the right tool for your needs.</p>
+
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/how-to-slice-3d-model.html">How to Slice a 3D Model for Printing: A Beginner's Guide</a></li>
+        <li><a href="../articles/cura-vs-prusaslicer-vs-bambu-studio.html">Cura vs PrusaSlicer vs Bambu Studio: Which Slicer Is Best?</a></li>
+        <li><a href="../articles/how-to-use-3d-printer-gcode.html">How to Use G-Code to Control Your 3D Printer</a></li>
+        <li><a href="../articles/how-to-choose-first-3d-printer.html">How to Choose Your First 3D Printer</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

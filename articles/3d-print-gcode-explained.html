@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Print G-Code Explained: What Every Line Means</title>
+  <meta name="description" content="G-code looks like gibberish — until you know what it means. This guide breaks down the most important G-code commands every 3D printer owner should understand.">
+  <meta name="keywords" content="3d print gcode explained, gcode commands 3d printer, what is gcode, gcode guide beginners, 3d printer code explained">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="#">Software &amp; Slicing</a> &raquo; <span>G-Code Guide</span>
+      </nav>
+
+      <h1>3D Print G-Code Explained: What Every Line Means</h1>
+
+      <div class="article-meta">
+        <span>📅 June 1, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">📟</span>
+      </div>
+
+      <div class="article-body">
+        <p>Open a G-code file and you'll see hundreds of lines that look like <code>G1 X45.2 Y30.1 E0.0345</code>. It reads like alien language — but it's actually straightforward once you learn a few dozen commands. <strong>G-code</strong> is the instruction set your 3D printer follows, and understanding it gives you real control over your prints. This guide breaks down every important command, what it does, and when you'll encounter it.</p>
+
+        <h2>What Is G-Code?</h2>
+        <p>G-code (short for Geometric Code) is a programming language that tells CNC machines — including 3D printers — exactly what to do. Each line is a command: move here, heat that, extrude this much filament. Your slicer (Cura, PrusaSlicer, Orca Slicer) takes your 3D model and converts it into thousands of G-code lines that the printer executes one by one.</p>
+        <p>Think of it as a recipe. The slicer writes the recipe. The printer follows it step by step. And once you can read the recipe, you can modify it — adjust temperatures on the fly, add pauses, fix errors, and optimize prints in ways the slicer can't.</p>
+        <p>For a broader overview of how G-code fits into the printing workflow, check out our <a href="how-to-use-3d-printer-gcode.html">guide to using G-code with your 3D printer</a>.</p>
+
+        <h2>How to Read a G-Code Line</h2>
+        <p>Every G-code line follows the same structure:</p>
+        <pre><code>G1 X45.2 Y30.1 Z0.2 E0.0345 F1200</code></pre>
+        <p>Here's what each part means:</p>
+        <ul>
+          <li><strong>G1</strong> — The command (linear move)</li>
+          <li><strong>X45.2</strong> — Move to X position 45.2mm</li>
+          <li><strong>Y30.1</strong> — Move to Y position 30.1mm</li>
+          <li><strong>Z0.2</strong> — Move to Z height 0.2mm</li>
+          <li><strong>E0.0345</strong> — Extrude 0.0345mm of filament</li>
+          <li><strong>F1200</strong> — Feed rate (speed): 1200mm/min</li>
+        </ul>
+        <p>Not every line has all parameters. A line like <code>G1 X50.0 F900</code> only moves the X axis at 900mm/min with no extrusion. Parameters that aren't specified keep their last value.</p>
+
+        <h2>Essential G-Code Commands</h2>
+
+        <h3>G0 and G1 — Movement</h3>
+        <p><code>G0</code> is a rapid move (travel without extruding). <code>G1</code> is a controlled move (usually while extruding). In practice, most slicers use <code>G1</code> for everything and rely on the E parameter to distinguish printing moves from travel moves. If E is present, filament is being extruded. If E is absent, the nozzle is just repositioning.</p>
+        <pre><code>G0 X10 Y10 Z5      ; rapid move to (10,10,5), no extrusion
+G1 X20 Y10 E0.5 F900 ; controlled move, extrude 0.5mm</code></pre>
+
+        <h3>G28 — Home All Axes</h3>
+        <p>This command tells the printer to move all axes to their home (zero) position. It's typically the first command in any G-code file — the printer needs to know where it is before it can go anywhere.</p>
+        <pre><code>G28         ; home all axes
+G28 X Y     ; home only X and Y</code></pre>
+        <p>If your printer has a BLTouch or other probe, G28 also triggers the bed probing sequence. Never skip homing — without it, the printer has no reference point and could crash into the frame.</p>
+
+        <h3>G29 — Auto Bed Leveling</h3>
+        <p>G29 runs the auto bed leveling probe. The printer measures multiple points on the bed and creates a compensation mesh. This command appears right after G28 in most start G-code scripts.</p>
+        <pre><code>G28    ; home first
+G29    ; then probe the bed</code></pre>
+        <p>Some printers use <code>M420 S1</code> instead to load a previously saved mesh, which is faster. If you're using <a href="octoprint-setup-guide.html">OctoPrint</a>, you can add a G29 plugin to visualize your mesh in real time.</p>
+
+        <h3>G90 and G91 — Absolute vs. Relative Positioning</h3>
+        <p><code>G90</code> sets absolute positioning — all coordinates are relative to the origin. <code>G91</code> sets relative positioning — coordinates are offsets from the current position.</p>
+        <pre><code>G90               ; absolute mode (default)
+G1 X50 Y50        ; move to position (50,50)
+G91               ; relative mode
+G1 X10 Y10        ; move 10mm right and 10mm forward from current position</code></pre>
+        <p>Most of your G-code file uses G90. Relative mode (G91) appears mainly in specific situations like <a href="3d-printing-retraction-settings.html">retraction moves</a> or wipe sequences.</p>
+
+        <h3>M104 and M109 — Hotend Temperature</h3>
+        <p><code>M104 S200</code> starts heating the hotend to 200°C but doesn't wait — the next commands execute immediately. <code>M109 S200</code> heats the hotend and <strong>waits</strong> until it reaches 200°C before continuing.</p>
+        <pre><code>M104 S200    ; start heating to 200°C (non-blocking)
+M109 S200    ; heat to 200°C and wait (blocking)</code></pre>
+        <p>Most start scripts use M104 early (so heating begins while the printer is homing), then M109 right before printing starts (to ensure the nozzle is fully up to temperature).</p>
+
+        <h3>M140 and M190 — Bed Temperature</h3>
+        <p>Same pattern as hotend commands, but for the heated bed. <code>M140</code> is non-blocking, <code>M190</code> is blocking.</p>
+        <pre><code>M140 S60    ; start heating bed to 60°C (non-blocking)
+M190 S60    ; heat bed to 60°C and wait (blocking)</code></pre>
+        <p>Pro tip: Heat the bed first (it takes longer), then start heating the hotend while the bed is still warming. This saves significant time on each print.</p>
+
+        <h3>M106 and M107 — Fan Control</h3>
+        <p><code>M106 S255</code> turns the part cooling fan on at full speed (255 = 100%). <code>M106 S128</code> sets it to 50%. <code>M107</code> turns the fan off entirely.</p>
+        <pre><code>M106 S255    ; fan on at 100%
+M106 S128    ; fan on at 50%
+M107          ; fan off</code></pre>
+        <p>Most slicers turn the fan off for the first few layers (better adhesion), then ramp it up for overhangs and bridges. Understanding fan commands helps you tweak cooling for specific filaments — PLA likes full fan, ABS prefers none.</p>
+
+        <h3>M82 and M83 — Extrusion Mode</h3>
+        <p><code>M82</code> sets absolute extrusion — the E value is the total filament extruded since the start. <code>M83</code> sets relative extrusion — the E value is how much filament to extrude for this move only.</p>
+        <pre><code>M82         ; absolute extrusion (default in Cura)
+M83         ; relative extrusion (default in PrusaSlicer)</code></pre>
+        <p>This matters when editing G-code by hand. In absolute mode, you need to calculate running totals. In relative mode, each line is self-contained — much easier for manual edits.</p>
+
+        <h3>G92 — Set Position</h3>
+        <p><code>G92</code> tells the printer "consider your current position to be this value." It's most commonly used to reset the extruder counter:</p>
+        <pre><code>G92 E0    ; reset extruder position to zero</code></pre>
+        <p>Slicers insert <code>G92 E0</code> before each layer in absolute extrusion mode, keeping the E values manageable instead of letting them grow into the thousands.</p>
+
+        <h2>Start G-Code: What Happens Before Your Print</h2>
+        <p>Every G-code file begins with a start script. Here's what a typical one looks like, with annotations:</p>
+        <pre><code>M140 S60          ; start heating bed
+M105              ; report temperature (keeps connection alive)
+M190 S60          ; wait for bed to reach 60°C
+M104 S200         ; start heating hotend
+M109 S200         ; wait for hotend to reach 200°C
+G28               ; home all axes
+G29               ; auto bed level
+G92 E0            ; reset extruder
+G1 Z2 F3000       ; raise nozzle 2mm
+G1 X0 Y0 F3000    ; move to corner
+G1 Z0.2 F500      ; lower to first layer height
+G1 X50 E10 F800   ; draw a purge line</code></pre>
+        <p>This sequence ensures the printer is heated, leveled, and primed before the actual print begins. The purge line at the end ensures filament is flowing — if you see gaps in your first layer, a missing or short purge line could be the culprit.</p>
+
+        <h2>End G-Code: How Your Print Finishes</h2>
+        <pre><code>M400              ; wait for all moves to finish
+M104 S0           ; turn off hotend
+M140 S0           ; turn off bed
+M106 S0           ; turn off fan
+G91               ; relative positioning
+G1 Z10 F3000      ; raise nozzle 10mm
+G90               ; back to absolute
+G1 X0 Y200 F3000  ; move bed forward (easy removal)
+M84               ; disable motors</code></pre>
+        <p>Disabling motors (M84) lets you manually move the print head after the print finishes. Without it, the steppers stay locked and you can't reposition anything.</p>
+
+        <h2>Common G-Code Modifications</h2>
+        <p>Understanding G-code opens up practical tweaks:</p>
+        <ul>
+          <li><strong>Add a pause:</strong> Insert <code>M0</code> or <code>M25</code> to pause the print — useful for color changes or embedding objects.</li>
+          <li><strong>Change temperature mid-print:</strong> Add <code>M104 S210</code> at a specific layer to increase hotend temperature for better layer adhesion.</li>
+          <li><strong>Slow down overhangs:</strong> Some slicers let you add <code>M220 S50</code> (50% speed) before overhang sections and <code>M220 S100</code> after.</li>
+          <li><strong>Firmware retract:</strong> <code>G10</code> retracts, <code>G11</code> unretracts — cleaner than manually editing E values. Learn more in our <a href="3d-printing-retraction-settings.html">retraction settings guide</a>.</li>
+        </ul>
+
+        <h2>How to View and Edit G-Code</h2>
+        <p>Any text editor can open a .gcode file — Notepad, VS Code, even your browser. For visualization, use these tools:</p>
+        <ul>
+          <li><strong><a href="octoprint-setup-guide.html">OctoPrint</a>:</strong> Built-in G-code viewer with layer-by-layer navigation.</li>
+          <li><strong>NCViewer:</strong> Free online G-code visualizer — drag and drop your file.</li>
+          <li><strong>PrusaSlicer / Orca Slicer:</strong> Both show a preview with estimated print time per section.</li>
+        </ul>
+        <p>When editing, always save a copy of the original file. One typo in G-code can cause a crashed print head or a mangled model.</p>
+
+        <h2>Quick Reference: Most Used Commands</h2>
+        <table>
+          <tr><th>Command</th><th>What It Does</th><th>Common Parameters</th></tr>
+          <tr><td><code>G0</code></td><td>Rapid move (no extrusion)</td><td>X, Y, Z, F</td></tr>
+          <tr><td><code>G1</code></td><td>Controlled move (with extrusion)</td><td>X, Y, Z, E, F</td></tr>
+          <tr><td><code>G28</code></td><td>Home all axes</td><td>X, Y, Z (optional)</td></tr>
+          <tr><td><code>G29</code></td><td>Auto bed level</td><td>—</td></tr>
+          <tr><td><code>G90</code></td><td>Absolute positioning</td><td>—</td></tr>
+          <tr><td><code>G91</code></td><td>Relative positioning</td><td>—</td></tr>
+          <tr><td><code>G92</code></td><td>Set position (reset axis)</td><td>X, Y, Z, E</td></tr>
+          <tr><td><code>M104</code></td><td>Set hotend temp (non-blocking)</td><td>S (temp °C)</td></tr>
+          <tr><td><code>M109</code></td><td>Set hotend temp (blocking)</td><td>S (temp °C)</td></tr>
+          <tr><td><code>M140</code></td><td>Set bed temp (non-blocking)</td><td>S (temp °C)</td></tr>
+          <tr><td><code>M190</code></td><td>Set bed temp (blocking)</td><td>S (temp °C)</td></tr>
+          <tr><td><code>M106</code></td><td>Fan on</td><td>S (0–255)</td></tr>
+          <tr><td><code>M107</code></td><td>Fan off</td><td>—</td></tr>
+          <tr><td><code>M82</code></td><td>Absolute extrusion</td><td>—</td></tr>
+          <tr><td><code>M83</code></td><td>Relative extrusion</td><td>—</td></tr>
+          <tr><td><code>M84</code></td><td>Disable motors</td><td>—</td></tr>
+        </table>
+
+        <h2>Conclusion</h2>
+        <p>You don't need to memorize every G-code command — most printers use fewer than 20 on a regular basis. Start by understanding <code>G0</code>/<code>G1</code> (movement), temperature commands (<code>M104</code>/<code>M109</code>/<code>M140</code>/<code>M190</code>), and homing (<code>G28</code>/<code>G29</code>). Those cover 90% of what happens in a typical print file. Once you're comfortable, explore your slicer's start and end G-code settings — that's where the real customization happens. For a deeper dive into how <a href="how-to-slice-3d-model.html">slicers generate G-code from your models</a>, check out our slicing guide. The more you understand the code driving your printer, the more control you have over every print.</p>
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="how-to-use-3d-printer-gcode.html">How to Use 3D Printer G-Code: A Beginner's Guide</a></li>
+          <li><a href="how-to-slice-3d-model.html">How to Slice a 3D Model for Printing</a></li>
+          <li><a href="3d-printing-retraction-settings.html">3D Printing Retraction Settings: Fix Stringing & Oozing</a></li>
+          <li><a href="octoprint-setup-guide.html">OctoPrint Setup Guide: Monitor & Control Your Printer</a></li>
+          <li><a href="../troubleshooting.html">Troubleshooting Guide</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrusaSlicer Settings Guide: Profiles, Tips &amp; Tricks — 3D Print Starter</title>
+  <meta name="description" content="Master PrusaSlicer with this complete settings guide. Learn how to configure profiles, tweak print settings, and get the best results from your 3D printer.">
+  <meta name="keywords" content="prusaslicer settings guide, prusaslicer profiles, prusaslicer tips tricks, prusa slicer configuration, 3d printing slicer settings">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Software &amp; Slicing</a> &raquo; <span>Slicer Settings</span>
+      </nav>
+
+      <h1>PrusaSlicer Settings Guide: Profiles, Tips &amp; Tricks</h1>
+
+      <div class="article-meta">
+        <span>📅 June 1, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🖥️</span>
+      </div>
+
+      <div class="article-body">
+        
+<p>PrusaSlicer has gone from being a niche tool for Prusa printer owners to one of the most capable free slicers available in 2026. Its custom G-code support, variable layer heights, and excellent print profiles make it a favorite among experienced makers — but it can also serve beginners well if you know where to start.</p>
+
+<p>This guide covers the key PrusaSlicer settings you need, how profiles work, and pro tips that'll save you from hours of frustration.</p>
+
+<h2>Understanding PrusaSlicer Profiles</h2>
+
+<p>Unlike Cura's single-profile approach, PrusaSlicer uses a layered profile system:</p>
+
+<ul>
+<li><strong>Printer Profile</strong> — Defines your hardware (nozzle size, build volume, bed type)</li>
+<li><strong>Print Profile</strong> — Defines quality/speed (0.10mm Detail, 0.20mm Quality, 0.30mm Draft)</li>
+<li><strong>Filament Profile</strong> — Defines material settings (temperature, cooling, retraction)</li>
+</ul>
+
+<p>You select one of each, and PrusaSlicer combines them. This means you can swap filaments without re-tuning your speed settings, and vice versa. It's cleaner than Cura's approach once you understand it.</p>
+
+<h2>Essential Print Settings</h2>
+
+<h3>Layer Height &amp; Quality Presets</h3>
+<table>
+<tr><th>Preset</th><th>Layer Height</th><th>Best For</th></tr>
+<tr><td>0.05 mm Ultra Detail</td><td>0.05 mm</td><td>Miniatures, jewelry</td></tr>
+<tr><td>0.10 mm Detail</td><td>0.10 mm</td><td>Display models, fine details</td></tr>
+<tr><td>0.15 mm Quality</td><td>0.15 mm</td><td>General purpose, good balance</td></tr>
+<tr><td>0.20 mm Speed</td><td>0.20 mm</td><td>Functional parts, everyday prints</td></tr>
+<tr><td>0.30 mm Draft</td><td>0.30 mm</td><td>Quick prototypes, test fits</td></tr>
+</table>
+
+<h3>Variable Layer Height</h3>
+<p>This is PrusaSlicer's killer feature. It lets you use thin layers for visible surfaces and thick layers for invisible infill — without splitting the model. Right-click the layer height slider and select "Adaptive" or manually paint regions. This can cut print time by 30-50% with zero quality loss on visible surfaces.</p>
+
+<h2>Filament Settings That Matter</h2>
+
+<h3>Temperature</h3>
+<p>PrusaSlicer's filament profiles include tested temperature ranges, but you may need to tune for your specific brand:</p>
+<ul>
+<li><strong>PLA</strong>: Nozzle 190-220 °C, Bed 50-65 °C</li>
+<li><strong>PETG</strong>: Nozzle 225-250 °C, Bed 70-90 °C</li>
+<li><strong>ABS</strong>: Nozzle 240-260 °C, Bed 95-110 °C</li>
+<li><strong>TPU</strong>: Nozzle 210-230 °C, Bed 40-60 °C</li>
+</ul>
+
+<h3>Cooling</h3>
+<p>PrusaSlicer's cooling is more nuanced than Cura's. You set a minimum and maximum fan speed, and it automatically adjusts within that range based on layer time. For PLA, set min 30% / max 100%. For PETG, set min 0% / max 50%.</p>
+
+<h2>Advanced Features Worth Using</h2>
+
+<h3>1. Custom G-Code</h3>
+<p>PrusaSlicer lets you add custom G-code at specific events (before/after layer change, before/after print, on tool change). Common uses:</p>
+<ul>
+<li>Add a beep when the print finishes: <code>M300 S800 P1000</code></li>
+<li>Turn off stepper motors at the end: <code>M84</code></li>
+<li>Pause for color change at a specific layer</li>
+</ul>
+
+<h3>2. Paint-on Supports</h3>
+<p>Instead of generating supports everywhere, you can paint exactly where you want them. This saves material and makes removal easier. Select the support eraser tool, then paint areas where you don't want supports.</p>
+
+<h3>3. Modifier Meshes</h3>
+<p>Want 100% infill just in the screw holes but 15% everywhere else? Create a cylinder in your CAD software, import it as a modifier mesh, and set different settings for that region. This is incredibly powerful for functional parts.</p>
+
+<h3>4. Seam Placement</h3>
+<p>Control where the Z-seam appears on your print. Options include: Rear, Nearest, Aligned, and Rear/Near. For display models, "Aligned" hides the seam in one consistent location. For functional parts, "Nearest" minimizes travel moves.</p>
+
+<h2>PrusaSlicer vs Cura: When to Switch</h2>
+
+<p>Stick with Cura if you value a simpler interface and massive community plugin support. Switch to PrusaSlicer if you need:</p>
+<ul>
+<li>Variable layer heights</li>
+<li>More granular control over support generation</li>
+<li>Better multi-material support (MMU)</li>
+<li>Superior custom G-code integration</li>
+</ul>
+
+<p>For a full comparison, see our <a href="../articles/cura-vs-prusaslicer-vs-bambu-studio.html">slicer showdown</a>.</p>
+
+<h2>Tips for Non-Prusa Printers</h2>
+
+<p>PrusaSlicer works great with non-Prusa machines. When setting up, choose "Other Vendors" and select your printer. If it's not listed, import a config from the community — there are thousands of tested profiles on GitHub and Printables.</p>
+
+<p>Key settings to verify for non-Prusa printers:</p>
+<ul>
+<li>Bed size and origin (some printers have origin at center, others at corner)</li>
+<li>Retraction distance (especially Bowden vs direct drive)</li>
+<li>Max speed and acceleration limits</li>
+<li>Start/end G-code (PrusaSlicer's defaults assume Prusa hardware)</li>
+</ul>
+
+      </div>
+
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/cura-vs-prusaslicer-vs-bambu-studio.html">Cura vs PrusaSlicer vs Bambu Studio: Which Slicer Is Best?</a></li>
+        <li><a href="../articles/how-to-slice-3d-model.html">How to Slice a 3D Model for Printing: A Beginner's Guide</a></li>
+        <li><a href="../articles/best-3d-printer-settings.html">Best 3D Printer Settings for Every Filament</a></li>
+        <li><a href="../articles/3d-print-infill-patterns.html">3D Print Infill Patterns: Which One Should You Use?</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
