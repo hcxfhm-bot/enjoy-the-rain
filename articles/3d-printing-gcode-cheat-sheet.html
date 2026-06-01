@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Essential G-Code Commands for 3D Printing: Cheat Sheet — 3D Print Starter</title><meta name="description" content="A practical G-code cheat sheet for 3D printing. Learn the most useful commands for bed leveling, extrusion, movement, and troubleshooting — without being a programmer."><meta name="keywords" content="gcode cheat sheet, 3d printing gcode, essential gcode commands, gcode reference, printer gcode list"><link rel="stylesheet" href="../css/style.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head><body>
+<nav class="nav"><div class="container"><a href="../index.html" class="nav-brand"><span class="icon">🖨️</span> 3D Print <span>Starter</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><ul class="nav-links"><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Projects</a></li></ul></div></nav>
+<main class="section"><div class="container"><article class="article-page"><nav class="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../getting-started.html">Reference</a> &raquo; <span>Reference</span></nav><h1>Essential G-Code Commands for 3D Printing: Cheat Sheet</h1><div class="article-meta"><span>📅 June 1, 2026</span><span>⏱️ 7 min read</span><span>✍️ 3D Print Starter Team</span></div><div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;"><span style="font-size: 4rem;">📋</span></div><div class="article-body"><p>You don't need to be a G-code programmer to benefit from knowing a few essential commands. These commands let you manually control your printer, diagnose problems, and perform maintenance.</p>
+<h2>Movement Commands</h2><table><tr><th>Command</th><th>What It Does</th></tr>
+<tr><td>G28</td><td>Home all axes</td></tr>
+<tr><td>G28 X Y</td><td>Home X and Y only (keep Z position)</td></tr>
+<tr><td>G1 X100 Y100 Z10 F3000</td><td>Move to X100 Y100 Z10 at 3000mm/min</td></tr>
+<tr><td>G1 Z5 F500</td><td>Move Z to 5mm (slow, for bed leveling)</td></tr></table>
+<h2>Extrusion Commands</h2><table><tr><th>Command</th><th>What It Does</th></tr>
+<tr><td>G1 E10 F100</td><td>Extrude 10mm of filament at 100mm/min</td></tr>
+<tr><td>G1 E-5 F300</td><td>Retract 5mm (for nozzle changes)</td></tr>
+<tr><td>M92 E424.9</td><td>Set E-steps to 424.9</td></tr>
+<tr><td>M302 P1</td><td>Allow cold extrusion (for testing only)</td></tr></table>
+<h2>Temperature Commands</h2><table><tr><th>Command</th><th>What It Does</th></tr>
+<tr><td>M104 S200</td><td>Set hotend to 200°C</td></tr>
+<tr><td>M140 S60</td><td>Set bed to 60°C</td></tr>
+<tr><td>M105</td><td>Report current temperatures</td></tr>
+<tr><td>M303 E0 S200 C8</td><td>PID auto-tune hotend at 200°C</td></tr></table>
+<h2>Utility Commands</h2><table><tr><th>Command</th><th>What It Does</th></tr>
+<tr><td>M500</td><td>Save settings to EEPROM</td></tr>
+<tr><td>M503</td><td>Print current settings</td></tr>
+<tr><td>M84</td><td>Disable all motors</td></tr>
+<tr><td>G29</td><td>Auto bed level (if ABL installed)</td></tr></table>
+<p>For more technical details, see our <a href="../articles/how-to-use-3d-printer-gcode.html">full G-code guide</a> and <a href="../articles/3d-print-gcode-explained.html">G-code explained</a>.</p></div><div class="ad-placeholder inline" style="margin: 2rem 0;">📢 Advertisement — Ad Placeholder (Google AdSense)</div><div class="related-articles"><h2>📖 You Might Also Like</h2><ul><li><a href="../articles/how-to-use-3d-printer-gcode.html">How to Use G-Code</a></li>
+        <li><a href="../articles/3d-print-gcode-explained.html">3D Print G-Code Explained</a></li>
+        <li><a href="../articles/how-to-calibrate-3d-printer.html">How to Calibrate Your 3D Printer</a></li></ul></div></article></div></main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><h3>🖨️ 3D Print Starter</h3><p>Your trusted guide to getting started with 3D printing.</p></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../getting-started.html">Getting Started</a></li><li><a href="../printers.html">Best Printers</a></li><li><a href="../filament-guide.html">Filament Guide</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../troubleshooting.html">Troubleshooting</a></li><li><a href="../projects.html">Project Ideas</a></li><li><a href="../about.html">About Us</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 3D Print Starter. All rights reserved.</p></div></div></footer>
+<script src="../js/main.js"></script></body></html>

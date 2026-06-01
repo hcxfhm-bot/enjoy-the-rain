@@ -246,12 +246,40 @@
 - [x] metal-3d-printing-beginners — Metal 3D Printing for Beginners: Processes, Costs & Applications ✅ 2026-06-01
 - [x] sustainable-3d-printing — Sustainable 3D Printing: Recycled Filaments & Eco-Friendly Practices ✅ 2026-06-01
 
+### 批次 33：MORE FILAMENT & MATERIAL DEEP-DIVES (6篇) ✅
+- [x] hmsfa-filament-guide — High-Speed PLA Filament Guide: Fast Printing Without Quality Loss ✅ 2026-06-01
+- [x] best-3d-printer-under-1000 — Best 3D Printer Under $1000 in 2026: Premium Quality on a Budget ✅ 2026-06-01
+- [x] 3d-printing-for-hobby-games — 3D Printing for Tabletop Games: Miniatures, Terrain & Accessories ✅ 2026-06-01
+- [x] 3d-print-stringing-fix-advanced — Advanced Stringing Fix: When Basic Retraction Isn't Enough ✅ 2026-06-01
+- [x] 3d-printing-first-layer-perfect — How to Get the Perfect First Layer Every Time: Complete Guide ✅ 2026-06-01
+- [x] 3d-printing-silicone-casting — 3D Printing for Silicone Casting: Molds, Masters & Techniques ✅ 2026-06-01
+
+### 批次 34：ORGANIZATION, MAINTENANCE & KIDS (6篇) ✅
+- [x] 3d-printing-organization-storage — 3D Printing Workspace Organization: Storage, Tools & Efficiency ✅ 2026-06-01
+- [x] 3d-printing-nozzle-wear-guide — 3D Printer Nozzle Wear: When to Replace and How to Extend Life ✅ 2026-06-01
+- [x] best-3d-printer-for-kids — Best 3D Printers for Kids and Young Makers in 2026 ✅ 2026-06-01
+- [x] 3d-printing-gcode-cheat-sheet — Essential G-Code Commands for 3D Printing: Cheat Sheet ✅ 2026-06-01
+- [x] 3d-printing-intellectual-property-guide — 3D Printing and Intellectual Property: What You Can and Can't Print ✅ 2026-06-01
+- [x] 3d-printing-troubleshooting-flowchart — 3D Print Troubleshooting Flowchart: Diagnose Any Problem in 5 Steps ✅ 2026-06-01
+
+### 批次 35：MANUFACTURING & GIFTS (6篇) ✅
+- [x] 3d-printing-vs-injection-molding — 3D Printing vs Injection Molding: When to Use Each in 2026 ✅ 2026-06-01
+- [x] 3d-printing-holiday-gifts — 3D Printed Holiday Gifts: 20 Ideas for Every Occasion ✅ 2026-06-01
+- [x] 3d-printing-emf-safety — 3D Printer EMF and Electrical Safety: What You Need to Know ✅ 2026-06-01
+- [x] 3d-printing-creality-slicer-guide — Creality Print Slicer Guide: Settings, Tips & Best Profiles ✅ 2026-06-01
+- [x] 3d-printing-vs-cnc-machining — 3D Printing vs CNC Machining: Which Is Right for Your Project? ✅ 2026-06-01
+- [x] 3d-printing-visual-quality-guide — How to Achieve Visual-Perfect 3D Prints: Settings for Display Models ✅ 2026-06-01
+
+### 批次 36：BONUS ARTICLES (2篇) ✅
+- [x] 3d-printer-filament-storage-guide — 3D Printer Filament Storage Guide: Bags, Boxes & Dry Boxes ✅ 2026-06-01
+- [x] best-3d-printer-for-cosplay — Best 3D Printer for Cosplay: Helmets, Armor & Props in 2026 ✅ 2026-06-01
+
 ## 进度
 
-- **总目标**: 200 篇
-- **已完成**: 200 篇 ✅ (全部批次1-32完成！)
+- **总目标**: 200+ 篇
+- **已完成**: 201 篇 ✅ (批次1-36全部完成！)
 - **剩余**: 0 篇 🎉
-- **当前状态**: 🎊 所有200篇SEO文章已全部生成完毕！
+- **当前状态**: 🎊 所有SEO文章已全部生成完毕，超过200篇目标！
 
 ## 生成规则
 
