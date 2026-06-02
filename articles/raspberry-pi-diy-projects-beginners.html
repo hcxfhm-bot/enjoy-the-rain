@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror (2026 Guide)</title>
+  <meta name="description" content="Discover 10 incredible Raspberry Pi DIY projects for beginners in 2026. Build your own NAS, smart mirror, game console, home automation hub, and more with step-by-step guides.">
+  <meta name="keywords" content="raspberry pi projects, DIY projects, beginner raspberry pi, raspberry pi nas, smart mirror, home server, retropie, pi-hole, 3d printing">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Projects</span>
+      </nav>
+
+      <h1>10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror (2026 Guide)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 2, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🖥️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+<p>The Raspberry Pi is one of the most versatile pieces of hardware ever made. For under $80, you get a full computer that fits in your pocket — and makers around the world have turned it into everything from home servers to retro gaming consoles. Whether you just bought your first Pi or it's been sitting in a drawer waiting for a purpose, this guide shows you 10 beginner-friendly projects that'll make you wonder how you ever lived without one.</p>
+
+<p>If you're setting up your Raspberry Pi for the first time, check out our <a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi guide</a> — it covers the initial setup you'll need for several of these projects.</p>
+
+<h2>What You'll Need Before Starting</h2>
+
+<p>Most Raspberry Pi DIY projects share a common set of essentials:</p>
+
+<ul>
+  <li><strong>Raspberry Pi 4 or 5</strong> (recommended for performance)</li>
+  <li><strong>microSD card</strong> — 32GB or larger, Class 10 or faster</li>
+  <li><strong>Power supply</strong> — Official USB-C adapter, 15W minimum</li>
+  <li><strong>Keyboard, mouse, monitor</strong> (for initial setup)</li>
+  <li><strong>Ethernet cable</strong> (optional but recommended for servers)</li>
+  <li><strong>3D-printed case or enclosure</strong> — Check our guide on <a href="raspberry-pi-case-3d-print.html">how to 3D print custom smart home device cases</a> to make your project look professional</li>
+</ul>
+
+<h2>Project 1: Build Your Own NAS (Network Attached Storage)</h2>
+
+<p>A NAS lets you store files centrally and access them from any device in your home — no monthly cloud fees. With a Raspberry Pi and an external USB drive, you can build a 2-bay NAS for around $120 total.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi 4 or 5</li>
+  <li>2 × USB external hard drives (or SSDs)</li>
+  <li>OpenMediaVault software (free, Linux-based NAS OS)</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Flash OpenMediaVault to your SD card, connect your drives, and configure storage pools through a web interface. You'll get Samba shares (Windows/Mac compatible), NFS for Linux, and even cloud sync features. Transfer speeds around 100-200 MB/s are typical over gigabit Ethernet — fast enough for 4K video streaming.</p>
+
+<h3>Why it's great for beginners</h3>
+<p>OpenMediaVault has a clean web GUI. No command-line hacking required for basic setup. You can expand storage by adding more drives later, and the system runs headless (no monitor needed once configured).</p>
+
+<h2>Project 2: Retro Gaming Console with RetroPie</h2>
+
+<p>Turn your Raspberry Pi into a full retro gaming station that plays NES, SNES, Sega Genesis, PlayStation, and thousands of arcade games. RetroPie combines EmulationStation (the pretty frontend) with RetroArch (the game emulation engine) in one easy image.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi 4 (2GB minimum, 4GB recommended)</li>
+  <li>Game controllers (8BitDo or Xbox/PlayStation controllers work great)</li>
+  <li>microSD card 64GB+</li>
+  <li>RetroPie image (free download)</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Flash the RetroPie image, boot up, pair your controllers over Bluetooth, and load your ROM files via network share. EmulationStation auto-detects your controllers and organizes games by system. Use a 3D-printed case to make it look like a real console — browse <a href="https://www.thingiverse.com/search?q=retropie+case" target="_blank" rel="noopener">Thingiverse for free Raspberry Pi case designs</a>.</p>
+
+<h3>Pro tip</h3>
+<p>RetroPie runs hot during long gaming sessions. Consider adding a small heatsink or fan. Our <a href="3d-printer-raspberry-pi-camera.html">Raspberry Pi camera guide</a> covers cooling solutions that apply here too.</p>
+
+<h2>Project 3: Ad Blocker with Pi-hole</h2>
+
+<p>Block ads and trackers across your entire network — every device, every app, zero ads — with a single Raspberry Pi running Pi-hole. It's a DNS-level ad blocker that works before ads even load in your browser.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi (any model, Zero 2 W works fine)</li>
+  <li>microSD card 8GB+</li>
+  <li>5 minutes to set up (no, really)</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Pi-hole intercepts DNS queries from devices on your network and blocks known advertising/tracking domains. It's invisible to your devices — no app to install. You get a slick dashboard showing blocked queries, and you can whitelist sites as needed.</p>
+
+<pre><code># Quick install (run on Raspberry Pi OS)
+curl -sSL https://install.pi-hole.net | bash</code></pre>
+
+<p>Point your router's DNS to the Pi's IP address, and every device on your network immediately benefits. Average users see 15-30% fewer ads across all apps.</p>
+
+<h2>Project 4: Smart Mirror</h2>
+
+<p>A smart mirror shows you the time, weather, calendar events, news headlines, and more — all reflected in a two-way mirror while you get ready in the morning. It's one of the most visually impressive beginner projects.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi 3B+ or newer</li>
+  <li>Two-way mirror glass (acrylic mirror works for testing)</li>
+  <li>Old monitor or LCD panel (remove the frame)</li>
+  <li>Magic Mirror² software (free, open source)</li>
+  <li>3D-printed frame or wooden frame</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Mount the monitor behind the two-way mirror, install Magic Mirror² on your Pi, and configure modules for weather, clock, calendar, news feed, and compliments. The display shines through the semi-transparent mirror, overlaying information on your reflection.</p>
+
+<p>Want to house your electronics neatly? Our <a href="3d-print-smart-home-case.html">guide to 3D printing custom smart home device cases</a> covers enclosure design — perfect for enclosing your Pi and wiring inside the mirror frame.</p>
+
+<h3>Modules to start with</h3>
+<ul>
+  <li><strong>MMM-DarkSkyProvider</strong> — Weather data</li>
+  <li><strong>MMM-CalendarExt3</strong> — Google Calendar integration</li>
+  <li><strong>MMM-NewsFeed</strong> — Headlines from your favorite sources</li>
+  <li><strong>MMM-EasyBack</strong> — Beautiful background images</li>
+</ul>
+
+<h2>Project 5: Home Assistant Smart Home Hub</h2>
+
+<p>If you want a truly private, local-only smart home that works without cloud subscriptions, Home Assistant on a Raspberry Pi is the answer. Control Zigbee devices, Z-Wave sensors, ESPHome gadgets, Tuya switches, and more — all from one unified dashboard.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi 4 (4GB recommended)</li>
+  <li>microSD card 32GB+ (or USB SSD for better reliability)</li>
+  <li>Home Assistant OS (free, via Raspberry Pi Imager)</li>
+  <li>Zigbee dongle (Sonoff ZBDongle-E recommended)</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Home Assistant discovers devices automatically on your network. Add a Zigbee coordinator, pair your sensors and switches, and build automations with a visual editor or YAML. The best part: everything runs locally. No internet required, no subscription, no privacy concerns.</p>
+
+<p>We have a complete <a href="home-assistant-raspberry-pi-setup.html">step-by-step guide to setting up Home Assistant on Raspberry Pi</a> that walks you through installation, configuration, and your first automations.</p>
+
+<h2>Project 6: Portable Gaming Handheld (Pocket Pi)</h2>
+
+<p>Take your retro gaming on the road with a portable Pi handheld. Projects like the RetroGame Pi or Potato Pi use a 3.5-inch screen, analog sticks, and buttons in a custom 3D-printed shell.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi Zero 2 W (compact size fits handheld cases)</li>
+  <li>3.5-inch IPS display (SPI or DPI interface)</li>
+  <li>Analog thumbsticks, buttons, and d-pad</li>
+  <li>3D-printed enclosure (search "Pocket Pi" on Printables or Thingiverse)</li>
+  <li>Lipo battery 1500-3000mAh</li>
+</ul>
+
+<h3>Why 3D printing matters here</h3>
+<p>These handhelds require a precise enclosure to fit the screen, PCB, and battery. This is where 3D printing shines — you can print test-fit prototypes and iterate until everything clicks. Check our <a href="3d-print-phone-case.html">guide to designing 3D printed cases</a> for tips on tolerance and fit.</p>
+
+<h2>Project 7: Magic Mirror with Voice Control</h2>
+
+<p>Upgrade Project 4 by adding Amazon Alexa or Google Assistant voice control. Ask your mirror for the weather, set timers, check calendar events, or control your smart home devices — all hands-free.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Everything from the Smart Mirror project (Project 4)</li>
+  <li>ReSpeaker USB Mic Array or PS3 Eye camera (for far-field voice pickup)</li>
+  <li>Alexa API or Google Assistant SDK on the Pi</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Install the Alexa Voice Service or Google Assistant SDK alongside Magic Mirror². The microphone array listens for wake words even from across the room, and responses display on the mirror while also playing through speakers.</p>
+
+<h2>Project 8: VPN Server for Remote Access</h2>
+
+<p>Access your home network securely from anywhere in the world. WireGuard on a Raspberry Pi is fast, modern, and takes under 30 minutes to set up.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi 4</li>
+  <li>Static IP or dynamic DNS (DDNS) service</li>
+  <li>Port forwarding on your router</li>
+</ul>
+
+<h3>How it works</h3>
+<p>WireGuard creates an encrypted tunnel between your phone/laptop and your home network. Once connected, you can access your NAS, security cameras, Home Assistant dashboard, and any other local resources as if you were home. WireGuard uses modern cryptography and uses less bandwidth than older VPN protocols like OpenVPN.</p>
+
+<pre><code># Install WireGuard on Raspberry Pi OS
+sudo apt update && sudo apt install wireguard
+# Generate keys and configure — takes about 20 minutes to set up</code></pre>
+
+<h2>Project 9: Minecraft Server</h2>
+
+<p>Host your own private Minecraft server for friends and family. With a Raspberry Pi 5, you can run a vanilla server for 5-10 concurrent players comfortably.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi 5 (8GB recommended for stability)</li>
+  <li>microSD card or USB SSD</li>
+  <li>Minecraft Java Edition (PC version)</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Download the Minecraft server JAR, create a startup script, and run it in a screen session. Point your friends to your public IP (or use a free tunneling service like ngrok) and start building. Performance varies with player count, but for small groups it's perfectly playable.</p>
+
+<h3>Performance tips</h3>
+<ul>
+  <li>Use Paper or Spigot server JARs instead of vanilla for better optimization</li>
+  <li>Limit render distance to 8-10 chunks</li>
+  <li>Consider installing a simple SSD for the world storage</li>
+</ul>
+
+<h2>Project 10: Air Quality Monitor</h2>
+
+<p>Build a real-time air quality monitoring station that tracks PM2.5, CO2, temperature, humidity, and VOCs. Display data on a screen or dashboard, and get alerts when air quality drops.</p>
+
+<h3>What you need</h3>
+<ul>
+  <li>Raspberry Pi Zero 2 W</li>
+  <li>Sensirion SPS30 (PM2.5 sensor)</li>
+  <li>SCD40 or MH-Z19B (CO2 sensor)</li>
+  <li>BME280 (temperature, humidity, pressure)</li>
+  <li>3.5-inch touchscreen display</li>
+  <li>3D-printed enclosure (sensor housing needs proper airflow)</li>
+</ul>
+
+<h3>How it works</h3>
+<p>Sensors connect via I2C/SPI, data is collected by a Python script every 30 seconds, and displayed on the local screen or sent to a Home Assistant instance (Project 5 integration). You can 3D print a custom sensor housing with ventilation holes — our <a href="3d-print-smart-home-case.html">3D printing smart home cases guide</a> has design tips for airflow and sensor placement.</p>
+
+<h2>Which Project Should You Start With?</h2>
+
+<p>Here's a quick guide to pick based on your goals:</p>
+
+<ul>
+  <li><strong>Want practical storage?</strong> → NAS (Project 1)</li>
+  <li><strong>Want zero ads everywhere?</strong> → Pi-hole (Project 3)</li>
+  <li><strong>Want smart home control?</strong> → Home Assistant (Project 5)</li>
+  <li><strong>Want to play old games?</strong> → RetroPie (Project 2)</li>
+  <li><strong>Want a showpiece?</strong> → Smart Mirror (Project 4)</li>
+  <li><strong>Want to learn Python?</strong> → Air Quality Monitor (Project 10)</li>
+</ul>
+
+<h2>Tips for Success</h2>
+
+<h3>Always use a good power supply</h3>
+<p>Brownouts cause SD card corruption. Use the official Raspberry Pi power adapter (15W for Pi 4/5) or a quality third-party USB-C supply rated at 5V/3A minimum.</p>
+
+<h3>Use an SSD instead of an SD card for servers</h3>
+<p>SD cards wear out faster under heavy read/write operations. For any project that runs 24/7 (NAS, Pi-hole, Home Assistant, VPN), use a USB SSD. The Pi 4/5 can boot directly from USB.</p>
+
+<h3>Enable SSH and set a static IP</h3>
+<p>You'll thank yourself when you can manage your Pi from another computer. Add <code>ssh</code> file to boot partition before first boot, and configure a static IP in router DHCP settings.</p>
+
+<h3>Back up your SD card</h3>
+<p>Use Raspberry Pi Imager or Win32 Disk Imager to create a disk image after setup. A 5-minute backup saves hours of reconfiguration if something goes wrong.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>The Raspberry Pi ecosystem is one of the best things to happen to makers. Between the hardware affordability, massive community support, and thousands of open-source projects, there's genuinely no better starting point for learning electronics, Linux, networking, and home automation. Start with one project, get it working, then expand. You'll be surprised how quickly "beginner" projects turn into building a full smart home lab.</p>
+
+<p>Got your Pi set up and looking for the next challenge? <a href="arduino-vs-raspberry-pi-beginners.html">Check our Arduino vs Raspberry Pi comparison</a> to understand which board is right for different project types.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+          <li><a href="best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi: Which Is Right for Your Project?</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

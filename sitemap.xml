@@ -1236,4 +1236,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://hcxfhm-bot.github.io/enjoy-the-rain/articles/raspberry-pi-diy-projects-beginners.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

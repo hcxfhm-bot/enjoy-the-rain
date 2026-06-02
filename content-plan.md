@@ -276,7 +276,7 @@
 
 ### 批次 37：MAKER & SMART HOME (6篇) 🆕
 - [x] home-assistant-raspberry-pi-setup — Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub ✅ 2026-06-02
-- [ ] raspberry-pi-diy-projects-beginners — 10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror
+- [x] raspberry-pi-diy-projects-beginners — 10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror ✅ 2026-06-02
 - [ ] arduino-vs-raspberry-pi-beginners — Arduino vs Raspberry Pi: Which Is Right for Your Project?
 - [ ] esp32-smart-home-beginners — ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners
 - [ ] best-multimeter-for-electronics — Best Multimeter for Electronics & DIY Makers in 2026
