@@ -1230,4 +1230,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://hcxfhm-bot.github.io/enjoy-the-rain/articles/home-assistant-raspberry-pi-setup.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

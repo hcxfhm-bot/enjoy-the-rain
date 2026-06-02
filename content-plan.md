@@ -274,12 +274,20 @@
 - [x] 3d-printer-filament-storage-guide — 3D Printer Filament Storage Guide: Bags, Boxes & Dry Boxes ✅ 2026-06-01
 - [x] best-3d-printer-for-cosplay — Best 3D Printer for Cosplay: Helmets, Armor & Props in 2026 ✅ 2026-06-01
 
+### 批次 37：MAKER & SMART HOME (6篇) 🆕
+- [x] home-assistant-raspberry-pi-setup — Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub ✅ 2026-06-02
+- [ ] raspberry-pi-diy-projects-beginners — 10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror
+- [ ] arduino-vs-raspberry-pi-beginners — Arduino vs Raspberry Pi: Which Is Right for Your Project?
+- [ ] esp32-smart-home-beginners — ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners
+- [ ] best-multimeter-for-electronics — Best Multimeter for Electronics & DIY Makers in 2026
+- [ ] 3d-print-smart-home-case — How to 3D Print Custom Smart Home Device Cases and Sensor Housings
+
 ## 进度
 
-- **总目标**: 200+ 篇
-- **已完成**: 201 篇 ✅ (批次1-36全部完成！)
-- **剩余**: 0 篇 🎉
-- **当前状态**: 🎊 所有SEO文章已全部生成完毕，超过200篇目标！
+- **总目标**: 300 篇
+- **已完成**: 201 篇 ✅ (批次1-36全部完成！3D打印主题)
+- **新批次进行中**: 批次37（Maker & Smart Home）— 0/6 篇
+- **剩余**: 99 篇
 
 ## 生成规则
 

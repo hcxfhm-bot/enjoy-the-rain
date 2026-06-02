@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</title>
+  <meta name="description" content="Learn how to set up Home Assistant on Raspberry Pi in 2026. Step-by-step guide to build your own private smart home hub with local control and no subscription fees.">
+  <meta name="keywords" content="home assistant, raspberry pi, smart home hub, home automation, home assistant os, smart home setup">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home & Maker</span>
+      </nav>
+
+      <h1>Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 2, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🏠</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Imagine controlling every light, switch, sensor, and camera in your home from <em>one dashboard</em> — no monthly fees, no cloud dependency, and everything runs locally on your own hardware. That's exactly what <strong>Home Assistant</strong> delivers when you run it on a <strong>Raspberry Pi</strong>.</p>
+
+        <p>Home Assistant is the world's most popular open-source smart home platform, supporting over 2,000 integrations with devices from every major brand — Philips Hue, Tuya, Shelly, Aqara, ESPHome, and more. Pair it with a Raspberry Pi and you've got a powerful, affordable smart home brain that fits in the palm of your hand.</p>
+
+        <p>In this guide, I'll walk you through everything you need to know to get Home Assistant running on your Raspberry Pi, from choosing the right hardware to completing your first automation.</p>
+
+        <h2>Why Run Home Assistant on a Raspberry Pi?</h2>
+
+        <p>You have two main options for running Home Assistant: the cloud service (Home Assistant Cloud / Nabu Casa) or the self-hosted approach. The self-hosted route on a Raspberry Pi gives you several major advantages:</p>
+
+        <ul>
+          <li><strong>100% local control</strong> — Your data never leaves your home. No internet dependency.</li>
+          <li><strong>No subscription fees</strong> — Unlike many commercial hubs (Samsung SmartThings, Wink), Home Assistant is completely free.</li>
+          <li><strong>Massive device support</strong> — Works with Zigbee, Z-Wave, Wi-Fi, Bluetooth, Matter, and Thread devices.</li>
+          <li><strong>Fully customizable</strong> — Build exactly the dashboard and automations you want.</li>
+          <li><strong>3D printing integration</strong> — Create custom sensor housings and enclosures for your smart home devices.</li>
+        </ul>
+
+        <p>If you're already into 3D printing, you're in the perfect position to extend Home Assistant even further. Check out our guide on <a href="../3d-print-smart-home-case.html">how to 3D print custom smart home device cases and sensor housings</a> to build professional-looking enclosures for your sensors, temperature probes, and display modules.</p>
+
+        <h2>What You'll Need</h2>
+
+        <p>Before diving in, here's a complete hardware checklist for a solid Home Assistant setup:</p>
+
+        <ul>
+          <li><strong>Raspberry Pi 4 (4GB or 8GB)</strong> — The recommended choice for 2026. Avoid Pi 3 for new setups.</li>
+          <li><strong>microSD card (32GB+ Class 10)</strong> — A fast, reliable card is essential. We recommend Samsung EVO Plus or SanDisk Extreme.</li>
+          <li><strong>Raspberry Pi 4 power supply (USB-C, 15W)</strong> — Use the official adapter to avoid power issues.</li>
+          <li><strong>Zigbee USB dongle</strong> — SkyConnect, Sonoff Zigbee 3.0, or ConBee II for local Zigbee control.</li>
+          <li><strong>Ethernet cable</strong> — Stable wired connection is strongly recommended for reliability.</li>
+          <li><strong>Case (optional)</strong> — 3D print your own Raspberry Pi case to match your workspace aesthetic.</li>
+        </ul>
+
+        <p>The total hardware cost comes to around <strong>$80-120</strong>, making it far cheaper than commercial hubs that often cost $200+ and lock you into their ecosystem.</p>
+
+        <h2>Method 1: Home Assistant OS (Recommended)</h2>
+
+        <p>Home Assistant OS (HAOS) is the easiest and most reliable way to get started. It includes everything pre-configured: Home Assistant Core, the Supervisor, and all system management tools.</p>
+
+        <h3>Step 1: Download the Home Assistant OS Image</h3>
+
+        <p>Head to <strong>homeassistant.io</strong> and download the Raspberry Pi 4 (64-bit) image. You'll use the Balena Etcher tool (or Raspberry Pi Imager) to flash it onto your microSD card.</p>
+
+        <p>If you already have a Raspberry Pi set up for another project like <a href="../octoprint-setup-guide.html">OctoPrint for 3D printer monitoring</a>, you can keep both running — just use a different Pi for Home Assistant to avoid resource conflicts.</p>
+
+        <h3>Step 2: Flash the Image</h3>
+
+        <ol>
+          <li>Insert your microSD card into your computer.</li>
+          <li>Open Balena Etcher, select the downloaded HAOS image.</li>
+          <li>Select your microSD card as the target.</li>
+          <li>Click "Flash!" and wait 5-10 minutes.</li>
+        </ol>
+
+        <h3>Step 3: First Boot</h3>
+
+        <p>Insert the microSD card into your Raspberry Pi 4, connect it to your router via Ethernet, and power it on. Give it about 20 minutes to fully initialize — the Pi will expand the filesystem and set up all services.</p>
+
+        <p>Once ready, open your browser and navigate to:</p>
+
+        <pre><code>http://homeassistant.local:8123</code></pre>
+
+        <p>If this doesn't work, you can also access it via your Pi's IP address directly (find it from your router's DHCP client list).</p>
+
+        <h3>Step 4: Create Your Account</h3>
+
+        <p>You'll see the Home Assistant welcome screen. Create your first account with:</p>
+
+        <ul>
+          <li><strong>Name</strong> — Your display name</li>
+          <li><strong>Username</strong> — Your login username</li>
+          <li><strong>Password</strong> — A strong password (minimum 8 characters)</li>
+        </ul>
+
+        <p>Next, Home Assistant will ask about your location (for weather, sunrise/sunset automations, and timezone). You can skip this and set it manually later.</p>
+
+        <h2>Method 2: Home Assistant Core (Advanced)</h2>
+
+        <p>If you want more control and prefer to run Home Assistant on an existing Raspberry Pi OS installation, you can install Home Assistant Core directly. This method is best if you already use your Pi for other projects.</p>
+
+        <h3>Prerequisites</h3>
+
+        <p>Start with Raspberry Pi OS Lite (64-bit) running on your Pi. Open a terminal and follow these steps:</p>
+
+        <pre><code># Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install dependencies
+sudo apt install -y python3 python3-pip python3-venv libffi-dev libssl-dev</code></pre>
+
+        <h3>Install Home Assistant</h3>
+
+        <pre><code># Create dedicated user
+sudo useradd -rm homeassistant -G dialout,gpio,i2c
+
+# Create virtual environment
+sudo -u homeassistant -H -s
+cd /srv/homeassistant
+python3 -m venv .
+source bin/activate
+
+# Install Home Assistant
+pip install wheel
+pip install homeassistant
+
+# Run Home Assistant
+hass</code></pre>
+
+        <p>This method gives you more flexibility but requires manual updates and maintenance. For most users, <strong>HAOS is the better choice</strong>.</p>
+
+        <h2>Adding Your First Devices</h2>
+
+        <p>Once Home Assistant is running, it's time to add your smart devices. Home Assistant uses "integrations" to connect devices:</p>
+
+        <h3>Adding Wi-Fi Devices</h3>
+
+        <p>For devices on your local network (like Tuya/Smart Life bulbs, Shelly switches, or ESP32 devices running Tasmota/ESPHome), go to:</p>
+
+        <p><strong>Settings → Devices & Services → Add Integration</strong></p>
+
+        <p>Search for your device type and follow the on-screen instructions. Most Wi-Fi devices are auto-discovered if they're on the same network.</p>
+
+        <h3>Adding Zigbee Devices</h3>
+
+        <p>Connect your Zigbee USB dongle (SkyConnect recommended for 2026), then add the <strong>Zigbee Home Automation (ZHA)</strong> integration. Put your Zigbee devices into pairing mode (usually holding a button for 5 seconds) and they'll appear in Home Assistant within seconds.</p>
+
+        <p>Popular Zigbee devices to start with:</p>
+
+        <ul>
+          <li>Aqara temperature and humidity sensor (great for monitoring 3D print room conditions!)</li>
+          <li>Philips Hue smart bulbs</li>
+          <li>Sonoff ZBMini smart switches</li>
+          <li>Aqara door/window contact sensors</li>
+          <li>TRÅDFRI motion sensors</li>
+        </ul>
+
+        <p>If you're interested in building your own Zigbee or ESP32 sensors, check out our guide on <a href="../esp32-smart-home-beginners.html">Tasmota and ESPHome for beginners</a> — you can flash custom firmware on $3 ESP32 boards to create incredibly cheap sensors integrated directly into Home Assistant.</p>
+
+        <h2>Building Your First Automation</h2>
+
+        <p>Automations are what make Home Assistant truly powerful. Instead of manually controlling every device, your home responds to triggers automatically.</p>
+
+        <h3>Example: Auto-Lights Based on Sunset</h3>
+
+        <p>Let's create a simple automation: turn on your living room lights at sunset.</p>
+
+        <ol>
+          <li>Go to <strong>Settings → Automations & Scenes</strong></li>
+          <li>Click <strong>Create Automation</strong></li>
+          <li>Choose <strong>Sun</strong> as the trigger type</li>
+          <li>Select <strong>Sunset</strong></li>
+          <li>Add an action: <strong>Turn On</strong> your living room light entity</li>
+          <li>Save!</li>
+        </ol>
+
+        <p>That's it — every evening when the sun sets, your lights will turn on automatically. No cloud service required.</p>
+
+        <h3>Example: 3D Print Room Humidity Alert</h3>
+
+        <p>Here's a more maker-focused automation: if your print room humidity exceeds 70%, get a notification. This is especially useful for <a href="../how-to-store-3d-printer-filament.html">proper filament storage</a> — high humidity ruins PLA and PETG.</p>
+
+        <ol>
+          <li>Add a Zigbee humidity sensor (like Aqara) to your print room.</li>
+          <li>Create an automation with trigger: humidity sensor above 70%</li>
+          <li>Action: send a notification via Home Assistant app</li>
+          <li>Bonus: trigger a <a href="../diy-3d-printer-enclosure.html">dehumidifier via a smart plug</a></li>
+        </ol>
+
+        <h2>Building a Dashboard</h2>
+
+        <p>Home Assistant's dashboard (called "Overview") is fully customizable. You can add cards showing:</p>
+
+        <ul>
+          <li>Device states (lights on/off, temperatures, power consumption)</li>
+          <li>Area views (group devices by room)</li>
+          <li>History graphs (temperature logs, energy usage)</li>
+          <li>Quick controls (one-tap scene activation)</li>
+          <li>Camera feeds</li>
+        </ul>
+
+        <p>The interface is intuitive — click <strong>Edit Dashboard</strong> in the top-right corner, then add cards by clicking the <strong>+</strong> button. You can arrange and resize cards freely.</p>
+
+        <h2>Recommended Add-ons</h2>
+
+        <p>Home Assistant's Supervisor lets you install official add-ons that extend functionality:</p>
+
+        <ul>
+          <li><strong>File Editor</strong> — Edit YAML configuration files directly in the browser</li>
+          <li><strong>Terminal & SSH</strong> — Full terminal access to your Home Assistant installation</li>
+          <li><strong>Mosquitto MQTT Broker</strong> — Required for many smart home integrations (ESPHome, Tasmota)</li>
+          <li><strong>MariaDB</strong> — Store long-term history data for sensors</li>
+          <li><strong>DuckDNS</strong> — Access Home Assistant remotely with a secure URL</li>
+        </ul>
+
+        <h2>Raspberry Pi vs Alternatives: Is the Pi Enough?</h2>
+
+        <p>In 2026, the Raspberry Pi 4 (4GB) is still an excellent choice for Home Assistant. It handles 100+ devices comfortably and the community support is unmatched.</p>
+
+        <p>However, if you're scaling up, consider these alternatives:</p>
+
+        <ul>
+          <li><strong>Home Assistant Yellow</strong> — Built specifically for Home Assistant with built-in Zigbee and Matter support ($150)</li>
+          <li><strong>Odroid N2+</strong> — Faster processor, good for large installations</li>
+          <li><strong>Mini PC / Intel N100</strong> — If you want to run more services alongside Home Assistant</li>
+        </ul>
+
+        <p>For most hobbyists and beginners, a <strong>Raspberry Pi 4 with 4GB</strong> is more than sufficient and offers the best price-to-performance ratio.</p>
+
+        <h2>3D Printing Your Smart Home Enclosures</h2>
+
+        <p>One of the best parts of building your own smart home hub is the ability to create custom enclosures for your sensors and devices. 3D printing lets you:</p>
+
+        <ul>
+          <li>Design professional-looking housings for exposed sensors</li>
+          <li>Create wall mounts for Zigbee buttons and remotes</li>
+          <li>Print protective cases for temperature/humidity sensors</li>
+          <li>Build custom dashboard displays using Raspberry Pi Touchscreens</li>
+        </ul>
+
+        <p>Our <a href="../3d-print-smart-home-case.html">guide to 3D printing smart home cases</a> covers everything from measuring your sensors to designing and printing perfect enclosures. Combined with Home Assistant, you can build a smart home that's both functional and beautifully customized.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>Home Assistant Won't Load</h3>
+
+        <p>If you can't access homeassistant.local:8123, try:</p>
+
+        <ol>
+          <li>Check that your Pi is connected to the router via Ethernet</li>
+          <li>Try accessing via IP address directly</li>
+          <li>Check your router's DHCP client list to find the Pi's IP</li>
+          <li>Ensure the microSD card is properly seated</li>
+        </ol>
+
+        <h3>Devices Not Being Discovered</h3>
+
+        <p>For Zigbee devices, try moving the USB dongle closer to the device during pairing. Wi-Fi devices need to be on the same subnet as Home Assistant — avoid guest networks.</p>
+
+        <h3>Slow Performance</h3>
+
+        <p>If your dashboard feels sluggish, the Pi 4 with 4GB is likely under-powered for your use case. Consider the 8GB model or switch to an Odroid N2+.</p>
+
+        <h2>Next Steps: Growing Your Smart Home</h2>
+
+        <p>Once Home Assistant is running smoothly, explore these areas to expand your setup:</p>
+
+        <ul>
+          <li><strong>ESPHome integration</strong> — Build your own $5 sensors with ESP32 boards</li>
+          <li><strong>Node-RED</strong> — Visual automation builder for complex workflows</li>
+          <li><strong>Energy Dashboard</strong> — Track your home's power consumption</li>
+          <li><strong>Voice Assistants</strong> — Integrate Rhasspy or Google Assistant</li>
+          <li><strong>3D printable projects</strong> — Build custom sensors, displays, and enclosures</li>
+        </ul>
+
+        <p>Home Assistant is a journey, not a destination. Start with a few devices, learn the interface, and expand gradually. The community is incredibly helpful — the r/homeassistant subreddit and Home Assistant forums are excellent resources.</p>
+
+        <p>And remember: the more you tinker, the more you'll discover what's possible. Whether you're automating your lights or building custom sensors for your 3D print room, Home Assistant on Raspberry Pi gives you complete control over your smart home — on your own terms, with no subscription required.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../octoprint-setup-guide.html">OctoPrint Setup Guide: Install and Configure in 20 Minutes</a></li>
+          <li><a href="../3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+          <li><a href="../esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="../how-to-store-3d-printer-filament.html">How to Store 3D Printer Filament So It Lasts for Years</a></li>
+          <li><a href="../diy-3d-printer-enclosure.html">DIY 3D Printer Enclosure: Build One for Under $50</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
