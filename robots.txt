@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://hcxfhm-bot.github.io/enjoy-the-rain/sitemap.xml
