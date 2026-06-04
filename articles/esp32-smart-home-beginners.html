@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners (2026 Guide)</title>
+  <meta name="description" content="Learn how to build smart home devices with ESP32 using Tasmota and ESPHome. Flash firmware, connect sensors, and integrate with Home Assistant in this beginner-friendly 2026 guide.">
+  <meta name="keywords" content="ESP32 smart home, Tasmota beginner guide, ESPHome tutorial, ESP32 Home Assistant, smart switch ESP32, DIY smart home 2026, Tasmota vs ESPHome, ESP32 relay module, smart home sensor ESP32">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home & Maker</span>
+      </nav>
+
+      <h1>ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners (2026 Guide)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 4, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🏠</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Commercial smart home devices are convenient, but they come with strings attached: cloud dependency, limited customization, privacy concerns, and subscription fees. What if you could build your own smart switches, sensors, and controllers for a fraction of the cost — with full local control and zero cloud reliance?</p>
+
+        <p>That's exactly what the <strong>ESP32</strong> makes possible. This tiny $4 microcontroller with built-in Wi-Fi and Bluetooth has become the backbone of the DIY smart home movement. Combined with open-source firmware like <strong>Tasmota</strong> or <strong>ESPHome</strong>, you can transform a cheap ESP32 board into a professional-grade smart home device that integrates seamlessly with <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a>.</p>
+
+        <p>In this beginner-friendly guide, I'll walk you through everything: choosing the right ESP32 board, understanding the difference between Tasmota and ESPHome, flashing your first device, and building three real smart home projects you can complete this weekend.</p>
+
+        <h2>What Is the ESP32 and Why Makers Love It</h2>
+
+        <p>The ESP32 is a low-cost, low-power system-on-a-chip (SoC) made by Espressif Systems. It features a dual-core processor (in most variants), built-in Wi-Fi (2.4 GHz), Bluetooth Classic and BLE, and plenty of GPIO pins for connecting sensors, relays, displays, and other components.</p>
+
+        <p>Here's why it's the go-to chip for smart home DIY:</p>
+
+        <ul>
+          <li><strong>Price</strong>: ESP32 dev boards start at around $3–5 on AliExpress or Amazon. Compare that to a $25–40 commercial smart switch.</li>
+          <li><strong>Wireless built-in</strong>: No need for separate Wi-Fi or Bluetooth shields — it's all on the chip.</li>
+          <li><strong>Low power</strong>: Deep sleep mode draws as little as 10 µA, making battery-powered sensors viable for months.</li>
+          <li><strong>Massive community</strong>: Thousands of open-source projects, libraries, and tutorials available.</li>
+          <li><strong>Arduino-compatible</strong>: Program it with the familiar Arduino IDE, PlatformIO, or use pre-built firmware like Tasmota/ESPHome.</li>
+        </ul>
+
+        <p>If you're already familiar with <a href="arduino-vs-raspberry-pi-beginners.html">Arduino and Raspberry Pi</a>, think of the ESP32 as Arduino's more connected cousin — it has the simplicity of a microcontroller but with wireless capabilities that rival much more expensive boards.</p>
+
+        <h2>Choosing the Right ESP32 Board</h2>
+
+        <p>Not all ESP32 boards are the same. Here are the most common variants you'll encounter in 2026:</p>
+
+        <h3>ESP32-WROOM-32 (Classic)</h3>
+        <p>The original and most widely supported. Dual-core, 520 KB SRAM, 4 MB flash. Available in dozens of dev board form factors. This is the safest choice for beginners — virtually every tutorial and firmware supports it. Price: $3–6.</p>
+
+        <h3>ESP32-S2</h3>
+        <p>Single-core but with more GPIO and native USB. Great for keyboard builds and USB gadgets. No Bluetooth, which limits some smart home use cases. Price: $4–7.</p>
+
+        <h3>ESP32-S3</h3>
+        <p>Dual-core with native USB, more GPIO, and AI acceleration instructions. Increasingly popular for projects needing USB or camera support. The Arduino Uno R4 Wi-Fi actually uses an ESP32-S3 as its wireless co-processor. Price: $5–8.</p>
+
+        <h3>ESP32-C3</h3>
+        <p>Single-core, RISC-V architecture, very low power. Perfect for simple smart switches and battery sensors where you don't need dual-core performance. Price: $2–4.</p>
+
+        <h3>ESP32-C6</h3>
+        <p>The newest addition with Wi-Fi 6, Zigbee, and Thread support. Future-proof for Matter-compatible smart homes. Still early in community support but very promising. Price: $5–8.</p>
+
+        <p><strong>Beginner recommendation</strong>: Start with a standard <strong>ESP32-WROOM-32 dev board</strong> (the one with 38 pins and the USB-C connector). It's the most universally supported and the cheapest way to learn.</p>
+
+        <h2>Tasmota vs ESPHome: Which Firmware Should You Use?</h2>
+
+        <p>This is the biggest decision you'll make. Both Tasmota and ESPHome are open-source firmware that turn your ESP32 into a smart home device, but they take very different approaches.</p>
+
+        <h3>Tasmota: The Web-Based Approach</h3>
+
+        <p>Tasmota installs on your ESP32 and provides a <strong>web interface</strong> for configuration. You don't need to write any code — just click through menus in your browser.</p>
+
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Zero coding required — configure everything through a web UI</li>
+          <li>Massive device template library (4,000+ supported devices)</li>
+          <li>MQTT auto-discovery with Home Assistant</li>
+          <li>Built-in timers, rules engine, and scripting</li>
+          <li>Easy OTA (over-the-air) updates</li>
+        </ul>
+
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Configuration changes require web UI access</li>
+          <li>Complex automations can get unwieldy in the rules engine</li>
+          <li>No version control for your device configurations</li>
+        </ul>
+
+        <h3>ESPHome: The Code-First Approach</h3>
+
+        <p>ESPHome uses <strong>YAML configuration files</strong> that compile into custom firmware for each device. It integrates directly into Home Assistant as an add-on.</p>
+
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Configuration-as-code — track changes in Git, share with others</li>
+          <li>Native Home Assistant integration (best-in-class)</li>
+          <li>Massive component library (sensors, displays, lights, switches)</li>
+          <li>Compile-time validation catches errors before flashing</li>
+          <li>Seamless OTA updates from the Home Assistant UI</li>
+        </ul>
+
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Requires basic YAML literacy</li>
+          <li>Needs a compilation step (Home Assistant add-on handles this)</li>
+          <li>Steeper learning curve for absolute beginners</li>
+        </ul>
+
+        <h3>My Recommendation</h3>
+
+        <p>If you're <strong>already running Home Assistant</strong> (and you should be — see our <a href="home-assistant-raspberry-pi-setup.html">Home Assistant setup guide</a>), go with <strong>ESPHome</strong>. The native integration is so much smoother that it's worth the small YAML learning curve.</p>
+
+        <p>If you're <strong>not using Home Assistant yet</strong> and just want to quickly flash a smart plug or switch, start with <strong>Tasmota</strong> — the web UI makes it approachable.</p>
+
+        <p>The good news? You're not locked in. You can flash Tasmota today and switch to ESPHome later (or vice versa).</p>
+
+        <h2>How to Flash Your First ESP32</h2>
+
+        <p>Before you can use Tasmota or ESPHome, you need to flash firmware onto your ESP32. Here's how.</p>
+
+        <h3>What You'll Need</h3>
+        <ul>
+          <li>An ESP32 dev board</li>
+          <li>A USB-C or Micro-USB cable (make sure it's a <em>data</em> cable, not charge-only)</li>
+          <li>A computer with Chrome or Edge browser</li>
+        </ul>
+
+        <h3>Method 1: ESP Home Web Flasher (Easiest)</h3>
+
+        <ol>
+          <li>Go to <strong>web.esphome.io</strong> in Chrome or Edge</li>
+          <li>Click <strong>"Connect"</strong> and select your ESP32's serial port</li>
+          <li>Click <strong>"Prepare for first use"</strong> — this installs the ESPHome bootloader</li>
+          <li>Wait for the process to complete (about 30 seconds)</li>
+          <li>Your ESP32 is now ready for wireless (OTA) firmware installation</li>
+        </ol>
+
+        <h3>Method 2: Tasmota Web Installer</h3>
+
+        <ol>
+          <li>Go to <strong>tasmota.com/installer</strong></li>
+          <li>Click <strong>"Connect"</strong> and select your ESP32</li>
+          <li>Choose the appropriate firmware variant (tasmota32 for ESP32)</li>
+          <li>Click <strong>"Install"</strong> and wait for completion</li>
+          <li>After installation, connect to the ESP32's Wi-Fi AP (password: <code>flashesp32</code>)</li>
+          <li>Open <strong>192.168.4.1</strong> in your browser and configure your home Wi-Fi</li>
+        </ol>
+
+        <h3>Troubleshooting Flash Issues</h3>
+
+        <p>If your ESP32 won't flash or connect:</p>
+        <ul>
+          <li><strong>Hold the BOOT button</strong> while clicking "Install" — some boards need this to enter download mode</li>
+          <li>Try a different USB cable (charge-only cables are the #1 cause of flash failures)</li>
+          <li>Install the CP2102 or CH340 USB driver if your computer doesn't recognize the board</li>
+          <li>Close other serial-monitoring programs that might be using the COM port</li>
+        </ul>
+
+        <h2>Project 1: Wi-Fi Smart Switch with Relay Module</h2>
+
+        <p>This is the most popular ESP32 smart home project — turning any dumb appliance into a smart, controllable device. A relay module acts as an electronic switch that the ESP32 can turn on or off via Wi-Fi.</p>
+
+        <h3>Parts Needed</h3>
+        <ul>
+          <li>ESP32 dev board — $4</li>
+          <li>1-channel 5V relay module (with optocoupler isolation) — $2</li>
+          <li>Jumper wires — $2</li>
+          <li>Total: ~$8</li>
+        </ul>
+
+        <h3>Wiring</h3>
+        <ul>
+          <li>Connect ESP32 <strong>GPIO 26</strong> to relay <strong>IN</strong></li>
+          <li>Connect ESP32 <strong>5V</strong> to relay <strong>VCC</strong></li>
+          <li>Connect ESP32 <strong>GND</strong> to relay <strong>GND</strong></li>
+          <li>Connect your load (lamp, fan, etc.) through the relay's <strong>COM</strong> and <strong>NO</strong> terminals</li>
+        </ul>
+
+        <h3>ESPHome Configuration</h3>
+
+        <pre><code>substitutions:
+  name: smart-switch
+  friendly_name: "Smart Switch"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32dev
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+
+logger:
+
+switch:
+  - platform: gpio
+    pin: GPIO26
+    name: "Relay"
+    id: relay_switch
+    icon: mdi:power
+    restore_mode: ALWAYS_OFF</code></pre>
+
+        <p>After compiling and installing this YAML, the switch will appear automatically in Home Assistant. You can toggle it from the dashboard, create automations, or control it with voice via Alexa or Google Home (through Home Assistant integrations).</p>
+
+        <h3>Tasmota Alternative</h3>
+
+        <p>In Tasmota, go to <strong>Configuration → Configure Module</strong>, set GPIO26 to <strong>"Relay 1"</strong>, and you're done. The switch appears in the Tasmota web UI instantly.</p>
+
+        <h2>Project 2: Temperature and Humidity Sensor</h2>
+
+        <p>A wireless temperature/humidity sensor is one of the most useful smart home devices you can build. Use it to monitor rooms, greenhouses, server closets, or anywhere climate matters.</p>
+
+        <h3>Parts Needed</h3>
+        <ul>
+          <li>ESP32 dev board — $4</li>
+          <li>DHT22 temperature/humidity sensor — $3</li>
+          <li>10KΩ resistor (pull-up for data line) — $0.10</li>
+          <li>3D printed sensor housing — free (more on this below)</li>
+          <li>Total: ~$7</li>
+        </ul>
+
+        <h3>Wiring</h3>
+        <ul>
+          <li>Connect DHT22 <strong>VCC</strong> to ESP32 <strong>3.3V</strong></li>
+          <li>Connect DHT22 <strong>GND</strong> to ESP32 <strong>GND</strong></li>
+          <li>Connect DHT22 <strong>DATA</strong> to ESP32 <strong>GPIO 27</strong></li>
+          <li>Place 10KΩ resistor between DATA and VCC</li>
+        </ul>
+
+        <h3>ESPHome Configuration</h3>
+
+        <pre><code>substitutions:
+  name: temp-sensor-living-room
+  friendly_name: "Living Room Sensor"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32dev
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot for setup
+  ap:
+    ssid: "${name} Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+
+logger:
+
+sensor:
+  - platform: dht
+    pin: GPIO27
+    temperature:
+      name: "Living Room Temperature"
+      unit_of_measurement: "°C"
+    humidity:
+      name: "Living Room Humidity"
+      unit_of_measurement: "%"
+    update_interval: 60s
+    model: DHT22
+
+  - platform: wifi_signal
+    name: "Living Room WiFi Signal"
+    update_interval: 300s</code></pre>
+
+        <p>For battery-powered operation, add a <strong>deep_sleep</strong> component that wakes the ESP32 every 5 minutes, takes a reading, sends it, and goes back to sleep. This can extend battery life from hours to months:</p>
+
+        <pre><code>deep_sleep:
+  run_duration: 30s
+  sleep_duration: 5min</code></pre>
+
+        <h3>3D Printed Sensor Housing</h3>
+
+        <p>Want a clean, professional look for your sensor? <a href="3d-printing-for-cosplay-beginners.html">3D printing</a> a custom enclosure is the perfect solution. Design a simple snap-fit case in Tinkercad or grab a pre-made design from Thingiverse — search for "DHT22 ESP32 enclosure." PLA works great for indoor sensors. Check our <a href="pla-filament-temperature-guide.html">PLA temperature guide</a> to dial in your print settings for a clean, dimensionally accurate case.</p>
+
+        <h2>Project 3: Smart Motion Sensor with Notifications</h2>
+
+        <p>Build a motion detector that sends you a phone notification whenever someone enters a room — perfect for home security, monitoring kids' rooms, or triggering automations.</p>
+
+        <h3>Parts Needed</h3>
+        <ul>
+          <li>ESP32 dev board — $4</li>
+          <li>HC-SR501 PIR motion sensor — $2</li>
+          <li>Jumper wires — $1</li>
+          <li>Total: ~$7</li>
+        </ul>
+
+        <h3>Wiring</h3>
+        <ul>
+          <li>Connect PIR <strong>VCC</strong> to ESP32 <strong>5V</strong></li>
+          <li>Connect PIR <strong>GND</strong> to ESP32 <strong>GND</strong></li>
+          <li>Connect PIR <strong>OUT</strong> to ESP32 <strong>GPIO 14</strong></li>
+        </ul>
+
+        <h3>ESPHome Configuration</h3>
+
+        <pre><code>binary_sensor:
+  - platform: gpio
+    pin: GPIO14
+    name: "Hallway Motion"
+    device_class: motion
+    filters:
+      - delayed_off: 30s</code></pre>
+
+        <p>The <code>delayed_off: 30s</code> filter prevents the sensor from rapidly toggling — it stays "on" for 30 seconds after the last motion is detected. In Home Assistant, you can create an automation like:</p>
+
+        <pre><code># Home Assistant automation
+- alias: "Motion Notification"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_motion
+      to: "on"
+  action:
+    - service: notify.mobile_app_your_phone
+      data:
+        title: "🏠 Motion Detected"
+        message: "Movement in the hallway"</code></pre>
+
+        <p>Want to take it further? Combine the motion sensor with a relay to automatically turn on the hallway light when someone walks by at night. Or pair it with a <a href="raspberry-pi-diy-projects-beginners.html">Raspberry Pi camera</a> for a full DIY security system.</p>
+
+        <h2>Integrating with Home Assistant</h2>
+
+        <p>One of the biggest advantages of ESPHome over Tasmota is the native Home Assistant integration. Here's how to set it up:</p>
+
+        <ol>
+          <li>Install the <strong>ESPHome add-on</strong> from the Home Assistant Supervisor add-on store</li>
+          <li>Open the ESPHome dashboard (usually at <code>http://homeassistant.local:6052</code>)</li>
+          <li>Click <strong>"New Device"</strong> and follow the wizard</li>
+          <li>After your first device is set up, all future devices appear automatically in Home Assistant</li>
+          <li>Go to <strong>Settings → Devices & Services</strong> to configure the ESPHome integration if it doesn't auto-detect</li>
+        </ol>
+
+        <p>Once integrated, every ESP32 sensor, switch, and binary sensor appears as a native Home Assistant entity. You can use them in dashboards, automations, scripts, and scenes — exactly like commercial devices, but with full local control and zero cloud dependency.</p>
+
+        <h2>Advanced Tips for ESP32 Smart Home Projects</h2>
+
+        <h3>Power Management</h3>
+        <p>For battery-powered sensors, enable deep sleep and reduce update intervals. An ESP32 with deep sleep waking every 5 minutes can run for 3–6 months on a single 18650 battery. Use the <code>esp_sleep</code> component in ESPHome to configure wake sources (timer, GPIO, or touch).</p>
+
+        <h3>OTA Updates</h3>
+        <p>Always enable OTA in your ESPHome config. This lets you update firmware wirelessly without physically connecting the ESP32 to your computer — crucial once your devices are installed in walls or enclosures.</p>
+
+        <h3>Multi-Device Management</h3>
+        <p>Use ESPHome's <strong>substitutions</strong> and <strong>packages</strong> features to create reusable templates. Define common settings once and apply them across all your devices. This saves time and ensures consistency.</p>
+
+        <h3>Enclosures and Safety</h3>
+        <p>Never run mains voltage (120V/240V) through a breadboard or exposed relay. If your project controls high-voltage devices, use a proper enclosed relay module with screw terminals and optocoupler isolation. <a href="3d-printing-emf-safety.html">Electrical safety</a> is not optional — even at low voltages, short circuits can damage your ESP32 or start a fire. 3D printing a custom enclosure adds protection and a professional look. Our <a href="best-3d-printer-enclosure.html">enclosure guide</a> has tips for printing durable, safe housings.</p>
+
+        <h2>ESP32 Smart Home Starter Kit Shopping List</h2>
+
+        <p>If you're starting from scratch, here's everything you need for all three projects above:</p>
+
+        <ul>
+          <li>3× ESP32-WROOM-32 dev boards — $12</li>
+          <li>1× 1-channel relay module — $2</li>
+          <li>1× DHT22 sensor — $3</li>
+          <li>1× HC-SR501 PIR sensor — $2</li>
+          <li>1× 10KΩ resistor — $0.10</li>
+          <li>1× Breadboard + jumper wire kit — $5</li>
+          <li>1× USB-C data cable — $3</li>
+        </ul>
+
+        <p><strong>Total: ~$27 for three fully functional smart home devices.</strong> That's less than the price of a single commercial smart switch.</p>
+
+        <h2>Common Mistakes to Avoid</h2>
+
+        <ul>
+          <li><strong>Using charge-only USB cables</strong> — This is the #1 reason ESP32s fail to flash. Always test your cable with another device first.</li>
+          <li><strong>Connecting 5V sensors to 3.3V GPIO</strong> — Some sensors output 5V logic that can damage the ESP32's 3.3V pins. Use a logic level converter or choose 3.3V-compatible sensors.</li>
+          <li><strong>Forgetting pull-up/pull-down resistors</strong> — The DHT22 and many I2C sensors require pull-up resistors on the data line. Without them, readings will be unreliable or absent.</li>
+          <li><strong>Powering relays from the ESP32's 3.3V pin</strong> — Most 5V relays won't trigger reliably at 3.3V. Use the 5V pin instead, and make sure your USB power supply can handle the relay's current draw (typically 70–100 mA).</li>
+          <li><strong>Skipping the OTA configuration</strong> — Once your device is installed inside a wall or enclosure, you'll really wish you had OTA enabled for updates.</li>
+        </ul>
+
+        <h2>What's Next?</h2>
+
+        <p>Once you've built these three starter projects, the ESP32 ecosystem opens up dramatically. Here are some directions to explore:</p>
+
+        <ul>
+          <li><strong>Matter/Thread integration</strong> — The new ESP32-C6 supports Thread and Matter, making your DIY devices compatible with Apple Home, Google Home, and Alexa natively</li>
+          <li><strong>Environmental monitoring</strong> — Add BME680 sensors for air quality, CO2 sensors for ventilation control, or soil moisture sensors for smart gardening</li>
+          <li><strong>RGBW LED control</strong> — Build custom addressable LED controllers for ambient lighting using WS2812B strips</li>
+          <li><strong>Voice control</strong> — Add a microphone and use Home Assistant's Wyoming protocol for local voice assistant integration</li>
+          <li><strong>Energy monitoring</strong> — Use PZEM-004T or similar modules to track real-time power consumption of any appliance</li>
+        </ul>
+
+        <p>The ESP32 is arguably the most versatile chip in the maker toolkit. For under $5 per device, you can build a smart home that rivals commercial systems costing 10x more — with the added benefits of local control, privacy, and unlimited customization. Start with one project, and you'll quickly find yourself building more.</p>
+
+        <p>Already have a <a href="home-assistant-raspberry-pi-setup.html">Home Assistant setup</a> running? Great — your first ESPHome device can be online in under 10 minutes. Not there yet? Our <a href="raspberry-pi-diy-projects-beginners.html">Raspberry Pi projects guide</a> covers setting up Home Assistant on a Pi, which pairs perfectly with the ESP32 projects in this guide.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi: Which Is Right for Your Project?</a></li>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners</a></li>
+          <li><a href="3d-printing-for-cosplay-beginners.html">3D Printing for Cosplay: A Beginner's Guide</a></li>
+          <li><a href="best-3d-printer-enclosure.html">Best 3D Printer Enclosures: Buy vs DIY</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
