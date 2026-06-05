@@ -280,15 +280,15 @@
 - [x] arduino-vs-raspberry-pi-beginners — Arduino vs Raspberry Pi: Which Is Right for Your Project? ✅ 2026-06-03
 - [x] esp32-smart-home-beginners — ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners ✅ 2026-06-04
 - [x] best-multimeter-for-electronics — Best Multimeter for Electronics & DIY Makers in 2026 ✅ 2026-06-05
-- [ ] 3d-print-smart-home-case — How to 3D Print Custom Smart Home Device Cases and Sensor Housings
+- [x] 3d-print-smart-home-case — How to 3D Print Custom Smart Home Device Cases and Sensor Housings ✅ 2026-06-05
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 203 篇 ✅ (批次1-36全部完成！批次37进行中)
-- **新批次进行中**: 批次37（Maker & Smart Home）— 4/6 篇
+- **已完成**: 204 篇 ✅ (批次1-36全部完成！批次37进行中)
+- **新批次进行中**: 批次37（Maker & Smart Home）— 5/6 篇
 going
-- **剩余**: 98 篇
+- **剩余**: 97 篇
 
 ## 生成规则
 
