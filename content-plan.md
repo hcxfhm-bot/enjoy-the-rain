@@ -282,13 +282,14 @@
 - [x] best-multimeter-for-electronics — Best Multimeter for Electronics & DIY Makers in 2026 ✅ 2026-06-05
 - [x] 3d-print-smart-home-case — How to 3D Print Custom Smart Home Device Cases and Sensor Housings ✅ 2026-06-05
 
+- [x] best-soldering-station-beginners — Best Soldering Station for Electronics & DIY Makers in 2026 ✅ 2026-06-06
+
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 204 篇 ✅ (批次1-36全部完成！批次37进行中)
-- **新批次进行中**: 批次37（Maker & Smart Home）— 5/6 篇
-going
-- **剩余**: 97 篇
+- **已完成**: 205 篇 ✅ (批次1-37全部完成！)
+- **新批次待规划**: 批次38（Maker & Smart Home 继续）
+- **剩余**: 95 篇
 
 ## 生成规则
 
