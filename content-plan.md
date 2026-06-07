@@ -283,13 +283,22 @@
 - [x] 3d-print-smart-home-case — How to 3D Print Custom Smart Home Device Cases and Sensor Housings ✅ 2026-06-05
 
 - [x] best-soldering-station-beginners — Best Soldering Station for Electronics & DIY Makers in 2026 ✅ 2026-06-06
+- [x] home-assistant-automations-beginners — Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home ✅ 2026-06-07
+
+### 批次 38：MAKER & SMART HOME CONTINUED (6篇) 🆕
+- [x] home-assistant-automations-beginners — Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home ✅ 2026-06-07
+- [ ] best-oscilloscope-beginners — Best Oscilloscope for Beginners & DIY Electronics in 2026
+- [ ] esphome-getting-started-guide — ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266
+- [ ] diy-smart-door-lock — How to Build a DIY Smart Door Lock with ESP32 and Home Assistant
+- [ ] homekit-home-assistant-bridge — How to Bridge Home Assistant to Apple HomeKit
+- [ ] best-soldering-iron-tips — Best Soldering Iron Tips: Types, Sizes & When to Use Each
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 205 篇 ✅ (批次1-37全部完成！)
-- **新批次待规划**: 批次38（Maker & Smart Home 继续）
-- **剩余**: 95 篇
+- **已完成**: 206 篇 ✅ (批次1-37全部完成 + 批次38进行中)
+- **当前批次**: 批次38（Maker & Smart Home 继续）
+- **剩余**: 94 篇
 
 ## 生成规则
 

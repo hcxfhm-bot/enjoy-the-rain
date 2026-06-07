@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</title>
+  <meta name="description" content="Learn how to create Home Assistant automations from scratch. 10 beginner-friendly automation examples with step-by-step YAML and UI instructions for your smart home.">
+  <meta name="keywords" content="home assistant automations, home automation beginners, smart home automations, home assistant triggers, home assistant yaml, home assistant blueprints">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 7, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🏠</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You installed Home Assistant. Your devices are connected. Now what? The real magic of Home Assistant isn't just controlling things from an app — it's making your home <em>think for itself</em>. That's what automations do.</p>
+
+        <p>In this guide, I'll walk you through 10 practical automations that actual beginners can set up today. No programming degree required — just a working Home Assistant instance and about 30 minutes.</p>
+
+        <p>If you haven't set up Home Assistant yet, start with our <a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a> guide first.</p>
+
+        <h2>How Home Assistant Automations Work</h2>
+
+        <p>Every automation in Home Assistant follows a simple three-part structure:</p>
+
+        <ul>
+          <li><strong>Trigger</strong> — What starts the automation (time, device state, sun position, etc.)</li>
+          <li><strong>Condition</strong> (optional) — Rules that must be true for the automation to run</li>
+          <li><strong>Action</strong> — What happens when the automation runs</li>
+        </ul>
+
+        <p>Think of it like a sentence: "When <em>[trigger]</em>, if <em>[condition]</em>, then <em>[action]</em>."</p>
+
+        <p>Example: "When <em>the sun sets</em>, if <em>someone is home</em>, then <em>turn on the living room lights</em>."</p>
+
+        <p>You can create automations two ways: through the visual UI editor (Settings → Automations → Create Automation) or by writing YAML directly. Both produce the same result. The UI is great for beginners; YAML is faster once you're comfortable.</p>
+
+        <h2>Automation #1: Lights On at Sunset</h2>
+
+        <p>This is the "Hello World" of Home Assistant automations. It turns on your lights when the sun goes down, so you never come home to a dark house.</p>
+
+        <h3>UI Setup</h3>
+        <ol>
+          <li>Go to <strong>Settings → Automations & Scenes → Create Automation</strong></li>
+          <li>Click <strong>"Create new automation"</strong></li>
+          <li>Trigger: <strong>Sun → Sunset</strong> (offset: -00:30:00 to turn on 30 minutes before sunset)</li>
+          <li>Action: <strong>Call service → light.turn_on</strong>, select your living room light</li>
+          <li>Save and name it "Lights On at Sunset"</li>
+        </ol>
+
+        <h3>YAML Version</h3>
+        <pre><code>alias: "Lights On at Sunset"
+trigger:
+  - platform: sun
+    event: sunset
+    offset: "-00:30:00"
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.living_room</code></pre>
+
+        <h2>Automation #2: Lights Off When Everyone Leaves</h2>
+
+        <p>No more "Did I leave the lights on?" anxiety. This automation detects when the last person leaves home and turns off all lights.</p>
+
+        <h3>How It Works</h3>
+        <p>It uses the <strong>zone</strong> integration and your phone's GPS (via the Home Assistant companion app) to track presence. When all tracked people leave the "home" zone, the automation fires.</p>
+
+        <pre><code>alias: "All Lights Off When Away"
+trigger:
+  - platform: zone
+    entity_id: person.you
+    zone: zone.home
+    event: leave
+condition:
+  - condition: zone
+    entity_id: person.you
+    zone: zone.home
+  - condition: template
+    value_template: "{{ state_attr('zone.home', 'persons') | length == 0 }}"
+action:
+  - service: light.turn_off
+    target:
+      entity_id: all</code></pre>
+
+        <p><strong>Pro tip:</strong> Add a 5-minute delay before turning off lights so you don't kill the lights if you're just taking out the trash.</p>
+
+        <h2>Automation #3: Morning Routine</h2>
+
+        <p>Wake up like you live in the future. This automation gradually turns on lights and starts your coffee maker at your chosen time — but only on weekdays.</p>
+
+        <pre><code>alias: "Morning Routine"
+trigger:
+  - platform: time
+    at: "06:30:00"
+condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  - condition: state
+    entity_id: person.you
+    state: "home"
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.bedroom
+    data:
+      brightness: 10
+      transition: 300
+  - delay:
+      minutes: 5
+  - service: light.turn_on
+    target:
+      entity_id: light.kitchen
+    data:
+      brightness: 80
+  - service: switch.turn_on
+    target:
+      entity_id: switch.coffee_maker</code></pre>
+
+        <p>The <code>transition: 300</code> makes the bedroom light fade in over 5 minutes — much gentler than a sudden flashlight at 6:30 AM.</p>
+
+        <h2>Automation #4: Motion-Activated Night Light</h2>
+
+        <p>Perfect for hallways and bathrooms. Turns on a dim light when motion is detected at night, then turns it off after no motion for 2 minutes.</p>
+
+        <pre><code>alias: "Night Hallway Light"
+trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+    to: "on"
+condition:
+  - condition: time
+    after: "22:00:00"
+    before: "06:00:00"
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.hallway
+    data:
+      brightness: 10
+      kelvin: 2200
+  - wait_for_trigger:
+      - platform: state
+        entity_id: binary_sensor.hallway_motion
+        to: "off"
+        for:
+          minutes: 2
+  - service: light.turn_off
+    target:
+      entity_id: light.hallway</code></pre>
+
+        <p>The <code>kelvin: 2200</code> gives a warm amber tone that won't blind you at 3 AM. If you want to build custom sensor housings for your motion sensors, check out our guide on <a href="3d-print-smart-home-case.html">3D printing custom smart home device cases</a>.</p>
+
+        <h2>Automation #5: Temperature-Based Fan Control</h2>
+
+        <p>Let your home manage its own comfort. When the temperature rises above your threshold, the fan turns on. When it drops, the fan turns off.</p>
+
+        <pre><code>alias: "Auto Fan Control"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    above: 26
+    id: "hot"
+  - platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: 24
+    id: "cool"
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: "hot"
+        sequence:
+          - service: fan.turn_on
+            target:
+              entity_id: fan.living_room
+      - conditions:
+          - condition: trigger
+            id: "cool"
+        sequence:
+          - service: fan.turn_off
+            target:
+              entity_id: fan.living_room</code></pre>
+
+        <p>The 2-degree gap between on (26°C) and off (24°C) prevents the fan from rapidly cycling on and off — a technique called <strong>hysteresis</strong>.</p>
+
+        <h2>Automation #6: Door Open Notification</h2>
+
+        <p>Get a phone notification when a door or window is left open too long. Great for security and for not wasting AC.</p>
+
+        <pre><code>alias: "Front Door Left Open Alert"
+trigger:
+  - platform: state
+    entity_id: binary_sensor.front_door
+    to: "on"
+    for:
+      minutes: 10
+action:
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "⚠️ Front Door Open"
+      message: "The front door has been open for 10 minutes."</code></pre>
+
+        <p>This requires a door sensor. You can use a cheap ESP32-based sensor running <a href="esp32-smart-home-beginners.html">ESPHome or Tasmota</a> — we cover that in our ESP32 smart home guide.</p>
+
+        <h2>Automation #7: Movie Mode</h2>
+
+        <p>One tap dims the lights, turns on the TV, and closes the blinds. This is the automation that makes guests say "Whoa."</p>
+
+        <pre><code>alias: "Movie Mode"
+trigger:
+  - platform: state
+    entity_id: input_boolean.movie_mode
+    to: "on"
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.living_room
+    data:
+      brightness: 15
+      kelvin: 2200
+  - service: cover.close
+    target:
+      entity_id: cover.living_room_blinds
+  - service: media_player.turn_on
+    target:
+      entity_id: media_player.living_room_tv
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.movie_mode</code></pre>
+
+        <p>The <code>input_boolean</code> acts as a virtual switch you can put on your dashboard. Tap it, and everything configures itself. The last action resets the switch so it's ready for next time.</p>
+
+        <h2>Automation #8: Guest WiFi Password Reminder</h2>
+
+        <p>When a guest arrives (detected via their phone connecting to your network or entering the home zone), automatically show the WiFi password on a dashboard or send it as a notification.</p>
+
+        <pre><code>alias: "Guest Welcome"
+trigger:
+  - platform: state
+    entity_id: person.guest
+    to: "home"
+action:
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "🎉 Guest Arrived"
+      message: "Guest is home! WiFi: MyNetwork / Password: MyPass123"</code></pre>
+
+        <h2>Automation #9: Plant Watering Reminder</h2>
+
+        <p>Using a soil moisture sensor (you can build one with an ESP32), get a reminder when your plants need water.</p>
+
+        <pre><code>alias: "Plant Needs Water"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.plant_soil_moisture
+    below: 30
+action:
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "🌱 Thirsty Plant"
+      message: "Soil moisture is {{ states('sensor.plant_soil_moisture') }}%. Time to water!"</code></pre>
+
+        <p>You can 3D print a waterproof enclosure for your soil sensor — see our <a href="3d-print-smart-home-case.html">smart home case printing guide</a> for ideas.</p>
+
+        <h2>Automation #10: Goodnight Routine</h2>
+
+        <p>The ultimate "I'm going to bed" automation. One action that secures your home for the night.</p>
+
+        <pre><code>alias: "Goodnight"
+trigger:
+  - platform: state
+    entity_id: input_boolean.goodnight
+    to: "on"
+action:
+  - service: light.turn_off
+    target:
+      entity_id: all
+  - service: lock.lock
+    target:
+      entity_id: lock.front_door
+  - service: cover.close
+    target:
+      entity_id: all
+  - service: switch.turn_off
+    target:
+      entity_id:
+        - switch.coffee_maker
+        - switch.living_room_fan
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "🌙 Goodnight"
+      message: "Everything is locked up. Sleep well!"
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.goodnight</code></pre>
+
+        <h2>Using Blueprints for Faster Setup</h2>
+
+        <p>If writing YAML feels like too much work, <strong>Blueprints</strong> are pre-made automations you can import and customize. Think of them as templates shared by the community.</p>
+
+        <h3>How to Use Blueprints</h3>
+        <ol>
+          <li>Go to <strong>Settings → Automations & Scenes → Blueprints</strong></li>
+          <li>Click <strong>"Import Blueprint"</strong></li>
+          <li>Paste the URL of a blueprint from the <a href="https://community.home-assistant.io/c/blueprints-exchange/53" target="_blank" rel="noopener">Home Assistant Community</a></li>
+          <li>Create an automation from the blueprint and fill in your device names</li>
+        </ol>
+
+        <p>Popular blueprints include: Z-Wave button controllers, presence-based lighting, and thermostat scheduling. The community has hundreds available for free.</p>
+
+        <h2>Debugging Automations That Don't Work</h2>
+
+        <p>Automations sometimes fail silently. Here's how to figure out why:</p>
+
+        <ol>
+          <li><strong>Check the trace</strong>: Go to the automation → three dots → <strong>Traces</strong>. This shows you exactly what happened at each step.</li>
+          <li><strong>Test manually</strong>: Use the "Run" button on the automation to fire it immediately, bypassing the trigger.</li>
+          <li><strong>Check entity states</strong>: Go to <strong>Developer Tools → States</strong> to verify your sensors report the values you expect.</li>
+          <li><strong>Watch the log</strong>: <strong>Settings → System → Logs</strong> will show errors from your automations.</li>
+          <li><strong>Use conditions sparingly</strong> at first. Get the trigger+action working, then add conditions.</li>
+        </ol>
+
+        <p>The most common beginner mistake? Using the wrong entity ID. Always copy entity IDs from Developer Tools → States, not from memory.</p>
+
+        <h2>Tips for Building Better Automations</h2>
+
+        <ul>
+          <li><strong>Start simple</strong> — Get the basic trigger→action working before adding conditions and delays</li>
+          <li><strong>Name everything clearly</strong> — "Lights On" is bad; "Sunset Living Room Lights On" is good</li>
+          <li><strong>Add descriptions</strong> — Future you will thank you when debugging at midnight</li>
+          <li><strong>Use delays and wait</strong> — Not every action should happen at the same time</li>
+          <li><strong>Test in stages</strong> — Don't build a 15-step automation and hope it all works</li>
+          <li><strong>Keep a backup</strong> — Before editing a working automation, make a note of what you changed</li>
+        </ul>
+
+        <p>For more advanced automation patterns (like using templates and variables), the Home Assistant documentation is your best friend. And if you want to expand your smart home with custom sensors and switches, our <a href="esp32-smart-home-beginners.html">ESP32 smart home projects guide</a> shows you how to build your own devices for under $5 each.</p>
+
+        <h2>What You'll Need</h2>
+
+        <p>To get started with these automations, here's what you need:</p>
+
+        <ul>
+          <li><strong>Home Assistant</strong> running on a Raspberry Pi or dedicated device (<a href="home-assistant-raspberry-pi-setup.html">setup guide here</a>)</li>
+          <li><strong>Home Assistant Companion App</strong> on your phone (for presence detection and notifications)</li>
+          <li><strong>Smart lights</strong> — Wi-Fi, Zigbee, or Z-Wave bulbs or switches</li>
+          <li><strong>Sensors</strong> — Motion, door, temperature (ESP32-based DIY sensors work great)</li>
+          <li><strong>A multimeter</strong> — for checking wiring on your DIY sensor builds (<a href="best-multimeter-for-electronics.html">our multimeter guide</a>)</li>
+        </ul>
+
+        <h2>Key Takeaways</h2>
+
+        <ul>
+          <li>Every automation = trigger + condition (optional) + action</li>
+          <li>Start with the UI editor, learn YAML when you're ready</li>
+          <li>Blueprints let you skip the hard work — use community templates</li>
+          <li>Use Traces to debug automations that don't behave as expected</li>
+          <li>Build automations in stages — test each part before adding complexity</li>
+          <li>The best automation is one you forget about because it just works</li>
+        </ul>
+
+        <p>The beauty of Home Assistant is that you're never locked into someone else's idea of what your smart home should do. These 10 automations are just the beginning — once you understand the trigger/condition/action pattern, you can automate literally anything in your home.</p>
+
+        <p>Start with one or two that solve real problems in your daily routine. Once you see how they work, you'll find yourself automating everything. It's addictive — in the best way.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases</a></li>
+          <li><a href="best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
