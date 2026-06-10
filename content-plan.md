@@ -289,14 +289,14 @@
 - [x] home-assistant-automations-beginners — Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home ✅ 2026-06-07
 - [x] best-oscilloscope-beginners — Best Oscilloscope for Beginners & DIY Electronics in 2026 ✅ 2026-06-08
 - [x] esphome-getting-started-guide — ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266 ✅ 2026-06-09
-- [ ] diy-smart-door-lock — How to Build a DIY Smart Door Lock with ESP32 and Home Assistant
+- [x] diy-smart-door-lock — How to Build a DIY Smart Door Lock with ESP32 and Home Assistant ✅ 2026-06-10
 - [ ] homekit-home-assistant-bridge — How to Bridge Home Assistant to Apple HomeKit
 - [ ] best-soldering-iron-tips — Best Soldering Iron Tips: Types, Sizes & When to Use Each
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 208 篇 ✅ (批次1-37全部完成 + 批次38进行中)
+- **已完成**: 209 篇 ✅ (批次1-37全部完成 + 批次38进行中)
 - **当前批次**: 批次38（Maker & Smart Home 继续）
 - **剩余**: 93 篇
 

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</title>
+  <meta name="description" content="Learn how to build a DIY smart door lock using ESP32 and Home Assistant. Complete guide with wiring, ESPHome config, and 3D printing a custom case for your smart home security.">
+  <meta name="keywords" content="DIY smart door lock, ESP32 smart lock, Home Assistant door lock, ESPHome lock, smart home security, DIY electronic lock">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & Smart Home</span>
+      </nav>
+
+      <h1>How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 10, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔐</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Want to upgrade your home security without spending $300 on a commercial smart lock? Building a DIY smart door lock with ESP32 and Home Assistant is easier than you think. In this guide, you'll learn how to create a WiFi-connected door lock that you can control from your phone, automate with Home Assistant, and even integrate with Apple HomeKit.</p>
+
+        <h2>Why Build a DIY Smart Door Lock?</h2>
+
+        <p>Commercial smart locks like August, Schlage, or Yale can cost $200-400. They often require proprietary apps, monthly subscriptions, or work only with specific ecosystems. By building your own with ESP32 and Home Assistant, you get:</p>
+
+        <ul>
+          <li><strong>Full control</strong> – No cloud dependency, works entirely on your local network</li>
+          <li><strong>Custom integration</strong> – Seamlessly works with <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> and other smart home platforms</li>
+          <li><strong>Low cost</strong> – Total parts cost under $40</li>
+          <li><strong>Privacy</strong> – No data sent to third-party servers</li>
+          <li><strong>Flexibility</strong> – Add any feature you want: fingerprint sensor, RFID, keypad, or voice control</li>
+        </ul>
+
+        <h2>Components You'll Need</h2>
+
+        <p>Before starting, gather these components. Most are available on <a href="aliexpress-3d-printer-buying-guide.html">AliExpress</a> or Amazon for low prices.</p>
+
+        <h3>Core Components</h3>
+
+        <ul>
+          <li><strong>ESP32 Development Board</strong> – The brain of the operation. Look for the ESP32-WROOM-32 (around $6-10). It has WiFi, Bluetooth, and enough GPIO pins for our project.</li>
+          <li><strong>Solenoid Lock or Servo Motor</strong> – A 12V solenoid lock ($8-15) is the simplest option. For retrofitting existing deadbolts, a high-torque servo like the MG996R ($5-8) works well.</li>
+          <li><strong>Relay Module (5V or 3.3V)</strong> – Controls the high-voltage solenoid with low-voltage ESP32 signals. A single-channel relay module costs about $1-2.</li>
+          <li><strong>12V Power Supply</strong> – Solenoid locks typically require 12V. A 2A power supply is sufficient ($8-12).</li>
+          <li><strong>AMS1117-3.3V or Similar Voltage Regulator</strong> – Powers the ESP32 from the same 12V supply (optional but recommended).</li>
+        </ul>
+
+        <h3>Optional Upgrades</h3>
+
+        <ul>
+          <li><strong>RFID Reader (RC522)</strong> – Unlock with RFID cards or key fobs ($2-3)</li>
+          <li><strong>Keypad (4x4 Matrix)</strong> – PIN code entry ($3-5)</li>
+          <li><strong>Fingerprint Sensor (AS608)</strong> – Biometric unlock ($8-12)</li>
+          <li><strong>Reset Button</strong> – Physical override button inside the house ($1)</li>
+          <li><strong>Status LED</strong> – Visual feedback for lock/unlock state ($0.50)</li>
+        </ul>
+
+        <p>If you're new to electronics, check out our guide on <a href="best-multimeter-for-electronics.html">the best multimeters for beginners</a> to safely test your connections.</p>
+
+        <h2>Wiring Diagram and Connections</h2>
+
+        <p>Here's how to wire everything together. Safety first: always disconnect power before making connections!</p>
+
+        <h3>Basic Wiring (ESP32 + Relay + Solenoid)</h3>
+
+        <pre><code>ESP32          Relay Module          Solenoid Lock
+GPIO 26 -----> IN
+5V      -----> VCC
+GND     -----> GND
+
+Relay NO (Normally Open) -----> Solenoid Positive
+Relay COM (Common)     -----> 12V Power Positive
+
+Solenoid Negative -----> 12V Power Negative
+12V Power GND    -----> ESP32 GND (common ground)</code></pre>
+
+        <h3>Power Supply Setup</h3>
+
+        <p>The ESP32 runs on 3.3V-5V, while the solenoid needs 12V. You have two options:</p>
+
+        <ol>
+          <li><strong>Dual Power Supplies</strong> – Simplest approach. Use a USB charger for ESP32 and a 12V adapter for the solenoid.</li>
+          <li><strong>Single 12V Supply + Voltage Regulator</strong> – More elegant. Use a buck converter (like LM2596) to step down 12V to 5V for the ESP32.</li>
+        </ol>
+
+        <p>If you're comfortable with soldering, our <a href="best-soldering-station-beginners.html">beginner soldering guide</a> will help you create permanent, reliable connections.</p>
+
+        <h2>Flashing ESPHome Firmware</h2>
+
+        <p>Instead of writing Arduino code from scratch, we'll use <a href="esphome-getting-started-guide.html">ESPHome</a> – a fantastic framework that generates custom firmware from simple YAML configuration. It integrates seamlessly with Home Assistant.</p>
+
+        <h3>Step 1: Install ESPHome</h3>
+
+        <p>On your computer with Home Assistant running, install the ESPHome Add-on:</p>
+
+        <ol>
+          <li>Open Home Assistant → Settings → Add-ons</li>
+          <li>Search for "ESPHome" and install it</li>
+          <li>Start the ESPHome dashboard</li>
+        </ol>
+
+        <h3>Step 2: Create New Device</h3>
+
+        <p>In the ESPHome dashboard:</p>
+
+        <ol>
+          <li>Click "+ New Device"</li>
+          <li>Name it "Smart Door Lock"</li>
+          <li>Select "ESP32" as the device type</li>
+          <li>Copy the encryption key shown (you'll need it later)</li>
+        </ol>
+
+        <h3>Step 3: Configure the Lock</h3>
+
+        <p>Edit the device configuration and add this code:</p>
+
+        <pre><code>esphome:
+  name: smart-door-lock
+  friendly_name: Smart Door Lock
+
+esp32:
+  board: esp32dev
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "YOUR_ENCRYPTION_KEY_HERE"
+
+ota:
+  password: "YOUR_OTA_PASSWORD"
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+  ap:
+    ssid: "Smart Lock Fallback"
+    password: "fallback-password"
+
+# GPIO pin for relay control
+switch:
+  - platform: gpio
+    pin: GPIO26
+    name: "Door Lock Relay"
+    id: door_lock_relay
+    restore_mode: ALWAYS_OFF  # Safety: default to locked
+
+# Optional: Status LED
+status_led:
+  pin: GPIO2
+
+# Optional: Binary sensor for door status
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO27
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Door Sensor"
+    device_class: door</code></pre>
+
+        <h3>Step 4: Flash the ESP32</h3>
+
+        <ol>
+          <li>Click "Install" in ESPHome dashboard</li>
+          <li>Choose "Plug into this computer" for first flash</li>
+          <li>Connect ESP32 via USB, select the correct port</li>
+          <li>Wait for flashing to complete (about 2-3 minutes)</li>
+          <li>ESP32 will restart and connect to your WiFi</li>
+        </ol>
+
+        <h2>Home Assistant Integration</h2>
+
+        <p>Once flashed, your smart lock will automatically appear in Home Assistant. Here's how to set it up properly:</p>
+
+        <h3>Adding the Device</h3>
+
+        <ol>
+          <li>Go to Settings → Devices & Services</li>
+          <li>ESPHome integration should auto-discover "smart-door-lock"</li>
+          <li>Click "Configure" and enter your encryption key</li>
+          <li>The lock will appear as a Switch entity</li>
+        </ol>
+
+        <h3>Creating a Lock Template</h3>
+
+        <p>The ESPHome switch controls the relay, but for proper lock/unlock semantics, create a Template Lock:</p>
+
+        <pre><code>lock:
+  - platform: template
+    name: "Front Door Lock"
+    id: front_door_lock
+    lock_action:
+      - switch.turn_on: door_lock_relay
+    unlock_action:
+      - switch.turn_off: door_lock_relay
+    value_template: "{{ states('switch.door_lock_relay') }}"</code></pre>
+
+        <p>This creates a proper lock entity that you can use in automations, dashboards, and even expose to <a href="homekit-home-assistant-bridge.html">Apple HomeKit</a>.</p>
+
+        <h2>3D Printing a Custom Case</h2>
+
+        <p>Now for the fun part – creating a professional enclosure for your smart lock! A 3D printed case protects the electronics and gives your project a polished look.</p>
+
+        <p>If you don't have a 3D printer yet, check out our guide on <a href="best-3d-printer-under-500.html">the best 3D printers under $500</a> to get started with this rewarding hobby.</p>
+
+        <h3>Case Design Considerations</h3>
+
+        <ul>
+          <li><strong>ESP32 mounting</strong> – Include standoffs or screw holes for secure mounting</li>
+          <li><strong>Relay module space</strong> – Ensure enough clearance for the relay and wiring</li>
+          <li><strong>Wire management</strong> – Add strain relief and cable channels</li>
+          <li><strong>Ventilation</strong> – The voltage regulator may get warm; add vent holes</li>
+          <li><strong>Mounting options</strong> – screw holes for wall mounting or adhesive backing</li>
+        </ul>
+
+        <h3>Where to Find Models</h3>
+
+        <p>Instead of designing from scratch, check these repositories for existing ESP32 enclosure designs:</p>
+
+        <ul>
+          <li><a href="https://www.thingiverse.com">Thingiverse</a> – Search "ESP32 enclosure" or "ESPHome case"</li>
+          <li><a href="https://www.printables.com">Printables</a> – High-quality, tested designs</li>
+          <li><a href="https://cults3d.com">Cults3D</a> – Unique and specialized enclosures</li>
+        </ul>
+
+        <p>For a custom fit, use <a href="fusion-360-3d-printing-tutorial.html">Fusion 360</a> or <a href="tinkercad-3d-printing-tutorial.html">Tinkercad</a> to design your own case. Measure your components carefully and add 2-3mm tolerance for easy fitting.</p>
+
+        <p>You can also modify existing smart home device cases from our <a href="3d-print-smart-home-case.html">3D printing smart home cases guide</a> to fit your specific components.</li>
+
+        <h3>Printing Tips</h3>
+
+        <ul>
+          <li><strong>Material</strong> – Use PETG for durability and heat resistance (see our <a href="petg-vs-pla-comparison.html">PETG vs PLA comparison</a>)</li>
+          <li><strong>Layer height</strong> – 0.2mm for strength, 0.15mm for better detail</li>
+          <li><strong>Infill</strong> – 20-30% gyroid for a good strength-to-weight ratio</li>
+          <li><strong>Supports</strong> – Only if your design has significant overhangs</li>
+        </ul>
+
+        <h2>Automation Ideas</h2>
+
+        <p>With Home Assistant, the possibilities are endless. Here are some practical automations:</p>
+
+        <h3>Auto-Lock After Closing</h3>
+
+        <pre><code>automation:
+  - alias: "Auto Lock Door After Closing"
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.door_sensor
+        to: "off"  # Door closed
+        for: "00:00:30"  # Wait 30 seconds
+    action:
+      - service: lock.lock
+        target:
+          entity_id: lock.front_door_lock</code></pre>
+
+        <h3>Unlock When You Arrive Home</h3>
+
+        <pre><code>automation:
+  - alias: "Unlock When Home"
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.your_phone
+        zone: zone.home
+        event: enter
+    action:
+      - service: lock.unlock
+        target:
+          entity_id: lock.front_door_lock
+      - service: notify.mobile_app
+        data:
+          message: "Welcome home! Door unlocked automatically."</code></pre>
+
+        <h3>Guest Access with Time Limit</h3>
+
+        <p>Create a temporary access code that expires:</p>
+
+        <pre><code>script:
+  grant_temporary_access:
+    sequence:
+      - service: lock.unlock
+        target:
+          entity_id: lock.front_door_lock
+      - delay: "02:00:00"  # 2 hours
+      - service: lock.lock
+        target:
+          entity_id: lock.front_door_lock</code></pre>
+
+        <h2>Security Considerations</h2>
+
+        <p>A smart lock is only as secure as its implementation. Follow these best practices:</p>
+
+        <h3>Network Security</h3>
+
+        <ul>
+          <li>Use WPA3 WiFi encryption (or WPA2 at minimum)</li>
+          <li>Create a separate IoT VLAN for smart home devices</li>
+          <li>Disable UPnP on your router</li>
+          <li>Use strong, unique passwords for ESPHome OTA updates</li>
+        </ul>
+
+        <h3>Physical Security</h3>
+
+        <ul>
+          <li>Mount the ESP32 inside the house, not outside</li>
+          <li>Use tamper-proof screws for the enclosure</li>
+          <li>Add a physical key override (don't rely solely on electronics)</li>
+          <li>Install a backup battery (USB power bank) for power outages</li>
+        </ul>
+
+        <h3>Software Security</h3>
+
+        <ul>
+          <li>Keep ESPHome firmware updated</li>
+          <li>Use encryption for ESPHome API communication</li>
+          <li>Enable Home Assistant two-factor authentication</li>
+          <li>Regularly review access logs</li>
+        </ul>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>ESP32 Won't Connect to WiFi</h3>
+
+        <ul>
+          <li>Double-check SSID and password in ESPHome config</li>
+          <li>Ensure 2.4GHz WiFi (ESP32 doesn't support 5GHz)</li>
+          <li>Move ESP32 closer to router for initial setup</li>
+          <li>Check if your WiFi has MAC address filtering enabled</li>
+        </ul>
+
+        <h3>Relay Doesn't Click</h3>
+
+        <ul>
+          <li>Verify GPIO pin number in ESPHome config</li>
+          <li>Check relay module requires 3.3V or 5V (most work with both)</li>
+          <li>Test relay independently with a multimeter</li>
+          <li>Ensure common ground between ESP32 and relay power</li>
+        </ul>
+
+        <h3>Home Assistant Doesn't Discover Device</h3>
+
+        <ul>
+          <li>Check if ESP32 and Home Assistant are on the same subnet</li>
+          <li>Disable AP mode after initial WiFi connection</li>
+          <li>Manually add device using its IP address</li>
+          <li>Check firewall settings on your router</li>
+        </ul>
+
+        <p>For more electronics troubleshooting tips, check our guide on <a href="best-oscilloscope-beginners.html">using an oscilloscope</a> to debug circuit issues.</p>
+
+        <h2>Taking It Further: Advanced Features</h2>
+
+        <p>Once you have the basic lock working, consider these upgrades:</p>
+
+        <h3>Add a Keypad</h3>
+
+        <p>Connect a 4x4 matrix keypad to ESP32 and program it to unlock when the correct PIN is entered. ESPHome has built-in support for keypad matrix.</p>
+
+        <h3>RFID Card Access</h3>
+
+        <p>Add an RC522 RFID reader. Program it to unlock when authorized cards are scanned. Great for family members who don't have smartphones.</p>
+
+        <h3>Fingerprint Sensor</h3>
+
+        <p>Connect an AS608 fingerprint sensor for biometric access. ESPHome doesn't have native support, but you can use the UART bus to communicate with the sensor using custom components.</p>
+
+        <h3>Camera Integration</h3>
+
+        <p>Add a <a href="3d-printer-raspberry-pi-camera.html">Raspberry Pi camera</a> to capture photos when someone unlocks the door. Send snapshots to your phone via Home Assistant notifications.</p>
+
+        <h3>Voice Control</h3>
+
+        <p>Expose the lock to Google Assistant or Amazon Alexa through Home Assistant cloud or Nabu Casa. Then say, "Hey Google, lock the front door."</p>
+
+        <h2>Cost Breakdown</h2>
+
+        <p>Here's what you can expect to spend:</p>
+
+        <table>
+          <tr>
+            <th>Component</th>
+            <th>Cost (USD)</th>
+          </tr>
+          <tr>
+            <td>ESP32 Development Board</td>
+            <td>$6 - $10</td>
+          </tr>
+          <tr>
+            <td>12V Solenoid Lock</td>
+            <td>$8 - $15</td>
+          </tr>
+          <tr>
+            <td>Relay Module</td>
+            <td>$1 - $3</td>
+          </tr>
+          <tr>
+            <td>12V Power Supply</td>
+            <td>$8 - $12</td>
+          </tr>
+          <tr>
+            <td>Wires, Connectors, etc.</td>
+            <td>$3 - $5</td>
+          </tr>
+          <tr>
+            <td>3D Printed Case (filament)</td>
+            <td>$2 - $5</td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <th>$28 - $50</th>
+          </tr>
+        </table>
+
+        <p>Compare this to $200-400 for commercial smart locks, and the DIY approach becomes very attractive!</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Building a DIY smart door lock with ESP32 and Home Assistant is a rewarding project that saves money, teaches valuable skills, and gives you complete control over your home security. With the ability to customize every aspect – from the locking mechanism to the automation logic – you'll end up with a system that perfectly fits your needs.</p>
+
+        <p>Start with the basic version (ESP32 + relay + solenoid), then gradually add features like RFID, keypad, or fingerprint sensing. Before you know it, you'll have a professional-grade smart lock system that rivals commercial offerings at a fraction of the cost.</p>
+
+        <p>Have you built a DIY smart lock? What features would you add? Let us know in the comments below!</p>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0; padding: 1rem; background: #f0f0f0; border-radius: 8px; text-align: center;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing and DIY electronics.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
