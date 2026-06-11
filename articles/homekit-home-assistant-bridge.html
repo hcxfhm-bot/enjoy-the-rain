@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Bridge Home Assistant to Apple HomeKit: Complete Setup Guide</title>
+  <meta name="description" content="Connect Home Assistant to Apple HomeKit in minutes. Control all your smart home devices through Siri and the Apple Home app — no paid plugins needed.">
+  <meta name="keywords" content="home assistant homekit bridge, homekit home assistant, apple homekit home assistant, home assistant siri, homekit integration home assistant">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>How to Bridge Home Assistant to Apple HomeKit: Complete Setup Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 11, 2026</span>
+        <span>⏱️ 10 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🍎</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You have a perfectly configured <strong>Home Assistant</strong> setup. Hundreds of entities, custom automations, ESPHome devices scattered across your home — everything running smoothly. But when your partner opens the Apple Home app and asks Siri to turn on the living room lights, nothing happens. Frustrating.</p>
+
+        <p>The good news: you don't need to buy HomeKit-certified hardware or abandon your existing setup. The <strong>Home Assistant HomeKit integration</strong> bridges your entire smart home to Apple HomeKit natively — for free, with no subscription, and entirely local. Here's how to set it up.</p>
+
+        <h2>What Is the HomeKit Bridge in Home Assistant?</h2>
+
+        <p>The HomeKit integration built into Home Assistant exposes your existing devices to Apple HomeKit as if they were native HomeKit accessories. Once configured, your iPhone, iPad, Mac, or HomePod recognises these devices in the Apple Home app — and Siri responds to commands like "Hey Siri, turn off the office lights" or "Hey Siri, set the thermostat to 72 degrees."</p>
+
+        <p>Critically, this bridge runs <strong>entirely locally on your Home Assistant instance</strong>. No cloud dependency, no monthly fees, no data going through third-party servers. Apple communicates directly with your Home Assistant server, whether it's running on a Raspberry Pi, a dedicated mini PC, or a Docker container.</p>
+
+        <p>If you're new to Home Assistant, check out our <a href="home-assistant-raspberry-pi-setup.html">getting started guide for Home Assistant on Raspberry Pi</a> for the full setup walkthrough before proceeding here.</p>
+
+        <h2>Why Bridge Home Assistant to Apple HomeKit?</h2>
+
+        <p>There are several solid reasons to set up this bridge:</p>
+
+        <ul>
+          <li><strong>Siri voice control</strong> — Siri is deeply integrated into every Apple device. "Hey Siri, I'm home" triggering a Home Assistant scene feels magical.</li>
+          <li><strong>Native Apple Home app</strong> — Family members who aren't Home Assistant users can control devices through an app they already know.</li>
+          <li><strong>HomeKit scenes and automations</strong> — Use the Apple Home app to create scenes and automations that work alongside your Home Assistant ones.</li>
+          <li><strong>Thread / Matter support</strong> — The bridge can expose compatible devices to Apple's Thread network for ultra-reliable, low-power mesh networking.</li>
+          <li><strong>HomeHub compatibility</strong> — Control devices through HomePod, HomePod mini, or Apple TV as a home hub — hands-free from anywhere in your home.</li>
+        </ul>
+
+        <p>The main limitation is that <strong>not every Home Assistant entity type maps cleanly to HomeKit</strong>. Some advanced sensors or custom helpers may not appear in Apple Home, but the vast majority of lights, switches, thermostats, locks, and sensors work without issue.</p>
+
+        <h2>Prerequisites</h2>
+
+        <p>Before you start, make sure you have:</p>
+
+        <ul>
+          <li>Home Assistant OS, Container, or Core installed and running</li>
+          <li>Access to the Home Assistant web UI (http://homeassistant:8123 or your local IP)</li>
+          <li>At least one Apple device (iPhone, iPad, or Mac) on the same network as Home Assistant</li>
+          <li>The <strong>HomeKit Controller integration</strong> already enabled (for importing existing HomeKit devices — optional but useful)</li>
+        </ul>
+
+        <p>No additional add-ons, subscriptions, or paid Home Assistant Supervisor features are required. Everything you need is already included.</p>
+
+        <h2>Method 1: Bridge via the UI (Recommended)</h2>
+
+        <p>This is the easiest path and works for most users.</p>
+
+        <h3>Step 1 — Add the HomeKit Integration</h3>
+
+        <p>Navigate to <strong>Settings → Devices & Services</strong> in Home Assistant. Click the <strong>+ Add Integration</strong> button in the bottom right corner. Search for <strong>"HomeKit"</strong> and select it from the list.</p>
+
+        <p>You'll see two options:</p>
+        <ul>
+          <li><strong>HomeKit Controller</strong> — Import existing physical HomeKit devices (like Eve or Philips Hue bridges)</li>
+          <li><strong>HomeKit Bridge</strong> — Expose Home Assistant entities TO Apple Home — this is what you want</li>
+        </ul>
+
+        <p>Select <strong>HomeKit Bridge</strong>.</p>
+
+        <h3>Step 2 — Choose How to Add Devices</h3>
+
+        <p>You have two choices:</p>
+
+        <ul>
+          <li><strong>Include all eligible devices</strong> — Home Assistant scans your entities and offers everything that can be bridged</li>
+          <li><strong>Select specific areas or device types</strong> — More control; choose only the devices or rooms you want exposed to Apple</li>
+        </ul>
+
+        <p>For your first setup, <strong>choose specific areas</strong> to avoid flooding Apple Home with test devices. You can always add more later.</p>
+
+        <h3>Step 3 — Pair with Apple Home</h3>
+
+        <p>Home Assistant will generate a <strong>pairing QR code</strong> and a 9-digit setup code. Open the Apple Home app on your iPhone or iPad. Tap the <strong>+</strong> button → <strong>Add Accessory</strong>. Point your camera at the QR code, or tap <strong>Enter Code Manually</strong> and type the 9-digit code.</p>
+
+        <p>Apple Home will discover the devices and add them to your home. This may take 30–60 seconds depending on how many entities you're bridging.</p>
+
+        <h3>Step 4 — Organize in Apple Home</h3>
+
+        <p>Once added, go into the Apple Home app and assign your devices to <strong>rooms</strong>. The bridge doesn't automatically inherit Home Assistant room names, so you'll need to do this manually. Group devices logically — lights together, climate devices together, locks in a security group.</p>
+
+        <p>Now test with Siri: "Hey Siri, turn on the kitchen light."</p>
+
+        <h2>Method 2: Bridge via Configuration.yaml (Advanced)</h2>
+
+        <p>If you prefer YAML configuration or need advanced control over which entities are exposed, you can configure the bridge manually. Add this to your <code>configuration.yaml</code>:</p>
+
+        <pre><code>homekit:
+  auto_start: true
+  filter:
+    include_entities:
+      - light.living_room
+      - switch.desk_lamp
+      - climate.thermostat
+      - lock.front_door
+    include_domains:
+      - light
+      - switch
+      - climate
+  entity_config:
+    light.living_room:
+      linked_battery_sensor: sensor.living_room_battery
+    lock.front_door:
+      secure_entities: true</code></pre>
+
+        <p>After saving, restart Home Assistant. The bridge will start automatically and expose only the entities you've specified.</p>
+
+        <p>This method gives you granular control over <strong>linked battery sensors</strong>, <strong>secure entity flags</strong> for locks, and <strong>custom names</strong> that appear in Apple Home.</p>
+
+        <h2>Troubleshooting Common HomeKit Bridge Issues</h2>
+
+        <h3>Devices Not Appearing in Apple Home</h3>
+
+        <p>If Apple Home doesn't show a device after pairing, the most common cause is that the entity type doesn't have a native HomeKit mapping. Check the <a href="https://www.home-assistant.io/integrations/homekit/">official Home Assistant HomeKit compatibility list</a> to confirm your entity type is supported. Unsupported entities silently fail — they won't show an error, they just won't appear.</p>
+
+        <h3>Siri Not Responding to Commands</h3>
+
+        <p>Siri's natural language processing can be finicky with custom-named devices. Try the following:</p>
+
+        <ul>
+          <li><strong>Use room-based commands</strong> — "Hey Siri, turn off the bedroom" instead of "turn off the bedroom light"</li>
+          <li><strong>Avoid special characters</strong> in device names (emojis, accents, unusual punctuation)</li>
+          <li><strong>Re-sync the HomeKit database</strong> — In Home Assistant, go to Settings → Devices & Services → HomeKit Bridge → Re-pair. In Apple Home, remove the bridge accessory and re-add it</li>
+        </ul>
+
+        <h3>Pairing Code Rejected</h3>
+
+        <p>If your iPhone says the pairing code is incorrect, generate a fresh code from the Home Assistant UI. Each code is single-use. Also ensure your iPhone and Home Assistant are on the <strong>same local network</strong> — the bridge won't work across VLANs or if mDNS is blocked.</p>
+
+        <h3>Too Many Devices in Apple Home</h3>
+
+        <p>Home Assistant has hundreds of entities. Exposing them all to Apple Home creates a chaotic experience. Use the area filter or YAML <code>filter</code> block to expose only the devices you actually want voice control over. Everything else stays in Home Assistant's UI.</p>
+
+        <h2>What Works and What Doesn't in the Bridge</h2>
+
+        <p>Here's a practical breakdown of HomeKit compatibility for common smart home devices:</p>
+
+        <ul>
+          <li><strong>Lights (switch and light entities)</strong> — ✅ Works fully. Brightness, color temperature, RGB control all supported.</li>
+          <li><strong>Thermostats (climate entities)</strong> — ✅ Works. Temperature setpoints and modes translate cleanly.</li>
+          <li><strong>Smart locks</strong> — ✅ Works with secure flag. Apple Home treats them as secure accessories.</li>
+          <li><strong>Motion and occupancy sensors</strong> — ✅ Works. Show as occupancy sensors in Apple Home.</li>
+          <li><strong>Buttons and remotes</strong> — ✅ Works. Appear as programmable buttons in Apple Home automations.</li>
+          <li><strong>ESPHome devices via Tasmota/ESPHome</strong> — ✅ Works if exposed as MQTT or native entities. See our <a href="esphome-getting-started-guide.html">ESPHome getting started guide</a> for firmware setup.</li>
+          <li><strong>Input helpers, template sensors</strong> — ⚠️ Usually not supported. Stick to core entity types.</li>
+          <li><strong>Camera streams</strong> — ⚠️ Requires additional configuration (ffmpeg). Advanced users only.</li>
+        </ul>
+
+        <h2>Automating Apple HomeKit with Home Assistant</h2>
+
+        <p>Once your devices are in Apple Home, you can layer automations on top. A popular approach: create <strong>Home Assistant scenes</strong> for complex actions (multiple lights + thermostat + blinds), then expose the scene as a switch or button in HomeKit. Saying "Hey Siri, movie time" triggers the entire scene.</p>
+
+        <p>For more automation ideas, see our <a href="home-assistant-automations-beginners.html">Home Assistant automations guide for beginners</a>, which covers 10 practical automation examples you can adapt.</p>
+
+        <h2>Security Considerations</h2>
+
+        <p>The Home Assistant HomeKit bridge uses <strong>local pairing</strong> — no internet required for device control. Your Apple device communicates directly with Home Assistant over your LAN. However, if you enable <strong>Home Assistant Cloud</strong> (Nabu Casa), remote access to HomeKit devices goes through their encrypted tunnel.</p>
+
+        <p>For locks and security devices, Apple HomeKit enforces authentication on each command. Home Assistant's bridge respects this by flagging <code>secure_entities</code> in the YAML config. Never expose a smart lock to HomeKit without proper network segmentation.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Bridging Home Assistant to Apple HomeKit is one of the highest-value integrations you can set up. It takes 10–15 minutes, costs nothing, and gives your entire household Siri-powered voice control over every smart device in your home — regardless of what protocol or brand it uses.</p>
+
+        <p>The setup is fully reversible: if you decide the bridge isn't for you, remove it from the Apple Home app and disable the integration in Home Assistant. No hardware changes, no firmware flashes, no loss of your existing Home Assistant configuration.</p>
+
+        <p><strong>Start with one room</strong> — expose your living room lights and thermostat. Get Siri working the way you want. Then expand from there.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="diy-smart-door-lock.html">How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -290,7 +290,7 @@
 - [x] best-oscilloscope-beginners — Best Oscilloscope for Beginners & DIY Electronics in 2026 ✅ 2026-06-08
 - [x] esphome-getting-started-guide — ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266 ✅ 2026-06-09
 - [x] diy-smart-door-lock — How to Build a DIY Smart Door Lock with ESP32 and Home Assistant ✅ 2026-06-10
-- [ ] homekit-home-assistant-bridge — How to Bridge Home Assistant to Apple HomeKit
+- [x] homekit-home-assistant-bridge — How to Bridge Home Assistant to Apple HomeKit ✅ 2026-06-11
 - [ ] best-soldering-iron-tips — Best Soldering Iron Tips: Types, Sizes & When to Use Each
 
 ## 进度
