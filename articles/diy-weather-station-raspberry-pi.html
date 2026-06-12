@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a DIY Weather Station with Raspberry Pi: Complete Guide</title>
+  <meta name="description" content="Build your own Raspberry Pi weather station with real sensors — temperature, humidity, pressure, wind, and rain. Full wiring guide, Python code, and Home Assistant integration.">
+  <meta name="keywords" content="DIY weather station, raspberry pi weather station, weather station sensors, BME280 raspberry pi, home assistant weather station, maker weather project">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & Smart Home</span>
+      </nav>
+
+      <h1>How to Build a DIY Weather Station with Raspberry Pi: Complete Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 12, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🌤️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Commercial weather stations cost $150–$500 and often lock you into proprietary apps with limited data access. But with a Raspberry Pi and a handful of affordable sensors, you can build a fully custom weather station that logs real data, integrates with <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a>, and lets you 3D print a weatherproof enclosure that looks exactly how you want it.</p>
+
+        <p>This guide walks through the complete build: selecting sensors, wiring them to your Pi, writing Python code to collect and publish data, integrating everything into your smart home dashboard, and designing a custom <a href="3d-print-smart-home-case.html">3D printed housing</a> to protect your station outdoors.</p>
+
+        <h2>What You'll Need</h2>
+
+        <h3>Core Hardware</h3>
+        <ul>
+          <li><strong>Raspberry Pi 4 or 5</strong> — Any model works; the Pi 4 (2GB) is the sweet spot for cost and performance. If you haven't set up a Pi before, start with our <a href="home-assistant-raspberry-pi-setup.html">Raspberry Pi setup guide</a>.</li>
+          <li><strong>BME280 sensor breakout</strong> — Measures temperature, humidity, and barometric pressure in one tiny module. Around $5–$8 on AliExpress or Adafruit.</li>
+          <li><strong>Wind speed sensor (anemometer)</strong> — A simple reed-switch anemometer that outputs pulses proportional to wind speed. Available for $10–$15.</li>
+          <li><strong>Rain gauge</strong> — A tipping-bucket rain gauge that counts tips (each tip = 0.2mm or 0.01 inch of rain). $15–$20.</li>
+          <li><strong>UV/light sensor (optional)</strong> — A VEML6075 or Si1145 breakout for UV index and ambient light. $8–$12.</li>
+        </ul>
+
+        <h3>Tools & Supplies</h3>
+        <ul>
+          <li>Soldering iron and basic soldering supplies — our <a href="best-soldering-station-beginners.html">soldering station guide</a> covers everything you need</li>
+          <li>Jumper wires (female-to-female for Pi GPIO connections)</li>
+          <li>4GB+ microSD card with Raspberry Pi OS</li>
+          <li>USB power supply (5V 3A minimum for Pi 4)</li>
+          <li>3D printer for the enclosure — any <a href="best-budget-3d-printer-under-200.html">budget FDM printer</a> works fine</li>
+          <li>Weatherproof cable glands (PG7 or PG9 size)</li>
+          <li>PETG or ASA filament for outdoor durability (see our <a href="asa-filament-guide.html">ASA filament guide</a> for outdoor printing)</li>
+        </ul>
+
+        <p><strong>Total cost:</strong> Approximately $40–$70 depending on how many sensors you include. That's less than a quarter of what a commercial Davis Vantage Pro2 costs.</p>
+
+        <h2>Sensor Wiring Guide</h2>
+
+        <h3>BME280 (I²C Connection)</h3>
+        <p>The BME280 communicates via I²C, which means just four wires:</p>
+        <ul>
+          <li><strong>VIN</strong> → Pi 3.3V (Pin 1)</li>
+          <li><strong>GND</strong> → Pi GND (Pin 6)</li>
+          <li><strong>SDI (SDA)</strong> → Pi GPIO2 (Pin 3)</li>
+          <li><strong>SCK (SCL)</strong> → Pi GPIO3 (Pin 5)</li>
+        </ul>
+        <p>Enable I²C on your Pi with <code>sudo raspi-config</code> → Interface Options → I²C → Enable. Verify the sensor is detected:</p>
+        <pre><code>sudo i2cdetect -y 1</code></pre>
+        <p>You should see the BME280 at address <code>0x76</code> or <code>0x77</code> depending on your breakout board's default configuration.</p>
+
+        <h3>Anemometer (GPIO Pulse Counting)</h3>
+        <p>The reed-switch anemometer outputs one pulse per revolution. Wind speed is calculated from the pulse frequency. Wiring:</p>
+        <ul>
+          <li><strong>One wire</strong> → Pi 3.3V (Pin 1)</li>
+          <li><strong>Other wire</strong> → Pi GPIO17 (Pin 11) with a 10kΩ pull-down resistor to GND</li>
+        </ul>
+        <p>The pull-down resistor keeps the GPIO pin LOW between pulses. Without it, floating input reads cause false counts. If you're not comfortable soldering resistors, our <a href="best-soldering-iron-tips.html">soldering iron tips guide</a> will help you get clean joints on small components.</p>
+
+        <h3>Rain Gauge (GPIO Interrupt)</h3>
+        <p>The tipping-bucket gauge works identically to the anemometer — a reed switch triggers on each tip:</p>
+        <ul>
+          <li><strong>One wire</strong> → Pi 3.3V (Pin 1)</li>
+          <li><strong>Other wire</strong> → Pi GPIO27 (Pin 13) with a 10kΩ pull-down resistor to GND</li>
+        </ul>
+
+        <h2>Python Data Collection Code</h2>
+
+        <p>Install the required libraries:</p>
+        <pre><code>pip3 install bme280 smbus2 RPi.GPIO paho-mqtt</code></pre>
+
+        <p>Here's the core data collection script:</p>
+        <pre><code>#!/usr/bin/env python3
+import time
+import json
+import bme280
+import smbus2
+import RPi.GPIO as GPIO
+import paho.mqtt.client as mqtt
+
+# BME280 setup
+bus = smbus2.SMBus(1)
+bme280.load_calibration_params(bus, 0x76)
+
+# GPIO setup for anemometer and rain gauge
+ANEMO_PIN = 17
+RAIN_PIN = 27
+wind_count = 0
+rain_count = 0
+WIND_SPEED_FACTOR = 1.2  # Adjust per your anemometer spec
+RAIN_PER_TIP = 0.2  # mm per tip (check your gauge spec)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(ANEMO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(RAIN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+def wind_tick(channel):
+    global wind_count
+    wind_count += 1
+
+def rain_tick(channel):
+    global rain_count
+    rain_count += 1
+
+GPIO.add_event_detect(ANEMO_PIN, GPIO.RISING, callback=wind_tick)
+GPIO.add_event_detect(RAIN_PIN, GPIO.RISING, callback=rain_tick, bouncetime=200)
+
+# MQTT client for Home Assistant integration
+client = mqtt.Client("weather_station")
+client.connect("localhost", 1883, 60)  # Home Assistant MQTT broker
+
+def publish_data():
+    data = bme280.sample(bus, 0x76)
+    wind_speed = wind_count * WIND_SPEED_FACTOR / 5  # 5-second sample
+    rainfall = rain_count * RAIN_PER_TIP
+    
+    payload = {
+        "temperature": round(data.temperature, 1),
+        "humidity": round(data.humidity, 1),
+        "pressure": round(data.pressure, 1),
+        "wind_speed": round(wind_speed, 1),
+        "rainfall": round(rainfall, 2)
+    }
+    
+    client.publish("homeassistant/sensor/weather_station/state",
+                   json.dumps(payload))
+    
+    global wind_count, rain_count
+    wind_count = 0
+    rain_count = 0
+
+# Main loop — publish every 30 seconds
+while True:
+    publish_data()
+    time.sleep(30)</code></pre>
+
+        <p>This script reads the BME280 every 30 seconds, calculates wind speed from pulse counts, accumulates rainfall, and publishes everything to your MQTT broker. Home Assistant will auto-discover the sensor data if you configure MQTT discovery — see our <a href="home-assistant-automations-beginners.html">Home Assistant automations guide</a> for the full setup.</p>
+
+        <h2>Home Assistant Integration</h2>
+
+        <p>To display your weather data in Home Assistant, configure MQTT sensors in your <code>configuration.yaml</code>:</p>
+        <pre><code>mqtt:
+  sensor:
+    - name: "Weather Station Temperature"
+      state_topic: "homeassistant/sensor/weather_station/state"
+      value_template: "{{ value_json.temperature }}"
+      unit_of_measurement: "°C"
+      device_class: temperature
+    - name: "Weather Station Humidity"
+      state_topic: "homeassistant/sensor/weather_station/state"
+      value_template: "{{ value_json.humidity }}"
+      unit_of_measurement: "%"
+      device_class: humidity
+    - name: "Weather Station Pressure"
+      state_topic: "homeassistant/sensor/weather_station/state"
+      value_template: "{{ value_json.pressure }}"
+      unit_of_measurement: "hPa"
+      device_class: atmospheric_pressure
+    - name: "Weather Station Wind Speed"
+      state_topic: "homeassistant/sensor/weather_station/state"
+      value_template: "{{ value_json.wind_speed }}"
+      unit_of_measurement: "km/h"
+    - name: "Weather Station Rainfall"
+      state_topic: "homeassistant/sensor/weather_station/state"
+      value_template: "{{ value_json.rainfall }}"
+      unit_of_measurement: "mm"</code></pre>
+
+        <p>After restarting Home Assistant, all five sensors appear on your dashboard. You can create automations like: <strong>"If wind speed exceeds 50 km/h, send a notification"</strong> or <strong>"If rainfall exceeds 5mm in the last hour, close the smart blinds."</strong> These automations tie directly into the broader smart home system we covered in our <a href="esp32-smart-home-beginners.html">ESP32 smart home projects guide</a>.</p>
+
+        <p>If you want your weather data available on Apple devices, bridge Home Assistant to HomeKit using the method described in our <a href="homekit-home-assistant-bridge.html">HomeKit integration guide</a>. Your weather station sensors will appear in the Home app alongside your other smart home devices.</p>
+
+        <h2>3D Printed Enclosure Design</h2>
+
+        <p>Your weather station lives outdoors, so the enclosure needs to be <strong>weatherproof, ventilated, and UV-resistant</strong>. Here's the design approach:</p>
+
+        <h3>Enclosure Requirements</h3>
+        <ul>
+          <li><strong>Material:</strong> PETG or ASA — both handle outdoor conditions better than PLA. ASA is specifically designed for UV resistance and temperature stability (see our <a href="asa-filament-guide.html">ASA guide</a>). PETG is easier to print and more impact-resistant.</li>
+          <li><strong>Design features:</strong> Louvered sides for airflow (the BME280 needs ambient air, not trapped greenhouse heat), sloped roof to shed rain, cable gland holes for sensor wires, and a mounting bracket for a pole or wall.</li>
+          <li><strong>Rain gauge placement:</strong> Mount the rain gauge separately on a flat, level surface away from trees and buildings. Don't put it inside the main enclosure — it needs open sky exposure.</li>
+          <li><strong>Anemometer placement:</strong> Mount the anemometer on a mast above the enclosure, ideally 2–3 meters above ground level for accurate wind readings.</li>
+        </ul>
+
+        <h3>Basic Enclosure Dimensions</h3>
+        <p>A simple box measuring roughly 120×100×60mm holds the Pi, BME280, and wiring. You can design this in <a href="tinkercad-3d-printing-tutorial.html">Tinkercad</a> in about 30 minutes — it's just a louvered box with a sloped lid. Add four cable gland holes (one for power, one for BME280 extension, one for anemometer, one for rain gauge).</p>
+
+        <p>For more complex enclosures with integrated mounting brackets, <a href="fusion-360-3d-printing-tutorial.html">Fusion 360</a> gives you parametric control. Design the louvers as 3mm-wide slots angled at 30° — this blocks direct rain while allowing airflow. The technique is the same as printing the <a href="3d-print-smart-home-case.html">smart home device cases</a> we covered earlier, just scaled up.</p>
+
+        <h3>Print Settings for Outdoor Enclosures</h3>
+        <ul>
+          <li><strong>Layer height:</strong> 0.2mm — good balance of strength and print time</li>
+          <li><strong>Infill:</strong> 30–40% — walls need enough density to resist impact; Gyroid pattern for best strength distribution (see our <a href="3d-print-infill-patterns.html">infill patterns guide</a>)</li>
+          <li><strong>Walls:</strong> 4 perimeters (1.6mm with a 0.4mm nozzle) — thick walls resist cracking under thermal cycling</li>
+          <li><strong>No enclosure needed for printing PETG/ASA</strong> — but if your printer has one, use it. Our <a href="best-3d-printer-enclosure.html">enclosure guide</a> explains the benefits</li>
+        </ul>
+
+        <h2>Data Logging and Visualization</h2>
+
+        <p>Beyond real-time dashboard display, you'll want historical data. Two approaches:</p>
+
+        <h3>Option A: Home Assistant Long-Term Statistics</h3>
+        <p>Home Assistant automatically stores sensor history for 10 days by default. To keep data longer, configure the recorder integration in <code>configuration.yaml</code>:</p>
+        <pre><code>recorder:
+  purge_keep_days: 365
+  include:
+    domains:
+      - sensor</code></pre>
+        <p>This keeps a full year of weather data. The History dashboard shows trends, and you can export data as CSV for analysis.</p>
+
+        <h3>Option B: Dedicated Database with Grafana</h3>
+        <p>For serious data nerds, route MQTT data into InfluxDB and visualize with Grafana:</p>
+        <pre><code>pip3 install influxdb</code></pre>
+        <p>Add InfluxDB writes to your Python script alongside the MQTT publish. Grafana running on the same Pi (or a separate server) creates professional weather dashboards with graphs, gauges, and alerts. This is the same approach used in industrial weather monitoring — just scaled down for your home.</p>
+
+        <p>If you're already running your Pi as a NAS (covered in our <a href="raspberry-pi-diy-projects-beginners.html">Raspberry Pi projects guide</a>), InfluxDB and Grafana run alongside your NAS without noticeable performance impact.</p>
+
+        <h2>Calibration Tips</h2>
+
+        <p>Your DIY station won't match professional accuracy out of the box, but simple calibration gets you close:</p>
+
+        <ul>
+          <li><strong>Temperature:</strong> The BME280 typically reads 1–2°C high due to self-heating from the IC. Reduce the sampling frequency (read every 60 seconds instead of 30) and subtract a -1°C offset in your code for a quick fix.</li>
+          <li><strong>Humidity:</strong> Place the sensor in open airflow — never inside a sealed box. The BME280's humidity accuracy is ±3%, which is acceptable for home weather monitoring.</li>
+          <li><strong>Pressure:</strong> BME280 pressure readings are altitude-dependent. Enter your elevation in the code to convert raw pressure to sea-level equivalent (the standard for weather reporting).</li>
+          <li><strong>Wind speed:</strong> Calibrate the <code>WIND_SPEED_FACTOR</code> constant by comparing against a known reference — even a handheld anemometer helps. The factor varies between different anemometer models.</li>
+          <li><strong>Rain gauge:</strong> Verify <code>RAIN_PER_TIP</code> matches your gauge's specification. Pour a known volume of water (e.g., 100ml = 1mm over a 100cm² collector area) slowly and count the tips to confirm.</li>
+        </ul>
+
+        <h2>Power and Reliability Considerations</h2>
+
+        <p>A weather station runs 24/7, so reliability matters:</p>
+
+        <ul>
+          <li><strong>Use a quality USB power supply.</strong> Undervoltage causes Pi instability and sensor read failures. A 5V 3A supply with a short, thick cable is essential.</li>
+          <li><strong>Add a watchdog.</strong> Configure the Pi's hardware watchdog to reboot automatically if the Python script crashes or the Pi hangs:</li>
+        </ul>
+        <pre><code># Enable watchdog in /boot/config.txt
+dtparam=watchdog=on
+
+# Add to your systemd service for auto-restart on failure
+Restart=always
+RestartSec=10</code></pre>
+
+        <ul>
+          <li><strong>Run the script as a systemd service</strong> so it starts automatically on boot and restarts on crash. Create <code>/etc/systemd/system/weather-station.service</code> with the standard service configuration pointing to your Python script.</li>
+          <li><strong>Consider a UPS or battery backup</strong> for the Pi if your area has frequent power outages. A simple USB battery pack between the power supply and Pi provides 2–4 hours of backup.</li>
+        </ul>
+
+        <h2>FAQ: DIY Weather Station Questions</h2>
+
+        <p><strong>Can I use an Arduino instead of a Raspberry Pi?</strong> Yes, but you lose the ability to run Home Assistant, MQTT broker, and a database on the same device. An Arduino works well as a remote sensor node that sends data to a Pi-based server. Our <a href="arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi comparison</a> covers the tradeoffs in detail.</p>
+
+        <p><strong>How accurate is a DIY weather station?</strong> With calibrated BME280 sensors and proper mounting, temperature accuracy reaches ±0.5°C, humidity ±3%, and pressure ±1 hPa — comparable to mid-range commercial stations. Wind and rain accuracy depends more on sensor quality and placement than on the Pi itself.</p>
+
+        <p><strong>Can I add more sensors later?</strong> Absolutely. The I²C bus supports multiple devices, and you have plenty of GPIO pins for additional pulse-count sensors. Common additions include soil moisture sensors (for garden automation), light/UV sensors, and air quality sensors (PM2.5).</p>
+
+        <p><strong>What about lightning detection?</strong> The AS3935 Franklin Lightning Sensor breakout ($10–$15) detects lightning strikes up to 40km away and estimates distance. It connects via I²C or SPI and integrates cleanly into the same Python script.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Building a Raspberry Pi weather station is one of the most rewarding maker projects you can tackle. You get real environmental data flowing into your smart home system, a custom 3D printed enclosure that fits your exact mounting situation, and the satisfaction of knowing exactly how your data is collected and processed — no proprietary black boxes.</p>
+
+        <p>Start with the BME280 for temperature, humidity, and pressure — it's the simplest sensor to wire and gives you immediate data on your Home Assistant dashboard. Add wind and rain sensors when you're ready for the full station. The modular design means you can expand incrementally without rebuilding anything.</p>
+
+        <p>For the enclosure, PETG or ASA printed on any <a href="how-to-choose-first-3d-printer.html">entry-level 3D printer</a> will hold up outdoors for years. Pair your weather station with other smart home devices from our <a href="esp32-smart-home-beginners.html">ESP32 projects guide</a> and you'll have a fully integrated home automation system with real environmental awareness.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners</a></li>
+          <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome</a></li>
+          <li><a href="best-soldering-station-beginners.html">Best Soldering Station for Electronics & DIY Makers</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

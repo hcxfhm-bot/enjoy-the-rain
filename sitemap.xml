@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9">
   <ns0:url>
     <ns0:loc>https://3dprintstarter.com/</ns0:loc>
@@ -1296,7 +1296,17 @@
     <ns0:changefreq>monthly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
-<ns0:url><ns0:loc>https://3dprintstarter.com/articles/home-assistant-automations-beginners.html</ns0:loc><ns0:lastmod>2026-06-07</ns0:lastmod><ns0:priority>0.7</ns0:priority></ns0:url><ns0:url><ns0:loc>https://3dprintstarter.com/articles/best-oscilloscope-beginners.html</ns0:loc><ns0:lastmod>2026-06-08</ns0:lastmod><ns0:priority>0.7</ns0:priority></ns0:url>  <ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/home-assistant-automations-beginners.html</ns0:loc>
+    <ns0:lastmod>2026-06-07</ns0:lastmod>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/best-oscilloscope-beginners.html</ns0:loc>
+    <ns0:lastmod>2026-06-08</ns0:lastmod>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
     <ns0:loc>https://3dprintstarter.com/articles/esphome-getting-started-guide.html</ns0:loc>
     <ns0:lastmod>2026-06-09</ns0:lastmod>
     <ns0:changefreq>monthly</ns0:changefreq>
@@ -1319,5 +1329,9 @@
     <ns0:lastmod>2026-06-11</ns0:lastmod>
     <ns0:changefreq>monthly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/diy-weather-station-raspberry-pi.html</ns0:loc>
+    <ns0:lastmod>2026-06-12</ns0:lastmod>
   </ns0:url>
 </ns0:urlset>
