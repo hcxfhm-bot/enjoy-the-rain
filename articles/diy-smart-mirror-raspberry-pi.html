@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Smart Mirror with Raspberry Pi: MagicMirror² Complete Setup Guide</title>
+  <meta name="description" content="Build your own DIY smart mirror with Raspberry Pi and MagicMirror². Step-by-step guide covering hardware, software setup, modules, 3D printed frame design, and Home Assistant integration.">
+  <meta name="keywords" content="smart mirror diy, raspberry pi smart mirror, magicmirror2 setup, diy smart mirror build, magic mirror raspberry pi, smart mirror frame 3d print, maker project raspberry pi">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & Smart Home</span>
+      </nav>
+
+      <h1>How to Build a Smart Mirror with Raspberry Pi: MagicMirror² Complete Setup Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 13, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🪞</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>A smart mirror sounds like science fiction — a mirror that shows your calendar, weather, news headlines, and even controls your smart home, all while reflecting your room. Commercial smart mirrors cost $300–$800, but you can build one yourself for under $150 using a <a href="raspberry-pi-diy-projects-beginners.html">Raspberry Pi</a>, a two-way mirror, and the free MagicMirror² platform.</p>
+
+        <p>This guide covers the full build from start to finish: choosing and sourcing a two-way mirror, setting up <a href="home-assistant-raspberry-pi-setup.html">Raspberry Pi</a> with MagicMirror², configuring the best modules, and <a href="3d-print-smart-home-case.html">3D printing a custom frame</a> to house everything. Whether you want a bathroom info display, a hallway dashboard, or a centerpiece for your maker workspace, this project delivers.</p>
+
+        <h2>What Is a Smart Mirror?</h2>
+
+        <p>A smart mirror is a display hidden behind a two-way (semi-transparent) mirror. The screen shows information widgets through the mirror glass when backlit, while the mirror surface still reflects your room and your reflection. The effect is a futuristic-looking display that doubles as a functional mirror.</p>
+
+        <p><a href="https://magicmirror.builders" target="_blank" rel="noopener">MagicMirror²</a> is the most popular open-source smart mirror platform. It runs on Node.js, uses a modular widget system, and has a massive community with hundreds of free modules for weather, calendars, Spotify controls, stock tickers, and more.</p>
+
+        <h2>What You'll Need</h2>
+
+        <h3>Display & Mirror</h3>
+        <ul>
+          <li><strong>Monitor (15–24 inch recommended)</strong> — An old laptop screen, a spare desktop monitor, or a purpose-bought IPS display. HDMI input is ideal. 1920×1080 is plenty for a mirror dashboard. Budget option: buy a used monitor for $20–$40.</li>
+          <li><strong>Two-way acrylic mirror</strong> — The core of the build. You need a semi-transparent mirror, not a regular mirror. Acrylic is safer than glass and lighter. Available on Amazon for $30–$60 depending on size. Look for "two-way mirror acrylic" or "smart mirror glass."</li>
+        </ul>
+
+        <h3>Computing</h3>
+        <ul>
+          <li><strong>Raspberry Pi 4 (4GB) or Pi 5</strong> — MagicMirror² runs well on a Pi 4. The Pi 5 gives you snappier animations and more headroom for modules. A Pi 3B+ can work but page transitions feel sluggish. If you're new to Raspberry Pi, our <a href="home-assistant-raspberry-pi-setup.html">Pi setup guide</a> walks through flashing the OS and basic configuration.</li>
+          <li><strong>MicroSD card (16GB+ Class 10)</strong> — A SanDisk Extreme or Samsung EVO for reliable read speeds.</li>
+          <li><strong>Power supply</strong> — 5V 3A USB-C for Pi 4, 5V 5A for Pi 5. The official Raspberry Pi power supply is the safest bet.</li>
+          <li><strong>Micro HDMI to HDMI cable</strong> — For connecting Pi to your monitor.</li>
+        </ul>
+
+        <h3>Frame & Housing</h3>
+        <ul>
+          <li><strong>3D printed frame or wooden frame</strong> — You can <a href="3d-print-smart-home-case.html">3D print corner brackets</a> to assemble a frame from aluminum extrusion, or build a simple wooden frame with a mitre saw. If you have a <a href="best-budget-3d-printer-under-200.html">budget 3D printer</a>, printing the frame components costs about $5–$10 in filament.</li>
+          <li><strong>Black cardboard or foam board</strong> — To block light leaks around the monitor edges behind the mirror.</li>
+          <li><strong>VHB tape or mounting brackets</strong> — To secure the monitor and mirror inside the frame.</li>
+        </ul>
+
+        <h3>Tools</h3>
+        <ul>
+          <li>Computer for initial Raspberry Pi setup (any OS works)</li>
+          <li>Screwdriver set for monitor disassembly</li>
+          <li>Soldering iron (optional) if you need to extend monitor cables — see our <a href="best-soldering-station-beginners.html">soldering station guide</a> for recommendations</li>
+          <li>Wire cutters and electrical tape</li>
+        </ul>
+
+        <h2>Step 1: Prepare the Display</h2>
+
+        <p>If you're using a laptop screen or a monitor with a thick bezel, you'll want to strip it down to bare essentials:</p>
+
+        <ol>
+          <li><strong>Remove the plastic bezel</strong> — Most monitors have snap-fit bezels. Carefully pry them off with a plastic spudger or thin flathead screwdriver. Work around the edges, releasing the plastic clips.</li>
+          <li><strong>Remove the metal shield</strong> — Unscrew the metal frame behind the bezel. This exposes the LCD panel and its controller board.</li>
+          <li><strong>Keep the controller board accessible</strong> — You need the power input, HDMI input, and the ribbon cable connected to the LCD. Position the controller board so it fits alongside or behind the screen inside your frame.</li>
+          <li><strong>Test before proceeding</strong> — Connect everything, power it on, and verify the display works. Much easier to troubleshoot now than after it's inside the frame.</li>
+        </ol>
+
+        <p><strong>Tip:</strong> Some laptop screens use LVDS instead of HDMI. If that's your display, you'll need an HDMI-to-LVDS driver board (about $10 on AliExpress). These work fine for smart mirrors — just match the driver board to your panel's resolution and pin count.</p>
+
+        <h2>Step 2: Install Raspberry Pi OS and MagicMirror²</h2>
+
+        <h3>Flash the OS</h3>
+        <ol>
+          <li>Download <a href="https://www.raspberrypi.com/software/" target="_blank" rel="noopener">Raspberry Pi Imager</a> on your computer.</li>
+          <li>Select <strong>Raspberry Pi OS (Legacy, 64-bit, Lite)</strong> — the Lite version is recommended because we don't need a desktop environment. MagicMirror² launches its own display server.</li>
+          <li>Write to your microSD card and insert it into the Pi.</li>
+          <li>Connect to ethernet or configure WiFi via <code>raspi-config</code> on first boot.</li>
+        </ol>
+
+        <h3>Install MagicMirror²</h3>
+
+        <p>SSH into your Raspberry Pi (or connect a keyboard and monitor temporarily), then run:</p>
+
+        <pre><code># Update system packages
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+# Install Node.js (v20 LTS recommended)
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Install MagicMirror²
+git clone https://github.com/MichMich/MagicMirror
+cd MagicMirror
+npm run install
+
+# Copy the default config
+cp config/config.js.sample config/config.js
+
+# Launch it
+DISPLAY=:0 npm start</code></pre>
+
+        <p>If the installation fails with a Node.js version error, check your version with <code>node -v</code>. MagicMirror² requires Node.js 18+. If you have conflicts, try using <code>nvm</code> (Node Version Manager) to install and manage the correct version.</p>
+
+        <h3>Auto-Start on Boot</h3>
+
+        <p>You don't want to SSH in every time to start MagicMirror. Set up autostart:</p>
+
+        <pre><code># Install the Electron display server
+sudo apt install -y chromium-browser unclutter
+
+# Create an autostart script
+sudo nano /etc/systemd/system/magicmirror.service</code></pre>
+
+        <p>Paste this configuration:</p>
+
+        <pre><code>[Unit]
+Description=MagicMirror² Service
+After=network.target
+
+[Service]
+User=pi
+ExecStart=/usr/bin/node /home/pi/MagicMirror/serveronly
+Restart=always
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+        <p>Then enable it:</p>
+
+        <pre><code>sudo systemctl enable magicmirror
+sudo systemctl start magicmirror</code></pre>
+
+        <p>Your mirror now launches automatically every time the Pi boots.</p>
+
+        <h2>Step 3: Configure Essential Modules</h2>
+
+        <p>MagicMirror²'s default config comes with a few modules enabled. Edit <code>~/MagicMirror/config/config.js</code> to customize. Here are the modules worth configuring:</p>
+
+        <h3>Weather (built-in)</h3>
+
+        <p>Get a free API key from <a href="https://openweathermap.org/api" target="_blank" rel="noopener">OpenWeatherMap</a> or <a href="https://www.weatherapi.com/" target="_blank" rel="noopener">WeatherAPI</a>. Then configure:</p>
+
+        <pre><code>{
+  module: "weather",
+  position: "top_right",
+  config: {
+    location: "Your City",
+    locationID: "1234567",
+    apiKey: "your_openweathermap_key",
+    units: "imperial"
+  }
+}</code></pre>
+
+        <h3>Calendar (built-in)</h3>
+
+        <p>Connect your Google Calendar for daily agenda:</p>
+
+        <pre><code>{
+  module: "calendar",
+  position: "top_left",
+  config: {
+    calendars: [
+      {
+        symbol: "📅",
+        url: "https://calendar.google.com/calendar/ical/YOUR_EMAIL/public/basic.ics"
+      }
+    ],
+    maximumEntries: 5,
+    timeFormat: "relative"
+  }
+}</code></pre>
+
+        <p>To get your Google Calendar URL: open Google Calendar → Settings → your calendar → "Secret address in iCal format." Copy the URL.</p>
+
+        <h3>News Feed (built-in)</h3>
+
+        <pre><code>{
+  module: "newsfeed",
+  position: "bottom_bar",
+  config: {
+    feeds: [
+      {
+        title: "TechCrunch",
+        url: "https://techcrunch.com/feed/"
+      },
+      {
+        title: "Hacker News",
+        url: "https://news.ycombinator.com/rss"
+      }
+    ],
+    showSourceTitle: true,
+    showPublishDate: true,
+    numEntries: 8
+  }
+}</code></pre>
+
+        <h3>Third-Party Modules Worth Installing</h3>
+
+        <p>These modules aren't included by default but are easy to add:</p>
+
+        <ul>
+          <li><strong>MMM-Remote-Control</strong> — Control your mirror from a browser. Install: <code>cd ~/MagicMirror/modules && git clone https://github.com/Jopyth/MMM-Remote-Control</code>. Access at <code>http://pi-ip:8080</code>. Great for debugging and changing settings without SSH.</li>
+          <li><strong>MMM-Spotify</strong> — Display and control your Spotify playback. Requires a Spotify Premium account and client credentials from the Spotify Developer Dashboard.</li>
+          <li><strong>MMM-HomeAssistant</strong> — Connect to your <a href="home-assistant-automations-beginners.html">Home Assistant</a> server to display sensor data and control devices. See our <a href="homekit-home-assistant-bridge.html">Home Assistant integration guide</a> for setup details.</li>
+          <li><strong>MMM-CalendarExt3</strong> — A more visually appealing calendar with week views, event coloring, and location-based icons.</li>
+          <li><strong>MMM-GooglePhotos</strong> — Display a slideshow of your Google Photos library. Perfect for a hallway mirror.</li>
+        </ul>
+
+        <p>To install any third-party module, the process is the same:</p>
+
+        <pre><code>cd ~/MagicMirror/modules
+git clone https://github.com/AUTHOR/MODULE-NAME.git
+cd MODULE-NAME
+npm install</code></pre>
+
+        <p>Then add the module configuration block to <code>config.js</code>. Most module GitHub repos include a README with the exact configuration to copy.</p>
+
+        <h2>Step 4: Build the Frame</h2>
+
+        <p>The frame is what separates a polished smart mirror from a science fair project. You have two main approaches:</p>
+
+        <h3>Option A: 3D Printed Frame</h3>
+
+        <p>Search Thingiverse or Printables for "smart mirror frame" — there are dozens of designs. A typical 3D printed frame consists of:</p>
+
+        <ul>
+          <li><strong>Four corner brackets</strong> — These clip onto aluminum extrusion (T-slot or V-slot profile) and hold the monitor and mirror in place.</li>
+          <li><strong>Side clips</strong> — Optional clips that run along the edges to prevent the mirror from shifting.</li>
+          <li><strong>Cable management channel</strong> — A printed channel that routes the Pi's power cable neatly.</li>
+        </ul>
+
+        <p>Recommended print settings:</p>
+        <ul>
+          <li>Material: <a href="pla-filament-temperature-guide.html">PLA</a> is fine for indoor use; use <a href="petg-vs-pla-comparison.html">PETG</a> if your bathroom mirror will see humidity</li>
+          <li>Infill: 30–50% (these parts need some strength)</li>
+          <li>Layer height: 0.2mm — no need for <a href="3d-print-layer-height-guide.html">super fine resolution</a> on functional parts</li>
+          <li>For PETG settings, check our <a href="petg-vs-pla-comparison.html">PETG vs PLA guide</a></li>
+        </ul>
+
+        <p>Assembly: cut four pieces of 20mm aluminum extrusion to your mirror dimensions. Slide the printed brackets on, insert your monitor and mirror, and tighten the brackets. The whole assembly is surprisingly rigid.</p>
+
+        <h3>Option B: Wooden Frame</h3>
+
+        <p>Build a simple shadow box from 1×3 or 1×4 pine boards:</p>
+
+        <ol>
+          <li>Cut four boards to size with 45° mitres for clean corners.</li>
+          <li>Glue and screw the frame together.</li>
+          <li>Paint or stain it black for the best look behind a mirror.</li>
+          <li>Mount the monitor inside with foam tape or small L-brackets.</li>
+          <li>Place the two-way mirror on top of the monitor, and use small foam pads in the corners to hold it in place without adhesive.</li>
+        </ol>
+
+        <p>This approach is simpler and doesn't require a 3D printer, but the 3D printed frame gives you a more modern, precise look.</p>
+
+        <h3>Handling the Mirror</h3>
+
+        <p>Two-way acrylic mirrors are surprisingly easy to work with but have a few quirks:</p>
+        <ul>
+          <li><strong>Peel the protective film</strong> only when you're ready for final assembly — it scratches easily.</li>
+          <li><strong>Clean with microfiber only</strong> — paper towels and ammonia-based cleaners will damage the semi-reflective coating.</li>
+          <li><strong>The reflective side faces outward</strong> (toward the room). The translucent side faces inward toward the monitor.</li>
+          <li><strong>Block all side light</strong> — If ambient light leaks into the gap between the monitor and mirror, it washes out the display. Use black foam board or electrical tape to seal all edges.</li>
+        </ul>
+
+        <h2>Step 5: Monitor Orientation</h2>
+
+        <p>Most smart mirrors work best in portrait orientation (tall and narrow). If your monitor's native orientation is landscape, rotate it 90° and tell the Raspberry Pi:</p>
+
+        <pre><code># Edit the boot config
+sudo nano /boot/firmware/config.txt
+
+# Add this line (rotate 90° clockwise; use 1 for 270° if your screen is upside down)
+display_rotate=1</code></pre>
+
+        <p>Reboot and your display should be in portrait mode. If it's upside down, change <code>display_rotate=1</code> to <code>display_rotate=3</code>.</p>
+
+        <h2>Step 6: Fine-Tune the Display</h2>
+
+        <h3>Brightness Control</h3>
+
+        <p>You'll want the screen bright enough to read through the mirror but not so bright that the mirror becomes obviously a screen. Some tips:</p>
+        <ul>
+          <li>Set monitor brightness to 70–80% as a starting point. Adjust based on room lighting.</li>
+          <li>Use the MMM-Remote-Control module to adjust brightness from your phone instead of physically reaching the monitor.</li>
+          <li>Consider adding a <a href="diy-weather-station-raspberry-pi.html">light sensor</a> to auto-adjust brightness based on ambient light — the MMM-LightSensor module handles this.</li>
+        </ul>
+
+        <h3>Hide the Cursor</h3>
+
+        <p>MagicMirror² doesn't show a cursor by default when running in server mode, but if you see one:</p>
+
+        <pre><code>sudo apt install unclutter
+# Add to autostart
+unclutter -display :0 -noevents &amp;</code></pre>
+
+        <h3>Touch Support (Optional)</h3>
+
+        <p>If your monitor supports touch input (many IPS panels do), you can add touch functionality. Install <code>xdotool</code> and enable touch modules for interactive widgets. This turns your smart mirror into a smart display — great for bathroom counters or kitchen walls.</p>
+
+        <h2>Step 7: Integrate with Home Assistant</h2>
+
+        <p>One of the best uses for a smart mirror is as a <a href="home-assistant-automations-beginners.html">Home Assistant dashboard</a>. With the MMM-HomeAssistant module, your mirror can display:</p>
+
+        <ul>
+          <li>Temperature and humidity from your <a href="diy-weather-station-raspberry-pi.html">DIY weather station</a></li>
+          <li>Door lock status from your <a href="diy-smart-door-lock.html">smart door lock</a></li>
+          <li>Energy consumption from smart plugs and sensors</li>
+          <li>Quick toggles for lights, fans, and appliances</li>
+          <li>Security camera feeds if you have ESP32 cameras running <a href="esphome-getting-started-guide.html">ESPHome</a></li>
+        </ul>
+
+        <p>Setup: install the module, configure your Home Assistant server URL and long-lived access token (generated in HA → Profile → Security → Long-lived access tokens), then add the entity cards you want to display. Each card can show a sensor reading, a toggle switch, or a graph.</p>
+
+        <h2>Step 8: Power Management</h2>
+
+        <p>Smart mirrors run 24/7 in most setups. A few considerations:</p>
+
+        <ul>
+          <li><strong>Power consumption</strong> — A Raspberry Pi 4 + 24" monitor uses about 20–30W total, roughly $2–4/month in electricity. Not bad for a 24/7 smart display.</li>
+          <li><strong>UPS (optional)</strong> — A small battery backup keeps the mirror running through brief power outages. A 12V battery with a simple charging circuit can provide 30–60 minutes of backup.</li>
+          <li><strong>Scheduled sleep</strong> — Use cron on the Pi to turn off the monitor via HDMI-CEC during night hours: <code>echo "on 0" | cec-client -s</code> / <code>echo "standby 0" | cec-client -s</code>.</li>
+        </ul>
+
+        <h2>Common Problems and Fixes</h2>
+
+        <h3>Screen Is Too Visible Through the Mirror</h3>
+        <p>Reduce monitor brightness. If it's still too visible, add a neutral density filter or switch to a mirror with a lower transmission rate (40% vs 70%). Some builders use privacy screen film applied to the monitor to reduce visibility further.</p>
+
+        <h3>MagicMirror² Won't Start</h3>
+        <p>Check Node.js version (<code>node -v</code> — need 18+). Check the log with <code>pm2 logs MagicMirror</code> if you use PM2 for process management. Most failures come from a module that failed to install — try removing modules one by one until it starts.</p>
+
+        <h3>Monitor Shows "No Signal"</h3>
+        <p>Verify the HDMI cable is seated firmly. On the Pi 4, the micro HDMI port can be finicky. Try the other HDMI port. If you're using an HDMI-to-LVDS board, check the panel resolution matches the board's configuration.</p>
+
+        <h3>WiFi Drops Frequently</h3>
+        <p>A wired ethernet connection is strongly recommended. If you must use WiFi, add a high-gain USB adapter or position the Pi closer to your router. Smart mirrors are typically wall-mounted in locations with worse WiFi reception.</p>
+
+        <h2>Total Cost Breakdown</h2>
+
+        <table>
+          <tr><th>Component</th><th>Budget</th><th>Mid-Range</th></tr>
+          <tr><td>Raspberry Pi 4 (4GB)</td><td>$35</td><td>$55</td></tr>
+          <tr><td>MicroSD card (32GB)</td><td>$8</td><td>$12</td></tr>
+          <tr><td>Power supply</td><td>$8</td><td>$12</td></tr>
+          <tr><td>Two-way mirror (20")</td><td>$25</td><td>$50</td></tr>
+          <tr><td>Monitor (used 20")</td><td>$20</td><td>$50</td></tr>
+          <tr><td>Frame (3D printed)</td><td>$5</td><td>$15</td></tr>
+          <tr><td>Cables & supplies</td><td>$5</td><td>$10</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$106</strong></td><td><strong>$204</strong></td></tr>
+        </table>
+
+        <h2>What's Next?</h2>
+
+        <p>Once your basic mirror is running, here are some upgrades to explore:</p>
+        <ul>
+          <li><strong>Voice control</strong> — Add a USB microphone and use Mycroft or Snowboy for wake-word detection to control modules hands-free.</li>
+          <li><strong>Face recognition</strong> — The MMM-Facial-Recognition module identifies who's looking at the mirror and shows personalized information (their calendar, their commute time, etc.).</li>
+          <li><strong>Gesture control</strong> — A small <a href="esp32-smart-home-beginners.html">ESP32 camera module</a> can detect hand waves and swipes to scroll through news or dismiss notifications.</li>
+          <li><strong>Multi-mirror network</strong> — Run the same MagicMirror² instance across multiple mirrors in different rooms, each showing location-relevant content.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>Building a DIY smart mirror is one of the most rewarding maker projects you can tackle. It combines electronics, software, and fabrication into a finished product that you actually use every day. With a Raspberry Pi, a two-way mirror, and some basic tools, you can create something that would cost hundreds of dollars commercially — and have full control over every widget and module on your mirror.</p>
+
+        <p>The total investment is modest (around $100–$200 depending on how much you already have), and the result is a genuinely useful smart home device that impresses everyone who sees it. Start with the basic modules, get the hardware assembled, and then iterate — add <a href="home-assistant-raspberry-pi-setup.html">Home Assistant integration</a>, face recognition, and voice controls as you go. That's the beauty of open-source: there's always another module to try.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+          <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+          <li><a href="diy-smart-door-lock.html">How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
