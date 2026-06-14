@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Home NAS with Raspberry Pi: OpenMediaVault Complete Setup Guide</title>
+  <meta name="description" content="Build your own home NAS with Raspberry Pi and OpenMediaVault. Step-by-step guide covering hardware selection, OS installation, storage configuration, SMB/NFS sharing, backup strategies, and performance optimization.">
+  <meta name="keywords" content="raspberry pi nas, home nas diy, openmediavault raspberry pi, diy network storage, raspberry pi server, nas setup guide, homemade nas build, maker project storage">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & Smart Home</span>
+      </nav>
+
+      <h1>How to Build a Home NAS with Raspberry Pi: OpenMediaVault Complete Setup Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 14, 2026</span>
+        <span>⏱️ 15 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a2b30, #254040); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💾</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Cloud storage subscriptions add up fast — $10/month for Google One, $12/month for iCloud+, $15/month for Dropbox Pro. Over three years, that's $360–$540 for something you can build yourself for under $100. A home NAS (Network Attached Storage) gives you full control over your data, no subscription fees, no privacy concerns, and storage that grows when you need it.</p>
+
+        <p>A <a href="raspberry-pi-diy-projects-beginners.html">Raspberry Pi</a> running OpenMediaVault (OMV) is the simplest way to build a NAS that actually works. OMV is a lightweight, Debian-based NAS operating system with a web interface for managing shares, users, backups, and services — no command-line wrangling required after the initial setup. This guide walks through the entire build: choosing hardware, installing OMV, configuring storage pools, setting up file sharing, and optimizing performance.</p>
+
+        <h2>Why Build a NAS Instead of Using Cloud Storage?</h2>
+
+        <p>Before diving into the build, let's address the real question: is a DIY NAS worth it compared to cloud?</p>
+
+        <table>
+          <tr><th>Feature</th><th>Cloud Storage</th><th>DIY NAS</th></tr>
+          <tr><td>Monthly cost</td><td>$10–$15/month</td><td>Free (electricity ~$1/month)</td></tr>
+          <tr><td>Storage limit</td><td>2TB max typically</td><td>Whatever drives you buy</td></tr>
+          <tr><td>Privacy</td><td>Data on someone else's servers</td><td>100% local, your control</td></tr>
+          <tr><td>Speed</td><td>Depends on internet speed</td><td>Local network: 100+ MB/s</td></tr>
+          <tr><td>Uptime</td><td>99.9% (provider SLA)</td><td>Depends on your setup</td></tr>
+          <tr><td>Access anywhere</td><td>Built-in</td><td>Requires VPN or remote setup</td></tr>
+          <tr><td>Redundancy</td><td>Provider handles backups</td><td>You handle RAID/backup</td></tr>
+        </table>
+
+        <p>A DIY NAS wins on cost, capacity, privacy, and speed. It loses on convenience for remote access and reliability if you don't set up redundancy. For most home users who want to backup family photos, share files between devices, and store media, a Pi NAS is more than sufficient — and the satisfaction of building it yourself is a bonus.</p>
+
+        <h2>What You'll Need</h2>
+
+        <h3>Computing</h3>
+        <ul>
+          <li><strong>Raspberry Pi 4 (4GB or 8GB) or Pi 5</strong> — The Pi 4 handles NAS duties well for 1–2 drives. The Pi 5's faster I/O makes it noticeably better for multi-drive setups and simultaneous access from several devices. If you're also running <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> on the same Pi, go for the 8GB model to avoid memory pressure.</li>
+          <li><strong>MicroSD card (8GB+)</strong> — Only for the OS. Your data lives on external drives. A small, reliable card like SanDisk Extreme 16GB is plenty.</li>
+          <li><strong>Official power supply</strong> — 5V 3A for Pi 4, 5V 5A for Pi 5. External HDDs draw significant power; an underrated supply causes random crashes.</li>
+          <li><strong>Ethernet connection</strong> — Do not use WiFi for a NAS. Gigabit ethernet (built into Pi 4/5) is essential for acceptable transfer speeds.</li>
+        </ul>
+
+        <h3>Storage</h3>
+        <ul>
+          <li><strong>External USB hard drives (2.5" or 3.5")</strong> — The simplest approach. 2.5" drives are bus-powered (no extra power supply needed) and work well with 1–4TB capacities. 3.5" drives need a powered USB hub or external enclosure but offer better value at 4TB+.</li>
+          <li><strong>USB SSDs</strong> — Faster and more reliable than HDDs, but more expensive per TB. A 1TB USB SSD costs $70–$90 vs a 2TB HDD at $50–$60. SSDs are worth it if speed matters (media streaming, frequent access).</li>
+          <li><strong>Powered USB hub (if using 3.5" drives)</strong> — A 4-port hub with its own power supply. The Pi's USB ports can't provide enough power for 3.5" drives. Look for one rated at 2A+ per port.</li>
+        </ul>
+
+        <h3>Optional but Recommended</h3>
+        <ul>
+          <li><strong>Case with passive cooling</strong> — A NAS runs 24/7. The <a href="https://geekworm.com" target="_blank" rel="noopener">Geekworm X825</a> or similar NAS case holds the Pi and a 2.5" drive in a compact enclosure. You can also <a href="3d-print-smart-home-case.html">3D print a custom NAS enclosure</a> — several designs are available on Printables and Thingiverse.</li>
+          <li><strong>UPS or battery backup</strong> — Prevents data corruption from sudden power loss. A basic USB battery pack works if you wire it correctly, or use a small APC UPS.</li>
+        </ul>
+
+        <h2>Step 1: Install OpenMediaVault</h2>
+
+        <p>OMV offers two installation methods: a dedicated image (easiest) or installing on top of Raspberry Pi OS (more flexible). We'll use the dedicated image method since it's the most straightforward for a NAS-only build.</p>
+
+        <h3>Flash the OMV Image</h3>
+        <ol>
+          <li>Download <a href="https://www.raspberrypi.com/software/" target="_blank" rel="noopener">Raspberry Pi Imager</a> on your computer.</li>
+          <li>In the Imager, click "Choose OS" → "Other general-purpose OS" → find OpenMediaVault. If it's not listed, download the latest OMV image from <a href="https://github.com/OpenMediaVault-Plugin-Developers/openmediavault-raspberrypi-os-images/releases" target="_blank" rel="noopener">the OMV Raspberry Pi releases page</a> and use "Use custom" in the Imager.</li>
+          <li>Select your microSD card and write the image.</li>
+          <li>Insert the card into the Pi, connect ethernet, and power it on.</li>
+          <li>Wait 2–3 minutes for the first boot to complete. OMV auto-configures the network.</li>
+        </ol>
+
+        <h3>Alternative: Install OMV on Raspberry Pi OS</h3>
+
+        <p>If you want to run OMV alongside other services (like <a href="home-assistant-automations-beginners.html">Home Assistant</a> or OctoPrint for your <a href="octoprint-setup-guide.html">3D printer</a>), install OMV on top of a standard Raspberry Pi OS:</p>
+
+        <pre><code># Flash Raspberry Pi OS Lite (64-bit)
+# SSH into the Pi after boot, then:
+
+sudo apt update && sudo apt upgrade -y
+
+# Install OMV
+sudo wget -O /usr/bin/omv-install https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install
+sudo chmod +x /usr/bin/omv-install
+sudo omv-install</code></pre>
+
+        <p>The install script takes 10–15 minutes and configures everything automatically. After it finishes, OMV is ready at <code>http://your-pi-ip</code>.</p>
+
+        <h2>Step 2: Access the OMV Web Interface</h2>
+
+        <p>Find your Pi's IP address by checking your router's DHCP table, or plug a monitor into the Pi briefly — it displays the IP on the console. Open a browser and navigate to <code>http://YOUR_PI_IP</code>.</p>
+
+        <p>Default login credentials:</p>
+        <ul>
+          <li><strong>Username:</strong> admin</li>
+          <li><strong>Password:</strong> openmediavault</li>
+        </ul>
+
+        <p>Change the password immediately after first login: go to System → Settings → Web Interface → Password. This is the most important security step — the default password is publicly known.</p>
+
+        <h2>Step 3: Configure Storage</h2>
+
+        <h3>Connect and Mount Your Drives</h3>
+
+        <p>Plug your external drive(s) into the Pi's USB ports. In OMV:</p>
+        <ol>
+          <li>Go to <strong>Storage → Disks</strong> — You should see your USB drive listed. If not, check the USB connection and power.</li>
+          <li>Go to <strong>Storage → File Systems</strong> — Click "Create" to format the drive. Choose <strong>EXT4</strong> for Linux-only environments (best performance and reliability). Choose <strong>NTFS</strong> if you need to occasionally plug the drive into a Windows machine directly.</li>
+          <li>After creating the file system, click "Mount" to mount it.</li>
+          <li>Verify it's mounted by checking the "Referenced" column shows a green checkmark.</li>
+        </ol>
+
+        <p><strong>Warning:</strong> Formatting a drive erases all data on it. If the drive has existing data you want to keep, back it up first or use OMV's mount-only approach (mount without formatting).</p>
+
+        <h3>RAID Setup (Optional, for Multi-Drive Redundancy)</h3>
+
+        <p>If you have two or more drives of the same size, you can create a RAID array for redundancy:</p>
+        <ol>
+          <li>Go to <strong>Storage → RAID</strong> → Click "Create"</li>
+          <li>Select RAID level: <strong>RAID 1</strong> (mirroring — one drive fails, your data survives) is recommended for home NAS. RAID 5 requires 3+ drives.</li>
+          <li>Select your drives and click "Create".</li>
+          <li>Wait for the RAID to initialize (can take hours for large drives — check progress in the RAID panel).</li>
+          <li>Create a file system on the RAID array, then mount it.</li>
+        </ol>
+
+        <p><strong>RAID is not backup.</strong> RAID protects against drive failure, but it doesn't protect against accidental deletion, corruption, or theft. You still need a separate backup strategy (covered later).</p>
+
+        <h2>Step 4: Create Shared Folders</h2>
+
+        <p>Shared folders are what other devices on your network can access. Create them based on how you want to organize your data:</p>
+
+        <ol>
+          <li>Go to <strong>Storage → Shared Folders</strong> → Click "Add"</li>
+          <li>Configure each folder:</li>
+        </ol>
+
+        <table>
+          <tr><th>Folder Name</th><th>Purpose</th><th>Permissions</th></tr>
+          <tr><td>Photos</td><td>Family photo backup</td><td>Read/Write for family users</td></tr>
+          <tr><td>Documents</td><td>Work and personal docs</td><td>Read/Write for owner, Read for others</td></tr>
+          <tr><td>Media</td><td>Movies, music, TV shows</td><td>Read-only for most users</td></tr>
+          <tr><td>Backups</td><td>Device backups (Time Machine, etc.)</td><td>Write-only for backup accounts</td></tr>
+          <tr><td>3D-Files</td><td>3D print models and G-code</td><td>Read/Write for maker users</td></tr>
+        </table>
+
+        <p>For each shared folder, select the file system (your mounted drive or RAID array) and set the path. OMV creates the directory automatically.</p>
+
+        <h2>Step 5: Set Up File Sharing Services</h2>
+
+        <h3>SMB/CIFS (Windows, macOS, Linux)</h3>
+
+        <p>SMB is the universal file sharing protocol — every OS supports it natively:</p>
+        <ol>
+          <li>Go to <strong>Services → SMB/CIFS</strong> → Enable the service</li>
+          <li>Go to <strong>Services → SMB/CIFS → Shares</strong> → Add each shared folder</li>
+          <li>For each share, set:
+            <ul>
+              <li><strong>Shared folder</strong> — Select from your created folders</li>
+              <li><strong>Public</strong> — "No" (require authentication) or "Yes" (guest access, use for Media)</li>
+              <li><strong>Read only</strong> — Enable for Media, disable for Photos/Documents</li>
+            </ul>
+          </li>
+          <li>Click "Apply" to activate all changes.</li>
+        </ol>
+
+        <p>On your Windows PC, the NAS appears in File Explorer under "Network" or by typing <code>\\YOUR_PI_IP</code> in the address bar. On macOS, it shows in Finder → Network, or use Connect to Server: <code>smb://YOUR_PI_IP</code>.</p>
+
+        <h3>NFS (Linux-only, Faster)</h3>
+
+        <p>If you have Linux devices, NFS offers better performance than SMB:</p>
+        <ol>
+          <li>Go to <strong>Services → NFS</strong> → Enable</li>
+          <li>Add shares with the same shared folders</li>
+          <li>Set client permissions (read/write or read-only)</li>
+          <li>On your Linux machine: <code>sudo mount YOUR_PI_IP:/export/Photos /mnt/nas-photos</code></li>
+        </ol>
+
+        <h3>SSH/SFTP (Secure Remote Access)</h3>
+
+        <p>OMV includes SSH by default. SFTP provides secure, encrypted file transfer from anywhere — no VPN needed if you have port forwarding set up (use port 22 or a non-standard port for security). This is your primary remote access method for files.</p>
+
+        <h2>Step 6: User Management</h2>
+
+        <p>Create separate users for different family members and devices:</p>
+        <ol>
+          <li>Go to <strong>Access Control → User</strong> → Click "Add"</li>
+          <li>Create users like: <code>dad</code>, <code>mom</code>, <code>backup</code>, <code>media-player</code></li>
+          <li>Set passwords and group memberships</li>
+          <li>Go to <strong>Access Control → Shared Folder Permissions</strong> to assign read/write access per folder per user</li>
+        </ol>
+
+        <p>For example, the <code>backup</code> user gets write-only access to the Backups folder (your backup software authenticates with this account). The <code>media-player</code> user gets read-only access to Media (for streaming boxes like Roku or Apple TV).</p>
+
+        <h2>Step 7: Enable Time Machine Backup (macOS)</h2>
+
+        <p>If you have Macs in the house, OMV can serve as a Time Machine destination — no more paying for iCloud backup or buying a Time Capsule:</p>
+        <ol>
+          <li>Create a shared folder called "TimeMachine"</li>
+          <li>Go to <strong>Services → SMB/CIFS → Shares</strong> → Edit the TimeMachine share</li>
+          <li>Enable <strong>"Time Machine support"</strong> and set the maximum sparse bundle size (e.g., 500GB per Mac)</li>
+          <li>On your Mac: System Settings → General → Time Machine → Add Backup Disk → select your Pi NAS</li>
+        </ol>
+
+        <p>Time Machine works reliably over SMB. The only caveat: first backups are large and slow over WiFi. Plug your Mac into ethernet for the initial backup (which can take hours for a full disk), then subsequent incremental backups work fine over WiFi.</p>
+
+        <h2>Step 8: Performance Optimization</h2>
+
+        <h3>USB Drive Tuning</h3>
+
+        <p>The Pi's USB 3.0 ports (Pi 4/5) support transfer speeds of 300–400 MB/s with SSDs, but HDDs typically deliver 80–120 MB/s. A few tweaks improve performance:</p>
+
+        <pre><code># Disable USB autosuspend (prevents drives from spinning down mid-transfer)
+sudo nano /etc/default/openmediavault
+
+# Add or modify:
+OMV_USB_AUTOSUSPEND__ENABLED="false"</code></pre>
+
+        <p>For SSDs, enable the fstrim timer to maintain long-term performance:</p>
+        <pre><code>sudo systemctl enable fstrim.timer
+sudo systemctl start fstrim.timer</code></pre>
+
+        <h3>SMB Protocol Version</h3>
+
+        <p>In OMV's SMB settings, set the minimum protocol version to SMB3 for best performance with modern clients. SMB1 is slow and insecure — disable it:</p>
+        <ol>
+          <li>Services → SMB/CIFS → Settings → "Minimum protocol version" → SMB3</li>
+          <li>Enable "Extended attributes" for better macOS compatibility</li>
+        </ol>
+
+        <h3>Network Optimization</h3>
+
+        <ul>
+          <li><strong>Use gigabit ethernet</strong> — The Pi 4/5 has gigabit ethernet. Verify your router and switch also support gigabit. A 100Mbps switch caps transfers at ~12 MB/s; gigabit gives you 100+ MB/s.</li>
+          <li><strong>MTU tuning (advanced)</strong> — If your network supports jumbo frames (MTU 9000), enable it on the Pi and your switch for 20–30% faster large file transfers.</li>
+          <li><strong>Static IP</strong> — Set a static IP for the Pi in OMV (System → Network → Interfaces) or on your router. A DHCP address that changes breaks SMB connections and Time Machine.</li>
+        </ul>
+
+        <h2>Step 9: Backup Strategy</h2>
+
+        <p>Your NAS stores your data, but what backs up your NAS? Three approaches:</p>
+
+        <h3>Option A: Cloud Sync (Hybrid Backup)</h3>
+        <p>Install the OMV <strong>CloudSync</strong> plugin to mirror important folders to a cloud provider (Backblaze B2 at $0.005/GB/month is the cheapest). This gives you off-site redundancy for disaster recovery without storing everything in the cloud.</p>
+
+        <h3>Option B: rsync to a Second Drive</h3>
+        <p>Plug a second USB drive into the Pi and set up an rsync job in OMV (System → Scheduled Jobs) to copy your primary drive weekly:</p>
+        <pre><code>rsync -av --delete /srv/dev-disk-by-label-Primary/ /srv/dev-disk-by-label-Backup/</code></pre>
+
+        <p>This is the cheapest redundancy — a second $50 HDD that sits in the same Pi and gets updated automatically.</p>
+
+        <h3>Option C: Snapshots (ZFS/Btrfs)</h3>
+        <p>If you're comfortable with advanced file systems, OMV supports Btrfs with snapshot support. Snapshots let you "undo" accidental deletions by restoring a previous state. This requires reformatting your drives as Btrfs, so plan ahead.</p>
+
+        <h2>Step 10: 3D Print a NAS Enclosure</h2>
+
+        <p>A bare Pi with drives hanging off USB cables looks messy and collects dust. A proper enclosure protects hardware and looks professional. You can <a href="3d-print-smart-home-case.html">3D print a custom case</a> designed for the Pi plus one or two drives.</p>
+
+        <p>Recommended designs to search on Printables/Thingiverse:</p>
+        <ul>
+          <li><strong>"Raspberry Pi NAS case"</strong> — Several designs hold a Pi 4 and a 2.5" HDD inside a compact shell</li>
+          <li><strong>"Geekworm NAS case"</strong> — Compatible with the X825 SATA adapter board (adds SATA connectivity for better HDD performance than USB-SATA bridges)</li>
+          <li><strong>"Pi 5 server rack"</strong> — Multi-Pi rack designs for people running several Pis as micro servers</li>
+        </ul>
+
+        <p>Print settings for NAS enclosures:</p>
+        <ul>
+          <li>Material: <a href="petg-vs-pla-comparison.html">PETG</a> or <a href="abs-filament-guide.html">ABS</a> (better heat resistance than <a href="pla-filament-temperature-guide.html">PLA</a> for a device running 24/7)</li>
+          <li>Infill: 30% (structural but not heavily loaded)</li>
+          <li>Layer height: 0.2mm — functional part, <a href="3d-print-layer-height-guide.html">no need for ultra-fine resolution</a></li>
+        </ul>
+
+        <h2>Optional Plugins Worth Installing</h2>
+
+        <p>OMV's plugin ecosystem extends your NAS well beyond basic file sharing:</p>
+
+        <ul>
+          <li><strong>OMV-Docker</strong> — Run Docker containers on your NAS. Perfect for running services like Plex (media server), Nextcloud (self-hosted cloud), or <a href="home-assistant-automations-beginners.html">Home Assistant</a> alongside your NAS.</li>
+          <li><strong>OMV-FlashMemory</strong> — Reduces microSD card wear by redirecting writes to RAM. Essential for 24/7 operation — microSD cards die quickly under constant writes without this plugin.</li>
+          <li><strong>OMV-ClamAV</strong> — Antivirus scanning for shared folders. Lightweight and only scans on schedule, not in real-time.</li>
+          <li><strong>OMV-WOL</strong> — Wake-on-LAN support to power on the NAS remotely from another device.</li>
+          <li><strong>OMV-USBBackup</strong> — One-click backup to an external USB drive with scheduled jobs.</li>
+        </ul>
+
+        <h2>Integrating Your NAS with Smart Home</h2>
+
+        <p>A NAS isn't just storage — it's the backbone of a smart home infrastructure:</p>
+        <ul>
+          <li><strong>Home Assistant backup</strong> — <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> can auto-backup to your NAS via SMB. Configure in HA → Settings → System → Backups → Network Storage.</li>
+          <li><strong>ESPHome firmware storage</strong> — Store your <a href="esphome-getting-started-guide.html">ESPHome</a> compiled firmware files on the NAS for easy OTA deployment to your <a href="esp32-smart-home-beginners.html">ESP32 devices</a>.</li>
+          <li><strong>3D print file server</strong> — Use your NAS as a G-code repository for <a href="octoprint-setup-guide.html">OctoPrint</a>. Point OctoPrint's upload directory at an SMB share on your NAS, so all your <a href="how-to-slice-3d-model.html">sliced models</a> are centralized.</li>
+          <li><strong>Media server</strong> — Install Plex or Jellyfin via Docker to stream your media collection to any device in the house.</li>
+        </ul>
+
+        <h2>Common Problems and Fixes</h2>
+
+        <h3>Drive Disappears After Reboot</h3>
+        <p>USB drive order changes on reboot. Fix by using <strong>by-label</strong> or <strong>by-id</strong> references instead of <code>/dev/sda</code>. OMV handles this automatically if you configure through the web interface. If a drive still drops, check the USB cable and power supply.</p>
+
+        <h3>Slow Transfer Speeds</h3>
+        <p>Verify you're on gigabit ethernet (not WiFi). Check SMB protocol version (must be SMB3+). If using HDDs, they're inherently slower than SSDs — 80–120 MB/s is normal. For SSDs, check that the USB connection is USB 3.0 (blue port on Pi 4).</p>
+
+        <h3>OMV Web Interface Won't Load</h3>
+        <p>Check the Pi's IP hasn't changed (set a static IP). Try SSH access (<code>ssh root@PI_IP</code> — OMV's default root password is the same as the web admin password). Restart OMV services: <code>sudo systemctl restart openmediavault-engined</code>.</p>
+
+        <h3>MicroSD Card Corrupted</h3>
+        <p>Install the <strong>FlashMemory</strong> plugin immediately on any new OMV setup. Without it, constant log writes kill microSD cards in weeks. If your card is already corrupted, reflash it, install FlashMemory, and restore your OMV configuration from a backup.</p>
+
+        <h2>Total Cost Breakdown</h2>
+
+        <table>
+          <tr><th>Component</th><th>Budget Build</th><th>Performance Build</th></tr>
+          <tr><td>Raspberry Pi 4 (4GB)</td><td>$35</td><td>$60 (Pi 5 8GB)</td></tr>
+          <tr><td>MicroSD card (16GB)</td><td>$8</td><td>$12</td></tr>
+          <tr><td>Power supply</td><td>$8</td><td>$12</td></tr>
+          <tr><td>USB HDD (2TB)</td><td>$45</td><td>—</td></tr>
+          <tr><td>USB SSD (1TB)</td><td>—</td><td>$80</td></tr>
+          <tr><td>3D printed enclosure</td><td>$5</td><td>$10</td></tr>
+          <tr><td>Ethernet cable</td><td>$3</td><td>$5</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$99</strong></td><td><strong>$179</strong></td></tr>
+        </table>
+
+        <p>Compare that to 3 years of Google One at $10/month = $360. Your Pi NAS pays for itself in under a year.</p>
+
+        <h2>What's Next?</h2>
+
+        <p>Once your NAS is running, these upgrades make it even more powerful:</p>
+        <ul>
+          <li><strong>Plex media server</strong> — Stream your movie and music collection to any TV, phone, or tablet in the house. Install via Docker on the Pi.</li>
+          <li><strong>Nextcloud</strong> — Self-hosted Google Drive alternative. Sync files across all your devices and access them from anywhere.</li>
+          <li><strong>Pi-hole ad blocker</strong> — Run it on the same Pi (or another one) to block ads for your entire network. Low resource usage, runs alongside OMV fine.</li>
+          <li><strong>Multiple drives with RAID</strong> — Add a second drive and set up RAID 1 mirroring for peace of mind. If one drive dies, your data survives.</li>
+          <li><strong>Remote access via VPN</strong> — Install WireGuard or Tailscale to securely access your NAS from anywhere without exposing it to the internet.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>Building a home NAS with Raspberry Pi and OpenMediaVault is one of the most practical maker projects you can undertake. For under $100, you get a network storage server that replaces expensive cloud subscriptions, gives you complete data sovereignty, and serves as the foundation for your smart home infrastructure.</p>
+
+        <p>The setup takes about an hour from flashing the SD card to having working SMB shares, and OMV's web interface makes ongoing management simple enough that you rarely need to touch the command line. Add Docker for services like Plex and Home Assistant, <a href="3d-print-smart-home-case.html">3D print a clean enclosure</a>, and you've built something that rivals commercial NAS devices at a fraction of the cost — with the satisfaction of knowing exactly how every piece works.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+          <li><a href="octoprint-setup-guide.html">OctoPrint Setup Guide: Install and Configure in 20 Minutes</a></li>
+          <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
