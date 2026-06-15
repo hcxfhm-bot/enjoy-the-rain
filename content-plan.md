@@ -298,7 +298,7 @@
 - [x] diy-smart-mirror-raspberry-pi — How to Build a Smart Mirror with Raspberry Pi: MagicMirror2 Setup ✅ 2026-06-13
 - [x] raspberry-pi-nas-build — How to Build a Home NAS with Raspberry Pi: OpenMediaVault Setup ✅ 2026-06-14
 - [x] sensor-guide-beginners — Electronics Sensor Guide for Beginners: Temperature, Motion, Light & More ✅ 2026-06-15
-- [ ] relay-module-arduino-esp32 — How to Use Relay Modules with Arduino and ESP32: Complete Guide
+- [x] relay-module-arduino-esp32 — How to Use Relay Modules with Arduino and ESP32: Complete Guide ✅ 2026-06-15
 - [ ] diy-plant-monitor-smart-home — DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant
 
 ## 进度
