@@ -299,14 +299,14 @@
 - [x] raspberry-pi-nas-build — How to Build a Home NAS with Raspberry Pi: OpenMediaVault Setup ✅ 2026-06-14
 - [x] sensor-guide-beginners — Electronics Sensor Guide for Beginners: Temperature, Motion, Light & More ✅ 2026-06-15
 - [x] relay-module-arduino-esp32 — How to Use Relay Modules with Arduino and ESP32: Complete Guide ✅ 2026-06-15
-- [ ] diy-plant-monitor-smart-home — DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant
+- [x] diy-plant-monitor-smart-home — DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant ✅ 2026-06-16
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 214 篇 ✅ (批次1-39进行中)
+- **已完成**: 215 篇 ✅ (批次1-39进行中)
 - **当前批次**: 批次39（Maker & Smart Home 继续）
-- **剩余**: 86 篇
+- **剩余**: 85 篇
 
 ## 生成规则
 

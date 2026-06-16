@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant (2026)</title>
+  <meta name="description" content="Build a DIY smart plant monitor with ESP32, soil moisture sensors, and Home Assistant. Never forget to water your plants again with automated alerts and dashboards.">
+  <meta name="keywords" content="smart plant monitor, soil moisture sensor, ESP32 plant monitor, Home Assistant plant monitor, DIY plant sensor, capacitive soil moisture, plant watering automation, ESPHome plant sensor, Xiaomi plant sensor, plant care automation">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & Smart Home</span>
+      </nav>
+
+      <h1>DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 16, 2026</span>
+        <span>⏱️ 24 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a4a1a, #2d7a2d); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🌱</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <div class="toc">
+          <h2>Table of Contents</h2>
+          <ul>
+            <li><a href="#introduction">Why Build a Smart Plant Monitor?</a></li>
+            <li><a href="#how-it-works">How Smart Plant Monitoring Works</a></li>
+            <li><a href="#components">Components You Need</a></li>
+            <li><a href="#sensor-types">Soil Moisture Sensor Types: Resistive vs. Capacitive</a></li>
+            <li><a href="#esp32-setup">ESP32 Setup with ESPHome</a></li>
+            <li><a href="#wiring">Wiring the Sensors</a></li>
+            <li><a href="#home-assistant">Connecting to Home Assistant</a></li>
+            <li><a href="#dashboard">Building a Plant Monitoring Dashboard</a></li>
+            <li><a href="#automations">Automations: Alerts and Watering Actions</a></li>
+            <li><a href="#enclosure">3D Printing a Custom Sensor Enclosure</a></li>
+            <li><a href="#troubleshooting">Troubleshooting Common Issues</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+          </ul>
+        </div>
+
+        <h2 id="introduction">Why Build a Smart Plant Monitor?</h2>
+
+        <p>If you've ever killed a houseplant by forgetting to water it — or the opposite, drowning it with love — you know the struggle. Commercial smart plant sensors exist (think Xiaomi Mi Flora, Parrot Flower Power), but they cost <strong>$30–50 per plant</strong> and lock you into their app. For a home with 10 plants, that's $300–500.</p>
+
+        <p>Building your own smart plant monitor with an ESP32, soil moisture sensors, and <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> costs under <strong>$10 per plant</strong>. You get real-time data on moisture, temperature, and light levels — all in one dashboard, fully customizable, and with no subscription fees.</p>
+
+        <p>This guide walks you through building a multi-sensor plant monitor that works with Home Assistant, sends push notifications when your plants are thirsty, and even triggers automated watering via a <a href="relay-module-arduino-esp32.html">relay module</a>.</p>
+
+        <!-- AdSense Top -->
+        <div class="ad-block">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXX"
+               data-ad-slot="1234567890"
+               data-ad-format="auto"></ins>
+        </div>
+
+        <h2 id="how-it-works">How Smart Plant Monitoring Works</h2>
+
+        <p>A smart plant monitor is a simple sensor network. At minimum, you need a soil moisture sensor. The more advanced version adds temperature, light, and fertilizer (EC) sensors. All sensors connect to a microcontroller (ESP32) that reads the values and transmits them to Home Assistant via WiFi.</p>
+
+        <p>The signal chain looks like this:</p>
+
+        <p><strong>Soil Moisture Sensor → ESP32 → WiFi → Home Assistant → Dashboard / Automations</strong></p>
+
+        <p>Once in Home Assistant, you can:</p>
+        <ul>
+          <li>View all plants on a single dashboard</li>
+          <li>Get notified when moisture drops below a threshold</li>
+          <li>Trigger a watering pump via <a href="relay-module-arduino-esp32.html">relay module</a></li>
+          <li>Log historical data to spot trends</li>
+          <li>Trigger automations based on time of day, season, or weather</li>
+        </ul>
+
+        <h2 id="components">Components You Need</h2>
+
+        <p>Here's what to gather for a single-plant monitor (under $15 total):</p>
+
+        <table>
+          <tr><th>Component</th><th>Approx. Cost</th><th>Notes</th></tr>
+          <tr><td>ESP32 Dev Board</td><td>$4–6</td><td>ESP32-WROOM-32 or ESP32-C3</td></tr>
+          <tr><td>Capacitive Soil Moisture Sensor</td><td>$2–4</td><td>More durable than resistive types</td></tr>
+          <tr><td>DS18B20 Temperature Sensor</td><td>$1–2</td><td>Waterproof probe, optional</td></tr>
+          <tr><td>BH1750 Light Sensor</td><td>$1–2</td><td>For ambient light measurement</td></tr>
+          <tr><td>3.3V to 5V Logic Level Shifter</td><td>$1</td><td>Only needed for some sensors</td></tr>
+          <tr><td>5V Power Supply / USB Cable</td><td>$1</td><td>Battery: 3.7V LiPo + TP4056 charger</td></tr>
+          <tr><td>Jumper Wires & Breadboard</td><td>$2</td><td>For prototyping</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$12–18</strong></td><td>Per plant</td></tr>
+        </table>
+
+        <p>For multiple plants, you can use an ESP32 with multiple sensor inputs — or build multiple ESP32 nodes that all report to the same Home Assistant instance. If you need more GPIO pins, check our <a href="sensor-guide-beginners.html">Electronics Sensor Guide</a> for pinout diagrams.</p>
+
+        <h2 id="sensor-types">Soil Moisture Sensor Types: Resistive vs. Capacitive</h2>
+
+        <p>This is the most important hardware decision you'll make. Resistive sensors are cheap but corrode within weeks when left in moist soil continuously. Capacitive sensors use a different measurement principle — they don't have exposed electrodes, so they last months or even years.</p>
+
+        <div class="info-box">
+          <h3>💡 Key Recommendation</h3>
+          <p>Always choose capacitive sensors (like the v1.2 or v2.0 boards). Resistive sensors (the cheap red PCB kind) are fine for <em>experiments</em> but will give you false readings after 2–4 weeks of continuous use.</p>
+        </div>
+
+        <p>The popular capacitive sensors are:</p>
+        <ul>
+          <li><strong>Capacitive Soil Moisture v1.2</strong> — Analog output (0–3.3V), simple, reliable</li>
+          <li><strong>Capacitive Soil Moisture v2.0</strong> — I2C interface, more stable readings, slightly more expensive</li>
+          <li><strong>Xiaomi JL-BC-01</strong> — Bluetooth, battery-powered, but easily hacked for ESPHome integration</li>
+          <li><strong>EZO by Atlas Scientific</strong> — Laboratory-grade, overkill for houseplants but excellent for <a href="diy-weather-station-raspberry-pi.html">garden monitoring</a></li>
+        </ul>
+
+        <h2 id="esp32-setup">ESP32 Setup with ESPHome</h2>
+
+        <p>We'll use <a href="esphome-getting-started-guide.html">ESPHome</a> to program the ESP32 — it's the easiest way to integrate with Home Assistant, requires zero cloud services, and runs entirely locally. If you haven't set up ESPHome yet, follow our <a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects guide</a> first.</p>
+
+        <p>Create a new ESPHome device in Home Assistant (Settings → Add-ons → ESPHome → Open Web UI). Add this configuration for a basic 3-sensor plant monitor:</p>
+
+<pre><code>esphome:
+  name: plant-monitor-1
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+
+api:
+  password: "ESPHOME_API_PASSWORD"
+
+ota:
+  password: "OTA_PASSWORD"
+
+sensor:
+  - platform: adc
+    pin: GPIO34
+    name: "Plant 1 Moisture"
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    filters:
+      - calibrate_linear:
+          - 0.0 -> 100.0   # dry
+          - 3.3 -> 0.0     # wet (sensor output vs real moisture)
+    update_interval: 5min
+
+  - platform: dht
+    pin: GPIO27
+    model: DHT22
+    temperature:
+      name: "Plant 1 Temperature"
+    humidity:
+      name: "Plant 1 Humidity"
+    update_interval: 5min
+
+  - platform: bh1750
+    pin: GPIO21
+    name: "Plant 1 Light"
+    address: 0x23
+    update_interval: 10min
+</code></pre>
+
+        <p>The calibration values (<code>calibrate_linear</code>) are the most important part. Put the sensor in dry soil, note the reading, then put it in water-saturated soil, and adjust the numbers accordingly. Each sensor batch is slightly different.</p>
+
+        <!-- AdSense Middle -->
+        <div class="ad-block">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXX"
+               data-ad-slot="1234567890"
+               data-ad-format="auto"></ins>
+        </div>
+
+        <h2 id="wiring">Wiring the Sensors</h2>
+
+        <p>Here's how to wire everything for a complete multi-sensor plant monitor:</p>
+
+        <p><strong>ESP32 → Capacitive Soil Moisture Sensor:</strong></p>
+        <ul>
+          <li>Sensor VCC → ESP32 3.3V (or 5V for v1.2 sensors)</li>
+          <li>Sensor GND → ESP32 GND</li>
+          <li>Sensor AOUT → ESP32 GPIO34 (ADC pin)</li>
+        </ul>
+
+        <p><strong>ESP32 → DS18B20 (Temperature):</strong></p>
+        <ul>
+          <li>DS18B20 Red (VCC) → ESP32 3.3V via 4.7K resistor</li>
+          <li>DS18B20 Black (GND) → ESP32 GND</li>
+          <li>DS18B20 Yellow (Data) → ESP32 GPIO27 + 4.7K pull-up resistor</li>
+        </ul>
+
+        <p><strong>ESP32 → BH1750 (Light Sensor):</strong></p>
+        <ul>
+          <li>BH1750 VCC → ESP32 3.3V</li>
+          <li>BH1750 GND → ESP32 GND</li>
+          <li>BH1750 SDA → ESP32 GPIO21</li>
+          <li>BH1750 SCL → ESP32 GPIO22</li>
+        </ul>
+
+        <p>For the waterproof DS18B20 probe, you'll need to add the <code>one_wire</code> component to ESPHome and enable the GPIO pin you used. For wiring multiple capacitive sensors, just use different ADC pins (GPIO34, GPIO35, GPIO36, GPIO39).</p>
+
+        <h2 id="home-assistant">Connecting to Home Assistant</h2>
+
+        <p>Once ESPHome compiles and flashes your firmware, the ESP32 will automatically appear in Home Assistant as a new device under Settings → Devices. All your sensors will be there, ready to add to your dashboard.</p>
+
+        <p>For a cleaner setup, use Home Assistant's <strong>Helpers</strong> (Settings → Devices & Services → Helpers) to create threshold sensors:</p>
+
+        <pre><code># Example: Binary sensor that turns ON when soil is dry
+template:
+  - binary_sensor:
+      - name: "Plant 1 Needs Water"
+        state: "{{ states('sensor.plant_1_moisture') | float(50) < 30 }}"
+        icon: mdi:water-alert
+</code></pre>
+
+        <p>This creates a virtual sensor that changes to "on" when moisture drops below 30%. You can then use this in automations to send alerts.</p>
+
+        <h2 id="dashboard">Building a Plant Monitoring Dashboard</h2>
+
+        <p>Home Assistant makes it easy to create a beautiful plant dashboard. Add a new Dashboard in Home Assistant and add these cards:</p>
+
+        <ul>
+          <li><strong>Gauge cards</strong> — For moisture percentage, temperature, and light level</li>
+          <li><strong>Mini graph card</strong> — Shows 24-hour or 7-day history of moisture levels</li>
+          <li><strong>Picture elements card</strong> — Place sensor values over a photo of each plant</li>
+          <li><strong>Conditional card</strong> — Shows an alert icon only when a plant needs attention</li>
+        </ul>
+
+        <p>Set each plant's thresholds based on its species. Succulents and cacti prefer 10–20% moisture most of the time. Tropical plants like peace lilies thrive at 40–60%. Herbs in the kitchen window are happy at 30–50%. You'll calibrate these numbers over a few weeks as you learn each plant's watering rhythm.</p>
+
+        <h2 id="automations">Automations: Alerts and Watering Actions</h2>
+
+        <p>The real value of a smart plant monitor is automation. Here are the automations that make it genuinely useful:</p>
+
+        <p><strong>Automation 1: Push Notification When Plant is Dry</strong></p>
+
+<pre><code>automation:
+  - alias: "Notify: Plant needs water"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.plant_1_moisture
+        below: 25
+    condition:
+      - condition: time
+        after: "07:00:00"
+        before: "21:00:00"
+    action:
+      - service: notify.mobile_app_your_phone
+        data:
+          title: "💧 Plant Alert"
+          message: "Plant 1 (Monstera) needs water! Current moisture: {{ states('sensor.plant_1_moisture') }}%"
+</code></pre>
+
+        <p><strong>Automation 2: Auto-Watering with Relay Module</strong></p>
+
+        <p>Connect a <a href="relay-module-arduino-esp32.html">5V relay module</a> to the ESP32 and a 12V water pump. When moisture drops below 20%, the relay closes, the pump runs for 30 seconds, and moisture is checked again in 10 minutes.</p>
+
+        <pre><code>automation:
+  - alias: "Auto-water Plant 1"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.plant_1_moisture
+        below: 20
+    condition:
+      - condition: state
+        entity_id: input_boolean.plant_1_auto_water
+        state: "on"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.plant_1_water_pump
+      - delay:
+          seconds: 30
+      - service: switch.turn_off
+        entity_id: switch.plant_1_water_pump
+</code></pre>
+
+        <p>The <code>input_boolean</code> lets you enable or disable auto-watering without editing automations. Add it as a toggle on your dashboard.</p>
+
+        <h2 id="enclosure">3D Printing a Custom Sensor Enclosure</h2>
+
+        <p>Once your electronics are working, you'll want a proper enclosure to protect them. The sensor probe goes into the soil, but the ESP32 and wiring need protection from moisture, dust, and accidental spills.</p>
+
+        <p>We've designed a <a href="3d-print-smart-home-case.html">3D-printable smart home sensor enclosure</a> that works great for plant monitors. Key features:</p>
+        <ul>
+          <li>Wall-mountable or stake-style for pushing into soil</li>
+          <li>Cutouts for USB power cable</li>
+          <li>Slots for routing sensor wires cleanly</li>
+          <li>Snap-fit lid for easy battery access</li>
+        </ul>
+
+        <p>Print settings: <strong>PLA or PETG</strong>, 0.2mm layer height, 15% infill, no supports needed for most designs. PETG is preferred since it handles humidity better than PLA over long periods.</p>
+
+        <p>For outdoor plant monitoring, consider printing with ASA filament or coating the enclosure in epoxy resin for water resistance. Our <a href="3d-printing-for-automotive.html">3D Printing for Outdoor Use</a> guide has tips on weatherproofing your prints.</p>
+
+        <!-- AdSense Middle -->
+        <div class="ad-block">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXX"
+               data-ad-slot="1234567890"
+               data-ad-format="auto"></ins>
+        </div>
+
+        <h2 id="troubleshooting">Troubleshooting Common Issues</h2>
+
+        <h3>Sensor Readings Stuck at Same Value</h3>
+        <p>This usually means the sensor has corroded (if resistive) or there's a wiring issue. For capacitive sensors, check that the wire between the probe and the amplifier board isn't broken. Wiggle the wires gently while watching the reading — any fluctuation indicates a loose connection.</p>
+
+        <h3>ESP32 Goes Offline</h3>
+        <p>If your ESP32 drops off WiFi frequently, the most common cause is insufficient power. The ESP32 can draw 250mA+ during WiFi transmission. If you're using a weak USB power source or long USB cable with voltage drop, the board will reset. Use a dedicated 5V/2A power supply and keep cables short.</p>
+
+        <h3>Moisture Readings Don't Match Reality</h3>
+        <p>Recalibrate. The raw ADC values from capacitive sensors don't map linearly to "percent moisture" across all soil types. Sandy soil reads differently from potting mix. Create custom calibration curves for each plant's pot if you need accuracy. Our <a href="sensor-guide-beginners.html">Electronics Sensor Guide</a> covers calibration techniques in detail.</p>
+
+        <h3>Battery-Powered Node Drains Quickly</h3>
+        <p>Deep sleep is essential. Configure ESPHome to sleep between readings:</p>
+        <pre><code>deep_sleep:
+  run_duration: 30s
+  sleep_duration: 10min
+</code></pre>
+        <p>With deep sleep, a 2000mAh LiPo battery can power a plant monitor for 6–12 months. Without it, expect 3–5 days at most.</p>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>Can I use this outdoors for garden monitoring?</h3>
+        <p>Absolutely. For garden beds, you'll want IP65+ rated enclosures, weatherproof sensor probes, and possibly solar charging. This project pairs perfectly with our <a href="diy-weather-station-raspberry-pi.html">DIY Weather Station guide</a> — share the data to correlate plant stress with weather patterns.</p>
+
+        <h3>How accurate are cheap capacitive sensors?</h3>
+        <p>Good enough for watering decisions. They won't give you laboratory-precise readings, but they'll reliably tell you "dry" vs "wet" and track trends over time. For research-grade data, use EZO sensors or similar.</p>
+
+        <h3>Can I integrate with Apple HomeKit?</h3>
+        <p>Yes. If you use Home Assistant with the <a href="homekit-home-assistant-bridge.html">HomeKit Bridge integration</a>, all your plant sensors appear natively in Apple Home app and can trigger Siri Shortcuts for plant care reminders.</p>
+
+        <h3>What's the best plant species for smart monitoring?</h3>
+        <p>Start with your most finicky plants. Plants that are dramatic about watering — like Monsteras, Peace Lilies, or Calatheas — are the ones where real-time data actually changes your behavior. The plant monitor becomes most valuable when it tells you something you couldn't easily guess by looking.</p>
+
+        <h3>Can I power multiple sensors from one ESP32?</h3>
+        <p>Yes. ESP32 has multiple ADC pins. With careful wiring, you can monitor up to 6–8 capacitive sensors from one board using a manual multiplexing approach, or use an I2C multiplexer (like the TCA9548A) to connect multiple I2C sensors.</p>
+
+        <!-- Related Articles -->
+        <div class="related-articles">
+          <h3>Related Articles</h3>
+          <ul>
+            <li><a href="sensor-guide-beginners.html">Electronics Sensor Guide for Beginners: Temperature, Motion, Light & More</a></li>
+            <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+            <li><a href="relay-module-arduino-esp32.html">How to Use Relay Modules with Arduino and ESP32</a></li>
+            <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+            <li><a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases</a></li>
+            <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+
+</body>
+</html>
