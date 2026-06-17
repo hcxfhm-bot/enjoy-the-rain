@@ -300,13 +300,14 @@
 - [x] sensor-guide-beginners — Electronics Sensor Guide for Beginners: Temperature, Motion, Light & More ✅ 2026-06-15
 - [x] relay-module-arduino-esp32 — How to Use Relay Modules with Arduino and ESP32: Complete Guide ✅ 2026-06-15
 - [x] diy-plant-monitor-smart-home — DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant ✅ 2026-06-16
+- [x] stepper-motor-guide-beginners — Stepper Motor Guide for Beginners: How They Work and How to Use Them ✅ 2026-06-17
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 215 篇 ✅ (批次1-39进行中)
+- **已完成**: 216 篇 ✅ (批次1-39进行中)
 - **当前批次**: 批次39（Maker & Smart Home 继续）
-- **剩余**: 85 篇
+- **剩余**: 84 篇
 
 ## 生成规则
 
