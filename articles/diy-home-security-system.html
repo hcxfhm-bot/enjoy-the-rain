@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a DIY Home Security System with ESP32 and Home Assistant</title>
+  <meta name="description" content="Learn how to build a complete DIY home security system using ESP32, motion sensors, door sensors, and Home Assistant. Step-by-step guide with parts list, wiring diagrams, and automation examples.">
+  <meta name="keywords" content="DIY home security system, ESP32 security system, Home Assistant security, smart home security DIY, ESP32 motion sensor, DIY alarm system, home automation security">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home Projects</span>
+      </nav>
+
+      <h1>How to Build a DIY Home Security System with ESP32 and Home Assistant</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 18, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔒</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+        <p>Commercial home security systems can cost $300 to $600 upfront, plus $15–$45 per month for monitoring. But here's the thing: you can build your own <strong>DIY home security system</strong> that's just as effective for a fraction of the cost—using an ESP32 microcontroller and <a href="../articles/home-assistant-raspberry-pi-setup.html">Home Assistant</a>.</p>
+
+        <p>In this guide, you'll learn how to build a complete home security system from scratch. We'll cover motion detection, door/window sensors, a siren, and automated alerts—all connected to Home Assistant so you can monitor and control everything from your phone. No monthly fees, no contracts, full ownership.</p>
+
+        <h2>Why Build Your Own Security System?</h2>
+        <p>Before we dive in, let's look at why a DIY approach makes sense:</p>
+        <ul>
+          <li><strong>Cost savings</strong> — A full system with multiple sensors costs under $100 in parts</li>
+          <li><strong>No subscriptions</strong> — Self-hosted means no monthly monitoring fees</li>
+          <li><strong>Full customization</strong> — Add any sensor, change automations, expand whenever you want</li>
+          <li><strong>Privacy control</strong> — Your data stays on your local network, not in someone's cloud</li>
+          <li><strong>Maker satisfaction</strong> — You built it yourself, and you understand every component</li>
+        </ul>
+        <p>Plus, if you're already running <a href="../articles/home-assistant-raspberry-pi-setup.html">Home Assistant on a Raspberry Pi</a>, adding security features is a natural next step that leverages your existing setup.</p>
+
+        <h2>What You'll Need: Parts List</h2>
+        <p>Here's everything you need to build a solid DIY security system. You can start with one ESP32 and expand from there.</p>
+
+        <h3>Core Components</h3>
+        <ul>
+          <li><strong>ESP32 development boards</strong> ($5–$8 each) — 2–3 boards for different zones</li>
+          <li><strong>HC-SR501 PIR motion sensors</strong> ($2–$3 each) — Detect movement in rooms and hallways</li>
+          <li><strong>Magnetic door/window sensors</strong> ($1–$2 each) — Reed switches for entry points</li>
+          <li><strong>Active buzzer or piezo siren</strong> ($2–$3) — Audible alarm trigger</li>
+          <li><strong>DHT22 temperature/humidity sensor</strong> ($3–$5) — Optional: environmental monitoring</li>
+          <li><strong>Jumper wires, breadboards, and USB cables</strong> ($5–$10 total)</li>
+          <li><strong>3D printed enclosures</strong> (free if you have a <a href="../articles/best-budget-3d-printer-under-200.html">3D printer</a>) — Protect your electronics</li>
+        </ul>
+
+        <h3>Estimated Total Cost</h3>
+        <p>A basic 3-sensor system (1 motion, 2 door sensors, 1 siren) costs roughly <strong>$25–$40</strong> in components. Compare that to a $300 commercial system—it's a no-brainer for makers.</p>
+
+        <h2>System Architecture Overview</h2>
+        <p>Here's how all the pieces work together:</p>
+        <ul>
+          <li><strong>ESP32 boards</strong> connect to sensors via GPIO pins and communicate over WiFi to Home Assistant</li>
+          <li><strong>ESPHome</strong> (an <a href="../articles/esphome-getting-started-guide.html">ESPHome add-on</a>) runs on each ESP32, translating sensor data into Home Assistant entities</li>
+          <li><strong>Home Assistant</strong> acts as the central hub — stores sensor states, runs automations, and sends notifications</li>
+          <li><strong>Automations</strong> trigger actions when sensors change state: send phone alerts, activate sirens, turn on lights</li>
+        </ul>
+        <p>The beauty of this architecture is modularity. Each sensor node is independent—if one ESP32 fails, the others keep working. You can also <a href="../articles/3d-print-smart-home-case.html">3D print custom cases</a> for each node to mount them neatly around your home.</p>
+
+        <h2>Step 1: Set Up Home Assistant (If You Haven't Already)</h2>
+        <p>If you don't have Home Assistant running yet, check our <a href="../articles/home-assistant-raspberry-pi-setup.html">complete Raspberry Pi setup guide</a>. You'll need:</p>
+        <ul>
+          <li>A Raspberry Pi 4 (2GB or more) or any computer running 24/7</li>
+          <li>Home Assistant OS installed (easiest method)</li>
+          <li>ESPHome add-on installed from the Home Assistant Supervisor</li>
+        </ul>
+        <p>Once Home Assistant is running, go to <strong>Settings → Add-ons → Add-on Store</strong> and install the <strong>ESPHome</strong> add-on. Start it, and make sure "Show in sidebar" is enabled. This is the bridge between your ESP32 boards and Home Assistant.</p>
+
+        <h2>Step 2: Wire a Motion Sensor Node</h2>
+        <p>Let's start with a motion sensor—one of the most useful security devices. The HC-SR501 PIR sensor is incredibly simple to wire.</p>
+
+        <h3>Wiring Diagram</h3>
+        <ul>
+          <li><strong>HC-SR501 VCC</strong> → ESP32 5V (or VIN pin)</li>
+          <li><strong>HC-SR501 GND</strong> → ESP32 GND</li>
+          <li><strong>HC-SR501 OUT</strong> → ESP32 GPIO 27 (or any digital input pin)</li>
+        </ul>
+
+        <h3>Adjusting the PIR Sensor</h3>
+        <p>The HC-SR501 has two potentiometers on the back:</p>
+        <ul>
+          <li><strong>Time delay</strong> — Controls how long the output stays HIGH after detecting motion (turn clockwise for longer, up to ~5 minutes)</li>
+          <li><strong>Sensitivity</strong> — Controls detection range (turn clockwise for ~7m range, counterclockwise for ~3m)</li>
+        </ul>
+        <p>For security use, set sensitivity to maximum range and the time delay to around 5–10 seconds. You want quick resets so the sensor can detect new motion events rapidly.</p>
+
+        <h2>Step 3: Wire Door and Window Sensors</h2>
+        <p>Magnetic reed switches are the simplest sensors you'll ever use. They have two parts: a magnet and a switch. When the magnet moves away from the switch, the circuit opens.</p>
+
+        <h3>Wiring</h3>
+        <ul>
+          <li>Connect one wire to ESP32 GPIO 14 (or another digital pin)</li>
+          <li>Connect the other wire to GND</li>
+          <li>Enable the <strong>internal pull-up resistor</strong> in your ESPHome config (the pin reads HIGH when the door is closed, LOW when open)</li>
+        </ul>
+        <p>Mount the magnet part on the door or window frame, and the switch part on the moving door or window itself. When the door opens, the magnet separates from the switch, and Home Assistant detects the change instantly.</p>
+
+        <h2>Step 4: Add a Siren Output</h2>
+        <p>An active buzzer connects directly to a GPIO pin. When you set the pin HIGH, it makes noise.</p>
+        <ul>
+          <li><strong>Buzzer +</strong> → ESP32 GPIO 26</li>
+          <li><strong>Buzzer −</strong> → ESP32 GND</li>
+        </ul>
+        <p>You can wire the buzzer to the same ESP32 as your motion sensor, or put it on a dedicated board near the front door for maximum attention when triggered.</p>
+
+        <h2>Step 5: Flash ESPHome Firmware</h2>
+        <p>Now comes the software side. Create a new device in the ESPHome dashboard (accessible from Home Assistant's sidebar).</p>
+
+        <h3>Example ESPHome YAML Configuration</h3>
+        <p>Here's a complete configuration for a node with motion sensor, door sensor, and siren:</p>
+        <p><code>
+        substitutions:<br>
+        &nbsp;&nbsp;device_name: security-node-1<br>
+        <br>
+        esphome:<br>
+        &nbsp;&nbsp;name: ${device_name}<br>
+        <br>
+        esp32:<br>
+        &nbsp;&nbsp;board: nodemcu-32s<br>
+        <br>
+        wifi:<br>
+        &nbsp;&nbsp;ssid: !secret wifi_ssid<br>
+        &nbsp;&nbsp;password: !secret wifi_password<br>
+        <br>
+        # Enable fallback hotspot<br>
+        ap:<br>
+        &nbsp;&nbsp;ssid: "${device_name}"<br>
+        &nbsp;&nbsp;password: "12345678"<br>
+        <br>
+        logger:<br>
+        api:<br>
+        ota:<br>
+        <br>
+        # Binary sensor: PIR motion<br>
+        binary_sensor:<br>
+        &nbsp;&nbsp;- platform: gpio<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;pin:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number: GPIO27<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode: INPUT_PULLUP<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;name: "${device_name} Motion"<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;device_class: motion<br>
+        <br>
+        &nbsp;&nbsp;- platform: gpio<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;pin:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number: GPIO14<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input: true<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pullup: true<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;name: "${device_name} Front Door"<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;device_class: door<br>
+        <br>
+        # Output: Siren<br>
+        output:<br>
+        &nbsp;&nbsp;- platform: gpio<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;pin: GPIO26<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;id: siren_output<br>
+        <br>
+        switch:<br>
+        &nbsp;&nbsp;- platform: output<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;name: "${device_name} Siren"<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;output: siren_output<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;icon: mdi:alarm-bell<br>
+        </code></p>
+
+        <p>Replace <code>wifi_ssid</code> and <code>wifi_password</code> with your actual WiFi credentials (stored as secrets in ESPHome for security). Click <strong>Install</strong> to flash this firmware to your ESP32.</p>
+
+        <h2>Step 6: Create Home Assistant Automations</h2>
+        <p>With your sensors appearing in Home Assistant, it's time to set up the intelligence. Go to <strong>Settings → Automations</strong> and create these automations:</p>
+
+        <h3>Automation 1: Instant Phone Alert on Motion</h3>
+        <ul>
+          <li><strong>Trigger:</strong> Binary sensor "security-node-1 Motion" changes to ON</li>
+          <li><strong>Condition:</strong> Only when "Security Mode" input_boolean is ON</li>
+          <li><strong>Action:</strong> Send a notification to your phone with the zone name and timestamp</li>
+        </ul>
+
+        <h3>Automation 2: Siren on Unauthorized Entry</h3>
+        <ul>
+          <li><strong>Trigger:</strong> Door sensor changes to OPEN</li>
+          <li><strong>Condition:</strong> Security Mode is ON, and nobody is home</li>
+          <li><strong>Action:</strong> Turn ON siren switch → Wait 60 seconds → Turn OFF siren → Send notification</li>
+        </ul>
+
+        <h3>Automation 3: Arm/Disarm with a Toggle</h3>
+        <ul>
+          <li>Create an <strong>input_boolean</strong> called "Security Mode" in your configuration</li>
+          <li>Add a toggle card to your Home Assistant dashboard</li>
+          <li>Use this as the master switch for all security automations</li>
+        </ul>
+        <p>For more automation ideas, check out our <a href="../articles/home-assistant-automations-beginners.html">Home Assistant automations beginner's guide</a>.</p>
+
+        <h2>Step 7: Add More Zones</h2>
+        <p>One ESP32 can handle multiple sensors, but for larger homes, you'll want multiple nodes:</p>
+        <ul>
+          <li><strong>Zone 1 (Living room):</strong> Motion sensor + door sensor on front door</li>
+          <li><strong>Zone 2 (Back door/Garage):</strong> Door sensors + motion sensor</li>
+          <li><strong>Zone 3 (Bedroom hallway):</strong> Motion sensor for nighttime alerts</li>
+          <li><strong>Zone 4 (Windows):</strong> Magnetic sensors on ground-floor windows</li>
+        </ul>
+        <p>Each node gets its own ESPHome configuration. The process is identical—just change the device name, WiFi credentials (same network), and GPIO pin assignments. All nodes appear automatically in Home Assistant.</p>
+
+        <h2>Step 8: 3D Print Custom Enclosures</h2>
+        <p>If you have a <a href="../articles/best-budget-3d-printer-under-200.html">3D printer</a>, you can <a href="../articles/3d-print-smart-home-case.html">print custom sensor housings</a> that match your home's aesthetics. This is where the 3D printing and smart home worlds overlap beautifully:</p>
+        <ul>
+          <li><strong>PIR sensor dome</strong> — Print a white hemisphere cover that diffuses the sensor for wider detection</li>
+          <li><strong>Door sensor mounts</strong> — Custom-fit mounts for uneven door frames</li>
+          <li><strong>ESP32 waterproof boxes</strong> — For outdoor sensor nodes (use PETG for weather resistance — see our <a href="../articles/petg-vs-pla-comparison.html">PETG vs PLA comparison</a>)</li>
+          <li><strong>Siren housing</strong> — A directional horn that amplifies the buzzer output</li>
+        </ul>
+        <p>You'll find plenty of open-source designs on sites like Printables and Thingiverse. Search for "ESP32 case," "PIR sensor mount," or "smart home sensor housing."</p>
+
+        <h2>Taking It Further: Advanced Features</h2>
+        <p>Once your basic system is running, here are some powerful upgrades:</p>
+        <ul>
+          <li><strong>ESP32-CAM integration</strong> — Add a camera module to capture photos when motion is detected and send them to your phone via Telegram</li>
+          <li><strong>MQTT for faster response</strong> — Configure MQTT for sub-second sensor updates instead of polling</li>
+          <li><strong>Deep sleep mode</strong> — Battery-powered window sensors that sleep between checks, lasting months on a charge</li>
+          <li><strong>Glass break sensors</strong> — Sound-based sensors that detect breaking glass</li>
+          <li><strong>Keypad arming</strong> — Add a numeric keypad at the front door to arm/disarm without your phone</li>
+          <li><strong><a href="../articles/esp32-smart-home-beginners.html">Tasmota or ESPHome</a> for existing smart plugs</strong> — Integrate commercial smart devices into your security automations</li>
+        </ul>
+
+        <h2>Troubleshooting Common Issues</h2>
+        <p>Here are solutions to the most common problems you might encounter:</p>
+        <ul>
+          <li><strong>Sensor triggers randomly</strong> — The PIR sensor may be detecting pets or air currents. Adjust the sensitivity dial or add a lens cover to narrow the detection cone</li>
+          <li><strong>ESP32 keeps disconnecting</strong> — WiFi range issues. Move the board closer to your router, or add a WiFi extender. You can also try lowering the WiFi power save mode in ESPHome</li>
+          <li><strong>Door sensor always shows OPEN</strong> — Check the wiring and ensure the internal pull-up resistor is enabled. The magnet may also be too far from the reed switch (keep within 1cm)</li>
+          <li><strong>Siren doesn't stop</strong> — Add a timeout in your automation (always include a "turn off after X seconds" action)</li>
+          <li><strong>Notifications delayed</strong> — Check your Home Assistant notification integration (mobile app companion, Telegram bot, or email)</li>
+        </ul>
+
+        <h2>Cost Comparison: DIY vs. Commercial</h2>
+        <p>Here's a realistic cost breakdown for a typical 3-bedroom home:</p>
+        <ul>
+          <li><strong>DIY (this guide):</strong> $50–$80 for hardware + $0/month = <strong>$50–$80 total</strong></li>
+          <li><strong>DIY + Raspberry Pi:</strong> $50–$80 + $55 Pi 4 = <strong>$105–$135 total</strong></li>
+          <li><strong>Ring Alarm (5-piece kit):</strong> $200 + $20/month monitoring = <strong>$440 over 1 year</strong></li>
+          <li><strong>SimpliSafe (Essential):</strong> $300 + $25/month = <strong>$600 over 1 year</strong></li>
+        </ul>
+        <p>The DIY system pays for itself in 2–3 months compared to commercial options. And you get the satisfaction of having built it yourself.</p>
+
+        <h2>Conclusion</h2>
+        <p>Building a <strong>DIY home security system</strong> with ESP32 and Home Assistant is one of the most practical and rewarding maker projects you can tackle. It combines <a href="../articles/arduino-vs-raspberry-pi-beginners.html">electronics</a>, programming, 3D printing, and home automation into one cohesive system that actually protects your home.</p>
+
+        <p>Start with a single motion sensor node. Once you see it working in Home Assistant, you'll want to add more sensors, more automations, and more <a href="../articles/home-assistant-automations-beginners.html">smart features</a>. Before you know it, your home will be smarter and more secure—and you built every piece of it.</p>
+
+        <p>The best security system is the one you understand and control. With ESP32 and Home Assistant, that's exactly what you get.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="../articles/esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="../articles/esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32</a></li>
+          <li><a href="../articles/diy-smart-door-lock.html">How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</a></li>
+          <li><a href="../articles/3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
