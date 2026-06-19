@@ -304,7 +304,7 @@
 
 ### 批次 40：MAKER PROJECTS & SMART HOME SECURITY (6篇) 🆕
 - [x] diy-home-security-system — How to Build a DIY Home Security System with ESP32 and Home Assistant ✅ 2026-06-18
-- [ ] best-budget-laser-cutter-beginners — Best Budget Laser Cutters and Engravers for Beginners in 2026
+- [x] best-budget-laser-cutter-beginners — Best Budget Laser Cutters and Engravers for Beginners in 2026 ✅ 2026-06-19
 - [ ] diy-esp32-cam-security-camera — How to Build a Smart Security Camera with ESP32-CAM
 - [ ] smart-light-switch-wiring-guide — Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff
 - [ ] diy-electronics-workbench-setup — How to Set Up a DIY Electronics Workbench: Essential Tools and Layout
