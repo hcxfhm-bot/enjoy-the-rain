@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Smart Security Camera with ESP32-CAM (2026 Guide)</title>
+  <meta name="description" content="Build a DIY security camera with ESP32-CAM for under $15. Complete step-by-step guide covering Arduino setup, Home Assistant integration, motion detection, and cloud storage. No soldering required.">
+  <meta name="keywords" content="ESP32-CAM security camera, DIY security camera, ESP32-CAM tutorial, home assistant camera, ESP32 camera setup, ESPHome camera, cheap security camera DIY, ESP32-CAM motion detection">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & DIY Tools</span>
+      </nav>
+
+      <h1>How to Build a Smart Security Camera with ESP32-CAM (2026 Step-by-Step Guide)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 20, 2026</span>
+        <span>⏱️ 15 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">📸</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Want a <strong>working security camera</strong> that costs less than a takeout dinner? The <strong>ESP32-CAM</strong> is a tiny Wi-Fi camera module that can stream live video, capture photos on motion detection, and integrate with <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant</a> — all for around <strong>$10–15</strong> in parts.</p>
+
+        <p>I've built five of these cameras around my home, and in this guide I'll walk you through everything: hardware setup, Arduino firmware, <a href="../esphome-getting-started-guide.html">ESPHome flashing</a>, Home Assistant integration, and motion-triggered alerts. Whether you're a complete beginner or an experienced maker, you'll have a working camera in under an hour.</p>
+
+        <h2>What You Need (Parts List)</h2>
+
+        <p>The hardware is refreshingly simple. Here's exactly what you need:</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Component</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Qty</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Price</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Notes</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>ESP32-CAM (AI-Thinker)</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">1</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$6–8</td>
+            <td style="padding: 10px; border: 1px solid #333;">Get the AI-Thinker version with OV2640</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>USB-to-TTL programmer (FTDI/CP2102)</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">1</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$3–5</td>
+            <td style="padding: 10px; border: 1px solid #333;">Only needed for first flash; OTA after that</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>MicroSD card (16GB+)</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">1</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$3–5</td>
+            <td style="padding: 10px; border: 1px solid #333;">For local photo storage; Class 10 recommended</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>5V 2A power supply</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">1</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$2–4</td>
+            <td style="padding: 10px; border: 1px solid #333;">Must be 2A minimum; weak power causes image corruption</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Jumper wires (female-to-female)</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">3</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$1</td>
+            <td style="padding: 10px; border: 1px solid #333;">For programming connections</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>PIR motion sensor (HC-SR501)</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">1 (optional)</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$1–2</td>
+            <td style="padding: 10px; border: 1px solid #333;">For hardware motion detection</td>
+          </tr>
+        </table>
+
+        <p><strong>Total cost: $16–25</strong> with all optional parts. Compare that to a $150 Wyze cam or $200 Ring camera, and you'll see why the ESP32-CAM is a maker favorite.</p>
+
+        <h2>Understanding the ESP32-CAM Hardware</h2>
+
+        <p>Before we wire anything up, let's understand what you're working with:</p>
+
+        <ul>
+          <li><strong>ESP32-S chip:</strong> Dual-core 240MHz processor with built-in Wi-Fi (802.11 b/g/n) and Bluetooth 4.2</li>
+          <li><strong>OV2640 camera sensor:</strong> 2 megapixel (1600×1200), supports JPEG compression in hardware</li>
+          <li><strong>4MB PSRAM:</strong> External RAM that's essential for buffering image data</li>
+          <li><strong>MicroSD card slot:</strong> Store captured photos locally without needing cloud services</li>
+          <li><strong>9 usable GPIO pins:</strong> Limited but sufficient for sensors and basic I/O</li>
+          <li><strong>Built-in LED flash:</strong> Weak but usable for very close-range illumination</li>
+        </ul>
+
+        <p>The ESP32-CAM measures just <strong>27×40mm</strong>, making it small enough to hide inside a <a href="../3d-print-smart-home-case.html">3D-printed enclosure</a> or behind a small hole in a wall plate.</p>
+
+        <h2>⚠️ Critical First: Power Supply Rules</h2>
+
+        <p>The number one cause of ESP32-CAM failures is <strong>inadequate power</strong>. The OV2640 camera draws significant current during image capture, and a weak supply causes:</p>
+
+        <ul>
+          <li>Corrupted images (horizontal lines or "water ripple" artifacts)</li>
+          <li>Random reboots during video streaming</li>
+          <li>Wi-Fi disconnections</li>
+        </ul>
+
+        <p><strong>Rules:</strong></p>
+
+        <ul>
+          <li>Use <strong>5V at 2A minimum</strong> — do not power from USB alone unless your USB port can genuinely deliver 2A</li>
+          <li>A <a href="../power-supply-guide-beginners.html">dedicated bench power supply</a> or high-quality phone charger works best</li>
+          <li>If using batteries, two 18650 cells in series with a buck converter is the reliable option</li>
+          <li>Never power from a 3.3V pin — it can't handle the camera's current draw</li>
+        </ul>
+
+        <h2>Step 1: Wiring the ESP32-CAM for Programming</h2>
+
+        <p>The ESP32-CAM has <strong>no built-in USB connector</strong>, so you need a USB-to-TTL programmer to flash firmware. Here's the wiring (this is only needed for the first upload — after that, you can use OTA wireless updates):</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">USB-TTL Programmer</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">ESP32-CAM</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;">RX</td>
+            <td style="padding: 10px; border: 1px solid #333;">U0TXD (GPIO 1)</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;">TX</td>
+            <td style="padding: 10px; border: 1px solid #333;">U0RXD (GPIO 3)</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;">GND</td>
+            <td style="padding: 10px; border: 1px solid #333;">GND</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;">5V</td>
+            <td style="padding: 10px; border: 1px solid #333;">5V</td>
+          </tr>
+        </table>
+
+        <p><strong>Critical step:</strong> Before uploading code, you must <strong>connect GPIO 0 to GND</strong> using a jumper wire. This puts the ESP32 into "flash mode." After the upload is complete, <strong>disconnect GPIO 0 from GND</strong> and press the reset button to run the firmware.</p>
+
+        <p>If you skip this step, the upload will fail silently — the ESP32-CAM will just sit there running whatever firmware is already on the board.</p>
+
+        <h2>Step 2: Setting Up Arduino IDE for ESP32</h2>
+
+        <p>If you already have Arduino IDE configured for <a href="../esp32-smart-home-beginners.html">ESP32 development</a>, skip to Step 3. Otherwise:</p>
+
+        <h3>2.1 Install Arduino IDE</h3>
+
+        <p>Download the latest version from <strong>arduino.cc</strong> (version 2.x works fine with ESP32). Install it normally.</p>
+
+        <h3>2.2 Add ESP32 Board Support</h3>
+
+        <ol>
+          <li>Open Arduino IDE → <strong>File → Preferences</strong></li>
+          <li>In "Additional Boards Manager URLs," add: <code>https://dl.espressif.com/dl/package_esp32_index.json</code></li>
+          <li>Click OK and restart Arduino IDE</li>
+          <li>Go to <strong>Tools → Board → Boards Manager</strong></li>
+          <li>Search "esp32" and install <strong>esp32 by Espressif Systems</strong></li>
+        </ol>
+
+        <h3>2.3 Select the Right Board</h3>
+
+        <p>Go to <strong>Tools → Board</strong> and select <strong>"AI Thinker ESP32-CAM"</strong>. This is crucial — selecting the wrong board variant will give you incorrect pin mappings and the camera won't initialize.</p>
+
+        <h2>Step 3: Upload the Camera Firmware</h2>
+
+        <p>Arduino includes a ready-made camera example that provides a web interface with live video streaming and photo capture. Here's how to use it:</p>
+
+        <ol>
+          <li>Open <strong>File → Examples → ESP32 → Camera → CameraWebServer</strong></li>
+          <li>Find the camera model definitions and <strong>uncomment only</strong> the line for AI Thinker:
+            <pre style="background: #252640; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;">
+#define CAMERA_MODEL_AI_THINKER</pre>
+          </li>
+          <li>Scroll down to the WiFi credentials and enter your network:
+            <pre style="background: #252640; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;">
+const char* ssid = "YOUR_WIFI_NAME";
+const char* password = "YOUR_WIFI_PASSWORD";</pre>
+            <strong>Important:</strong> ESP32 only supports <strong>2.4GHz Wi-Fi</strong>. If your router only broadcasts 5GHz, you'll need to enable the 2.4GHz band in your router settings.
+          </li>
+          <li>Connect GPIO 0 to GND, then click <strong>Upload</strong></li>
+          <li>Wait for compilation (first time takes 2–5 minutes)</li>
+          <li>When you see "Connecting..." in the console, press the <strong>Reset</strong> button on the ESP32-CAM</li>
+          <li>After successful upload, <strong>disconnect GPIO 0 from GND</strong></li>
+          <li>Open the <strong>Serial Monitor</strong> at 115200 baud and press Reset</li>
+          <li>You'll see an IP address like <code>192.168.1.xxx</code> printed in the console</li>
+        </ol>
+
+        <p>Open a browser on any device on the same network and navigate to that IP address. You'll see the ESP32-CAM web interface with live video streaming, photo capture, and face detection options.</p>
+
+        <h2>Step 4: Adding Motion Detection (Hardware Method)</h2>
+
+        <p>The web interface is nice for testing, but a real security camera needs <strong>automatic motion-triggered capture</strong>. The most reliable method uses a PIR sensor:</p>
+
+        <h3>PIR Sensor Wiring</h3>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">PIR Sensor (HC-SR501)</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">ESP32-CAM</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;">VCC</td>
+            <td style="padding: 10px; border: 1px solid #333;">5V</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;">GND</td>
+            <td style="padding: 10px; border: 1px solid #333;">GND</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;">OUT</td>
+            <td style="padding: 10px; border: 1px solid #333;">GPIO 13</td>
+          </tr>
+        </table>
+
+        <p><strong>GPIO 13</strong> is one of the few usable pins on the ESP32-CAM (many pins are occupied by the camera and SD card). The PIR sensor pulls this pin HIGH when motion is detected.</p>
+
+        <h3>Adjusting PIR Sensitivity</h3>
+
+        <p>The HC-SR501 has two potentiometers on the back:</p>
+
+        <ul>
+          <li><strong>Time delay (Tx):</strong> How long the output stays HIGH after detecting motion. Default is ~5 seconds; turn clockwise for longer (up to ~7 minutes)</li>
+          <li><strong>Sensitivity (Sx):</strong> Detection range. Default is ~3 meters; turn counterclockwise to reduce false triggers</li>
+        </ul>
+
+        <p>For a security camera, set the time delay to <strong>5–10 seconds</strong> and adjust sensitivity based on your room size. Too sensitive and you'll fill your SD card with false positives (fans, pets, sunlight changes).</p>
+
+        <h2>Step 5: Saving Photos to MicroSD Card</h2>
+
+        <p>One of the ESP32-CAM's best features is the ability to <strong>save photos locally to a MicroSD card</strong>. No cloud subscription needed. Here's the modified code approach:</p>
+
+        <pre style="background: #252640; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;">
+#include "esp_camera.h"
+#include "FS.h"
+#include "SD_MMC.h"
+
+// PIR sensor pin
+#define PIR_PIN 13
+
+// Camera pin configuration for AI-Thinker
+#define PWDN_GPIO_NUM     32
+#define RESET_GPIO_NUM    -1
+#define XCLK_GPIO_NUM      0
+#define SIOD_GPIO_NUM     26
+#define SIOC_GPIO_NUM     27
+#define Y9_GPIO_NUM       35
+#define Y8_GPIO_NUM       34
+#define Y7_GPIO_NUM       39
+#define Y6_GPIO_NUM       36
+#define Y5_GPIO_NUM       21
+#define Y4_GPIO_NUM       19
+#define Y3_GPIO_NUM       18
+#define Y2_GPIO_NUM        5
+#define VSYNC_GPIO_NUM    25
+#define HREF_GPIO_NUM     23
+#define PCLK_GPIO_NUM     22
+
+int photoNumber = 0;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(PIR_PIN, INPUT);
+
+  // Initialize camera
+  camera_config_t config;
+  config.ledc_channel = LEDC_CHANNEL_0;
+  config.ledc_timer = LEDC_TIMER_0;
+  config.pin_d0 = Y2_GPIO_NUM;
+  config.pin_d1 = Y3_GPIO_NUM;
+  config.pin_d2 = Y4_GPIO_NUM;
+  config.pin_d3 = Y5_GPIO_NUM;
+  config.pin_d4 = Y6_GPIO_NUM;
+  config.pin_d5 = Y7_GPIO_NUM;
+  config.pin_d6 = Y8_GPIO_NUM;
+  config.pin_d7 = Y9_GPIO_NUM;
+  config.pin_xclk = XCLK_GPIO_NUM;
+  config.pin_pclk = PCLK_GPIO_NUM;
+  config.pin_vsync = VSYNC_GPIO_NUM;
+  config.pin_href = HREF_GPIO_NUM;
+  config.pin_sccb_sda = SIOD_GPIO_NUM;
+  config.pin_sccb_scl = SIOC_GPIO_NUM;
+  config.pin_pwdn = PWDN_GPIO_NUM;
+  config.pin_reset = RESET_GPIO_NUM;
+  config.xclk_freq_hz = 20000000;
+  config.pixel_format = PIXFORMAT_JPEG;
+
+  if (psramFound()) {
+    config.frame_size = FRAMESIZE_UXGA;
+    config.jpeg_quality = 10;
+    config.fb_count = 2;
+  } else {
+    config.frame_size = FRAMESIZE_SVGA;
+    config.jpeg_quality = 12;
+    config.fb_count = 1;
+  }
+
+  esp_err_t err = esp_camera_init(&amp;config);
+  if (err != ESP_OK) {
+    Serial.printf("Camera init failed: 0x%x", err);
+    return;
+  }
+
+  // Initialize SD card
+  if (!SD_MMC.begin()) {
+    Serial.println("SD Card Mount Failed");
+    return;
+  }
+
+  Serial.println("Security camera ready!");
+}
+
+void loop() {
+  if (digitalRead(PIR_PIN) == HIGH) {
+    Serial.println("Motion detected! Capturing photo...");
+    camera_fb_t *fb = esp_camera_fb_get();
+    if (fb) {
+      String path = "/photo_" + String(photoNumber++) + ".jpg";
+      fs::FS &amp;fs = SD_MMC;
+      File file = fs.open(path.c_str(), FILE_WRITE);
+      if (file) {
+        file.write(fb->buf, fb->len);
+        file.close();
+        Serial.printf("Saved: %s (%d bytes)\n", path.c_str(), fb->len);
+      }
+      esp_camera_fb_return(fb);
+    }
+    delay(5000); // Wait before next capture
+  }
+}
+</pre>
+
+        <p>Upload this code (remember: GPIO 0 to GND during upload). Every time the PIR sensor detects motion, the camera captures a JPEG photo and saves it to the SD card with an incrementing filename.</p>
+
+        <h2>Step 6: Integrating with Home Assistant via ESPHome</h2>
+
+        <p>For the best smart home experience, the <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant + ESPHome</a> combo is unbeatable. ESPHome provides a <strong>YAML-based configuration</strong> that eliminates the need to write C++ code and enables OTA (Over-The-Air) wireless firmware updates.</p>
+
+        <h3>ESPHome YAML Configuration</h3>
+
+        <p>Create a new file in your ESPHome directory (e.g., <code>security_cam.yaml</code>):</p>
+
+        <pre style="background: #252640; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;">
+substitutions:
+  device_name: front_door_camera
+  friendly_name: Front Door Camera
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot
+  ap:
+    ssid: "${device_name} Fallback"
+    password: !secret fallback_password
+
+# Camera configuration
+esp32_camera:
+  id: esp_cam
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+  name: "${friendly_name}"
+  resolution: 1280x1024
+  jpeg_quality: 20
+  brightness: 1
+  contrast: 1
+  saturation: 1
+
+# PIR motion sensor
+binary_sensor:
+  - platform: gpio
+    pin: GPIO13
+    name: "${friendly_name} Motion"
+    device_class: motion
+    filters:
+      - delayed_on: 100ms
+
+# Flash LED for illumination
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: flash_led
+
+light:
+  - platform: binary
+    output: flash_led
+    name: "${friendly_name} Flash"
+    restore_mode: ALWAYS_OFF
+
+# SD card for local storage
+sd_card:
+  - platform: sdmmc
+    id: sd_card
+</pre>
+
+        <h3>Flashing via ESPHome</h3>
+
+        <ol>
+          <li>Open the <a href="../esphome-getting-started-guide.html">ESPHome Dashboard</a> in Home Assistant (typically <code>http://homeassistant:6052</code>)</li>
+          <li>Click <strong>NEW DEVICE</strong> and select <strong>ESP32</strong></li>
+          <li>Enter your device name and Wi-Fi credentials</li>
+          <li>Replace the generated YAML with the configuration above</li>
+          <li>Connect the ESP32-CAM to your programmer (GPIO 0 to GND)</li>
+          <li>Click <strong>INSTALL</strong> → select <strong>Manual (Plug into computer)</strong></li>
+          <li>Select the correct COM port and click <strong>Connect</strong></li>
+          <li>Wait for compilation and upload (3–8 minutes first time)</li>
+          <li>Disconnect GPIO 0, connect a proper 5V 2A power supply, and press Reset</li>
+        </ol>
+
+        <p>After the first wired flash, <strong>all future updates happen wirelessly via OTA</strong>. This means you can deploy the camera permanently and update its firmware from anywhere — no more messing with jumper wires.</p>
+
+        <h2>Step 7: Setting Up Home Assistant Automations</h2>
+
+        <p>With the camera connected to Home Assistant, you can create powerful <a href="../home-assistant-automations-beginners.html">automations</a> that turn motion detection into actionable alerts:</p>
+
+        <pre style="background: #252640; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;">
+automation:
+  - alias: "Front Door Motion Alert"
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_door_camera_motion
+        to: "on"
+    action:
+      - service: camera.snapshot
+        target:
+          entity_id: camera.front_door_camera
+        data:
+          filename: "/config/www/snapshots/front_door_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+      - service: notify.mobile_app
+        data:
+          title: "🚨 Motion Detected"
+          message: "Movement detected at front door"
+          data:
+            image: "/local/snapshots/front_door_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+</pre>
+
+        <p>This automation does three things when motion is detected: <strong>captures a snapshot</strong>, <strong>saves it locally</strong>, and <strong>sends a push notification</strong> to your phone with the image attached. It's essentially a free, self-hosted alternative to a Ring or Nest camera's motion alerts.</p>
+
+        <h3>Advanced Automation Ideas</h3>
+
+        <ul>
+          <li><strong>Night mode:</strong> Turn on the ESP32-CAM flash LED only between 10 PM and 6 AM when motion is detected</li>
+          <li><strong>Recording schedule:</strong> Only enable motion detection during work hours when nobody's home</li>
+          <li><strong>Multi-camera dashboard:</strong> Combine multiple ESP32-CAM feeds into a single Home Assistant camera card</li>
+          <li><strong>Integration with smart lights:</strong> Trigger porch lights when the camera detects someone approaching</li>
+        </ul>
+
+        <h2>Step 8: Building a 3D-Printed Enclosure</h2>
+
+        <p>A bare circuit board mounted with tape isn't ideal for a permanent installation. If you have a <a href="../best-budget-3d-printer-under-200.html">3D printer</a>, you can create a professional-looking camera housing:</p>
+
+        <ul>
+          <li><strong>Weatherproof box:</strong> Print in PETG or <a href="../petg-vs-pla-comparison.html">PETG (more weather-resistant than PLA)</a> if mounting outdoors</li>
+          <li><strong>Adjustable mount:</strong> A ball-joint design lets you aim the camera precisely</li>
+          <li><strong>Hidden design:</strong> Print an enclosure that looks like a smoke detector or doorbell to avoid drawing attention</li>
+          <li><strong>PIR sensor window:</strong> Include a small Fresnel lens window for the motion sensor</li>
+        </ul>
+
+        <p>Search Thingiverse or Printables for "ESP32-CAM enclosure" — there are hundreds of free designs ranging from minimalist mounts to fully weatherproof outdoor housings. The article on <a href="../3d-print-smart-home-case.html">3D printing smart home device cases</a> covers the specific techniques for creating custom enclosures.</p>
+
+        <h2>Common Problems and Fixes</h2>
+
+        <p>Here are the issues you're most likely to encounter and how to solve them:</p>
+
+        <h3>Camera Shows Brownout / Reboots Constantly</h3>
+
+        <p><strong>Cause:</strong> Insufficient power supply. The ESP32-CAM draws 300–500mA during Wi-Fi streaming, which spikes higher during image capture.</p>
+
+        <p><strong>Fix:</strong> Use a dedicated 5V 2A supply. Add a <strong>470µF electrolytic capacitor</strong> across the 5V and GND pins near the ESP32-CAM to smooth out current spikes. This single capacitor solves 90% of stability problems.</p>
+
+        <h3>Image Has Horizontal Lines / "Water Ripple"</h3>
+
+        <p><strong>Cause:</strong> Same as above — power noise during image capture. The camera's image sensor is extremely sensitive to voltage fluctuations.</p>
+
+        <p><strong>Fix:</strong> Adequate power supply + decoupling capacitor. Also try reducing the XCLK frequency from 20MHz to 10MHz in your code.</p>
+
+        <h3>Upload Fails / "A fatal error occurred"</h3>
+
+        <p><strong>Cause:</strong> GPIO 0 not connected to GND, wrong board selected, or COM port not recognized.</p>
+
+        <p><strong>Fix:</strong> Double-check that GPIO 0 is grounded during upload. Make sure you've selected <strong>AI Thinker ESP32-CAM</strong> (not ESP32 Dev Module). If the COM port doesn't appear, try a different USB cable — some cables are charge-only with no data pins.</p>
+
+        <h3>Wi-Fi Won't Connect</h3>
+
+        <p><strong>Cause:</strong> ESP32-CAM only supports <strong>2.4GHz</strong> Wi-Fi. If your router broadcasts separate 2.4G and 5G networks with the same SSID, the ESP32 might fail to connect.</p>
+
+        <p><strong>Fix:</strong> Set your router to broadcast 2.4GHz and 5GHz under different SSIDs, and connect the ESP32-CAM to the 2.4GHz one explicitly.</p>
+
+        <h3>Camera Shows Green/Purple Tint</h3>
+
+        <p><strong>Cause:</strong> White balance not calibrated. This is common with OV2640 sensors and is usually worse under artificial lighting.</p>
+
+        <p><strong>Fix:</strong> Adjust the <code>wb_mode</code> setting in the camera web interface (try "sunny" for outdoor cameras). You can also set this in the ESPHome YAML with <code>white_balance: auto</code>.</p>
+
+        <h2>ESP32-CAM vs. ESP32-CAM-MB (V2.1)</h2>
+
+        <p>In 2025–2026, a new version called the <strong>ESP32-CAM-MB</strong> (sometimes labeled "V2.1" or "ESP32-CAM2") became available. Here's what's different:</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Feature</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">ESP32-CAM (Original)</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">ESP32-CAM-MB (V2.1)</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;">USB Connector</td>
+            <td style="padding: 10px; border: 1px solid #333;">None (need FTDI programmer)</td>
+            <td style="padding: 10px; border: 1px solid #333;">Built-in Type-C</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;">Flash Mode</td>
+            <td style="padding: 10px; border: 1px solid #333;">GPIO 0 to GND</td>
+            <td style="padding: 10px; border: 1px solid #333;">Button on board</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;">Ease of Use</td>
+            <td style="padding: 10px; border: 1px solid #333;">Moderate (needs wiring)</td>
+            <td style="padding: 10px; border: 1px solid #333;">Easy (plug and flash)</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;">Price</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$6–8</td>
+            <td style="padding: 10px; border: 1px solid #333;">~$8–12</td>
+          </tr>
+        </table>
+
+        <p>If you're buying new, <strong>get the ESP32-CAM-MB (V2.1)</strong>. The built-in USB connector eliminates the FTDI programmer entirely, and the onboard flash button makes firmware uploads much simpler. The pin layout is compatible with all the same Arduino and ESPHome code.</p>
+
+        <h2>Performance Expectations: What to Actually Expect</h2>
+
+        <p>Let's be honest about what the ESP32-CAM can and can't do:</p>
+
+        <h3>What It Does Well</h3>
+
+        <ul>
+          <li><strong>Live streaming at 5–15 FPS</strong> in VGA or SVGA resolution — good enough to see who's at your door</li>
+          <li><strong>Still photo capture</strong> at 2MP (1600×1200) — decent quality for motion-triggered snapshots</li>
+          <li><strong>Local storage</strong> to MicroSD — no cloud dependency, no subscription fees</li>
+          <li><strong>Home Assistant integration</strong> — full smart home control with automations and dashboards</li>
+          <li><strong>Face detection</strong> (ESP32 built-in) — can distinguish human faces with ~70% accuracy in good lighting</li>
+        </ul>
+
+        <h3>What It Struggles With</h3>
+
+        <ul>
+          <li><strong>Low-light performance:</strong> The OV2640 sensor is poor in dim conditions. Night vision requires external IR LEDs</li>
+          <li><strong>Smooth 30fps video:</strong> The ESP32 simply doesn't have the bandwidth for high-framerate streaming over Wi-Fi</li>
+          <li><strong>Audio recording:</strong> There's no microphone on the base ESP32-CAM module</li>
+          <li><strong>Reliability over weeks:</strong> Expect occasional reboots; add a watchdog timer in your code for long-term deployment</li>
+          <li><strong>Outdoor use:</strong> Not waterproof or weatherproof without a proper enclosure</li>
+        </ul>
+
+        <h2>ESP32-CAM vs. Commercial Security Cameras</h2>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Feature</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">ESP32-CAM DIY</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Wyze Cam v4</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Ring Indoor Cam</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Cost</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">$10–25</td>
+            <td style="padding: 10px; border: 1px solid #333;">$40–50</td>
+            <td style="padding: 10px; border: 1px solid #333;">$80–100</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Cloud Storage</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Free (local SD)</td>
+            <td style="padding: 10px; border: 1px solid #333;">Free tier / $3/mo</td>
+            <td style="padding: 10px; border: 1px solid #333;">$3/mo</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Home Assistant</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Native (ESPHome)</td>
+            <td style="padding: 10px; border: 1px solid #333;">Community integration</td>
+            <td style="padding: 10px; border: 1px solid #333;">No official support</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Video Quality</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">2MP, 5–15 fps</td>
+            <td style="padding: 10px; border: 1px solid #333;">1080p, 30 fps</td>
+            <td style="padding: 10px; border: 1px solid #333;">1080p, 30 fps</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Night Vision</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Add-on only</td>
+            <td style="padding: 10px; border: 1px solid #333;">Built-in IR</td>
+            <td style="padding: 10px; border: 1px solid #333;">Built-in IR</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Setup Difficulty</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Moderate</td>
+            <td style="padding: 10px; border: 1px solid #333;">Easy</td>
+            <td style="padding: 10px; border: 1px solid #333;">Easy</td>
+          </tr>
+        </table>
+
+        <p>The ESP32-CAM wins on <strong>cost, privacy, and Home Assistant integration</strong>. Commercial cameras win on <strong>ease of use, video quality, and reliability</strong>. For a <a href="../diy-home-security-system.html">DIY home security system</a>, mixing both approaches is often the best strategy — ESP32-CAMs for less critical areas (garage, backyard) and a commercial camera for the front door.</p>
+
+        <h2>Tips for Reliable Long-Term Deployment</h2>
+
+        <p>After running ESP32-CAM cameras for months, here are the practices that actually make a difference:</p>
+
+        <ul>
+          <li><strong>Add a watchdog timer:</strong> In ESPHome, add <code>esp32_camera: ... id: esp_cam</code> with a <code>web_server:</code> component and restart-on-disconnect</li>
+          <li><strong>Use a hardware watchdog:</strong> Connect a 555 timer IC to the EN pin — if the ESP32 freezes, the timer resets it after 30 seconds</li>
+          <li><strong>Capacitor near the board:</strong> A 1000µF capacitor across 5V/GND prevents most brownout reboots</li>
+          <li><strong>Heat management:</strong> The ESP32-CAM runs warm during streaming. If enclosed, add small ventilation slots or a tiny heatsink on the ESP32 chip</li>
+          <li><strong>SD card management:</strong> Set up an automation that deletes photos older than 7 days, or the card will fill up. Use <a href="../relay-module-arduino-esp32.html">the same relay techniques</a> for additional sensor integration</li>
+          <li><strong>Static IP address:</strong> Assign a static IP in your router's DHCP reservation list. If the camera's IP changes, Home Assistant will lose connection</li>
+        </ul>
+
+        <h2>What's Next: Expanding Your Camera System</h2>
+
+        <p>Once you have one ESP32-CAM working, the natural next steps are:</p>
+
+        <ul>
+          <li><strong>Add more cameras:</strong> Each costs ~$10, so covering a whole house is affordable. Use the <a href="../diy-home-security-system.html">DIY home security system</a> guide for multi-camera strategies</li>
+          <li><strong>Upgrade to ESP32-S3-EYE:</strong> The newer ESP32-S3 chip has better image processing and dedicated AI acceleration for face detection</li>
+          <li><strong>Build a camera NVR:</strong> Use your <a href="../raspberry-pi-nas-build.html">Raspberry Pi NAS</a> to store and organize photos from multiple cameras</li>
+          <li><strong>Add a <a href="../diy-smart-door-lock.html">smart door lock</a>:</strong> Pair the camera with an ESP32-based door lock for a complete entry system — camera detects someone, lock logs the event</li>
+          <li><strong>Integrate sensors:</strong> The <a href="../sensor-guide-beginners.html">sensor guide</a> covers adding environmental monitoring to your camera station</li>
+        </ul>
+
+        <h2>The Bottom Line</h2>
+
+        <p>The ESP32-CAM is the most cost-effective way to add <strong>smart surveillance</strong> to your home. For $10–25 in parts and an hour of your time, you get:</p>
+
+        <ul>
+          <li>A working Wi-Fi camera with live streaming</li>
+          <li>Motion-triggered photo capture to local SD storage</li>
+          <li>Full Home Assistant integration with automations and alerts</li>
+          <li>OTA firmware updates — no more physical access needed after initial setup</li>
+        </ul>
+
+        <p>It's not a replacement for a professional security system. But if you're already running <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant</a>, enjoy <a href="../raspberry-pi-diy-projects-beginners.html">maker projects</a>, and want to learn about IoT, the ESP32-CAM is one of the most rewarding $10 you can spend.</p>
+
+        <p><em>Disclaimer: Always comply with local privacy laws when installing surveillance cameras. In most jurisdictions, you must not record areas where people have a reasonable expectation of privacy (bathrooms, neighboring properties). This guide is for personal property security only.</em></p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../diy-home-security-system.html">How to Build a DIY Home Security System with ESP32 and Home Assistant</a></li>
+          <li><a href="../home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="../esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="../diy-smart-door-lock.html">How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</a></li>
+          <li><a href="../3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing and maker tools.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

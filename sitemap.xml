@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9">
   <ns0:url>
     <ns0:loc>https://3dprintstarter.com/</ns0:loc>
@@ -1375,6 +1375,13 @@
   <ns0:url>
     <ns0:loc>https://3dprintstarter.com/articles/best-budget-laser-cutter-beginners.html</ns0:loc>
     <ns0:lastmod>2026-06-19</ns0:lastmod>
+    <ns0:changefreq>weekly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/diy-esp32-cam-security-camera.html</ns0:loc>
+    <ns0:lastmod>2026-06-20</ns0:lastmod>
     <ns0:changefreq>weekly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
