@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Light Switch Wiring Guide: How to Replace a Wall Switch with Tuya or Sonoff (2026)</title>
+  <meta name="description" content="Learn how to safely install a smart light switch in 2026. This step-by-step wiring guide covers Tuya and Sonoff switches, neutral vs no-neutral wiring, tools, Home Assistant integration, and common fixes.">
+  <meta name="keywords" content="smart light switch wiring, Tuya smart switch, Sonoff light switch, replace wall switch with smart switch, no neutral smart switch, smart home wiring, Home Assistant light switch, smart switch installation, 2026 smart switch guide">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home & Maker</span>
+      </nav>
+
+      <h1>Smart Light Switch Wiring Guide: How to Replace a Wall Switch with Tuya or Sonoff (2026 Step-by-Step)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 21, 2026</span>
+        <span>⏱️ 11 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Swapping a basic wall switch for a smart one is one of the <strong>cheapest and most useful smart home upgrades</strong> you can make. For $10–25 and about 30 minutes of work, you can turn any overhead light or ceiling fan into a voice-controlled, automation-ready device.</p>
+
+        <p>This guide covers <strong>smart light switch wiring</strong> for both <strong>Tuya-based switches</strong> (Smart Life / Tuya Smart) and <strong>Sonoff switches</strong> (eWeLink), including how to identify a neutral wire, what to do without one, and how to connect everything to <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant</a>.</p>
+
+        <p><strong>Important:</strong> This guide deals with mains voltage. If you're not comfortable working inside an electrical box, hire a licensed electrician.</p>
+
+        <h2>Why Replace a Wall Switch with a Smart Switch?</h2>
+
+        <p>Smart bulbs are popular, but they have a major flaw: if someone flips the wall switch off, the bulb loses power and becomes "unreachable" in your app. A smart switch solves that by keeping the circuit connected and controlling power electronically.</p>
+
+        <ul>
+          <li><strong>Control from anywhere:</strong> Turn lights on or off from your phone</li>
+          <li><strong>Voice control:</strong> Works with Alexa, Google Assistant, and Siri</li>
+          <li><strong>Automations:</strong> Trigger lights based on sunset, motion, or security events</li>
+          <li><strong>Scheduling:</strong> Make it look like you're home when traveling</li>
+          <li><strong>Energy monitoring:</strong> Some switches report real-time power usage</li>
+        </ul>
+
+        <p>Once installed, you can build a complete <a href="../diy-home-security-system.html">DIY home security system</a> where lights react to cameras and sensors automatically.</p>
+
+        <h2>What You Need</h2>
+
+        <p>Before you touch the breaker, gather these tools and parts:</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Item</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Why You Need It</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Smart switch</strong> (Tuya or Sonoff)</td>
+            <td style="padding: 10px; border: 1px solid #333;">Choose based on your app ecosystem and whether you have a neutral wire</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Non-contact voltage tester</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Confirms wires are dead before you touch them</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Flathead and Phillips screwdrivers</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">For the wall plate and wire terminals</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Wire stripper</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">For cleaning up wire ends if needed</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Needle-nose pliers</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">For shaping and tucking wires into the box</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Electrical tape</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">For insulating bare terminals or wire nuts</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Wire nuts or Wago connectors</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">For connecting neutral wires if the switch doesn't have enough terminals</td>
+          </tr>
+        </table>
+
+        <p>A good <a href="../best-soldering-station-beginners.html">soldering station</a> isn't needed for basic installation, but it comes in handy later if you decide to add custom sensors or modify the switch board.</p>
+
+        <h2>Safety First: Rules That Could Save Your Life</h2>
+
+        <p>Household electrical wiring in the US is typically <strong>120V AC</strong>, and in Europe it's <strong>230V AC</strong>. Either can kill you. Follow these rules every single time:</p>
+
+        <ul>
+          <li><strong>Turn off the breaker</strong> at the electrical panel, not just the wall switch</li>
+          <li><strong>Test with a voltage tester</strong> on every wire before touching anything</li>
+          <li><strong>Work in daylight or with a battery-powered light</strong> — don't rely on the circuit you're working on</li>
+          <li><strong>Don't assume the previous owner wired it correctly</strong> — colors can be wrong</li>
+          <li><strong>Cap any bare wires</strong> before turning the breaker back on for testing</li>
+          <li><strong>Keep one hand in your pocket</strong> when working near live panels to avoid completing a circuit through your chest</li>
+        </ul>
+
+        <p>If your house was built before the 1980s, there's a decent chance your switch boxes don't have a neutral wire. We'll cover that next.</p>
+
+        <h2>How a Standard Wall Switch Is Wired</h2>
+
+        <p>A basic mechanical switch is a simple interrupter. It sits between the incoming hot wire from the panel and the wire going to the light fixture. When you flip the switch, you either complete or break the circuit.</p>
+
+        <p>Inside a typical US switch box, you'll find:</p>
+
+        <ul>
+          <li><strong>Line (hot):</strong> Usually black. Carries power from the breaker to the switch</li>
+          <li><strong>Load:</strong> Usually black or red. Carries power from the switch to the light fixture</li>
+          <li><strong>Neutral:</strong> Usually white. Completes the circuit back to the panel</li>
+          <li><strong>Ground:</strong> Bare copper or green. Safety path for fault current</li>
+        </ul>
+
+        <p>In a standard switch loop, the neutral wire may pass through the box but isn't connected to the dumb switch. It's usually tucked in the back with a wire nut. That's the wire your smart switch needs to power its own radio and processor.</p>
+
+        <h2>Neutral vs. No-Neutral Smart Switches</h2>
+
+        <p>This is the single most important decision when buying a smart switch.</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Type</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">How It Works</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Best For</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Neutral-required</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Draws a small amount of power from line to neutral to run the electronics</td>
+            <td style="padding: 10px; border: 1px solid #333;">Most reliable option; works with all bulb types</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>No-neutral</strong></td>
+            <td style="padding: 10px; border: 1px solid #333;">Leaks a tiny current through the load (the bulb) to power itself</td>
+            <td style="padding: 10px; border: 1px solid #333;">Older homes without neutral wires in the switch box</td>
+          </tr>
+        </table>
+
+        <p><strong>My recommendation:</strong> If your box has a neutral wire, use it. Neutral-required switches are more stable, work with LED bulbs without flickering, and are less likely to cause "ghost" current issues.</p>
+
+        <p>If you only have two wires in the box (plus ground), you have a <strong>switch loop</strong> with no neutral. In that case, you need a no-neutral smart switch and possibly a bypass capacitor for LED bulbs. We'll cover that in the troubleshooting section.</p>
+
+        <h2>Tuya vs. Sonoff: Which Smart Switch Should You Buy?</h2>
+
+        <p>Both brands dominate the budget smart switch market, but they have different ecosystems and hardware quirks.</p>
+
+        <h3>Tuya / Smart Life Switches</h3>
+
+        <p>Tuya is a white-label platform used by brands like Treatlife, Gosund, and BN-Link, all controlled through the <strong>Smart Life</strong> or <strong>Tuya Smart</strong> app.</p>
+
+        <ul>
+          <li><strong>Pros:</strong> Huge selection, strong Alexa/Google integration, energy monitoring on some models</li>
+          <li><strong>Cons:</strong> Most require a neutral wire; cloud-dependent unless flashed</li>
+          <li><strong>Best pick:</strong> Treatlife SS02S or a neutral-wire Tuya dimmer</li>
+        </ul>
+
+        <h3>Sonoff Switches</h3>
+
+        <p>Sonoff is ITEAD's house brand and uses the <strong>eWeLink</strong> app. Many models are easy to flash with <a href="../esphome-getting-started-guide.html">ESPHome</a> or Tasmota.</p>
+
+        <ul>
+          <li><strong>Pros:</strong> Low cost, no-neutral options like MINIR4M, compact size, good Home Assistant support</li>
+          <li><strong>Cons:</strong> eWeLink automation is more limited; flashing requires opening the device</li>
+          <li><strong>Best pick:</strong> Sonoff MINIR4M for no-neutral, T0-TX for glass panels</li>
+        </ul>
+
+        <p>For a fully local smart home, Sonoff is usually the better starting point. For the easiest setup with broad integrations, Tuya is hard to beat.</p>
+
+        <h2>Step-by-Step: How to Wire a Smart Light Switch</h2>
+
+        <p>Here's the exact process I use for every switch I install. Read through it once before touching any wires.</p>
+
+        <h3>Step 1: Turn Off the Power</h3>
+
+        <p>Find the breaker that controls the switch. Flip it off. Flip the wall switch to confirm the light is dead. Then test each wire in the box with a non-contact voltage tester. The tester should not beep on any wire. If it does, you turned off the wrong breaker.</p>
+
+        <h3>Step 2: Remove the Old Switch</h3>
+
+        <p>Remove the wall plate, then unscrew the old switch from the electrical box. Take a photo of the existing wiring before you disconnect anything. This is your insurance policy if you forget how it was connected.</p>
+
+        <h3>Step 3: Identify Your Wires</h3>
+
+        <p>Look at the wires in the box:</p>
+
+        <ul>
+          <li><strong>Black wires:</strong> One is line (power in), one is load (power out to the light). Use a voltage tester to identify which one is live when the breaker is on</li>
+          <li><strong>White wires:</strong> Usually neutral. Often capped together with a wire nut in the back of the box</li>
+          <li><strong>Red wire:</strong> Often a traveler in a three-way circuit, or sometimes the load</li>
+          <li><strong>Bare copper or green:</strong> Ground</li>
+        </ul>
+
+        <h3>Step 4: Connect the New Smart Switch</h3>
+
+        <p>Most smart switches have labeled terminals: <strong>L</strong> (line), <strong>L1</strong> or <strong>Load</strong> (load), <strong>N</strong> (neutral), and <strong>⏚</strong> (ground). Connect them as follows:</p>
+
+        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <tr style="background: #252640; color: #e0e0e0;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Wire in Box</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Smart Switch Terminal</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Line (hot)</strong> — power from breaker</td>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>L</strong> or <strong>Live</strong></td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Load</strong> — power to light fixture</td>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>L1</strong> or <strong>Load</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Neutral</strong> — white wire</td>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>N</strong> (neutral-required switches only)</td>
+          </tr>
+          <tr style="background: #1a1b30;">
+            <td style="padding: 10px; border: 1px solid #333;"><strong>Ground</strong> — bare copper or green</td>
+            <td style="padding: 10px; border: 1px solid #333;"><strong>⏚</strong> or ground symbol</td>
+          </tr>
+        </table>
+
+        <p>If your switch doesn't have a ground terminal, you can still connect the ground wire to the box itself if it's metal, or leave it capped if the box is plastic and the switch has no ground connection.</p>
+
+        <h3>Step 5: Tuck and Mount</h3>
+
+        <p>Smart switches are bulkier than dumb switches because they contain a radio, relay, and power supply. Carefully push the wires into the back of the box, making sure no bare copper is exposed. Screw the switch into the box, but don't overtighten — the plastic ears can crack.</p>
+
+        <h3>Step 6: Turn the Power Back On</h3>
+
+        <p>Flip the breaker on. The switch LED should light up or blink, indicating it's in pairing mode. If nothing happens, turn the breaker off again and double-check your wiring.</p>
+
+        <h3>Step 7: Pair With the App</h3>
+
+        <p>For Tuya switches, use the <strong>Smart Life</strong> or <strong>Tuya Smart</strong> app. For Sonoff, use <strong>eWeLink</strong>. The exact steps vary slightly, but the general process is:</p>
+
+        <ol>
+          <li>Open the app and tap "Add Device"</li>
+          <li>Choose <strong>Lighting → Switch (Wi-Fi)</strong></li>
+          <li>Put the switch in pairing mode by holding the button until the LED blinks rapidly</li>
+          <li>Enter your 2.4GHz Wi-Fi credentials</li>
+          <li>Wait 30–60 seconds for the device to register</li>
+        </ol>
+
+        <p><strong>Important:</strong> Smart switches only connect to <strong>2.4GHz Wi-Fi</strong>. If your router uses a combined 2.4G/5G SSID, temporarily separate them or move farther from the router.</p>
+
+        <h2>Connecting Your Smart Switch to Home Assistant</h2>
+
+        <p>Once the switch is in the app, you can bring it into <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant</a> for local control and advanced automations.</p>
+
+        <h3>Tuya Integration</h3>
+
+        <p>Home Assistant has an official Tuya integration. Go to <strong>Settings → Devices & Services → Add Integration</strong> and search for Tuya. You'll need free Tuya IoT developer credentials. Once linked, your Tuya devices appear as entities.</p>
+
+        <h3>Sonoff Integration</h3>
+
+        <p>For Sonoff, the most reliable options are:</p>
+
+        <ul>
+          <li><strong>SONOFF LAN mode:</strong> Keeps devices local without flashing; install through HACS</li>
+          <li><strong>ESPHome:</strong> Flash for full local control and no cloud dependency</li>
+          <li><strong>Tasmota:</strong> Open firmware with MQTT support</li>
+        </ul>
+
+        <p>If you're new to flashing, our <a href="../esphome-getting-started-guide.html">ESPHome getting started guide</a> walks through the process using a USB-to-TTL adapter or OTA updates.</p>
+
+        <h3>Automation Ideas</h3>
+
+        <ul>
+          <li>Turn on porch lights 30 minutes before sunset</li>
+          <li>Flash lights when a camera or motion sensor detects motion</li>
+          <li>Turn off every light when you leave home</li>
+          <li>Dim bedroom lights gradually as a sleep routine</li>
+        </ul>
+
+        <p>Our <a href="../home-assistant-automations-beginners.html">Home Assistant automations for beginners</a> guide has 10 ready-to-use examples.</p>
+
+        <h2>3D Print a Custom Wall Plate or Spacer</h2>
+
+        <p>Smart switches don't always fit perfectly in old electrical boxes. If the switch sits too far back or the wall plate gap is visible, you can design and print a custom spacer or oversized wall plate. This is a perfect example of where 3D printing and smart home projects overlap.</p>
+
+        <p>We've covered the design process in detail in our guide on <a href="../3d-print-smart-home-case.html">3D printing custom smart home device cases</a>. Use PETG or ABS for heat resistance, and measure the box depth carefully before printing.</p>
+
+        <h2>Troubleshooting Common Smart Switch Problems</h2>
+
+        <p>Even with careful wiring, things sometimes don't work the first time. Here are the most common issues and how to fix them.</p>
+
+        <h3>Switch Won't Power On</h3>
+
+        <p><strong>Cause:</strong> No neutral wire connected, or line and load are reversed.</p>
+
+        <p><strong>Fix:</strong> Check the wiring. If you have no neutral, make sure you bought a no-neutral model. Verify line and load with a voltage tester.</p>
+
+        <h3>Light Flickers or Glows When "Off"</h3>
+
+        <p><strong>Cause:</strong> No-neutral switches leak a small current through LED bulbs.</p>
+
+        <p><strong>Fix:</strong> Install a <strong>smart switch bypass capacitor</strong> across the light fixture's line and neutral terminals, or use incandescent bulbs.</p>
+
+        <h3>Switch Keeps Disconnecting from Wi-Fi</h3>
+
+        <p><strong>Cause:</strong> Weak signal or the switch is trying to connect to 5GHz.</p>
+
+        <p><strong>Fix:</strong> Move your access point closer, add a Wi-Fi extender, or create a dedicated 2.4GHz SSID.</p>
+
+        <h3>App Won't Find the Switch</h3>
+
+        <p><strong>Cause:</strong> The switch isn't in pairing mode, or your phone is on 5GHz Wi-Fi.</p>
+
+        <p><strong>Fix:</strong> Hold the button until the LED blinks rapidly, and make sure your phone is on the 2.4GHz network.</p>
+
+        <h3>Switch Works in App but Not with Voice Assistant</h3>
+
+        <p><strong>Cause:</strong> The skill or account linking isn't set up.</p>
+
+        <p><strong>Fix:</strong> Enable the Smart Life or eWeLink skill in Alexa or Google Home and run device discovery.</p>
+
+        <h2>Smart Switch Wiring Best Practices</h2>
+
+        <p>After installing dozens of these, here are the habits that make the job safer and cleaner:</p>
+
+        <ul>
+          <li><strong>Always take a before photo.</strong> It can save hours later</li>
+          <li><strong>Label wires with masking tape</strong> in multi-gang boxes</li>
+          <li><strong>Don't cram wires.</strong> A crowded box is a fire hazard</li>
+          <li><strong>Use Wago connectors</strong> for reusable, verifiable neutral connections</li>
+          <li><strong>Test the switch physically before configuring the app.</strong> The app can't fix bad wiring</li>
+          <li><strong>Document your setup.</strong> Note which breaker controls which switch</li>
+        </ul>
+
+        <h2>The Bottom Line</h2>
+
+        <p>Installing a smart light switch is one of the best entry points into smart home automation. It's cheaper than smart bulbs in the long run, more reliable, and gives you full control over your existing lights. With the right switch, a few basic tools, and respect for electrical safety, you can upgrade a room in under 30 minutes.</p>
+
+        <p>Whether you choose Tuya for broad compatibility or Sonoff for local-maker flexibility, the wiring fundamentals are the same: line, load, neutral, ground. Get those four wires right, and the rest is just app configuration. If you want to go deeper, connect the switch to <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant</a> and start building automations that make your home feel truly intelligent.</p>
+
+        <p><em>Disclaimer: Electrical work can be dangerous. If you are unsure about any step, consult a licensed electrician. This guide is for informational purposes only and is not a substitute for professional electrical advice.</em></p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="../home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="../diy-home-security-system.html">How to Build a DIY Home Security System with ESP32 and Home Assistant</a></li>
+          <li><a href="../3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+          <li><a href="../best-soldering-station-beginners.html">Best Soldering Station for Electronics & DIY Makers in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing and maker tools.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
