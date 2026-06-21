@@ -307,15 +307,15 @@
 - [x] best-budget-laser-cutter-beginners — Best Budget Laser Cutters and Engravers for Beginners in 2026 ✅ 2026-06-19
 - [x] diy-esp32-cam-security-camera — How to Build a Smart Security Camera with ESP32-CAM ✅ 2026-06-20
 - [x] smart-light-switch-wiring-guide — Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff ✅ 2026-06-21
-- [ ] diy-electronics-workbench-setup — How to Set Up a DIY Electronics Workbench: Essential Tools and Layout
+- [x] diy-electronics-workbench-setup — How to Set Up a DIY Electronics Workbench: Essential Tools and Layout ✅ 2026-06-21
 - [ ] power-supply-guide-beginners — Power Supply Guide for Electronics Beginners: Bench Supplies, Buck Converters & More
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 220 篇 ✅ (批次1-39完成，批次40进行中)
+- **已完成**: 221 篇 ✅ (批次1-40进行中)
 - **当前批次**: 批次40（Maker & Smart Home 继续）
-- **剩余**: 80 篇
+- **剩余**: 79 篇
 
 ## 生成规则
 
