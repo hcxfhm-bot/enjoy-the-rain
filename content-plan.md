@@ -308,12 +308,12 @@
 - [x] diy-esp32-cam-security-camera — How to Build a Smart Security Camera with ESP32-CAM ✅ 2026-06-20
 - [x] smart-light-switch-wiring-guide — Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff ✅ 2026-06-21
 - [x] diy-electronics-workbench-setup — How to Set Up a DIY Electronics Workbench: Essential Tools and Layout ✅ 2026-06-21
-- [ ] power-supply-guide-beginners — Power Supply Guide for Electronics Beginners: Bench Supplies, Buck Converters & More
+- [x] power-supply-guide-beginners — Power Supply Guide for Electronics Beginners: Bench Supplies, Buck Converters & More ✅ 2026-06-22
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 221 篇 ✅ (批次1-40进行中)
+- **已完成**: 222 篇 ✅ (批次1-40进行中)
 - **当前批次**: 批次40（Maker & Smart Home 继续）
 - **剩余**: 79 篇
 
