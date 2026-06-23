@@ -310,6 +310,22 @@
 - [x] diy-electronics-workbench-setup — How to Set Up a DIY Electronics Workbench: Essential Tools and Layout ✅ 2026-06-21
 - [x] power-supply-guide-beginners — Power Supply Guide for Electronics Beginners: Bench Supplies, Buck Converters & More ✅ 2026-06-22
 
+### 批次 41：MAKER TOOLS & ESP32 DEEP-DIVE (6篇) 🆕
+- [x] best-esp32-development-board — Best ESP32 Development Boards in 2026: DevKit, WROOM, and WROVER Compared ✅ 2026-06-23
+- [ ] esphome-sensor-integration — ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant
+- [ ] arduino-uno-r4-review — Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade?
+- [ ] diy-pcb-design-beginners — DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide
+- [ ] best-breadboard-projects-beginners — 10 Best Breadboard Projects for Electronics Beginners
+- [ ] ws2812b-led-strip-esp32 — How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide
+
+### 批次 42：3D PRINTING + SMART HOME CROSSOVER (6篇) 🆕
+- [ ] 3d-printed-esp32-case-design — How to Design and 3D Print Custom ESP32 and Sensor Cases
+- [ ] diy-smart-plant-monitor-3d-print — DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant
+- [ ] 3d-printed-wall-mount-smart-home — 3D Printed Wall Mounts for Smart Home Devices: Design Tips and 10 Models
+- [ ] custom-knob-3d-print-home-assistant — How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards
+- [ ] 3d-printed-cable-management-smart-home — 3D Printed Cable Management for Smart Home Setups: 8 Practical Designs
+- [ ] diy-outdoor-sensor-enclosure-3d-print — How to Design Weatherproof Outdoor Sensor Enclosures for ESP32 and Arduino
+
 ## 进度
 
 - **总目标**: 300 篇
