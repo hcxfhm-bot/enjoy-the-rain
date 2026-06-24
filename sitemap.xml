@@ -1397,4 +1397,22 @@
     <ns0:changefreq>weekly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/power-supply-guide-beginners.html</ns0:loc>
+    <ns0:lastmod>2026-06-22</ns0:lastmod>
+    <ns0:changefreq>weekly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/best-esp32-development-board.html</ns0:loc>
+    <ns0:lastmod>2026-06-23</ns0:lastmod>
+    <ns0:changefreq>weekly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/esphome-sensor-integration.html</ns0:loc>
+    <ns0:lastmod>2026-06-24</ns0:lastmod>
+    <ns0:changefreq>weekly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
 </ns0:urlset>
