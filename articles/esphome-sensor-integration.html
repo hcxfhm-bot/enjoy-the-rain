@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant</title>
+  <meta name="description" content="Learn how to integrate DHT22, BME280, and analog sensors with Home Assistant using ESPHome. Complete wiring diagrams, YAML configs, and troubleshooting tips for beginners.">
+  <meta name="keywords" content="ESPHome sensor, DHT22 Home Assistant, BME280 ESPHome, analog sensor ESP32, ESPHome temperature sensor, ESPHome humidity sensor, Home Assistant sensors">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span> &raquo; <span>ESPHome Sensors</span>
+      </nav>
+
+      <h1>ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 24, 2026</span>
+        <span>⏱️ 15 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🌡️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You've got ESPHome running on your ESP32 or ESP8266. Now it's time to make it actually <em>do</em> something useful. The most common first project? Environmental sensors. Temperature, humidity, pressure — the bread and butter of any smart home.</p>
+
+        <p>In this guide, I'll walk you through integrating three popular sensor types with ESPHome: the budget-friendly DHT22, the precision BME280, and basic analog sensors. By the end, you'll have real sensor data flowing into Home Assistant and ready for automations.</p>
+
+        <p>If you haven't set up ESPHome yet, start with our <a href="esphome-getting-started-guide.html">ESPHome Getting Started Guide</a> to get your board flashed and connected.</p>
+
+        <h2>Why Sensor Choice Matters</h2>
+
+        <p>Not all sensors are created equal. Here's a quick comparison of the two most popular temperature/humidity sensors:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>DHT22 (AM2302)</th>
+              <th>BME280</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Price</td>
+              <td>$2-5</td>
+              <td>$5-15</td>
+            </tr>
+            <tr>
+              <td>Temperature Accuracy</td>
+              <td>±0.5°C</td>
+              <td>±0.5°C</td>
+            </tr>
+            <tr>
+              <td>Humidity Accuracy</td>
+              <td>±2-5%</td>
+              <td>±3%</td>
+            </tr>
+            <tr>
+              <td>Pressure Sensing</td>
+              <td>❌ No</td>
+              <td>✅ Yes (±1 hPa)</td>
+            </tr>
+            <tr>
+              <td>Update Speed</td>
+              <td>~2 seconds</td>
+              <td>Instant (I2C)</td>
+            </tr>
+            <tr>
+              <td>Interface</td>
+              <td>1-wire digital</td>
+              <td>I2C or SPI</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Bottom line:</strong> DHT22 is fine for basic "is it hot in here?" sensing. BME280 is worth the extra cost if you want barometric pressure data or better accuracy for climate control automations.</p>
+
+        <h2>Part 1: DHT22 Temperature & Humidity Sensor</h2>
+
+        <p>The DHT22 is the classic beginner sensor. It's cheap, widely available, and dead simple to wire. The tradeoff? It's slower to update and less accurate than premium sensors.</p>
+
+        <h3>Wiring the DHT22</h3>
+
+        <p>The DHT22 has three pins you'll use (some modules have 4 pins, but one is unused):</p>
+
+        <ul>
+          <li><strong>VCC</strong> → ESP32 3.3V pin (or 5V if your module has a voltage regulator)</li>
+          <li><strong>DATA</strong> → Any GPIO pin (I'll use GPIO 21)</li>
+          <li><strong>GND</strong> → ESP32 GND</li>
+        </ul>
+
+        <p>Most DHT22 modules include a built-in pull-up resistor on the data line. If you're using a bare DHT22 sensor (the white plastic blob with 4 pins), you'll need to add a 4.7KΩ resistor between VCC and DATA.</p>
+
+        <h3>ESPHome Configuration for DHT22</h3>
+
+        <p>Add this to your ESPHome YAML config:</p>
+
+        <pre><code>sensor:
+  - platform: dht
+    pin: GPIO21
+    temperature:
+      name: "Living Room Temperature"
+      id: living_room_temp
+    humidity:
+      name: "Living Room Humidity"
+      id: living_room_humidity
+    update_interval: 60s
+    model: DHT22</code></pre>
+
+        <p><strong>Key settings explained:</strong></p>
+
+        <ul>
+          <li><code>pin: GPIO21</code> — The GPIO pin connected to the DATA line. Change this to match your wiring.</li>
+          <li><code>update_interval: 60s</code> — How often to read the sensor. DHT22 can't update faster than every 2 seconds, so 60s saves power and reduces noise.</li>
+          <li><code>model: DHT22</code> — Tells ESPHome which DHT variant you're using. Options: DHT11, DHT22, DHT22_TYPE2, AM2302, RHT03.</li>
+        </ul>
+
+        <h3>Testing Your DHT22</h3>
+
+        <p>After uploading the config to your ESP32:</p>
+
+        <ol>
+          <li>Open Home Assistant → Settings → Devices & Services</li>
+          <li>Find your ESPHome device (it should appear automatically)</li>
+          <li>Click it to see the sensor entities</li>
+          <li>You should see "Living Room Temperature" and "Living Room Humidity" with current values</li>
+        </ol>
+
+        <p>If sensors show "unknown" or "NAN":</p>
+
+        <ul>
+          <li>Check wiring (most common issue — DATA pin is easy to mix up)</li>
+          <li>Try a different GPIO pin (some pins on ESP32 have special uses)</li>
+          <li>Add a pull-up resistor if using a bare sensor (not a module)</li>
+          <li>Check ESPHome logs for error messages</li>
+        </ul>
+
+        <h2>Part 2: BME280 Temperature, Humidity & Pressure Sensor</h2>
+
+        <p>The BME280 is my go-to sensor for serious environmental monitoring. It measures temperature, humidity, <em>and</em> barometric pressure, all with better accuracy and faster updates than the DHT22. The I2C interface means it shares two pins with other I2C devices.</p>
+
+        <h3>Wiring the BME280</h3>
+
+        <p>BME280 modules use I2C, which requires only two data pins:</p>
+
+        <ul>
+          <li><strong>VCC</strong> → ESP32 3.3V (most BME280 modules are 3.3V only — don't connect to 5V!)</li>
+          <li><strong>GND</strong> → ESP32 GND</li>
+          <li><strong>SCL</strong> → ESP32 GPIO 22 (default I2C clock pin)</li>
+          <strong>SDA</strong> → ESP32 GPIO 21 (default I2C data pin)</li>
+        </ul>
+
+        <p>These are the default I2C pins on ESP32. You can use different pins by configuring them in ESPHome.</p>
+
+        <h3>ESPHome Configuration for BME280</h3>
+
+        <p>First, set up I2C in your config:</p>
+
+        <pre><code>i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true</code></pre>
+
+        <p>Then add the BME280 sensor:</p>
+
+        <pre><code>sensor:
+  - platform: bme280_i2c
+    temperature:
+      name: "Office Temperature"
+      id: office_temp
+      oversampling: 16x
+    humidity:
+      name: "Office Humidity"
+      id: office_humidity
+      oversampling: 16x
+    pressure:
+      name: "Office Pressure"
+      id: office_pressure
+      oversampling: 16x
+    address: 0x76
+    update_interval: 60s</code></pre>
+
+        <p><strong>Important settings:</strong></p>
+
+        <ul>
+          <li><code>address: 0x76</code> — The default I2C address for most BME280 modules. Some use 0x77. If you're not sure, check the module documentation or run I2C scan (set <code>scan: true</code> in the i2c config and check logs).</li>
+          <li><code>oversampling: 16x</code> — Higher oversampling = more accurate readings but slower. Options: NONE, 1x, 2x, 4x, 8x, 16x. 16x is overkill for most uses; 4x or 8x is a good balance.</li>
+        </ul>
+
+        <h3>Getting Useful Pressure Data</h3>
+
+        <p>Raw barometric pressure is interesting for weather monitoring, but it's hard to interpret directly. Here's how to convert it to sea-level equivalent (what weather apps report):</p>
+
+        <pre><code>  - platform: template
+    name: "Office Pressure Sea Level"
+    lambda: |-
+      const float ALTITUDE = 150; // Your altitude in meters
+      return id(office_pressure).state * 
+        pow(1 - (0.0065 * ALTITUDE / 288.15), -5.255);
+    unit_of_measurement: "hPa"
+    device_class: pressure
+    update_interval: 60s</code></pre>
+
+        <p>Replace <code>ALTITUDE = 150</code> with your actual elevation in meters. You can find this from Google Maps or your phone's compass app.</p>
+
+        <h2>Part 3: Analog Sensors (Light, Soil Moisture, Gas)</h2>
+
+        <p>ESP32 has built-in analog-to-digital converters (ADC) that can read voltage levels from 0-3.3V. This opens up a huge range of cheap analog sensors: light sensors, soil moisture probes, gas sensors, and more.</p>
+
+        <h3>ESP32 ADC Gotchas</h3>
+
+        <p>Before wiring analog sensors, understand these ESP32 limitations:</p>
+
+        <ul>
+          <li><strong>ADC2 pins don't work when WiFi is enabled:</strong> GPIO 0, 2, 4, 12-15, 25-27 are on ADC2. Use ADC1 pins instead (GPIO 32-39).</li>
+          <li><strong>Non-linear response:</strong> ESP32 ADC isn't perfectly linear. For precision projects, calibrate with known voltages.</li>
+          <li><strong>Noise:</strong> ESP32 ADC is noisy. ESPHome includes averaging and oversampling to help.</li>
+          <li><strong>Input range:</strong> 0-3.3V max. Higher voltages will damage the pin.</li>
+        </ul>
+
+        <h3>Example: Simple Light Sensor (LDR)</h3>
+
+        <p>A light-dependent resistor (LDR) changes resistance based on light. Wire it in a voltage divider with a 10KΩ fixed resistor:</p>
+
+        <ul>
+          <li>3.3V → LDR → GPIO 34 (ADC pin)</li>
+          <li>GPIO 34 → 10KΩ resistor → GND</li>
+        </ul>
+
+        <p>ESPHome config:</p>
+
+        <pre><code>sensor:
+  - platform: adc
+    pin: GPIO34
+    name: "Ambient Light"
+    attenuation: 11db
+    update_interval: 10s
+    filters:
+      - multiply: 100
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5</code></pre>
+
+        <p><strong>Config breakdown:</strong></p>
+
+        <ul>
+          <li><code>attenuation: 11db</code> — Extends input range to ~0-3.3V. Options: 0db (0-1.1V), 2.5db (0-1.5V), 6db (0-2.2V), 11db (0-3.3V).</li>
+          <li><code>multiply: 100</code> — Scales the 0-3.3V reading to 0-100 for a "percentage" output.</li>
+          <li><code>sliding_window_moving_average</code> — Takes 5 readings and averages them to reduce noise.</li>
+        </ul>
+
+        <h3>Example: Soil Moisture Sensor</h3>
+
+        <p>Cheap capacitive soil moisture sensors output 0-3.3V based on soil moisture. Wire the sensor's analog output to an ADC pin (GPIO 32, for example):</p>
+
+        <pre><code>sensor:
+  - platform: adc
+    pin: GPIO32
+    name: "Plant Soil Moisture"
+    attenuation: 11db
+    update_interval: 60s
+    filters:
+      - median:
+          window_size: 3
+          send_every: 3
+      - calibrate_linear:
+          - 0.0 -> 100.0
+          - 3.3 -> 0.0</code></pre>
+
+        <p>The <code>calibrate_linear</code> filter inverts the reading (higher voltage = drier soil on most sensors) and scales to 0-100%. For accuracy, measure the actual voltages in dry and water-saturated soil, then adjust the calibration points.</p>
+
+        <h2>Part 4: Using Sensor Data in Home Assistant Automations</h2>
+
+        <p>Now that your sensors are reporting to Home Assistant, put them to work. Here are three practical automation examples:</p>
+
+        <h3>Automation 1: Alert When Temperature Drops Below Threshold</h3>
+
+        <pre><code>alias: "Alert: Low Temperature"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: 15
+action:
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "⚠️ Low Temperature Alert"
+      message: "Living room is {{ states('sensor.living_room_temperature') }}°C"</code></pre>
+
+        <h3>Automation 2: Turn On Humidifier When Humidity Drops</h3>
+
+        <pre><code>alias: "Humidifier: Auto On"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.office_humidity
+    below: 40
+action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.humidifier</code></pre>
+
+        <p>For more automation ideas, check out our <a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners</a> guide with 10 practical examples.</p>
+
+        <h2>Part 5: Troubleshooting Common Sensor Issues</h2>
+
+        <h3>DHT22 Shows "NAN" or Updates Very Slowly</h3>
+
+        <ul>
+          <li><strong>Wrong pin:</strong> Double-check DATA pin connection and GPIO number in config</li>
+          <li><strong>Missing pull-up resistor:</strong> Add 4.7KΩ between VCC and DATA if using bare sensor</li>
+          <li><strong>3.3V vs 5V:</strong> Most DHT22 modules work at 3.3V, but check your specific module</li>
+          <li><strong>Bad sensor:</strong> DHT22 clones are common and often fail. Try a different sensor.</li>
+        </ul>
+
+        <h3>BME280 Not Detected (I2C Error)</h3>
+
+        <ul>
+          <li><strong>Wrong I2C address:</strong> Try 0x77 instead of 0x76 (or vice versa)</li>
+          <li><strong>SDA/SCL swapped:</strong> The two I2C pins are easy to mix up</li>
+          <li><strong>Voltage issue:</strong> BME280 is strictly 3.3V. Powering from 5V can damage it.</li>
+          <li><strong>Enable I2C scan:</strong> Set <code>scan: true</code> in i2c config and check ESPHome logs</li>
+        </ul>
+
+        <h3>Analog Sensor Values Are All Over the Place</h3>
+
+        <ul>
+          <li><strong>Use ADC1 pins:</strong> ADC2 pins (GPIO 0, 2, 4, 12-15, 25-27) don't work with WiFi enabled</li>
+          <li><strong>Add filtering:</strong> Use <code>sliding_window_moving_average</code> or <code>median</code> filters</li>
+          <li><strong>Check attenuation:</strong> Use <code>11db</code> for 0-3.3V input range</li>
+          <li><strong>Avoid breadboard:</strong> Breadboard connections are noisy. Solder connections for stable readings.</li>
+        </ul>
+
+        <h3>Sensors Work But Values Seem Wrong</h3>
+
+        <p>Sensor accuracy varies. DHT22 ±2-5% humidity is typical. For more accurate readings:</p>
+
+        <ul>
+          <li>Calibrate against a known reference (commercial weather station, medical-grade thermometer)</li>
+          <li>Use <code>calibrate_linear</code> or <code>calibrate_polynomial</code> filters in ESPHome</li>
+          <li>Average multiple sensors in the same space</li>
+          <li>Upgrade to a higher-quality sensor like BME280 or SHT31</li>
+        </ul>
+
+        <h2>Part 6: Power-Saving Tips for Battery-Powered Sensors</h2>
+
+        <p>If you're building a battery-powered sensor node, every milliamp counts. Here's how to extend battery life:</p>
+
+        <ul>
+          <li><strong>Increase update_interval:</strong> 5-15 minutes is fine for temperature trends. 60 seconds drains batteries quickly.</li>
+          <li><strong>Use deep sleep:</strong> ESPHome supports deep sleep mode where the ESP32 powers down between readings.</li>
+          <li><strong>Disable WiFi between readings:</strong> Combine deep sleep with sensor polling to minimize WiFi uptime.</li>
+          <li><strong>Choose sensors wisely:</strong> DHT22 draws less power than BME280 during readings.</li>
+          <li><strong>Avoid power-hungry features:</strong> Bluetooth, always-on WiFi, and frequent display updates kill batteries.</li>
+        </ul>
+
+        <p>Example deep sleep config for a 10-minute interval:</p>
+
+        <pre><code>deep_sleep:
+  id: deep_sleep_1
+  sleep_duration: 10min
+
+interval:
+  - interval: 10min
+    then:
+      - deep_sleep.enter: deep_sleep_1</code></pre>
+
+        <h2>What's Next?</h2>
+
+        <p>Now that you've got environmental sensors running, the smart home possibilities are endless. Here are some natural next steps:</p>
+
+        <ul>
+          <li><strong>Build a weather station:</strong> Combine BME280 with an anemometer and rain sensor</li>
+          <li><strong>Create plant monitors:</strong> Soil moisture + light sensors for automated watering</li>
+          <li><strong>Set up air quality monitoring:</strong> Add gas sensors like MQ-135 or PMS5003 particulate sensor</li>
+          <li><strong>3D print enclosures:</strong> Protect your sensors with custom 3D printed cases — see our <a href="3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases</a> guide</li>
+        </ul>
+
+        <p>ESPHome's component library has support for hundreds of sensors, displays, and actuators. Once you understand the basic sensor integration pattern, adding new devices is just a matter of finding the right YAML config.</p>
+
+        <p>For more advanced projects, explore the <a href="best-esp32-development-board.html">Best ESP32 Development Boards</a> to find the right hardware for your next build.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started Guide: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+          <li><a href="diy-plant-monitor-smart-home.html">DIY Smart Plant Monitor: Soil Moisture Sensors with Home Assistant</a></li>
+          <li><a href="sensor-guide-beginners.html">Electronics Sensor Guide for Beginners: Temperature, Motion, Light & More</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

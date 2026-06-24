@@ -312,7 +312,7 @@
 
 ### 批次 41：MAKER TOOLS & ESP32 DEEP-DIVE (6篇) 🆕
 - [x] best-esp32-development-board — Best ESP32 Development Boards in 2026: DevKit, WROOM, and WROVER Compared ✅ 2026-06-23
-- [ ] esphome-sensor-integration — ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant
+- [x] esphome-sensor-integration — ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant ✅ 2026-06-24
 - [ ] arduino-uno-r4-review — Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade?
 - [ ] diy-pcb-design-beginners — DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide
 - [ ] best-breadboard-projects-beginners — 10 Best Breadboard Projects for Electronics Beginners
@@ -329,9 +329,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 222 篇 ✅ (批次1-40进行中)
+- **已完成**: 223 篇 ✅ (批次1-41进行中)
 - **当前批次**: 批次40（Maker & Smart Home 继续）
-- **剩余**: 79 篇
+- **剩余**: 77 篇
 
 ## 生成规则
 
