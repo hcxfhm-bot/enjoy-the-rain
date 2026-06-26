@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide</title>
+  <meta name="description" content="Learn DIY PCB design from scratch in 2026. This beginner guide covers EasyEDA vs KiCad, schematic design, component placement, and how to order custom boards for under $5.">
+  <meta name="keywords" content="DIY PCB design, KiCad tutorial, EasyEDA, PCB fabrication, custom PCB, electronics design, PCB ordering, PCB beginner guide">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home & Maker</span>
+      </nav>
+
+      <h1>DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 26, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You've been building circuits on breadboards for a while now. Everything works. But every time you move your project, wires come loose. The mess of jumper cables is embarrassing. You keep thinking: <strong>there has to be a better way</strong>.</p>
+
+        <p>There is. It's called a PCB—a printed circuit board. And designing your own custom PCB is easier and cheaper than ever in 2026. With free software and boards starting at $2, you can go from messy breadboard prototype to professional-looking finished product in a weekend.</p>
+
+        <p>This guide walks you through everything you need to know to design your first DIY PCB, from choosing the right software to ordering your first batch of boards.</p>
+
+        <h2>What is a PCB and Why Make Your Own?</h2>
+
+        <p>A PCB is a flat board with copper traces that connect electronic components. Unlike breadboards where you push wires into holes, PCBs have metal pads and routes already baked in. The result? Reliable connections, compact size, and professional aesthetics.</p>
+
+        <p>Making your own PCBs at home is possible through methods like toner transfer or UV exposure, but the results often look rough and don't scale well. <strong>The modern maker approach is to design the PCB with free software and order professionally manufactured boards</strong>—often for less than a cup of coffee.</p>
+
+        <p>Websites like <strong>JLCPCB</strong>, <strong>PCBWay</strong>, and <strong>ALLPCB</strong> offer 5-10 pieces of 100x100mm boards for $2-5 with 3-7 day turnaround. The quality rivals commercial electronics.</p>
+
+        <h2>Choosing Your PCB Design Software</h2>
+
+        <p>Two tools dominate the hobbyist space: <strong>EasyEDA</strong> and <strong>KiCad</strong>. Both are free, both can produce professional-grade designs, and both have active communities. Here's how to choose:</p>
+
+        <h3>EasyEDA: Best for Beginners</h3>
+
+        <p><strong>EasyEDA</strong> is browser-based, which means nothing to install. It runs in Chrome, Firefox, or Edge with no software requirements. The interface feels modern and approachable, with drag-and-drop components and intuitive shortcuts.</p>
+
+        <p>Key advantages:</p>
+        <ul>
+          <li><strong>Zero setup</strong> — Open browser, start designing</li>
+          <li><strong>Built-in parts library</strong> — Massive inventory of components with accurate footprints</li>
+          <li><strong>Direct ordering</strong> — Generate Gerbers and order boards without leaving the interface</li>
+          <li><strong>Chinese server</strong> — Optimized for JLCPCB integration, often with coupon codes</li>
+        </ul>
+
+        <p>EasyEDA works great for straightforward projects like <a href="diy-pcb-design-beginners.html">custom sensor boards</a>, simple microcontroller breakouts, or Arduino shields. If you're building on ESP32 or Raspberry Pi projects, EasyEDA handles the common modules without fuss.</p>
+
+        <h3>KiCad: Best for Power and Control</h3>
+
+        <p><strong>KiCad</strong> is open-source, runs locally, and offers unmatched flexibility. It handles complex multi-layer boards, advanced routing, and integrates with external tools. If you're serious about electronics design, KiCad is the industry-standard free option.</p>
+
+        <p>Key advantages:</p>
+        <ul>
+          <li><strong>No cloud dependency</strong> — Your designs stay on your machine</li>
+          <li><strong>Unlimited layers</strong> — Professional 4, 6, or 8-layer boards possible</li>
+          <li><strong>Scripting and automation</strong> — Python integration for custom workflows</li>
+          <li><strong>No vendor lock-in</strong> — Works with any manufacturer worldwide</li>
+        </ul>
+
+        <p>KiCad has a steeper learning curve but rewards patience. The official KiCad library contains thousands of verified components, and community repositories like SnapEDA offer millions more. For advanced maker projects like custom <a href="home-assistant-raspberry-pi-setup.html">Home Assistant controllers</a> or IoT devices, KiCad's flexibility shines.</p>
+
+        <h2>Your First PCB Design: Step-by-Step</h2>
+
+        <p>Let's design a simple project: an ESP32 breakout board. This teaches core skills—schematic capture, component placement, routing, and export—without overwhelming complexity.</p>
+
+        <h3>Step 1: Create a New Project</h3>
+
+        <p>In EasyEDA, click <strong>"New Project"</strong> and name it "ESP32 Breakout". In KiCad, use <strong>KiCad Schematic Capture</strong> to create a new project file. Both will open with an empty canvas ready for your schematic.</p>
+
+        <h3>Step 2: Add Components to Your Schematic</h3>
+
+        <p>Your ESP32 breakout needs:</p>
+        <ul>
+          <li>ESP32-WROOM module (or ESP32-DEVKITC)</li>
+          <li>LD1117 3.3V voltage regulator</li>
+          <li>USB-C connector</li>
+          <li>2x 10μF capacitors (for regulator filtering)</li>
+          <li>Header pins for GPIO access</li>
+        </ul>
+
+        <p>In EasyEDA, search each component in the right-hand parts library. Click to place. In KiCad, press <strong>"A"</strong> to open the symbol chooser and add components. Connect them by drawing wires between pins.</p>
+
+        <h3>Step 3: Assign Footprints</h3>
+
+        <p>This step bridges schematic symbols to physical packages. The ESP32 module might exist as multiple footprints—make sure you select the exact variant you're using. Mismatched footprints make boards unusable.</p>
+
+        <p>Pro tip: When using components like the <a href="esphome-sensor-integration.html">DHT22 temperature sensor</a> in Home Assistant projects, verify footprint compatibility between your design software and manufacturer libraries before ordering.</p>
+
+        <h3>Step 4: Switch to PCB Editor</h3>
+
+        <p>In EasyEDA, click <strong>"Convert to PCB"</strong>. In KiCad, click <strong>"PCB Editor"</strong> then run <strong>"Update PCB from Schematic"</strong> (F8). This generates an empty board outline populated with your components in a tangled heap.</p>
+
+        <h3>Step 5: Define Board Outline</h3>
+
+        <p>Draw a rectangle representing your board dimensions. For a basic ESP32 breakout, 50x70mm works well. In EasyEDA, use the <strong>"Board Outline"</strong> layer. In KiCad, draw on the <strong>Edge.Cuts</strong> layer.</p>
+
+        <p>Most budget manufacturers offer free routing on boards up to 100x100mm, so staying small saves money.</p>
+
+        <h3>Step 6: Arrange Components</h3>
+
+        <p>Drag components inside the board outline. Place related components near each other—USB connector on one edge, GPIO headers on the opposite side, voltage regulator near power input. Good placement reduces routing complexity dramatically.</p>
+
+        <p>For smart home projects, consider how your board will mount. A <a href="3d-printed-esp32-case-design.html">3D-printed case</a> might need specific mounting hole positions. Plan early.</p>
+
+        <h3>Step 7: Route Traces</h3>
+
+        <p>Routing connects component pads with copper traces. In EasyEDA, click <strong>"Route"</strong> or press <strong>"W"</strong>. Click and drag to draw traces between pads. In KiCad, use the <strong>"Route" tool</strong> (X key).</p>
+
+        <p>Basic rules for beginners:</p>
+        <ul>
+          <li><strong>Power traces should be thicker</strong> — 0.8-1.0mm for 5V/GND, 0.3-0.5mm for signals</li>
+          <li><strong>Keep traces at 45° angles</strong> — Sharp corners cause manufacturing issues</li>
+          <li><strong>Avoid vias (through-holes) when possible</strong> — They add cost and complexity</li>
+          <li><strong>Leave clearance</strong> — 0.2mm minimum between traces</li>
+        </ul>
+
+        <p>Auto-routers exist in both tools and handle simple boards adequately. But manual routing produces cleaner results and helps you understand your design.</p>
+
+        <h3>Step 8: Add Silkscreen Labels</h3>
+
+        <p>Silkscreen is the white text and symbols on top of the board. Add component designators (R1, C1, U1), pin labels (3V3, GND, TX), and your logo if desired. Clear silkscreen makes debugging and assembly much easier.</p>
+
+        <h2>Generating Manufacturing Files</h2>
+
+        <p>Before ordering, you need <strong>Gerber files</strong>—the universal format PCB manufacturers use. In EasyEDA, click <strong>"Generate Gerber"</strong>. In KiCad, use <strong>"Plot"</strong> (File menu) to export Gerber files, then <strong>"Generate Drill Files"</strong>.</p>
+
+        <p>Always order a <strong>PCB review</strong> before fabrication. Both JLCPCB and PCBWay offer free online viewers where you can rotate, zoom, and inspect every layer. Triple-check:</p>
+        <ul>
+          <li>Board dimensions match your outline</li>
+          <li>All mounting holes are present</li>
+          <li>Component footprints match real parts</li>
+          <li>Silkscreen is readable and not overlapping pads</li>
+        </ul>
+
+        <h2>Ordering Your First Boards</h2>
+
+        <p>For first-timers, <strong>JLCPCB</strong> offers the smoothest experience:</p>
+        <ol>
+          <li>Create account at jlcpcb.com</li>
+          <li>Upload your Gerber ZIP file</li>
+          <li>Select options: <strong>PCB Quantity: 5</strong>, <strong>Size: 100x100mm or smaller</strong>, <strong>PCB Color: choose what you like</strong></li>
+          <li>Review price—usually $2 for boards + ~$25 shipping for international</li>
+          <li>Wait 3-7 days for delivery</li>
+        </ol>
+
+        <p>Pro tip: JLCPCB's <strong>Basic Parts</strong> library lets you add SMT assembly for $3 per board. Upload a BOM and CPL file, and they populate components automatically. Game-changing for complex boards.</p>
+
+        <h2>Common Beginner Mistakes to Avoid</h2>
+
+        <p><strong>Forgetting decoupling capacitors:</strong> Every IC needs capacitors near power pins. Skipping them causes unstable operation and mysterious glitches.</p>
+
+        <p><strong>Mismatched voltage levels:</strong> ESP32 is 3.3V logic. Connecting 5V signals directly damages it. Always verify logic levels before wiring.</p>
+
+        <p><strong>Ignoring DRC (Design Rule Check):</strong> Run DRC before generating Gerbers. It catches trace-width violations, unconnected nets, and clearance violations that cause board failures.</p>
+
+        <p><strong>No mounting holes:</strong> If your board needs to attach to something, add mounting holes early. Adding them later often requires re-routing.</p>
+
+        <h2>What's Next After Your First Board?</h2>
+
+        <p>Once you've built and tested your first PCB successfully, you're ready for more:</p>
+
+        <ul>
+          <li><strong>Multi-layer boards</strong> — More routing density for complex projects</li>
+          <li><strong>Flexible PCBs</strong> — For wearable or space-constrained designs</li>
+          <li><strong>Custom sensor boards</strong> — Integrate sensors directly into your PCB design</li>
+          <li><strong>SMT assembly</strong> — Let manufacturers populate components for you</li>
+        </ul>
+
+        <p>Consider combining PCB design with <a href="best-breadboard-projects-beginners.html">electronics prototyping skills</a> and <a href="raspberry-pi-nas-build.html">Raspberry Pi projects</a> for complete maker capability. The ability to design and fabricate custom circuit boards opens up possibilities that breadboards simply cannot match.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>DIY PCB design is one of the most rewarding maker skills you can develop. Starting with free software like EasyEDA or KiCad, you can design professional-quality circuit boards for less than $5. The process teaches valuable electronics fundamentals while producing real, usable hardware.</p>
+
+        <p>Your first board won't be perfect—mine wasn't either. But each design iteration improves your skills, and within a few projects, you'll wonder how you ever managed with breadboards and jumper wires. The jump from prototype to product is closer than you think.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="arduino-uno-r4-review.html">Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade?</a></li>
+          <li><a href="best-esp32-development-board.html">Best ESP32 Development Boards in 2026: DevKit, WROOM, and WROVER Compared</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="diy-electronics-workbench-setup.html">How to Set Up a DIY Electronics Workbench: Essential Tools and Layout</a></li>
+          <li><a href="best-soldering-station-beginners.html">Best Soldering Station for Electronics & DIY Makers in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
