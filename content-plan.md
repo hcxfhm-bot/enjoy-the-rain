@@ -315,7 +315,7 @@
 - [x] esphome-sensor-integration — ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant ✅ 2026-06-24
 - [x] arduino-uno-r4-review — Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade? ✅ 2026-06-25
 - [x] diy-pcb-design-beginners — DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide ✅ 2026-06-26
-- [ ] best-breadboard-projects-beginners — 10 Best Breadboard Projects for Electronics Beginners
+- [x] best-breadboard-projects-beginners — 10 Best Breadboard Projects for Electronics Beginners ✅ 2026-06-28
 - [ ] ws2812b-led-strip-esp32 — How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide
 
 ### 批次 42：3D PRINTING + SMART HOME CROSSOVER (6篇) 🆕
