@@ -316,7 +316,7 @@
 - [x] arduino-uno-r4-review — Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade? ✅ 2026-06-25
 - [x] diy-pcb-design-beginners — DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide ✅ 2026-06-26
 - [x] best-breadboard-projects-beginners — 10 Best Breadboard Projects for Electronics Beginners ✅ 2026-06-28
-- [ ] ws2812b-led-strip-esp32 — How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide
+- [x] ws2812b-led-strip-esp32 — How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide ✅ 2026-06-29
 
 ### 批次 42：3D PRINTING + SMART HOME CROSSOVER (6篇) 🆕
 - [ ] 3d-printed-esp32-case-design — How to Design and 3D Print Custom ESP32 and Sensor Cases
@@ -329,9 +329,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 224 篇 ✅ (批次1-41进行中)
-- **当前批次**: 批次40（Maker & Smart Home 继续）
-- **剩余**: 76 篇
+- **已完成**: 225 篇 ✅ (批次1-41进行中)
+- **当前批次**: 批次42（3D Printing + Smart Home Crossover）
+- **剩余**: 75 篇
 
 ## 生成规则
 

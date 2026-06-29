@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide</title>
+  <meta name="description" content="Learn how to control WS2812B (NeoPixel) LED strips with ESP32 using FastLED and WLED. Step-by-step wiring, code examples, and Home Assistant integration for DIY smart lighting.">
+  <meta name="keywords" content="WS2812B ESP32, NeoPixel Arduino, FastLED tutorial, WLED setup, LED strip ESP32, addressable LED, smart home lighting, ESP32 LED controller">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home & Maker</span>
+      </nav>
+
+      <h1>How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 29, 2026</span>
+        <span>⏱️ 20 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>WS2812B LED strips (also known as NeoPixels) are the <strong>holy grail of DIY lighting</strong>. Unlike old-school LED strips where every LED is the same color, each WS2812B LED is individually addressable — meaning you can control 144, 288, or even 1000+ LEDs independently, creating rainbow waves, music-reactive effects, and ambient lighting that looks like it came from a sci-fi movie.</p>
+
+        <p>And the best part? An <strong>ESP32</strong> board can control these strips over WiFi. That means you can change colors from your phone, integrate with <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant</a>, or sync with Spotify — all for under $20 in parts.</p>
+
+        <p>In this guide, I'll walk you through <strong>two approaches</strong>: the <strong>FastLED library</strong> (for custom code and effects) and <strong>WLED</strong> (a ready-to-flash firmware with 100+ built-in effects). By the end, you'll have a fully controllable LED setup that rivals commercial smart lights at a fraction of the cost.</p>
+
+        <h2>What Are WS2812B LEDs?</h2>
+
+        <p>WS2812B is the technical name for what Adafruit calls "NeoPixel." Each LED has a tiny built-in controller chip that receives data, shows its color, and passes the rest of the data to the next LED. This creates a <strong>daisy-chain</strong> where one data wire controls everything.</p>
+
+        <p><strong>Key specs:</strong></p>
+        <ul>
+          <li><strong>Voltage:</strong> 5V (most common) — do NOT connect directly to 12V!</li>
+          <li><strong>Current:</strong> Up to 60mA per LED at full white (30 LEDs = 1.8A max)</li>
+          <li><strong>Data speed:</strong> 800kHz — fast enough for smooth animations</li>
+          <li><strong>Density:</strong> 30, 60, 144 LEDs per meter (higher = brighter, more power)</li>
+        </ul>
+
+        <p>For ESP32 projects, a 30-LED/meter strip is perfect — bright enough for under-cabinet lighting, PC case lighting, or a DIY Ambilight without needing a massive power supply.</p>
+
+        <h2>What You'll Need</h2>
+
+        <p>Here's your shopping list for a complete ESP32 + WS2812B setup:</p>
+
+        <ul>
+          <li><strong>1 × ESP32 DevKit V1</strong> — Any ESP32 board works. I recommend the <a href="../best-esp32-development-board.html">DevKitC or NodeMCU-32S</a> for easy breadboard use.</li>
+          <li><strong>1 × WS2812B LED strip</strong> — 30 LEDs/meter (1m strip = 30 LEDs) is a good start.</li>
+          <li><strong>1 × 5V power supply</strong> — At least 2A (10W) for 30 LEDs at full brightness. A USB phone charger works for short strips.</li>
+          <li><strong>1 × 470Ω resistor</strong> — Protects the data line (optional but recommended).</li>
+          <li><strong>1 × 1000µF capacitor</strong> — Smooths power spikes (optional but prevents flickering).</li>
+          <li><strong>Jumper wires and breadboard</strong> — For prototyping.</li>
+          <li><strong>Micro USB cable</strong> — To flash the ESP32.</li>
+        </ul>
+
+        <p>If you're new to ESP32, check out our <a href="../esp32-smart-home-beginners.html">ESP32 smart home beginner's guide</a> for an overview of the board and its capabilities.</p>
+
+        <h2>Method 1: FastLED Library (Custom Code Approach)</h2>
+
+        <p>FastLED is the most popular Arduino library for addressable LEDs. It gives you complete control over every LED, with functions for rainbows, fades, and patterns — but you write the code yourself.</p>
+
+        <h3>Step 1: Install FastLED in Arduino IDE</h3>
+
+        <ol>
+          <li>Open Arduino IDE</li>
+          <li>Go to <strong>Sketch → Include Library → Manage Libraries</strong></li>
+          <li>Search for "FastLED"</li>
+          <li>Click <strong>Install</strong></li>
+        </ol>
+
+        <h3>Step 2: Wire the LED Strip to ESP32</h3>
+
+        <p>WS2812B strips have three wires: <strong>5V</strong>, <strong>GND</strong>, and <strong>Data In (DI)</strong>. Here's how to connect:</p>
+
+        <ul>
+          <li><strong>5V on strip</strong> → 5V power supply positive (or ESP32 5V pin if using USB power)</li>
+          <li><strong>GND on strip</strong> → Power supply GND <em>and</em> ESP32 GND (must share ground!)</li>
+          <li><strong>Data In (DI)</strong> → ESP32 GPIO pin (e.g., GPIO 16) through a 470Ω resistor</li>
+        </ul>
+
+        <p><strong>Important:</strong> Always connect GND first! A floating ground can damage the LEDs.</p>
+
+        <h3>Step 3: Upload the Code</h3>
+
+        <p>Here's a minimal FastLED sketch that creates a rainbow cycle:</p>
+
+        <pre><code>#include &lt;FastLED.h&gt;
+
+#define LED_PIN     16
+#define NUM_LEDS    30
+#define BRIGHTNESS  64
+#define LED_TYPE    WS2812B
+#define COLOR_ORDER GRB
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  FastLED.addLeds&lt;LED_TYPE, LED_PIN, COLOR_ORDER&gt;(leds, NUM_LEDS);
+  FastLED.setBrightness(BRIGHTNESS);
+}
+
+void loop() {
+  fill_rainbow(leds, NUM_LEDS, 0, 255/NUM_LEDS);
+  FastLED.show();
+  delay(50);
+}</code></pre>
+
+        <p>Upload this to your ESP32, and you'll see a rainbow wave moving across the strip. Change <code>NUM_LEDS</code> to match your strip length, and adjust <code>BRIGHTNESS</code> (0-255) to control intensity.</p>
+
+        <h3>Step 4: Add WiFi Control (Basic)</h3>
+
+        <p>To make this smart, you need WiFi. Here's a simple web server that lets you change colors from your phone:</p>
+
+        <pre><code>#include &lt;WiFi.h&gt;
+#include &lt;FastLED.h&gt;
+#include &lt;WebServer.h&gt;
+
+const char* ssid = "YOUR_WIFI_NAME";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+#define LED_PIN 16
+#define NUM_LEDS 30
+
+CRGB leds[NUM_LEDS];
+WebServer server(80);
+
+void handleRoot() {
+  String html = "&lt;h1&gt;LED Control&lt;/h1&gt;";
+  html += "&lt;a href='/red'&gt;Red&lt;/a&gt;&lt;br&gt;";
+  html += "&lt;a href='/green'&gt;Green&lt;/a&gt;&lt;br&gt;";
+  html += "&lt;a href='/blue'&gt;Blue&lt;/a&gt;&lt;br&gt;";
+  html += "&lt;a href='/rainbow'&gt;Rainbow&lt;/a&gt;&lt;br&gt;";
+  html += "&lt;a href='/off'&gt;Off&lt;/a&gt;";
+  server.send(200, "text/html", html);
+}
+
+void handleRed() {
+  fill_solid(leds, NUM_LEDS, CRGB::Red);
+  FastLED.show();
+  server.send(200, "text/plain", "Red!");
+}
+
+void handleGreen() {
+  fill_solid(leds, NUM_LEDS, CRGB::Green);
+  FastLED.show();
+  server.send(200, "text/plain", "Green!");
+}
+
+void handleBlue() {
+  fill_solid(leds, NUM_LEDS, CRGB::Blue);
+  FastLED.show();
+  server.send(200, "text/plain", "Blue!");
+}
+
+void handleRainbow() {
+  fill_rainbow(leds, NUM_LEDS, 0, 255/NUM_LEDS);
+  FastLED.show();
+  server.send(200, "text/plain", "Rainbow!");
+}
+
+void handleOff() {
+  FastLED.clear();
+  FastLED.show();
+  server.send(200, "text/plain", "Off!");
+}
+
+void setup() {
+  FastLED.addLeds&lt;WS2812B, LED_PIN, GRB&gt;(leds, NUM_LEDS);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) delay(500);
+
+  server.on("/", handleRoot);
+  server.on("/red", handleRed);
+  server.on("/green", handleGreen);
+  server.on("/blue", handleBlue);
+  server.on("/rainbow", handleRainbow);
+  server.on("/off", handleOff);
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}</code></pre>
+
+        <p>After uploading, open the Serial Monitor (115200 baud) to see the ESP32's IP address. Type that into your phone's browser, and you'll get a simple control page.</p>
+
+        <h2>Method 2: WLED Firmware (No-Code Solution)</h2>
+
+        <p>If writing code isn't your thing, <strong>WLED</strong> is a pre-made firmware that turns your ESP32 into a commercial-grade LED controller. It includes:</p>
+
+        <ul>
+          <li>100+ built-in effects (rainbow, fire, twinkle, meteor, etc.)</li>
+          <li>Web interface accessible from any device</li>
+          <li>Native <a href="../home-assistant-automations-beginners.html">Home Assistant integration</a> via MQTT</li>
+          <li>Sync with music, Alexa, and Spotify</li>
+          <li>Schedules and timers</li>
+        </ul>
+
+        <h3>Step 1: Flash WLED</h3>
+
+        <p>The easiest way is using the <strong>WLED Web Installer</strong> (no software needed!):</p>
+
+        <ol>
+          <li>Go to <code>https://install.wled.me</code> in Chrome or Edge</li>
+          <li>Connect your ESP32 to your computer via USB</li>
+          <li>Click <strong>Connect</strong> and select the ESP32's COM port</li>
+          <li>Click <strong>Install WLED</strong> and wait for the flash to complete</li>
+          <li>Connect to the "WLED-AP" WiFi network from your phone</li>
+          <li>Open <code>http://4.3.2.1</code> in your browser to configure WiFi</li>
+        </ol>
+
+        <h3>Step 2: Configure LED Settings</h3>
+
+        <p>Once WLED is running, go to <strong>Config → LED Preferences</strong>:</p>
+
+        <ul>
+          <li><strong>LED count:</strong> Enter your strip's LED count (e.g., 30)</li>
+          <li><strong>GPIO:</strong> Set to the pin you connected Data In (default is GPIO 16)</li>
+          <li><strong>LED type:</strong> WS281x</li>
+          <li><strong>Color order:</strong> GRB (most WS2812B strips)</li>
+        </ul>
+
+        <p>Save, and your LEDs should light up with the default effect!</p>
+
+        <h3>Step 3: Explore the Web Interface</h3>
+
+        <p>WLED's interface is incredibly polished. From the main screen, you can:</p>
+
+        <ul>
+          <li><strong>Colors:</strong> Pick solid colors or color palettes</li>
+          <li><strong>Effects:</strong> Scroll through 100+ effects with live preview</li>
+          <li><strong>Segments:</strong> Split the strip into zones (e.g., left/right)</li>
+          <li><strong>Presets:</strong> Save favorite combinations for one-tap access</li>
+          <li><strong>Timers:</strong> Schedule lights on/off at specific times</li>
+        </ul>
+
+        <h3>Step 4: Integrate with Home Assistant</h3>
+
+        <p>WLED integrates natively with Home Assistant. If you've set up a <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant hub on Raspberry Pi</a>, it will auto-discover your WLED device once both are on the same network.</p>
+
+        <p>In Home Assistant:</p>
+
+        <ol>
+          <li>Go to <strong>Settings → Devices & Services</strong></li>
+          <li>Look for "WLED" under discovered integrations</li>
+          <li>Click <strong>Configure</strong> and enter the WLED device's IP</li>
+          <li>Now you can control brightness, effects, and colors from HA dashboards and automations</li>
+        </ol>
+
+        <p>For advanced setups (like music sync), check out our <a href="../home-assistant-automations-beginners.html">Home Assistant automations guide</a> to trigger LED effects based on time, motion, or other sensors.</p>
+
+        <h2>Power Management: Don't Burn Your House Down</h2>
+
+        <p>Addressable LEDs can draw a lot of current. A 30-LED strip at full white needs 1.8A — more than USB can safely provide. Here's how to power properly:</p>
+
+        <h3>For Small Projects (≤30 LEDs)</h3>
+        <p>You can power from the ESP32's 5V pin if using a strong USB adapter (2A+). But avoid full-white for long periods.</p>
+
+        <h3>For Medium Projects (30-100 LEDs)</h3>
+        <p>Use a dedicated 5V 3-5A power supply. Connect directly to the LED strip's power wires, not through the ESP32.</p>
+
+        <h3>For Large Projects (100+ LEDs)</h3>
+        <p>Use a 5V 10A+ power supply and inject power at both ends of the strip. Voltage drop causes color inconsistency and flickering.</p>
+
+        <p>Always use a <a href="../best-multimeter-for-electronics.html">multimeter</a> to verify voltage before connecting expensive LED strips. A 12V power supply will instantly kill a 5V WS2812B strip!</p>
+
+        <h2>3D Printing Enclosures for Your LED Controller</h2>
+
+        <p>Once your ESP32 + LED setup works, you'll want to make it look professional. This is where your 3D printer shines:</p>
+
+        <ul>
+          <li><strong>ESP32 enclosure</strong> — Protect the board and mount it under a desk or behind a TV</li>
+          <li><strong>LED diffuser</strong> — A frosted cover that softens the light and removes "hot spots"</li>
+          <li><strong>Cable management</strong> — Channels that hide the power and data wires</li>
+          <li><strong>Wall-mounted controller</strong> — A box with buttons for manual control (WLED supports buttons!)</li>
+        </ul>
+
+        <p>For tips on designing professional enclosures, check out our <a href="../3d-print-smart-home-case.html">guide to 3D printing smart home device cases</a>. A well-printed case makes a $20 project look like a $200 commercial product.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>LEDs flicker or show random colors</h3>
+        <p><strong>Cause:</strong> Power supply can't deliver enough current, or voltage drop along the strip.</p>
+        <p><strong>Fix:</strong> Use a stronger power supply, inject power at both ends, and add a 1000µF capacitor across 5V/GND.</p>
+
+        <h3>Only the first few LEDs light up</h3>
+        <p><strong>Cause:</strong> Wrong LED count in code, or data line disconnected after first LED.</p>
+        <p><strong>Fix:</strong> Check your <code>NUM_LEDS</code> value and verify the strip isn't damaged (try a different section).</p>
+
+        <h3>LEDs stay off but code uploads successfully</h3>
+        <p><strong>Cause:</strong> Wrong GPIO pin in code, or wrong color order (RGB vs GRB).</p>
+        <p><strong>Fix:</strong> Double-check the pin number in your code matches the physical connection. Try changing <code>COLOR_ORDER</code> to RGB.</p>
+
+        <h3>WLED won't connect to WiFi</h3>
+        <p><strong>Cause:</strong> Wrong password, or 2.4GHz/5GHz confusion (ESP32 only supports 2.4GHz).</p>
+        <p><strong>Fix:</strong> Reset WLED by unplugging and plugging 5 times quickly, then reconfigure WiFi.</p>
+
+        <h2>Project Ideas to Try Next</h2>
+
+        <p>Once you master WS2812B + ESP32, the possibilities are endless:</p>
+
+        <ul>
+          <li><strong>DIY Ambilight</strong> — Sync LEDs with your TV for immersive movie watching</li>
+          <li><strong>Music-reactive lights</strong> — Use a microphone module to pulse LEDs to the beat</li>
+          <li><strong>Smart under-cabinet lighting</strong> — Turn on with motion sensors or voice commands</li>
+          <li><strong>PC case lighting</strong> — Match your gaming setup's color scheme</li>
+          <li><strong>Holiday decorations</strong> — Change colors for Christmas, Halloween, etc.</li>
+        </ul>
+
+        <p>For more ESP32 project ideas, explore our <a href="../raspberry-pi-diy-projects-beginners.html">DIY project guides</a> — many can be adapted for ESP32 instead of Raspberry Pi.</p>
+
+        <h2>Conclusion: You're Now a LED Wizard</h2>
+
+        <p>Controlling WS2812B LEDs with ESP32 is one of the most rewarding DIY skills you can learn. For the cost of a pizza, you can build custom smart lights that rival Philips Hue — and you control every aspect, from colors to effects to automation.</p>
+
+        <p><strong>My recommendation:</strong> Start with WLED if you want instant results. Once you're comfortable, dive into FastLED for custom effects. And don't forget to 3D print a nice enclosure — it transforms a bare board into something you're proud to show off.</p>
+
+        <p>Got questions or built something cool? Drop a comment below. I'd love to see what you create! 💡</p>
+
+        <p><em>Ready to take your smart home to the next level? Check out our <a href="../esphome-sensor-integration.html">ESPHome sensor integration guide</a> to add temperature, motion, and light sensors to your Home Assistant setup.</em></p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../best-esp32-development-board.html">Best ESP32 Development Boards in 2026: DevKit, WROOM, and WROVER Compared</a></li>
+          <li><a href="../home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="../esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="../3d-print-smart-home-case.html">How to 3D Print Custom Smart Home Device Cases and Sensor Housings</a></li>
+          <li><a href="../best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
