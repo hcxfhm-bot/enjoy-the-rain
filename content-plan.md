@@ -319,7 +319,7 @@
 - [x] ws2812b-led-strip-esp32 — How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide ✅ 2026-06-29
 
 ### 批次 42：3D PRINTING + SMART HOME CROSSOVER (6篇) 🆕
-- [ ] 3d-printed-esp32-case-design — How to Design and 3D Print Custom ESP32 and Sensor Cases
+- [x] 3d-printed-esp32-case-design — How to Design and 3D Print Custom ESP32 and Sensor Cases ✅ 2026-06-29
 - [ ] diy-smart-plant-monitor-3d-print — DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant
 - [ ] 3d-printed-wall-mount-smart-home — 3D Printed Wall Mounts for Smart Home Devices: Design Tips and 10 Models
 - [ ] custom-knob-3d-print-home-assistant — How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards
@@ -329,7 +329,7 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 225 篇 ✅ (批次1-41进行中)
+- **已完成**: 226 篇 ✅ (批次42进行中)
 - **当前批次**: 批次42（3D Printing + Smart Home Crossover）
 - **剩余**: 75 篇
 

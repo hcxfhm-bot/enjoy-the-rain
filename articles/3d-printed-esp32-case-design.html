@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Design and 3D Print Custom ESP32 and Sensor Cases</title>
+  <meta name="description" content="Learn to design custom 3D printed enclosures for ESP32 boards, temperature sensors, motion detectors, and smart home devices. Covers CAD tools, design rules, and print settings.">
+  <meta name="keywords" content="3D print ESP32 case, custom sensor enclosure, DIY smart home case, 3D printed electronics housing, ESP32 enclosure design">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>3D Printing + Smart Home</span>
+      </nav>
+
+      <h1>How to Design and 3D Print Custom ESP32 and Sensor Cases</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 29, 2026</span>
+        <span>⏱️ 10 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">📦</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You've built your ESP32 smart home sensor. It's monitoring temperature, detecting motion, or controlling your lights through Home Assistant. But the bare PCB with wires sticking out looks fragile and messy — and it's definitely not safe to mount on a wall. <strong>You need a custom case.</strong></p>
+
+        <p>The good news? If you have a 3D printer, you can design and print a perfect enclosure in an afternoon. This guide walks you through designing custom cases for ESP32 boards, temperature sensors, motion detectors, and other smart home electronics — even if you've never done 3D design before.</p>
+
+        <h2>Why Custom Cases Matter for Smart Home Projects</h2>
+
+        <p>Off-the-shelf project boxes work, but they're never quite right. The mounting holes don't align with your PCB. There's no cutout for your USB cable. The sensor opening is in the wrong spot. You end up drilling, filing, and improvising — and the result looks like it.</p>
+
+        <p>Custom 3D printed cases solve all of these problems:</p>
+
+        <ul>
+          <li><strong>Perfect fit:</strong> Every mounting hole, cutout, and opening matches your specific board and components.</li>
+          <li><strong>Professional appearance:</strong> Your smart home devices look like commercial products, not hobby experiments.</li>
+          <li><strong>Protection:</strong> Electronics stay safe from dust, moisture, and accidental shorts.</li>
+          <li><strong>Easy mounting:</strong> Design in wall mounts, screw tabs, or DIN rail clips right into the case.</li>
+        </ul>
+
+        <p>If you're following our guides on <a href="ws2812b-led-strip-esp32.html">controlling WS2812B LEDs with ESP32</a> or <a href="diy-weather-station-raspberry-pi.html">building a DIY weather station</a>, a well-designed case makes the final project look polished and professional.</p>
+
+        <h2>Tools You Need to Design Enclosures</h2>
+
+        <p>You don't need expensive CAD software. Several free tools handle enclosure design well:</p>
+
+        <h3>Tinkercad (Beginner-Friendly)</h3>
+        <p>Tinkercad is a browser-based 3D design tool from Autodesk. It uses a simple block-based approach — you add cubes, cylinders, and holes, then combine them into your final shape. It's perfect for simple rectangular cases with a few cutouts.</p>
+        <p><strong>Best for:</strong> Your first few enclosures, simple box designs, quick prototypes. If you followed our <a href="tinkercad-3d-printing-tutorial.html">Tinkercad 3D printing tutorial</a>, you already know the basics.</p>
+
+        <h3>Fusion 360 (Intermediate to Advanced)</h3>
+        <p>Fusion 360 is a full parametric CAD tool that's free for hobbyists and makers (with some limitations). It lets you create precise designs with exact dimensions, parametric features, and complex shapes. If you want to design cases with snap-fit lids, custom clips, or intricate mounting features, Fusion 360 is worth the learning curve.</p>
+        <p><strong>Best for:</strong> Repeated designs, parametric models where you can adjust dimensions without redrawing, complex assemblies like multi-part cases.</p>
+
+        <h3>FreeCAD (Free and Open-Source)</h3>
+        <p>FreeCAD is an open-source parametric CAD tool similar to Fusion 360. It's completely free with no restrictions, though the interface is less polished. If you prefer open-source software or need features locked behind Fusion 360's paid tier, FreeCAD is a solid alternative.</p>
+
+        <h2>Step-by-Step: Design Your First ESP32 Case</h2>
+
+        <p>Let's walk through designing a simple case for an ESP32 DevKit board (the most common ESP32 form factor for DIY projects). We'll use Tinkercad for simplicity, but the process is similar in any CAD tool.</p>
+
+        <h3>Step 1: Measure Your Board</h3>
+        <p>Grab a caliper or ruler and measure:</p>
+        <ul>
+          <li>PCB length and width (ESP32 DevKit V1 is typically 55mm × 28mm)</li>
+          <li>PCB thickness (usually 1.6mm)</li>
+          <li>Height of the tallest component (the USB connector is often tallest at ~8mm)</li>
+          <li>Mounting hole positions (measure from board corner to hole center)</li>
+          <li>USB connector position and dimensions</li>
+        </ul>
+        <p><strong>Tip:</strong> If you don't have the board yet, search for "ESP32 DevKit dimensions" — most popular boards have published dimension drawings.</p>
+
+        <h3>Step 2: Create the Base</h3>
+        <p>In Tinkercad, create a box slightly larger than your PCB. Add 2-3mm clearance on all sides, and make the walls about 2mm thick. So for a 55mm × 28mm ESP32 board, your outer dimensions might be 60mm × 33mm.</p>
+        <p>Set the base height to about 15-20mm — enough to hold the board with some air space above.</p>
+
+        <h3>Step 3: Add PCB Mounting Features</h3>
+        <p>You have two options for holding the PCB:</p>
+        <ul>
+          <li><strong>Screw mounts:</strong> Add small cylindrical posts in the corners with holes matching your PCB's mounting holes. Use M3 screws or M2.5 if the board uses smaller holes.</li>
+          <li><strong>Snap-in clips:</strong> Design small plastic clips that grab the PCB edges. These work well but require careful sizing — too tight and the board won't fit, too loose and it rattles.</li>
+        </ul>
+
+        <h3>Step 4: Create Cutouts</h3>
+        <p>Use the "hole" feature in Tinkercad to remove material where you need openings:</p>
+        <ul>
+          <li><strong>USB cutout:</strong> Add a rectangular hole on one end for the USB cable. Make it slightly larger than the USB connector — 10mm × 6mm is usually safe for micro-USB.</li>
+          <li><strong>Sensor opening:</strong> If your board has temperature or humidity sensors, add ventilation slots or a circular opening directly above the sensor.</li>
+          <li><strong>LED window:</strong> For status LEDs, create a small hole or use translucent filament in that area.</li>
+        </ul>
+
+        <h3>Step 5: Design the Lid</h3>
+        <p>Create a separate lid piece that fits over the base. Add a 2-3mm overlap where the lid sits inside the base walls. You can design the lid to:</p>
+        <ul>
+          <li><strong>Press-fit:</strong> The lid snaps into place with friction. Simple but not reusable many times.</li>
+          <li><strong>Screw-on:</strong> Add matching holes in the lid and base for M3 screws. More secure and easier to open.</li>
+        </ul>
+
+        <h2>Design Rules for 3D Printed Cases</h2>
+
+        <p>Designing for 3D printing is different from designing for injection molding. Follow these rules to ensure your cases print reliably:</p>
+
+        <h3>Wall Thickness</h3>
+        <p>Make walls at least 2mm thick (2 perimeters at 0.4mm nozzle width). Thinner walls may print but will be fragile. For larger cases or outdoor use, go with 3mm walls.</p>
+
+        <h3>Tolerances</h3>
+        <p>3D prints aren't dimensionally perfect. Add 0.2-0.3mm clearance for parts that fit together. So if your PCB is 55mm wide, make the case interior at least 55.3mm. Test-fit your first print and adjust the CAD model if needed.</p>
+
+        <h3>Layer Orientation</h3>
+        <p>Print cases with the open side facing up (lid on top in the slicer). This avoids overhangs and gives you the smoothest finish on visible surfaces. The layer lines will run horizontally around the case, which looks better and is stronger vertically.</p>
+
+        <h3>Avoid Sharp Internal Corners</h3>
+        <p>Sharp 90° corners inside your case (where walls meet the floor) tend to print poorly. Add a small fillet or chamfer — 1-2mm radius is enough. This also makes the case stronger and easier to clean.</p>
+
+        <h2>Choosing Filament for Electronics Cases</h2>
+
+        <p>Not all filaments are suitable for electronics enclosures. Consider these factors:</p>
+
+        <h3>PLA (Most Common)</h3>
+        <p>PLA is the easiest filament to print and works fine for indoor projects. It's rigid and dimensionally stable at room temperature. However, PLA softens around 60°C, so avoid it for projects that generate heat or sit in direct sunlight.</p>
+
+        <h3>PETG (Better for Heat Resistance)</h3>
+        <p>PETG handles temperatures up to 80°C before softening, making it safer for projects with power electronics or outdoor deployment. It's also more impact-resistant than PLA. If you're not sure which filament to use, our <a href="petg-vs-pla-comparison.html">PETG vs PLA comparison</a> breaks down the differences in detail.</p>
+
+        <h3>ASA (Outdoor Use)</h3>
+        <p>ASA is similar to ABS but UV-resistant. Use it for outdoor sensor enclosures like those in <a href="diy-outdoor-sensor-enclosure-3d-print.html">weatherproof sensor housings</a>. It's harder to print than PLA or PETG — you'll need an enclosure and good bed adhesion.</p>
+
+        <h2>Print Settings for Cases</h2>
+
+        <p>Use these settings as a starting point:</p>
+
+        <ul>
+          <li><strong>Layer height:</strong> 0.2mm (good balance of speed and surface quality)</li>
+          <li><strong>Perimeters:</strong> 3 (stronger walls and better appearance)</li>
+          <li><strong>Infill:</strong> 15-20% (cases don't need high strength, but more infill reduces print time for sparse areas)</li>
+          <li><strong>Support:</strong> Usually not needed if you orient the case correctly. If your design has overhangs, use tree supports for easier removal.</li>
+          <li><strong>Bed temperature:</strong> 60°C for PLA, 80°C for PETG, 90-100°C for ASA</li>
+        </ul>
+
+        <h2>Advanced Design Tips</h2>
+
+        <p>Once you're comfortable with basic cases, try these techniques:</p>
+
+        <h3>Threaded Inserts</h3>
+        <p>Instead of tapping plastic or using wood screws, design mounting holes for heat-set threaded inserts. These brass inserts melt into the plastic and provide strong, reusable threads for M3 screws. Our guide on <a href="3d-printing-threaded-inserts.html">how to use threaded inserts in 3D prints</a> covers this in detail.</p>
+
+        <h3>Ventilation Patterns</h3>
+        <p>For projects that generate heat (like power supplies or motor drivers), design ventilation slots into the case. A grid of rectangular holes or a honeycomb pattern works well. Consider airflow direction — place intake vents low on one side and exhaust vents high on the opposite side.</p>
+
+        <h3>Mounting Tabs</h3>
+        <p>Add screw tabs to the outside of the case for wall mounting. A simple L-shaped tab with a hole for a screw head is easy to design and lets you mount the case securely. Make tabs at least 3mm thick to handle clamping force.</p>
+
+        <h3>Cable Glands</h3>
+        <p>For projects with external cables (sensors, power), design in a cable gland — a tapered hole that grips the cable jacket. This provides strain relief and keeps the enclosure sealed against dust.</p>
+
+        <h2>Testing and Iterating</h2>
+
+        <p>Your first case design probably won't be perfect — and that's fine. Print a quick prototype with lower infill and faster settings, test-fit your electronics, and note what needs to change. Common adjustments:</p>
+
+        <ul>
+          <li>USB cutout position shifted 1-2mm</li>
+          <li>PCB mount holes slightly too small or large</li>
+          <li>Lid fits too tight or too loose</li>
+          <li>Forgot a cutout for reset button or antenna</li>
+        </ul>
+
+        <p>Refine the CAD model and print again. Most designs are production-ready after 2-3 iterations.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Designing custom 3D printed cases for ESP32 boards and smart home sensors is a skill that transforms messy prototype builds into polished, professional-looking projects. Start simple with Tinkercad, follow the basic design rules, and iterate based on test prints. Once you've designed one or two cases, you'll develop a feel for clearances, mounting features, and what works on your printer.</p>
+
+        <p>Whether you're building a temperature sensor for your smart home hub like our <a href="home-assistant-raspberry-pi-setup.html">Home Assistant setup guide</a>, or creating a custom enclosure for an ESP32-CAM security camera, the same design process applies. Measure, model, print, test, and refine — and you'll have cases that make your DIY electronics look factory-made.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="tinkercad-3d-printing-tutorial.html">Tinkercad for 3D Printing: Design Your First Model in 30 Minutes</a></li>
+          <li><a href="3d-printing-threaded-inserts.html">How to Use Threaded Inserts in 3D Prints (Step-by-Step Guide)</a></li>
+          <li><a href="ws2812b-led-strip-esp32.html">How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide</a></li>
+          <li><a href="petg-vs-pla-comparison.html">PETG vs PLA: Strength, Ease of Use & When to Switch</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
