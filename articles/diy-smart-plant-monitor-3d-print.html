@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant</title>
+  <meta name="description" content="Build a DIY smart plant monitor with ESP32, soil moisture sensor, and a custom 3D printed enclosure. Integrate with Home Assistant to track moisture, temperature, and light levels for healthier plants.">
+  <meta name="keywords" content="DIY plant monitor, ESP32 soil moisture sensor, 3D printed plant monitor case, Home Assistant plant sensor, smart plant monitor ESP32, ESPHome plant monitoring">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>3D Printing + Smart Home</span>
+      </nav>
+
+      <h1>DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 June 30, 2026</span>
+        <span>⏱️ 11 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🌱</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You love your plants, but let's be honest — you're not great at remembering when to water them. Some thrive on neglect, others wilt if you blink at them wrong, and half the time you're guessing whether that drooping leaf means "water me" or "stop drowning me." <strong>A smart plant monitor takes the guesswork out of plant care.</strong></p>
+
+        <p>Commercial plant sensors cost $30-50 each, and you need one per plant if you want whole-house coverage. But you can build your own for under $10 per sensor using an ESP32, a soil moisture sensor, and a 3D printed enclosure. Even better, you can integrate these sensors into Home Assistant and see all your plants' moisture, temperature, and light levels on one dashboard.</p>
+
+        <p>This guide walks you through building a DIY smart plant monitor from scratch — including designing and printing a custom enclosure that looks good enough to sit on your windowsill next to your fiddle leaf fig.</p>
+
+        <h2>What You'll Need</h2>
+
+        <p>Here's the parts list for one plant monitor. If you're making several (and you probably will once you see how useful they are), buy components in bulk to save money.</p>
+
+        <h3>Electronics</h3>
+        <ul>
+          <li><strong>ESP32 DevKit V1</strong> — The brain of the project. Handles Wi-Fi, sensor readings, and sends data to Home Assistant. (~$5-8 on AliExpress)</li>
+          <li><strong>Capacitive soil moisture sensor (v1.2 or v2.0)</strong> — Measures soil moisture without corroding like the old resistive sensors. (~$3-5)</li>
+          <li><strong>DHT22 temperature/humidity sensor</strong> — Tracks air temperature and humidity near your plant. Optional but useful. (~$2-3)</li>
+          <li><strong>BH1750 light sensor</strong> — Measures light levels so you know if your plant is getting enough sun. Also optional. (~$2)</li>
+          <li><strong>18650 battery + holder (optional)</strong> — For cordless operation. A small LiPo or 18650 with a TP4056 charging module works well.</li>
+          <li><strong>Hook-up wire</strong> — 22-26 AWG silicone wire is flexible and easy to work with.</li>
+        </ul>
+
+        <h3>Tools</h3>
+        <ul>
+          <li>Soldering iron and solder (see our <a href="best-soldering-station-beginners.html">best soldering station guide for beginners</a> if you need one)</li>
+          <li>3D printer (or use a printing service like PrintAThing)</li>
+          <li>Micro-USB cable for programming and power</li>
+          <li>Small Phillips screwdriver</li>
+        </ul>
+
+        <p>If you've already built projects from our <a href="esp32-smart-home-beginners.html">ESP32 smart home guide</a> or our <a href="sensor-guide-beginners.html">electronics sensor guide for beginners</a>, you already have most of these parts.</p>
+
+        <h2>Wiring the Sensors to ESP32</h2>
+
+        <p>The ESP32 has plenty of GPIO pins, so wiring is straightforward. Here's the connection map:</p>
+
+        <h3>Capacitive Soil Moisture Sensor</h3>
+        <ul>
+          <li>VCC → 3.3V (not 5V — the sensor runs on 3.3V and 5V can damage it over time)</li>
+          <li>GND → GND</li>
+          <li>OUT (analog) → GPIO 32 (any ADC pin works, but GPIO 32-39 are recommended for analog reading)</li>
+        </ul>
+
+        <h3>DHT22 Temperature/Humidity Sensor</h3>
+        <ul>
+          <li>VCC → 3.3V</li>
+          <li>GND → GND</li>
+          <li>DATA → GPIO 4 (or any available GPIO)</li>
+        </ul>
+
+        <h3>BH1750 Light Sensor (I2C)</h3>
+        <ul>
+          <li>VCC → 3.3V</li>
+          <li>GND → GND</li>
+          <li>SDA → GPIO 21 (ESP32's default SDA pin)</li>
+          <li>SCL → GPIO 22 (ESP32's default SCL pin)</li>
+        </ul>
+
+        <p><strong>Pro tip:</strong> Add a small capacitor (0.1µF ceramic) between VCC and GND on the moisture sensor to reduce noise. Soil moisture readings can be jittery without it.</p>
+
+        <h2>Flashing ESPHome Firmware (No Coding Required)</h2>
+
+        <p>You don't need to write Arduino code for this project. ESPHome is an open-source firmware that lets you configure sensors using a simple YAML file, then flash it to your ESP32. It integrates seamlessly with Home Assistant and handles Wi-Fi, sensor polling, and data reporting automatically.</p>
+
+        <p>If you followed our <a href="esphome-getting-started-guide.html">ESPHome getting started guide</a>, you already know the workflow. If not, here's the quick version:</p>
+
+        <h3>Step 1: Install ESPHome</h3>
+        <p>In Home Assistant, go to <strong>Settings → Add-ons → Add-on Store</strong>, search for "ESPHome", and install it. Once installed, open the ESPHome dashboard.</p>
+
+        <h3>Step 2: Create a New Device</h3>
+        <p>Click "New Device", give it a name (like "plant-monitor-living-room"), and select "ESP32" as the device type. ESPHome will generate a basic configuration file.</p>
+
+        <h3>Step 3: Add Sensor Configuration</h3>
+        <p>Click "Edit" on your new device and add the sensor configuration. Here's a sample config for our plant monitor:</p>
+
+        <pre><code>esphome:
+  name: plant-monitor-living-room
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "Your_WiFi_SSID"
+  password: "Your_WiFi_Password"
+
+api:
+  encryption:
+    key: "your-encryption-key"
+
+ota:
+  password: "your-ota-password"
+
+sensor:
+  - platform: adc
+    pin: 32
+    name: "Soil Moisture"
+    unit_of_measurement: "%"
+    filters:
+      - lambda: |-
+          return (1 - (x / 3.3)) * 100;
+
+  - platform: dht
+    pin: 4
+    model: DHT22
+    temperature:
+      name: "Plant Temperature"
+    humidity:
+      name: "Plant Humidity"
+    update_interval: 60s
+
+  - platform: bh1750
+    name: "Plant Light Level"
+    address: 0x23
+    update_interval: 60s
+
+deep_sleep:
+  id: deep_sleep_control
+  run_duration: 30s
+  sleep_duration: 300s
+</code></pre>
+
+        <p>This config reads all three sensors, reports data to Home Assistant every 5 minutes (with a 30-second wake window to send data), and puts the ESP32 into deep sleep between readings to save battery if you're running wireless.</p>
+
+        <h3>Step 4: Flash and Test</h3>
+        <p>Click "Install" in ESPHome, connect your ESP32 via USB, and select "Plug into this computer". ESPHome will compile and flash the firmware. Once done, check your Home Assistant dashboard — your plant sensors should appear as entities under the ESPHome device.</p>
+
+        <h2>Designing the 3D Printed Enclosure</h2>
+
+        <p>Now for the fun part — designing a case that protects your electronics and looks good next to your plants. You have two options: download an existing design from Printables or Thingiverse, or design your own custom enclosure.</p>
+
+        <p>If you want to design your own (and you should — it's a great learning experience), follow the process from our <a href="3d-printed-esp32-case-design.html">ESP32 case design guide</a>. Here are the specific considerations for a plant monitor enclosure:</p>
+
+        <h3>Enclosure Design Requirements</h3>
+        <ul>
+          <li><strong>Water resistance:</strong> The enclosure doesn't need to be waterproof, but it should shed water. A sloped top prevents water from pooling. Avoid horizontal surfaces where water can collect.</li>
+          <li><strong>Sensor cable exit:</strong> The soil moisture sensor has a long cable that needs to exit the case. Design a small notch or cable gland in the bottom or back of the case.</li>
+          <li><strong>Ventilation:</strong> If you include the DHT22 temperature/humidity sensor inside the case, it needs airflow to read ambient conditions. Add narrow slots or a mesh pattern on the sides.</li>
+          <li><strong>USB access:</strong> You'll need to charge or reprogram the ESP32 occasionally. Design the case so the micro-USB port is accessible without disassembling everything, or make the case easy to open with screws or a snap-fit lid.</li>
+          <li><strong>Mounting:</strong> A flat bottom lets the case sit on a shelf or windowsill. Optionally add a keyhole slot or wall mount tabs if you want to hang it.</li>
+        </ul>
+
+        <h3>Sizing the Enclosure</h3>
+        <p>A typical ESP32 DevKit board (55mm × 28mm) with a small prototyping area needs a case about 65mm × 40mm × 25mm. If you're using a larger battery or multiple sensors, adjust accordingly. Keep the case as small as possible while leaving 5mm clearance around all components for wire routing.</p>
+
+        <h3>Print Settings</h3>
+        <p>Use PETG or ASA for the enclosure — both handle moisture better than PLA. PLA will absorb humidity over time and can become brittle. PETG is a good compromise between printability and water resistance. If you're not sure which filament to choose, our <a href="petg-vs-pla-comparison.html">PETG vs PLA comparison</a> breaks down the differences.</p>
+
+        <p>Recommended print settings:</p>
+        <ul>
+          <li><strong>Layer height:</strong> 0.2mm (balance of speed and detail)</li>
+          <li><strong>Walls:</strong> 3 perimeters (strong enough for a small case)</li>
+          <li><strong>Infill:</strong> 20% (adequate strength, keeps print time reasonable)</li>
+          <li><strong>Support:</strong> Only if your design has significant overhangs. Orient the case with the open side up to minimize support needs.</li>
+        </ul>
+
+        <h2>Assembling the Plant Monitor</h2>
+
+        <p>Once your enclosure is printed and you've tested the electronics on a breadboard, it's time to assemble everything into the final unit.</p>
+
+        <h3>Step 1: Test Fit the Electronics</h3>
+        <p>Before soldering anything permanently, do a test fit. Place the ESP32 and sensors in the enclosure (or a 3D printed prototype) to verify clearances. Check that the USB cable can reach the port, and that the moisture sensor cable exits the case where you intended.</p>
+
+        <h3>Step 2: Solder and Secure</h3>
+        <p>Solder the sensors to the ESP32 according to the wiring diagram. Use flexible silicone wire (26 AWG works well) so the case can be assembled without stressing the connections. Once soldered, secure the ESP32 to the case using M3 screws and heat-set threaded inserts. If you haven't used threaded inserts before, our guide on <a href="3d-printing-threaded-inserts.html">threaded inserts in 3D prints</a> covers the process step-by-step.</p>
+
+        <h3>Step 3: Route the Moisture Sensor Cable</h3>
+        <p>The soil moisture sensor connects via a 1-2 meter cable. Route this through the cable exit in your case and strain-relieve it — you don't want the cable getting yanked and pulling the solder joint off the ESP32. A small cable tie or hot glue dab works as a strain relief.</p>
+
+        <h3>Step 4: Seal the Case</h3>
+        <p>Close the case and secure the lid. If your design uses screws, don't overtighten — plastic threads strip easily. If it's a snap-fit lid, test the fit before final assembly. You may need to sand the lid edges slightly for a smooth fit.</p>
+
+        <h3>Step 5: Calibrate the Moisture Sensor</h3>
+        <p>Before sticking the sensor in a plant, calibrate it. Insert the moisture probe into a glass of water (the probe part only — not the electronics!) and note the reading. Then let it dry completely and note the dry reading. Map these to 100% and 0% moisture in your ESPHome config using the lambda filter (shown in the sample config above).</p>
+
+        <h2>Integrating with Home Assistant</h2>
+
+        <p>With the hardware assembled and firmware flashed, your plant monitor should already appear in Home Assistant's ESPHome integration. Now set up a dashboard to monitor all your plants at a glance.</p>
+
+        <h3>Creating a Plant Dashboard</h3>
+        <p>In Home Assistant, go to <strong>Settings → Dashboards → Add Dashboard</strong>. Choose "Manual" for full control, then add cards for each sensor. A good layout:</p>
+
+        <ul>
+          <li><strong>Gauge card</strong> for soil moisture (0-100% range, with "low" threshold at 30%)</li>
+          <li><strong>Entity card</strong> for temperature and humidity</li>
+          <li><strong>History graph</strong> to see moisture trends over time (is the plant using more water as it grows?)</li>
+          <li><strong>Automation trigger</strong> — send a notification when moisture drops below 30%</li>
+        </ul>
+
+        <h3>Setting Up Automations</h3>
+        <p>The real power of a smart plant monitor is automated alerts. Create an automation in Home Assistant that notifies you when a plant needs water:</p>
+
+        <pre><code>alias: Plant Watering Reminder
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.plant_monitor_living_room_soil_moisture
+    below: 30
+action:
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "Time to water your plant!"
+      message: "The fiddle leaf fig in the living room is getting dry."
+</code></pre>
+
+        <p>You can extend this to control a smart watering system — our guide on <a href="home-assistant-automations-beginners.html">Home Assistant automations for beginners</a> covers the basics of triggering actions from sensor data.</p>
+
+        <h2>Going Wireless: Battery Operation</h2>
+
+        <p>If you don't want a USB cable running across your windowsill, add a battery. The ESP32 can run on a single 18650 Li-ion cell (3.7V) or a small LiPo battery. Connect the battery to the ESP32's 3.3V regulator (not directly to the 5V pin — you need a regulator or a TP4056 charging module with protection).</p>
+
+        <p>The deep sleep configuration in the ESPHome YAML above puts the ESP32 into low-power mode between sensor readings. With deep sleep and a 3000mAh 18650 battery, you can expect 2-3 months of runtime before needing to recharge. When the battery gets low, the ESP32 can send a low-battery notification to Home Assistant.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>Moisture Sensor Reads Erratically</h3>
+        <p>Capacitive sensors can be noisy. Add a capacitor across the power pins, use shielded cable for the sensor lead, and increase the ADC filtering in ESPHome (add a moving average filter in the YAML config). Also make sure the sensor probes are clean — soil salts can build up over time.</p>
+
+        <h3>ESP32 Won't Stay Connected to Wi-Fi</h3>
+        <p>Plant monitors often sit in windowsills or corners with weak Wi-Fi. Add a small Wi-Fi antenna to the ESP32, or use a Wi-Fi range extender. Alternatively, use ESP-NOW (a peer-to-peer protocol) to relay data from multiple plant sensors to one ESP32 gateway that's closer to your router.</p>
+
+        <h3>Case Is Too Tight for the Electronics</h3>
+        <p>If your first print doesn't fit quite right, don't force it. Measure the actual printed dimensions with calipers and compare to your CAD model. ABS and PLA shrink differently — if you printed in ABS, you may need to adjust tolerances. For your next version, add 0.2-0.3mm clearance to all internal features.</p>
+
+        <h2>Expanding the Project</h2>
+
+        <p>Once you've built one plant monitor, it's easy to scale up. Build a second one for your bedroom pothos, a third for the kitchen herbs, and soon you'll have a full house of monitored plants. Some ideas for taking this project further:</p>
+
+        <ul>
+          <li><strong>Add a small OLED display</strong> to the case showing moisture level at a glance (no phone required).</li>
+          <li><strong>Use ESP32-CAM</strong> to snap daily photos of your plant and track growth over time in Home Assistant.</li>
+          <li><strong>Automate watering</strong> by adding a small peristaltic pump and relay — when moisture drops below the threshold, the pump runs for 10 seconds to add water to the pot.</li>
+          <li><strong>Design a modular enclosure system</strong> where the ESP32 slides into different sensor pods — one for moisture, one for light, one for temperature — so you can mix and match sensors for each plant's needs.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>A DIY smart plant monitor is one of the most satisfying ESP32 projects — it's useful, customizable, and looks great with a 3D printed enclosure. For under $15 in parts, you get a sensor that outperforms many commercial options, integrates seamlessly with Home Assistant, and teaches you about ESPHome, sensor wiring, and enclosure design along the way.</p>
+
+        <p>Start with one plant. Print the enclosure, flash the firmware, and get it running. Once you see your plant's moisture levels on your Home Assistant dashboard — and get a notification when it's time to water — you'll wonder how you ever kept plants alive without it. Then build another one. And another. Soon you'll have the most monitored (and healthiest) plant collection on the block.</p>
+
+        <p>If you're looking for more smart home projects to 3D print enclosures for, check out our guides on <a href="diy-home-security-system.html">DIY home security systems</a> and <a href="diy-smart-door-lock.html">building a smart door lock with ESP32</a>. The same enclosure design skills apply, and your 3D printer will quickly become your most-used smart home tool.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 and Sensor Cases</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="best-soldering-station-beginners.html">Best Soldering Station for Electronics & DIY Makers in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

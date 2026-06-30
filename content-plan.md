@@ -320,7 +320,7 @@
 
 ### 批次 42：3D PRINTING + SMART HOME CROSSOVER (6篇) 🆕
 - [x] 3d-printed-esp32-case-design — How to Design and 3D Print Custom ESP32 and Sensor Cases ✅ 2026-06-29
-- [ ] diy-smart-plant-monitor-3d-print — DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant
+- [x] diy-smart-plant-monitor-3d-print — DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant ✅ 2026-06-30
 - [ ] 3d-printed-wall-mount-smart-home — 3D Printed Wall Mounts for Smart Home Devices: Design Tips and 10 Models
 - [ ] custom-knob-3d-print-home-assistant — How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards
 - [ ] 3d-printed-cable-management-smart-home — 3D Printed Cable Management for Smart Home Setups: 8 Practical Designs
