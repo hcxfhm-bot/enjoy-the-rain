@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards</title>
+  <meta name="description" content="Learn how to design and 3D print custom knobs and dials for your Home Assistant dashboard. Includes rotary encoder integration, design tips, and 3 printable models.">
+  <meta name="keywords" content="3D printed knob, Home Assistant dial, rotary encoder knob, smart home control, 3D print rotary knob, custom dashboard dial, ESP32 rotary encoder">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home + 3D Printing</span>
+      </nav>
+
+      <h1>How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 2, 2026</span>
+        <span>⏱️ 10 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🎛️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Physical controls are making a comeback in smart homes. While touchscreens and voice commands are convenient, there's something satisfying about turning a real knob to dim your lights or adjust the thermostat. If you're building a custom Home Assistant dashboard with rotary encoders, you'll need knobs—and 3D printing lets you create exactly what you want.</p>
+
+        <p>In this guide, we'll cover how to design and 3D print custom knobs and dials for rotary encoders used in Home Assistant setups, along with three ready-to-print models you can use today.</p>
+
+        <h2>Why Physical Knobs for Smart Home Control?</h2>
+
+        <p>Before diving into design, let's address why you'd want physical knobs in a smart home:</p>
+
+        <ul>
+          <li><strong>Muscle memory:</strong> You can adjust a knob without looking—try doing that with a touchscreen slider.</li>
+          <li><strong>Tactile feedback:</strong> The click of a rotary encoder and the feel of a knurled knob provide satisfying confirmation of your action.</li>
+          <li><strong>Guest-friendly:</strong> Visitors don't need to learn your voice commands or app interface—they just turn the knob.</li>
+          <li><strong>Reliability:</strong> Physical controls work even when your Wi-Fi is down or your phone is in another room.</li>
+          <li><strong>Accessibility:</strong> For family members who struggle with touchscreens or voice commands, knobs are intuitive and easy to use.</li>
+        </ul>
+
+        <p>Projects like our <a href="../articles/diy-smart-plant-monitor-3d-print.html">DIY smart plant monitor</a> benefit from having a physical interface for quick checks without opening an app.</p>
+
+        <h2>Understanding Rotary Encoders</h2>
+
+        <p>Most DIY smart home knobs use rotary encoders—electronic components that convert rotational movement into digital signals. Here's what you need to know:</p>
+
+        <h3>Types of Rotary Encoders</h3>
+
+        <ul>
+          <li><strong>Mechanical (incremental):</strong> Most common and affordable. Output pulses as you turn, with 20-24 "detents" (clicks) per rotation. Perfect for Home Assistant volume or brightness control.</li>
+          <li><strong>Magnetic:</strong> Smoother feel without detents. Better for precise positioning but more expensive.</li>
+          <li><strong>Optical:</strong> High precision for industrial applications. Overkill for home automation.</li>
+        </ul>
+
+        <h3>Common Shaft Sizes</h3>
+
+        <p>When designing knobs, you need to match the encoder's shaft diameter:</p>
+
+        <ul>
+          <li><strong>6mm D-shaft:</strong> Most common for panel-mount encoders. The flat side prevents rotation.</li>
+          <li><strong>1/4" (6.35mm) D-shaft:</strong> Common in audio equipment.</li>
+          <li><strong>4mm round shaft:</strong> Found on some PCB-mounted encoders. Requires a set screw.</li>
+          <li><strong>Knurled shafts:</strong> Press-fit knobs work well on these.</li>
+        </ul>
+
+        <p>Always measure your encoder's shaft with calipers before designing. Tolerance is critical—a 6mm shaft needs a 6.1-6.2mm hole for a snug fit.</p>
+
+        <h2>Design Principles for 3D Printed Knobs</h2>
+
+        <h3>1. Shaft Attachment Methods</h3>
+
+        <p>How your knob attaches to the encoder shaft is the most critical design element:</p>
+
+        <ul>
+          <li><strong>Press-fit (D-shaft):</strong> Design a hole matching the shaft diameter with a flat side. The plastic flexes slightly to grip. Works best with slightly flexible materials like PETG. Print hole 0.1-0.15mm undersized.</li>
+          <li><strong>Set screw:</strong> Include a hole for an M2 or M3 set screw that tightens against the shaft. Most secure option but requires tapping threads or using heat-set inserts.</li>
+          <li><strong>Collet/clamp:</strong> Split design that clamps around the shaft when tightened. Most complex but works with any shaft type.</li>
+        </ul>
+
+        <h3>2. Knob Diameter and Height</h3>
+
+        <p>Size affects usability:</p>
+
+        <ul>
+          <li><strong>Diameter:</strong> 20-30mm is comfortable for most fingers. Smaller knobs (15mm) work for infrequent adjustments. Larger knobs (40mm+) provide more precision for fine control.</li>
+          <li><strong>Height:</strong> 15-25mm is typical. Taller knobs give more leverage but protrude further from your panel.</li>
+          <li><strong>Grip surface:</strong> Add knurling, ridges, or rubber inserts for better grip. Smooth plastic can be slippery.</li>
+        </ul>
+
+        <h3>3. Visual Feedback</h3>
+
+        <p>Help users understand the knob's position:</p>
+
+        <ul>
+          <li><strong>Indicator line:</strong> A white line or dot on top shows the current position. Print in two colors, or paint after printing.</li>
+          <li><strong>Pointer shape:</strong> Design the knob with an arrow or pointer shape molded in.</li>
+          <li><strong>LED hole:</strong> Many encoders have built-in RGB LEDs. Design a translucent section or light pipe to show status.</li>
+        </ul>
+
+        <h3>4. Print Orientation</h3>
+
+        <p>Always print knobs with the shaft hole vertical (standing up). This ensures:</p>
+
+        <ul>
+          <li>Layer lines run perpendicular to the rotational force</li>
+          <li>Better surface finish on the visible top</li>
+          <li>Shaft hole prints as perfect circles rather than layered ovals</li>
+        </ul>
+
+        <h2>Three Ready-to-Print Knob Models</h2>
+
+        <p>Here are three knob designs optimized for Home Assistant dashboards:</p>
+
+        <h3>1. Classic Knurled Knob (6mm D-Shaft)</h3>
+
+        <p>A timeless design with diamond knurling for grip. 25mm diameter, 20mm height. Works with most panel-mount rotary encoders.</p>
+
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Diamond knurl pattern for excellent grip</li>
+          <li>Indicator line on top surface</li>
+          <li>Press-fit design (no hardware needed)</li>
+        </ul>
+
+        <p><strong>Print settings:</strong> PLA or PETG, 0.2mm layer height, 3 perimeters, 20% infill. Print standing up with the shaft hole vertical. No supports needed.</p>
+
+        <h3>2. Modern Minimalist Dial (6mm D-Shaft with Set Screw)</h3>
+
+        <p>Clean, rounded design for contemporary smart home aesthetics. 30mm diameter, 18mm height. Includes M3 set screw hole.</p>
+
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Smooth rounded edges for comfortable feel</li>
+          <li>Recessed indicator dot</li>
+          <li>Set screw hole for secure mounting</li>
+          <li>Optional LED light pipe channel (4mm diameter)</li>
+        </ul>
+
+        <p><strong>Print settings:</strong> PETG recommended for strength, 0.15mm layer height for smooth finish, 3 perimeters, 25% infill. Use an M3 tap or heat-set insert for the set screw.</p>
+
+        <h3>3. Multi-Function Encoder Knob with Push Button</h3>
+
+        <p>Designed for encoders with integrated push buttons (common in Home Assistant controllers). 28mm diameter, 22mm height. Tall enough to press comfortably.</p>
+
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Raised rim for easy push-button activation</li>
+          <li>Radial ridges for grip</li>
+          <li>Center dimple shows button location</li>
+          <li>Works with encoder push function (cycle through modes, confirm selections)</li>
+        </ul>
+
+        <p><strong>Print settings:</strong> PLA or PETG, 0.2mm layer height, 3 perimeters, 20% infill. Print vertically. This design pairs well with our <a href="../articles/esphome-sensor-integration.html">ESPHome sensor integration</a> guide for building custom controllers.</p>
+
+        <h2>Material Recommendations</h2>
+
+        <p>Choose filament based on your needs:</p>
+
+        <ul>
+          <li><strong>PLA:</strong> Easiest to print, good detail, works for press-fit knobs. Can crack under heavy force.</li>
+          <li><strong>PETG:</strong> Better flexibility for press-fit designs, more durable. Slightly stringier prints. Our <a href="../articles/petg-vs-pla-comparison.html">PETG vs PLA guide</a> covers the differences in detail.</li>
+          <li><strong>TPU:</strong> Flexible rubber-like knobs. Great for grip but harder to print precisely.</li>
+          <li><strong>Composite filaments:</strong> Wood-fill or marble-fill for unique aesthetics. May require larger nozzles.</li>
+        </ul>
+
+        <p>For high-use knobs (volume control, frequently adjusted settings), PETG is the best balance of durability and printability.</p>
+
+        <h2>Integration with Home Assistant</h2>
+
+        <h3>Wiring Rotary Encoders</h3>
+
+        <p>A typical incremental rotary encoder has 5 pins:</p>
+
+        <ul>
+          <li><strong>CLK (A):</strong> Output A - connects to a GPIO pin</li>
+          <li><strong>DT (B):</strong> Output B - connects to another GPIO pin</li>
+          <li><strong>SW:</strong> Push button switch (if equipped)</li>
+          <li><strong>+</strong> and <strong>GND:</strong> Power</li>
+        </ul>
+
+        <p>For ESP32-based controllers, connect CLK and DT to any two GPIO pins, then configure them in ESPHome:</p>
+
+        <pre><code>rotary_encoder:
+  - pin_a: GPIO32
+    pin_b: GPIO33
+    id: my_knob
+    on_clockwise:
+      - homeassistant.service:
+          service: light.turn_on
+          data:
+            entity_id: light.living_room
+            brightness_step_pct: 10
+    on_counter_clockwise:
+      - homeassistant.service:
+          service: light.turn_on
+          data:
+            entity_id: light.living_room
+            brightness_step_pct: -10</code></pre>
+
+        <p>This setup increases brightness 10% per detent clockwise, decreases 10% counter-clockwise. See our <a href="../articles/esphome-getting-started-guide.html">ESPHome getting started guide</a> for the full setup process.</p>
+
+        <h3>ESP32 and ESP8266 Options</h3>
+
+        <p>For your Home Assistant knob controller, these boards work well:</p>
+
+        <ul>
+          <li><strong>ESP32 DevKit:</strong> Plenty of GPIO pins, supports multiple encoders. Check our <a href="../articles/best-esp32-development-board.html">ESP32 board comparison</a>.</li>
+          <li><strong>ESP8266 (NodeMCU/Wemos D1):</strong> Fewer pins but cheaper. Good for single-knob setups.</li>
+          <li><strong>ESP32-S3:</strong> Built-in USB-C and more pins. Best for new projects.</li>
+        </ul>
+
+        <h2>Advanced Knob Features</h2>
+
+        <p>Take your knobs further with these enhancements:</p>
+
+        <h3>RGB LED Integration</h3>
+
+        <p>Many rotary encoders come with built-in RGB LEDs. Design your knob with:</p>
+
+        <ul>
+          <li>A translucent center section for status indication</li>
+          <li>A light pipe channel to route light to the indicator</li>
+          <li>Clear or white PETG for better light transmission</li>
+        </ul>
+
+        <p>Use the LED to show current state (red = off, green = on, blue = night mode). This pairs nicely with our <a href="../articles/ws2812b-led-strip-esp32.html">WS2812B LED control guide</a> for programming RGB feedback.</p>
+
+        <h3>Multi-Turn Counting</h3>
+
+        <p>For precise control (like setting a temperature from 50-90°F), design a knob with a visual scale and program your encoder to track multiple rotations. A skirt around the base can hold a printed scale.</p>
+
+        <h3>Detent Customization</h3>
+
+        <p>Some encoders allow you to change the detent feel. If you want smoother rotation without clicks, look for "detentless" encoders. For distinct position feedback (like a volume knob with 20 steps), standard detented encoders are perfect.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>Knob Slips on Shaft</h3>
+
+        <p>If your press-fit knob is too loose:</p>
+
+        <ul>
+          <li>Print with 0.1mm smaller hole diameter</li>
+          <li>Apply a drop of super glue inside (permanent but effective)</li>
+          <li>Wrap the shaft with a thin layer of tape</li>
+          <li>Switch to a set-screw design</li>
+        </ul>
+
+        <h3>Knob Cracks When Pressing On</h3>
+
+        <p>If the knob cracks during installation:</p>
+
+        <ul>
+          <li>Use PETG instead of PLA for better flexibility</li>
+          <li>Increase the wall thickness around the shaft hole to 3-4 perimeters</li>
+          <li>Heat the knob gently with a hair dryer before pressing</li>
+        </ul>
+
+        <h3>Layer Lines Feel Rough</h3>
+
+        <p>For a smoother feel:</p>
+
+        <ul>
+          <li>Print at 0.15mm or 0.1mm layer height</li>
+          <li>Sand the grip surface with 400-grit sandpaper</li>
+          <li>Apply a thin coat of clear spray paint to seal the surface</li>
+        </ul>
+
+        <p>For more on finishing techniques, see our <a href="../articles/how-to-sand-3d-prints.html">sanding guide</a>.</p>
+
+        <h2>Design Tools for Custom Knobs</h2>
+
+        <p>Want to design your own? These free tools work great:</p>
+
+        <ul>
+          <li><strong>Tinkercad:</strong> Combine cylinders and holes for basic knobs. <a href="../articles/tinkercad-3d-printing-tutorial.html">Start here</a> if you're new to 3D design.</li>
+          <li><strong>FreeCAD:</strong> Parametric design lets you adjust shaft diameter and knob size easily. Our <a href="../articles/freecad-3d-printing-tutorial.html">FreeCAD tutorial</a> covers the basics.</li>
+          <li><strong>OpenSCAD:</strong> Code-based design perfect for knobs—change a few variables and regenerate. Great for batch-creating multiple sizes.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>3D printing custom knobs for your Home Assistant dashboard combines practical function with creative satisfaction. Whether you're building a dedicated control panel or adding tactile controls to a smart speaker setup, a well-designed knob makes interaction more intuitive and enjoyable.</p>
+
+        <p>Start with the ready-to-print models above, then experiment with your own designs. Once you've dialed in your preferred size, shape, and grip pattern, you can quickly print knobs for every encoder in your smart home system.</p>
+
+        <p>For more smart home projects that combine 3D printing with electronics, check out our <a href="../articles/3d-printed-esp32-case-design.html">ESP32 case design guide</a> and <a href="../articles/diy-smart-plant-monitor-3d-print.html">DIY smart plant monitor</a> with 3D printed enclosure.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 and Sensor Cases</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32</a></li>
+          <li><a href="best-esp32-development-board.html">Best ESP32 Development Boards in 2026</a></li>
+          <li><a href="petg-vs-pla-comparison.html">PETG vs PLA: Strength, Ease of Use & When to Switch</a></li>
+          <li><a href="tinkercad-3d-printing-tutorial.html">Tinkercad for 3D Printing: Design Your First Model</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
