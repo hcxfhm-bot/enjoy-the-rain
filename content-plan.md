@@ -323,7 +323,7 @@
 - [x] diy-smart-plant-monitor-3d-print — DIY Smart Plant Monitor: 3D Printed Enclosure + ESP32 + Home Assistant ✅ 2026-06-30
 - [x] 3d-printed-wall-mount-smart-home — 3D Printed Wall Mounts for Smart Home Devices: Design Tips and 10 Models ✅ 2026-07-01
 - [x] custom-knob-3d-print-home-assistant — How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards ✅ 2026-07-02
-- [ ] 3d-printed-cable-management-smart-home — 3D Printed Cable Management for Smart Home Setups: 8 Practical Designs
+- [x] 3d-printed-cable-management-smart-home — 3D Printed Cable Management for Smart Home Setups: 8 Practical Designs ✅ 2026-07-03
 - [ ] diy-outdoor-sensor-enclosure-3d-print — How to Design Weatherproof Outdoor Sensor Enclosures for ESP32 and Arduino
 
 ## 进度
