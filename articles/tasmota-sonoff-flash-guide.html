@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide</title>
+  <meta name="description" content="Learn how to flash Tasmota firmware on Sonoff smart switches and outlets. Step-by-step guide covering Sonoff Basic, Mini, POW, and more — no coding required.">
+  <meta name="keywords" content="flash Tasmota on Sonoff, Sonoff Tasmota firmware, Tasmota flashing guide, Sonoff custom firmware, ESP8266 Tasmota">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 5, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>If you own a Sonoff smart switch or outlet, you've probably noticed it only works with the eWeLink app — and that comes with cloud dependence, data privacy concerns, and limited customization. The good news: you can take full control by <strong>flashing Tasmota firmware</strong> on your Sonoff device. Once flashed, your device runs locally, responds faster, and integrates seamlessly with <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> and other platforms without any cloud dependency.</p>
+
+        <p>In this guide, you'll learn everything you need: what Tasmota is, which Sonoff devices are supported, the flashing methods available, and step-by-step instructions for the most common Sonoff models including the <strong>Sonoff Basic, Sonoff Mini, Sonoff POW, and Sonoff 4CH Pro</strong>.</p>
+
+        <h2>What Is Tasmota Firmware?</h2>
+
+        <p><a href="esphome-getting-started-guide.html">Tasmota</a> is a free, open-source firmware for ESP8266 and ESP32-based smart devices. It replaces the stock firmware on Sonoff products and gives you:</p>
+
+        <ul>
+          <li><strong>Local control</strong> — no cloud, no internet required</li>
+          <li><strong>Web interface</strong> — configure via any browser</li>
+          <li><strong>MQTT support</strong> — integrates perfectly with Home Assistant and other DIY platforms</li>
+          <li><strong>Energy monitoring</strong> — real-time power, voltage, and current readings on supported devices</li>
+          <li><strong>Rule engine</strong> — automate behavior without external systems</li>
+          <li><strong>Over-the-air updates</strong> — update via web UI or MQTT</li>
+        </ul>
+
+        <p>Think of it as upgrading your Sonoff from a "dumb smart device" to a fully programmable, local-first smart home component. And unlike proprietary systems, Tasmota has an active community that continuously improves it.</p>
+
+        <h2>Which Sonoff Devices Support Tasmota?</h2>
+
+        <p>Almost every Sonoff device built on the ESP8266 chip can run Tasmota. Here's a quick compatibility matrix:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Sonoff Model</th>
+              <th>Chip</th>
+              <th>Energy Monitoring</th>
+              <th>Flash Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sonoff Basic R1 / R2</td>
+              <td>ESP8266</td>
+              <td>No</td>
+              <td>Header pins / OTA</td>
+            </tr>
+            <tr>
+              <td>Sonoff Mini</td>
+              <td>ESP8266</td>
+              <td>No</td>
+              <td>Switch legs / OTA</td>
+            </tr>
+            <tr>
+              <td>Sonoff POW R2</td>
+              <td>ESP8266</td>
+              <td>Yes</td>
+              <td>Header pins / OTA</td>
+            </tr>
+            <tr>
+              <td>Sonoff Dual R2</td>
+              <td>ESP8266</td>
+              <td>No</td>
+              <td>Header pins / OTA</td>
+            </tr>
+            <tr>
+              <td>Sonoff TH10/TH16</td>
+              <td>ESP8266</td>
+              <td>No (TH16: Yes)</td>
+              <td>Header pins</td>
+            </tr>
+            <tr>
+              <td>Sonoff 4CH Pro R3</td>
+              <td>ESP8266</td>
+              <td>No</td>
+              <td>Header pins</td>
+            </tr>
+            <tr>
+              <td>Sonoff S31 (US)</td>
+              <td>ESP8266</td>
+              <td>Yes</td>
+              <td>Header pins / OTA</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>The <strong>Sonoff Basic</strong> and <strong>Sonoff Mini</strong> are the most popular starting points — they're inexpensive, widely available, and straightforward to flash.</p>
+
+        <h2>What You Need Before Flashing</h2>
+
+        <p>Gather these tools before you begin:</p>
+
+        <ul>
+          <li><strong>A computer</strong> (Windows, Mac, or Linux)</li>
+          <li><strong>USB to TTL Serial Adapter</strong> (3.3V FTDI recommended) — for header pin flashing</li>
+          <li><strong>Jumper wires</strong> — if using serial adapter</li>
+          <li><strong>A small flathead screwdriver</strong> — to open the Sonoff case</li>
+          <li><strong>Tasmota firmware binary</strong> — download from <a href="https://tasmota.github.io/install/">tasmota.github.io/install</a></li>
+          <li><strong>TasmoCompiler</strong> (optional) — web-based tool at <a href="https://app.compilestack.com/">app.compilestack.com</a> for OTA flashing</li>
+          <li><strong>Tasmota device firmware</strong> — the specific .bin file for your device model</li>
+        </ul>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Method 1: Flash via Serial Header (Recommended for Beginners)</h2>
+
+        <p>Serial flashing gives you the most reliable results and works for all Sonoff models. Here's how:</p>
+
+        <h3>Step 1: Open the Sonoff Device</h3>
+
+        <p>Use a small flathead screwdriver to pry open the Sonoff case. Be gentle — the plastic clips can break. Once open, locate the four programming header pins on the PCB (usually labeled <strong>GND, TX, RX, 3V3</strong>).</p>
+
+        <h3>Step 2: Wire the Serial Adapter</h3>
+
+        <p>Connect your USB to TTL adapter to the Sonoff headers:</p>
+
+        <ul>
+          <li><strong>3V3 → 3V3</strong> (power — <em>be careful, only power this AFTER all connections are made</em>)</li>
+          <li><strong>GND → GND</strong></li>
+          <li><strong>TX → RX</strong></li>
+          <li><strong>RX → TX</strong></li>
+        </ul>
+
+        <h3>Step 3: Put the Device in Flash Mode</h3>
+
+        <p>Before powering on, <strong>hold down the Sonoff button</strong> (or the onboard button). While holding it, plug the USB cable into your computer. The device should now be in flash mode — release the button after 2-3 seconds.</p>
+
+        <h3>Step 4: Flash Using Tasmota Web Installer</h3>
+
+        <p>The easiest way to flash Tasmota is through your browser using the official <a href="https://tasmota.github.io/install/">Tasmota Web Installer</a>:</p>
+
+        <ol>
+          <li>Connect your serial adapter to your computer</li>
+          <li>Open <a href="https://tasmota.github.io/install/">https://tasmota.github.io/install</a> in Chrome or Edge</li>
+          <li>Click <strong>Connect</strong> and select your serial port</li>
+          <li>Choose your Sonoff model (or select <strong>tasmota.bin</strong> for generic installation)</li>
+          <li>Click <strong>Install</strong> and wait for the upload to complete</li>
+        </ol>
+
+        <p>If the web installer doesn't work, you can use <strong>esptool</strong> from the command line:</p>
+
+        <pre><code>esptool.py --port COM3 erase_flash
+esptool.py --port COM3 write_flash 0x00000 tasmota.bin</code></pre>
+
+        <p>Replace <code>COM3</code> with your actual serial port and <code>tasmota.bin</code> with your device-specific binary.</p>
+
+        <h2>Method 2: Flash OTA (No Soldering Required)</h2>
+
+        <p>Over-the-air flashing works for Sonoff devices that already have ESP8266-based firmware and have been previously flashed, or for devices running Sonoff's original eWeLink firmware with a workaround. This method is only viable if your device is already on a compatible intermediate firmware like <a href="esp32-smart-home-beginners.html">Sonoff-Tasmota-compatible</a> intermediate build or if you can use the Sonoff DIY mode.</p>
+
+        <p>For most people starting fresh, <strong>serial flashing is the recommended method</strong>. OTA is typically used for updating an already-flashed device.</p>
+
+        <h2>Initial Tasmota Configuration</h2>
+
+        <p>After flashing, your Sonoff creates a WiFi access point. Here's how to set it up:</p>
+
+        <ol>
+          <li>Power on the flashed Sonoff — it will broadcast a WiFi network named <code>Tasmota_XXXXXX-XXXX</code></li>
+          <li>Connect your phone/computer to that WiFi network</li>
+          <li>Open a browser and go to <code>http://192.168.4.1</code></li>
+          <li>Enter your home WiFi credentials and click <strong>Save</strong></li>
+          <li>Wait for the device to connect to your network</li>
+          <li>Find the device's IP address from your router's DHCP table and open it in a browser</li>
+        </ol>
+
+        <p>On the Tasmota web interface, go to <strong>Configuration → Configure Module</strong> and select your Sonoff model from the dropdown. Then go to <strong>Configuration → Configure WiFi</strong> to confirm your settings.</p>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Connecting Tasmota to Home Assistant</h2>
+
+        <p>Once Tasmota is running, integrating with <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> takes just a few steps via MQTT:</p>
+
+        <h3>Step 1: Configure MQTT in Tasmota</h3>
+
+        <p>In the Tasmota web interface, go to <strong>Configuration → Configure MQTT</strong> and enter:</p>
+
+        <ul>
+          <li><strong>Host</strong>: Your MQTT broker IP (e.g., your Home Assistant IP)</li>
+          <li><strong>Port</strong>: 1883 (default)</li>
+          <li><strong>Client</strong>: Sonoff (or leave auto)</li>
+          <li><strong>Topic</strong>: <code>sonoff-living-room</code> (use a unique name per device)</li>
+          <li><strong>User</strong> / <strong>Password</strong>: Your MQTT credentials</li>
+        </ul>
+
+        <h3>Step 2: Add to Home Assistant</h3>
+
+        <p>Home Assistant will auto-detect your Tasmota device if MQTT discovery is enabled. In Tasmota, go to <strong>Configuration → Configure Other</strong> and check <strong>MQTT</strong> and enable discovery. Home Assistant will automatically add your Sonoff as a switch entity.</p>
+
+        <p>If auto-discovery doesn't work, you can manually add it to your <code>configuration.yaml</code>:</p>
+
+        <pre><code>switch:
+  - platform: mqtt
+    name: "Living Room Light"
+    command_topic: "cmnd/sonoff-living-room/power"
+    state_topic: "stat/sonoff-living-room/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true</code></pre>
+
+        <h2>Tasmota Rule Examples</h2>
+
+        <p>One of Tasmota's most powerful features is its built-in rule engine. You can program logic directly on the device without needing a home automation platform. Here are a few examples:</p>
+
+        <h3>Auto-Off Timer</h3>
+
+        <p>Automatically turn off a light 30 minutes after it's turned on:</p>
+
+        <pre><code>Rule1 ON Power1#State=1 DO Backlog Delay 1800; Power1 0 ENDON</code></pre>
+
+        <h3>Power State Recovery</h3>
+
+        <p>Have the device restore its last state after a power outage:</p>
+
+        <pre><code>SetOptions 65 1</code></pre>
+
+        <h3>PIR Motion Sensor Integration</h3>
+
+        <p>If you have a Sonoff with a connected PIR sensor, turn on a light automatically:</p>
+
+        <pre><code>Rule2 ON Switch1#State=1 DO Power1 TOGGLE ENDON</code></pre>
+
+        <p>To learn more about programming Tasmota devices with rules and logic, check out our full guide to <a href="tasmota-rules-and-automations.html">Tasmota Rules and Automations</a>.</p>
+
+        <h2>Sonoff POW: Energy Monitoring</h2>
+
+        <p>The <strong>Sonoff POW</strong> series is special because it includes a <a href="power-supply-guide-beginners.html">HLW8012 power monitoring chip</a> that measures voltage, current, and power consumption. After flashing Tasmota, you get real-time energy data in the web interface.</p>
+
+        <p>To enable energy monitoring on the Sonoff POW, go to <strong>Configuration → Configure Module</strong> and select <strong>Sonoff POW R2</strong> (or your specific model). The energy data is displayed in the main UI and can also be published via MQTT for logging in Home Assistant.</p>
+
+        <p>Combined with <a href="tasmota-energy-monitoring.html">Tasmota Energy Monitoring</a> configuration, you can track your appliances' power usage over time and set automation triggers based on wattage thresholds.</p>
+
+        <h2>Troubleshooting Common Tasmota Flashing Issues</h2>
+
+        <h3>Device Not Entering Flash Mode</h3>
+
+        <p>If the flashing fails, make sure you're holding the button before and during power-on. Some USB serial adapters don't provide enough power — try using a <strong>dedicated 3.3V power source</strong> on the 3V3 pin instead of drawing power from USB.</p>
+
+        <h3>Wrong COM Port Selected</h3>
+
+        <p>On Windows, check Device Manager to confirm the correct COM port. On Mac/Linux, the port will be something like <code>/dev/ttyUSB0</code> or <code>/dev/cu.usbserial-XXXX</code>.</p>
+
+        <h3>Device Won't Connect to WiFi After Flashing</h3>
+
+        <p>If the Tasmota AP doesn't appear, the flash may have failed. Re-flash using the serial method. If the AP appears but it won't connect to your network, double-check your WiFi password and make sure your router supports 2.4GHz (Tasmota doesn't support 5GHz).</p>
+
+        <h3>Serial Port Permission Denied (Linux/Mac)</h3>
+
+        <p>Run: <code>sudo chmod 666 /dev/ttyUSB0</code> (replace with your port). On Mac, you may need to install drivers for your USB serial adapter.</p>
+
+        <h2>Tasmota vs ESPHome: Which Should You Choose?</h2>
+
+        <p>If you're deciding between <a href="esphome-getting-started-guide.html">Tasmota and ESPHome</a> for your Sonoff devices, here's a quick comparison:</p>
+
+        <ul>
+          <li><strong>Tasmota</strong>: Pre-compiled binaries, easy flashing, web UI, built-in MQTT, excellent rule engine — best for most users</li>
+          <li><strong>ESPHome</strong>: YAML-based configuration, tighter Home Assistant integration, custom sensor support, compile-time optimization — better for advanced users who want maximum control</li>
+        </ul>
+
+        <p>For most smart home enthusiasts, <strong>Tasmota is the easier starting point</strong>. If you outgrow it, you can always migrate to <a href="esphome-getting-started-guide.html">ESPHome</a> later.</p>
+
+        <h2>Safety Warning</h2>
+
+        <p>⚠️ <strong>Important:</strong> Working with mains voltage (110V-240V) is dangerous. Always <strong>disconnect power</strong> before opening a Sonoff device or connecting the serial adapter. Never flash a Sonoff while it's plugged into mains voltage — always use the low-voltage serial connection for flashing. If you're not comfortable working with electricity, consult a licensed electrician.</p>
+
+        <h2>Final Thoughts</h2>
+
+        <p>Flashing Tasmota firmware on Sonoff devices is one of the best upgrades you can make for your smart home. It removes cloud dependencies, improves reliability, and gives you complete control over your devices. Whether you want to <a href="smart-light-switch-wiring-guide.html">automate your light switches</a>, monitor energy usage, or integrate everything into <a href="homekit-home-assistant-bridge.html">HomeKit via Home Assistant</a>, Tasmota makes it possible.</p>
+
+        <p>The initial process takes about 15-20 minutes per device, and once it's done, you'll have a local-first smart home that works even when your internet is down. Start with a <strong>Sonoff Basic</strong> — they're inexpensive and forgiving — and work your way up to more complex devices like the <a href="tasmota-energy-monitoring.html">Sonoff POW for energy monitoring</a>.</p>
+
+        <p>Have questions or run into issues? The <a href="3d-printing-community-best-forums.html">Tasmota community forums</a> and <a href="3d-printing-community-best-forums.html">Reddit r/homeassistant</a> are excellent resources for troubleshooting.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="smart-light-switch-wiring-guide.html">Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff</a></li>
+          <li><a href="homekit-home-assistant-bridge.html">How to Bridge Home Assistant to Apple HomeKit</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

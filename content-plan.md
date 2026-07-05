@@ -326,11 +326,19 @@
 - [x] 3d-printed-cable-management-smart-home — 3D Printed Cable Management for Smart Home Setups: 8 Practical Designs ✅ 2026-07-03
 - [x] diy-outdoor-sensor-enclosure-3d-print — How to Design Weatherproof Outdoor Sensor Enclosures for ESP32 and Arduino ✅ 2026-07-04
 
+### 批次 43：TASMOTA & SONOFF SMART HOME (6篇) 🆕
+- [x] tasmota-sonoff-flash-guide — How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide ✅ 2026-07-05
+- [ ] tasmota-rules-and-automations — Tasmota Rules and Automations: Programming Smart Devices Without Code ✅
+- [ ] sonoff-tasmota-vs-esphome — Sonoff with Tasmota vs ESPHome: Which Custom Firmware Is Better? ✅
+- [ ] tasmota-energy-monitoring — Tasmota Energy Monitoring: Track Power Usage with Sonoff POW ✅
+- [ ] tasmota-mqtt-home-assistant — Tasmota MQTT Setup: Connect Your Devices to Home Assistant ✅
+- [ ] best-sonoff-devices-2026 — Best Sonoff Smart Home Devices in 2026: Complete Buyer's Guide ✅
+
 ## 进度
 
 - **总目标**: 300 篇
 - **已完成**: 229 篇 ✅ (批次42完成)
-- **当前批次**: 批次42（3D Printing + Smart Home Crossover）✅ 已完成
+- **当前批次**: 批次43（Tasmota & Sonoff Smart Home）
 - **剩余**: 74 篇
 
 ## 生成规则
