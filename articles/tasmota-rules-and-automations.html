@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasmota Rules and Automations: Programming Smart Devices Without Code</title>
+  <meta name="description" content="Master Tasmota rules and automations to program your Sonoff and ESP devices without coding. Step-by-step guide with real-world examples for smart home automation.">
+  <meta name="keywords" content="Tasmota rules, Tasmota automation, Sonoff automation, Tasmota programming, smart home rules engine, Tasmota if-this-then-that">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>Tasmota Rules and Automations: Programming Smart Devices Without Code</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 6, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚙️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Once you've <a href="tasmota-sonoff-flash-guide.html">flashed Tasmota firmware onto your Sonoff devices</a>, you unlock one of the most powerful features in the DIY smart home world: the <strong>Tasmota rules engine</strong>. This built-in rule system lets you program complex automations directly on your device — no Home Assistant, no Node-RED, no coding skills required.</p>
+
+        <p>In this guide, you'll learn how Tasmota rules work, the syntax you need to know, and real-world automation examples you can implement today. Whether you want auto-off timers, conditional logic, or sensor-triggered actions, Tasmota rules handle it all locally.</p>
+
+        <h2>What Are Tasmota Rules?</h2>
+
+        <p>Tasmota rules are <strong>if-this-then-that (IFTTT) statements</strong> that run directly on your ESP8266 or ESP32 device. They're stored in the device's memory and execute without needing an external automation platform.</p>
+
+        <p>Unlike cloud-based automations that depend on internet connectivity, Tasmota rules:</p>
+
+        <ul>
+          <li><strong>Run locally</strong> — no internet required</li>
+          <li><strong>Execute instantly</strong> — no cloud latency</li>
+          <li><strong>Survive reboots</strong> — rules persist in flash memory</li>
+          <li><strong>Use minimal resources</strong> — efficient enough for the ESP8266</li>
+        </ul>
+
+        <p>Think of the rules engine as a tiny automation brain built into every Tasmota device. Once configured, your Sonoff can make decisions on its own based on sensor inputs, time, power state, or external triggers.</p>
+
+        <h2>Understanding Tasmota Rule Syntax</h2>
+
+        <p>Tasmota rules use a straightforward syntax that might look intimidating at first, but becomes intuitive once you understand the structure:</p>
+
+        <pre><code>Rule1 ON [trigger] DO [action] ENDON</code></pre>
+
+        <p>Let's break down each component:</p>
+
+        <ul>
+          <li><strong>Rule1</strong> — Rules are numbered 1-5, each with independent enable/disable states</li>
+          <li><strong>ON [trigger]</strong> — The condition that activates the rule (sensor reading, button press, time, etc.)</li>
+          <li><strong>DO [action]</strong> — What the device should do when triggered</li>
+          <li><strong>ENDON</strong> — Marks the end of the rule block</li>
+        </ul>
+
+        <p>You can chain multiple triggers and actions using <code>AND</code>, <code>OR</code>, and the <code>Backlog</code> command to execute sequences.</p>
+
+        <h3>Key Triggers</h3>
+
+        <p>Here are the most common triggers you'll use:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Trigger</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Power1#State=1</code></td>
+              <td>Relay 1 turns ON</td>
+              <td>When living room light turns on</td>
+            </tr>
+            <tr>
+              <td><code>Switch1#State=1</code></td>
+              <td>External switch pressed</td>
+              <td>When physical button is pressed</td>
+            </tr>
+            <tr>
+              <td><code>Analog#A0=512</code></td>
+              <td>Analog sensor threshold</td>
+              <td>When light sensor reads specific value</td>
+            </tr>
+            <tr>
+              <td><code>Time#Minute=30</code></td>
+              <td>Every 30 minutes</td>
+              <td>Scheduled actions</td>
+            </tr>
+            <tr>
+              <td><code>Sensor#DHT11~Temperature&gt;25</code></td>
+              <td>Temperature exceeds threshold</td>
+              <td>Turn on fan when hot</td>
+            </tr>
+            <tr>
+              <td><code>Var1=1</code></td>
+              <td>Variable equals value</td>
+              <td>Programmable flag/trigger</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Key Actions</h3>
+
+        <p>Common actions you can trigger:</p>
+
+        <ul>
+          <li><code>Power1 ON/OFF/TOGGLE</code> — Control relays</li>
+          <li><code>Delay X</code> — Wait X seconds before next action</li>
+          <li><code>Backlog</code> — Execute multiple commands in sequence</li>
+          <li><code>Publish</code> — Send MQTT message</li>
+          <li><code>RuleTimer</code> — Set countdown timer</li>
+          <li><code>Power ON</code> — Turn on without specifying relay number</li>
+        </ul>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Getting Started: Enable Rules in Tasmota</h2>
+
+        <p>Before you can use rules, you need to enable the rules system in Tasmota:</p>
+
+        <ol>
+          <li>Open your Tasmota device's web interface (find its IP address)</li>
+          <li>Go to <strong>Configuration → Configure Other</strong></li>
+          <li>Find the <strong>Rules</strong> option and set it to <strong>Enabled</strong></li>
+          <li>Click <strong>Save</strong></li>
+          <li>Navigate to <strong>Console</strong> in the top menu</li>
+        </ol>
+
+        <p>The console is where you'll type your rules commands. You'll see real-time status messages and feedback as you test.</p>
+
+        <h3>Rule Management Commands</h3>
+
+        <p>Use these commands in the Tasmota console:</p>
+
+        <pre><code>Rule1 ON ... DO ... ENDON     // Define the rule
+Rule1 1                         // Enable Rule1
+Rule1 0                         // Disable Rule1
+Rule1                           // Show current Rule1 definition
+Rule1 4                         // Enable Rule1 after boot (persistent)
+Backlog                         // Combine multiple commands</code></pre>
+
+        <p>For multiple rules, use <code>Rule2</code>, <code>Rule3</code>, etc. Each rule can be independently enabled, disabled, or configured to start on boot.</p>
+
+        <h2>10 Practical Tasmota Automation Examples</h2>
+
+        <p>Let's dive into real-world automations you can implement right now. Each example includes the complete rule command — just copy, paste, and adapt to your setup.</p>
+
+        <h3>1. Auto-Off Timer: Turn Off Light After 30 Minutes</h3>
+
+        <p>The most common automation — automatically turn off a light after you've left the room:</p>
+
+        <pre><code>Rule1 ON Power1#State=1 DO Backlog Delay 1800; Power1 0 ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When the relay turns on, the rule starts a 1800-second (30-minute) delay. After the delay, it sends the Power1 0 command to turn off the relay. Perfect for bathrooms, closets, or garages.</p>
+
+        <p><strong>Customization:</strong> Change <code>1800</code> to your preferred delay in seconds (600 = 10 minutes, 3600 = 1 hour).</p>
+
+        <h3>2. Toggle Button: Single Press On/Off</h3>
+
+        <p>Convert a Sonoff Basic into a simple toggle switch:</p>
+
+        <pre><code>Rule1 ON Switch1#State=1 DO Power1 TOGGLE ENDON</code></pre>
+
+        <p><strong>How it works:</strong> Every time the external switch is pressed, the relay toggles between on and off. This is ideal for <a href="smart-light-switch-wiring-guide.html">replacing traditional wall switches</a> with Sonoff modules.</p>
+
+        <h3>3. Motion-Triggered Light</h3>
+
+        <p>Connect a PIR motion sensor to your Sonoff and automate lighting:</p>
+
+        <pre><code>Rule1 ON Switch1#State=1 DO Power1 ON; RuleTimer1 60 ENDON
+Rule1 ON Rules#Timer=1 DO Power1 OFF ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When motion is detected (Switch1 goes HIGH), the light turns on and a 60-second timer starts. If no more motion is detected, the timer expires and the light turns off.</p>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h3>4. Sunrise/Sunset Based Lighting</h3>
+
+        <p>Control lights based on time of day:</p>
+
+        <pre><code>Rule1 ON Time#Initialized DO var1 %sunrise% ENDON
+Rule1 ON Time#Minute=30 DO IF (var1 %time%) == 1 AND (var2==0) == 1 THEN Power1 ON; var2 1 ENDIF ENDON</code></pre>
+
+        <p><strong>Simpler approach using Time#Hour:</strong></p>
+
+        <pre><code>Rule1 ON Time#Hour=18 DO Power1 ON ENDON     // Turn on at 6 PM
+Rule1 ON Time#Hour=23 DO Power1 OFF ENDON    // Turn off at 11 PM</code></pre>
+
+        <p><strong>How it works:</strong> This is a basic time-based rule. For more sophisticated sun-based triggers, consider using <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> which has built-in sun entities.</p>
+
+        <h3>5. Temperature-Triggered Fan</h3>
+
+        <p>Turn on a fan when temperature exceeds a threshold:</p>
+
+        <pre><code>Rule1 ON AM2301#Temperature>28 DO Power2 ON ENDON
+Rule1 ON AM2301#Temperature<26 DO Power2 OFF ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When the DHT22 sensor reads above 28°C, the fan (connected to relay 2) turns on. It turns off again when temperature drops below 26°C (hysteresis prevents rapid on/off cycling). This is excellent for <a href="diy-weather-station-raspberry-pi.html">greenhouse automation</a> or server rooms.</p>
+
+        <h3>6. Power State Recovery After Outage</h3>
+
+        <p>Configure the device to restore its last state after a power failure:</p>
+
+        <pre><code>SetOption65 1</code></pre>
+
+        <p><strong>How it works:</strong> This SetOption command enables power state recovery. When power is restored, the device returns to the state it was in before the outage. Essential for critical automation scenarios like aquarium equipment or sump pumps.</p>
+
+        <h3>7. Double-Tap for Special Action</h3>
+
+        <p>Program different actions for single vs. double button presses:</p>
+
+        <pre><code>Rule1 ON Button1#State=3 DO Power1 TOGGLE ENDON          // Single press
+Rule1 ON Button1#State=4 DO Power2 TOGGLE; RuleTimer1 300 ENDON  // Double press (3 = single, 4 = double)</code></pre>
+
+        <p><strong>How it works:</strong> Single press toggles relay 1. Double press within 1 second toggles relay 2 and starts a 5-minute auto-off timer. Perfect for bed-side implementations where you want different behaviors for different press patterns.</p>
+
+        <h3>8. Humidity-Triggered Dehumidifier</h3>
+
+        <p>Similar to temperature, but for humidity control:</p>
+
+        <pre><code>Rule1 ON AM2301#Humidity>70 DO Power1 ON ENDON
+Rule1 ON AM2301#Humidity<60 DO Power1 OFF ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When humidity exceeds 70%, the dehumidifier turns on. It shuts off when humidity drops below 60%. This is perfect for bathrooms, basements, or <a href="diy-plant-monitor-smart-home.html">indoor plant monitoring setups</a>.</p>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h3>9. MQTT-Triggered Automation</h3>
+
+        <p>Trigger actions based on MQTT messages from another system:</p>
+
+        <pre><code>Rule1 ON MQTT#Connected DO Backlog Publish stat/tasmota/RESULT {"Event":"Ready"} ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When the device connects to MQTT, it publishes a "Ready" event. You can then subscribe to this topic in <a href="tasmota-mqtt-home-assistant.html">Home Assistant or Node-RED</a> to trigger further automations across your system.</p>
+
+        <h3>10. Pulse Mode: Run Device for X Seconds</h3>
+
+        <p>Activate a device for a specific duration (great for sprinklers, door strikes, etc.):</p>
+
+        <pre><code>Rule1 ON Switch1#State=1 DO Backlog Power1 ON; RuleTimer1 300; ENDON
+Rule1 ON Rules#Timer=1 DO Power1 OFF ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When triggered, the device turns on for exactly 300 seconds (5 minutes) then automatically turns off. Change <code>300</code> to control duration. Perfect for <a href="diy-smart-door-lock.html">smart door lock strikes</a> or irrigation systems.</p>
+
+        <h2>Advanced Rule Techniques</h2>
+
+        <h3>Using Variables (Var1-9)</h3>
+
+        <p>Tasmota variables let you store and compare values across rule executions:</p>
+
+        <pre><code>Var1 0                           // Initialize Var1 to 0
+Rule1 ON Power1#State=1 DO Var1 1 ENDON    // Set Var1 when relay turns on
+Rule1 ON Power1#State=0 DO Var1 0 ENDON    // Reset Var1 when relay turns off
+Rule1 ON Var1=1 DO Power2 ON ENDON         // If Var1 is 1, turn on relay 2</code></pre>
+
+        <h3>Multi-Condition Logic</h3>
+
+        <p>Combine multiple triggers with AND/OR logic:</p>
+
+        <pre><code>Rule1 ON (Switch1#State=1 AND Var1=1) DO Power1 ON ENDON
+Rule1 ON (Switch1#State=1 OR Switch2#State=1) DO Power1 ON ENDON</code></pre>
+
+        <h3>Sequential Commands with Backlog</h3>
+
+        <p>Execute multiple actions in sequence:</p>
+
+        <pre><code>Rule1 ON Switch1#State=1 DO Backlog Power1 ON; Power2 ON; Publish cmnd/otherdevice/POWER ON; ENDON</code></pre>
+
+        <p><strong>How it works:</strong> When triggered, the device: turns on relay 1, turns on relay 2, and sends an MQTT command to another device — all in sequence with minimal delay between commands.</p>
+
+        <h2>Debugging Your Rules</h2>
+
+        <p>When rules don't work as expected, here's your debugging workflow:</p>
+
+        <ol>
+          <li><strong>Check rule status:</strong> Type <code>Rule1</code> in console to see the current rule definition</li>
+          <li><strong>Verify rule is enabled:</strong> Rules show <code>ON</code> or <code>OFF</code> status</li>
+          <li><strong>Enable rule logging:</strong> Use <code>RuleDebug 1</code> to see rule trigger events in console</li>
+          <li><strong>Test the trigger manually:</strong> Send the trigger condition via console and watch for response</li>
+          <li><strong>Simplify and test:</strong> Strip down complex rules to isolate the problem</li>
+        </ol>
+
+        <div class="ad-placeholder inline" style="margin: 2rem 0;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Rules vs. Home Assistant Automations: When to Use Each</h2>
+
+        <p>Now you might be wondering: should I use Tasmota rules or <a href="home-assistant-automations-beginners.html">Home Assistant automations</a>? Here's the breakdown:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Use Case</th>
+              <th>Tasmota Rules</th>
+              <th>Home Assistant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Single device logic</td>
+              <td>✅ Perfect</td>
+              <td>Overkill</td>
+            </tr>
+            <tr>
+              <td>Instant response (< 100ms)</td>
+              <td>✅ Best</td>
+              <td>Network latency</td>
+            </tr>
+            <tr>
+              <td>Multi-device coordination</td>
+              <td>⚠️ Possible but complex</td>
+              <td>✅ Much easier</td>
+            </tr>
+            <tr>
+              <td>Sensor fusion / complex logic</td>
+              <td>⚠️ Limited</td>
+              <td>✅ Full power</td>
+            </tr>
+            <tr>
+              <td>Works without network</td>
+              <td>✅ Always</td>
+              <td>❌ Needs HA running</td>
+            </tr>
+            <tr>
+              <td>Easy visualization</td>
+              <td>❌ Console only</td>
+              <td>✅ Dashboard UI</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>My recommendation:</strong> Use Tasmota rules for device-local logic (timers, simple triggers, failsafes) and <a href="home-assistant-raspberry-pi-setup.html">Home Assistant</a> for complex, multi-device automations. This hybrid approach gives you the best of both worlds.</p>
+
+        <h2>Comparison: Tasmota Rules vs. ESPHome Automations</h2>
+
+        <p>If you're deciding between Tasmota and <a href="esphome-getting-started-guide.html">ESPHome</a> for your smart home projects, here's how their automation systems compare:</p>
+
+        <ul>
+          <li><strong>Tasmota rules</strong>: Text-based, device-local, minimal resources, perfect for simple to moderate logic</li>
+          <li><strong>ESPHome automations</strong>: YAML-based, compile-time optimized, tighter Home Assistant integration</li>
+        </ul>
+
+        <p>For most users, Tasmota rules are easier to get started with and sufficient for common automations. If you need complex sensor fusion, custom C++ logic, or extremely tight HA integration, ESPHome offers more power at the cost of higher complexity.</p>
+
+        <h2>Performance Tips</h2>
+
+        <ul>
+          <li><strong>Limit rule complexity:</strong> Each rule check consumes CPU cycles. Keep rules simple.</li>
+          <li><strong>Use RuleTimers efficiently:</strong> One timer per rule, reuse by resetting.</li>
+          <li><strong>Disable unused rules:</strong> If a rule isn't needed, disable it with <code>Rule1 0</code>.</li>
+          <li><strong>Test in isolation:</strong> Enable one rule at a time to identify conflicts.</li>
+        </ul>
+
+        <h2>Final Thoughts</h2>
+
+        <p>Tasmota rules transform your Sonoff devices from simple smart switches into intelligent automation controllers. Whether you're implementing <a href="tasmota-sonoff-flash-guide.html">auto-off timers</a>, sensor-triggered actions, or conditional logic, the rules engine handles it all locally without cloud dependencies.</p>
+
+        <p>The best part: these rules persist across reboots and work even when your network is down. Start with one simple rule, test it thoroughly, then expand your automation library over time.</p>
+
+        <p>Have a cool Tasmota rule you'd like to share? The <a href="3d-printing-community-best-forums.html">Tasmota community forums</a> and <a href="3d-printing-community-best-forums.html">r/homeassistant on Reddit</a> are great places to find inspiration and troubleshoot issues.</p>
+
+        <p>Ready to take your smart home further? Combine Tasmota rules with <a href="tasmota-mqtt-home-assistant.html">MQTT integration to Home Assistant</a> for the ultimate hybrid automation system — local intelligence where it matters, coordinated control where you need it.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="tasmota-sonoff-flash-guide.html">How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="tasmota-mqtt-home-assistant.html">Tasmota MQTT Setup: Connect Your Devices to Home Assistant</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

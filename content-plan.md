@@ -328,7 +328,7 @@
 
 ### 批次 43：TASMOTA & SONOFF SMART HOME (6篇) 🆕
 - [x] tasmota-sonoff-flash-guide — How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide ✅ 2026-07-05
-- [ ] tasmota-rules-and-automations — Tasmota Rules and Automations: Programming Smart Devices Without Code ✅
+- [x] tasmota-rules-and-automations — Tasmota Rules and Automations: Programming Smart Devices Without Code ✅ 2026-07-06
 - [ ] sonoff-tasmota-vs-esphome — Sonoff with Tasmota vs ESPHome: Which Custom Firmware Is Better? ✅
 - [ ] tasmota-energy-monitoring — Tasmota Energy Monitoring: Track Power Usage with Sonoff POW ✅
 - [ ] tasmota-mqtt-home-assistant — Tasmota MQTT Setup: Connect Your Devices to Home Assistant ✅
@@ -337,9 +337,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 229 篇 ✅ (批次42完成)
+- **已完成**: 230 篇 ✅ (批次43进行中)
 - **当前批次**: 批次43（Tasmota & Sonoff Smart Home）
-- **剩余**: 74 篇
+- **剩余**: 73 篇
 
 ## 生成规则
 
