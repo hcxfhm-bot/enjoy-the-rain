@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasmota Energy Monitoring: Track Power Usage with Sonoff POW</title>
+  <meta name="description" content="Learn how to set up Tasmota energy monitoring on Sonoff POW devices. Track real-time power consumption, view historical data, and integrate with Home Assistant.">
+  <meta name="keywords" content="Tasmota energy monitoring, Sonoff POW, power monitoring, energy tracking, Home Assistant energy, smart home power meter, Tasmota MQTT">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>Tasmota Energy Monitoring: Track Power Usage with Sonoff POW</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 8, 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Want to know exactly how much energy your 3D printer, air conditioner, or entire home office consumes? <strong>Tasmota energy monitoring</strong> on Sonoff POW devices gives you real-time power tracking at a fraction of the cost of commercial energy monitors. After flashing Tasmota on a $15 Sonoff POW, you'll have professional-grade power monitoring with MQTT integration, historical data logging, and Home Assistant compatibility.</p>
+
+        <p>In this guide, I'll walk you through setting up energy monitoring on Sonoff POW devices with Tasmota firmware—from initial configuration to Home Assistant integration and power usage alerts.</p>
+
+        <h2>Why Use Tasmota for Energy Monitoring?</h2>
+        
+        <p>The stock Sonoff firmware provides basic on/off control through the eWeLink app, but Tasmota transforms the Sonoff POW into a powerful energy monitoring tool:</p>
+        
+        <ul>
+          <li><strong>Real-time power data</strong> — Voltage, current, power (Watts), and energy (kWh) updated every few seconds</li>
+          <li><strong>Local control</strong> — No cloud dependency, works without internet</li>
+          <li><strong>MQTT integration</strong> — Send energy data to Home Assistant, Node-RED, or any MQTT platform</li>
+          <li><strong>Historical tracking</strong> — Daily, weekly, and monthly energy consumption logs</li>
+          <li><strong>Power thresholds</strong> — Automations based on power usage (e.g., notify when dryer finishes)</li>
+        </ul>
+        
+        <p>For makers and DIY enthusiasts, this is invaluable for monitoring 3D printers, laser cutters, CNC machines, and workshop equipment. Check out our guide on <a href="../articles/best-oscilloscope-beginners.html">oscilloscopes for electronics</a> for more tools to analyze power consumption.</p>
+
+        <h2>Sonoff POW Models for Energy Monitoring</h2>
+        
+        <p>Not all Sonoff POW devices are created equal. Here's a quick comparison:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #2a2b45;">
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Model</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Max Power</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Energy Monitor</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Sonoff POW R2</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">3500W / 16A</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">✅ Yes</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">~$15</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Sonoff POW R3</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">3500W / 16A</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">✅ Yes</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">~$18</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Sonoff S31 Lite</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">2200W / 10A</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">❌ No</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">~$8</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Sonoff POW Elite</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">3500W / 16A</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">✅ Yes + Display</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">~$25</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <p>For most users, the <strong>Sonoff POW R2</strong> or <strong>R3</strong> offers the best value. The R3 has improved hardware and better accuracy. If you want a built-in display for checking power at a glance, consider the POW Elite.</p>
+        
+        <p><strong>Note:</strong> If you haven't flashed Tasmota yet, follow our complete <a href="../articles/tasmota-sonoff-flash-guide.html">Tasmota flashing guide for Sonoff devices</a> before continuing.</p>
+
+        <h2>Step 1: Configure Energy Monitoring in Tasmota</h2>
+        
+        <p>After flashing Tasmota on your Sonoff POW, you need to configure the energy monitoring parameters. Connect to your Tasmota device's web interface (enter the device's IP address in your browser).</p>
+        
+        <h3>Set Power Monitoring Parameters</h3>
+        
+        <p>Go to <strong>Configuration → Configure Module</strong> and verify the correct module is selected (usually "Sonoff POW R2" or "Sonoff POW R3"). Save and restart if needed.</p>
+        
+        <p>Then go to <strong>Configuration → Configure Other</strong> and enter these template parameters in the "Template" field:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>{"NAME":"Sonoff POW R3","GPIO":[32,288,0,224,0,0,0,0,0,0,0,0,0,0],"FLAG":0,"BASE":54}</code></pre>
+        
+        <p>For <strong>Sonoff POW R2</strong>, use:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>{"NAME":"Sonoff POW R2","GPIO":[17,0,0,0,0,134,0,0,131,132,0,0,0],"FLAG":0,"BASE":52}</code></pre>
+        
+        <p>After saving, the device will restart with proper energy monitoring GPIO configuration.</p>
+
+        <h2>Step 2: Calibrate Energy Readings</h2>
+        
+        <p>Tasmota energy readings are reasonably accurate out of the box, but calibration ensures precision. You'll need a known load—a device with a verified power consumption (like a 100W incandescent bulb or a metered power strip).</p>
+        
+        <h3>Voltage Calibration</h3>
+        
+        <p>Compare Tasmota's voltage reading with a multimeter or known grid voltage. If Tasmota shows 228V but actual is 230V:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>PowerCal 228.0</code></pre>
+        
+        <h3>Power Calibration</h3>
+        
+        <p>Connect a known load (e.g., 100W bulb). If Tasmota reads 95W instead of 100W:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>PowerCal 95.0</code></pre>
+        
+        <p>For accurate calibration, use our guide on <a href="../articles/best-multimeter-for-electronics.html">best multimeters for electronics</a> to verify voltage and current.</p>
+        
+        <h3>Current Calibration</h3>
+        
+        <p>Current calibration follows the same principle. If actual current is 0.5A but Tasmota reads 0.48A:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>CurrentCal 0.48</code></pre>
+        
+        <p><strong>Tip:</strong> Enter these commands in the Tasmota console (<strong>Consoles → Console</strong>), not the template field.</p>
+
+        <h2>Step 3: View Energy Data in Tasmota</h2>
+        
+        <p>Once configured, your Tasmota main page displays real-time energy data:</p>
+        
+        <ul>
+          <li><strong>Voltage</strong> — Current line voltage (V)</li>
+          <li><strong>Current</strong> — Current draw (A)</li>
+          <li><strong>Power</strong> — Real-time power consumption (W)</li>
+          <li><strong>Apparent Power</strong> — VA (useful for inductive loads)</li>
+          <li><strong>Reactive Power</strong> — VAR</li>
+          <li><strong>Power Factor</strong> — Efficiency ratio (0-1)</li>
+          <li><strong>Energy Today</strong> — kWh consumed today</li>
+          <li><strong>Energy Yesterday</strong> — Yesterday's total kWh</li>
+          <li><strong>Energy Total</strong> — Lifetime energy consumption</li>
+        </ul>
+        
+        <p>This data updates every few seconds, making it perfect for monitoring devices like 3D printers during long print jobs. You can instantly see when a print finishes by the power drop.</p>
+
+        <h2>Step 4: MQTT Setup for Home Assistant Integration</h2>
+        
+        <p>The real power of Tasmota energy monitoring comes from MQTT integration. This enables Home Assistant dashboards, automations, and long-term data logging.</p>
+        
+        <h3>Configure MQTT in Tasmota</h3>
+        
+        <ol>
+          <li>Go to <strong>Configuration → Configure MQTT</strong></li>
+          <li>Enter your MQTT broker details:
+            <ul>
+              <li><strong>Host</strong> — Your MQTT broker IP (e.g., Home Assistant IP or Mosquitto server)</li>
+              <li><strong>Port</strong> — Usually 1883</li>
+              <li><strong>User</strong> — MQTT username (if required)</li>
+              <li><strong>Password</strong> — MQTT password</li>
+              <li><strong>Topic</strong> — Unique topic for this device (e.g., "sonoff_pow_printer")</li>
+            </ul>
+          </li>
+          <li>Save and restart</li>
+        </ol>
+        
+        <p>For detailed MQTT configuration, see our guide on <a href="../articles/home-assistant-automations-beginners.html">Home Assistant automations for beginners</a>.</p>
+        
+        <h3>Home Assistant Auto-Discovery</h3>
+        
+        <p>Tasmota supports MQTT auto-discovery, which automatically creates sensors in Home Assistant. Enable it with this console command:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>SetOption19 1</code></pre>
+        
+        <p>Restart the device, and Home Assistant will discover your Sonoff POW with all energy monitoring sensors automatically.</p>
+
+        <h2>Step 5: Create Energy Monitoring Automations</h2>
+        
+        <p>With energy data in Home Assistant, you can create powerful automations. Here are practical examples:</p>
+        
+        <h3>Example 1: 3D Print Completion Detection</h3>
+        
+        <p>When your 3D printer finishes a print, power drops significantly. Create an automation that notifies you:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>alias: "3D Print Complete"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.sonoff_pow_printer_power
+    below: 20
+    for:
+      minutes: 2
+condition:
+  - condition: state
+    entity_id: switch.sonoff_pow_printer
+    state: "on"
+action:
+  - service: notify.mobile_app
+    data:
+      message: "3D print appears complete! Power dropped to {{ states('sensor.sonoff_pow_printer_power') }}W"</code></pre>
+        
+        <p>This is incredibly useful for long prints. Learn more about <a href="../articles/3d-printing-speed-vs-quality.html">optimizing 3D printing speed vs quality</a> to understand power consumption patterns.</p>
+        
+        <h3>Example 2: Energy Budget Alerts</h3>
+        
+        <p>Get notified when daily energy consumption exceeds a threshold:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>alias: "Energy Budget Alert"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.sonoff_pow_energy_today
+    above: 5
+action:
+  - service: notify.mobile_app
+    data:
+      message: "Energy usage today: {{ states('sensor.sonoff_pow_energy_today') }} kWh"</code></pre>
+
+        <h3>Example 3: Power Anomaly Detection</h3>
+        
+        <p>Detect when devices draw unusual power (potential issues):</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>alias: "Power Anomaly Alert"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.sonoff_pow_power
+    above: 2000
+action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.sonoff_pow
+  - service: notify.mobile_app
+    data:
+      message: "Emergency! Power exceeded 2000W. Device turned off."</code></pre>
+        
+        <p>For more Tasmota automation ideas, check out our <a href="../articles/tasmota-rules-and-automations.html">Tasmota rules and automations guide</a>.</p>
+
+        <h2>Tasmota Energy Monitoring Commands Reference</h2>
+        
+        <p>Here are essential Tasmota console commands for energy monitoring:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #2a2b45;">
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Command</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">PowerCal [value]</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Calibrate power reading</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">VoltageCal [value]</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Calibrate voltage reading</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">CurrentCal [value]</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Calibrate current reading</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">EnergyRes [value]</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set energy resolution (0-5)</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">FreqRes [value]</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set frequency resolution</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">Status 8</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Show all energy data</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Troubleshooting Common Issues</h2>
+        
+        <h3>Energy readings show 0</h3>
+        <p>Verify the correct module template is applied. Check GPIO assignments match your POW version. For R2/R3 differences, consult the Tasmota documentation.</p>
+        
+        <h3>Readings are inaccurate</h3>
+        <p>Calibrate using a known load. A 100W incandescent bulb is ideal—it draws consistent power without power factor complications.</p>
+        
+        <h3>Energy resets to 0 after restart</h3>
+        <p>Tasmota stores energy data in flash memory, but frequent writes can degrade it. Use <code>SetOption65 1</code> to enable energy counting from saved totals.</p>
+        
+        <h3>Home Assistant shows unavailable</h3>
+        <p>Check MQTT connection in Tasmota console with <code>Status 5</code>. Verify Home Assistant's MQTT integration is active and the broker is reachable.</p>
+        
+        <p>For more troubleshooting, our <a href="../articles/3d-print-troubleshooting-flowchart.html">3D print troubleshooting flowchart</a> methodology applies similarly—systematic diagnosis.</p>
+
+        <h2>Practical Use Cases for Makers</h2>
+        
+        <p>Tasmota energy monitoring shines in maker workshops:</p>
+        
+        <ul>
+          <li><strong>3D printer monitoring</strong> — Track per-print energy costs, detect print completion, identify failed prints (unusual power patterns)</li>
+          <li><strong>Laser cutter/cutter tracking</strong> — Monitor high-power equipment, ensure safe operation</li>
+          <li><strong>CNC machine monitoring</strong> — Detect bit changes by power spikes, track job progress</li>
+          <li><strong>Server/NAS power</strong> — Monitor your <a href="../articles/raspberry-pi-nas-build.html">Raspberry Pi NAS</a> or home server energy consumption</li>
+          <li><strong>Soldering station tracking</strong> — Monitor iron warm-up time and usage patterns</li>
+        </ul>
+        
+        <p>For smart home enthusiasts, pair Sonoff POW with <a href="../articles/esphome-getting-started-guide.html">ESPHome sensors</a> for comprehensive energy monitoring.</p>
+
+        <h2>Conclusion</h2>
+        
+        <p>Tasmota energy monitoring transforms an affordable Sonoff POW into a professional-grade power analysis tool. For under $20, you get real-time power tracking, MQTT integration, Home Assistant compatibility, and automation capabilities that rival commercial energy monitors costing 5-10x more.</p>
+        
+        <p>Whether you're monitoring a 3D printer, optimizing home energy usage, or building automation around power consumption, Tasmota on Sonoff POW delivers reliable, accurate, and hackable energy monitoring for the DIY smart home.</p>
+        
+        <p><strong>Next steps:</strong> After setting up energy monitoring, explore <a href="../articles/tasmota-mqtt-home-assistant.html">advanced MQTT configurations</a> to unlock even more automation possibilities.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="tasmota-sonoff-flash-guide.html">How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide</a></li>
+          <li><a href="tasmota-rules-and-automations.html">Tasmota Rules and Automations: Programming Smart Devices Without Code</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="diy-smart-door-lock.html">How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
