@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasmota MQTT Setup: Connect Your Devices to Home Assistant</title>
+  <meta name="description" content="Learn how to configure Tasmota MQTT to connect smart devices to Home Assistant. Complete setup guide with auto-discovery, manual configuration, and troubleshooting tips.">
+  <meta name="keywords" content="Tasmota MQTT, Home Assistant MQTT, Tasmota setup, MQTT configuration, smart home integration, Tasmota auto-discovery, Home Assistant Tasmota">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>Tasmota MQTT Setup: Connect Your Devices to Home Assistant</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 9, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔌</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>MQTT is the backbone of any robust smart home setup, and <strong>Tasmota MQTT configuration</strong> is your gateway to seamlessly connecting ESP-based devices to Home Assistant. Whether you've just flashed Tasmota on a Sonoff switch or you're building custom ESP32 sensors, understanding MQTT integration transforms basic Wi-Fi devices into powerful, locally-controlled smart home components.</p>
+
+        <p>In this guide, I'll walk you through the complete Tasmota MQTT setup process—from broker configuration to Home Assistant auto-discovery—so you can control your devices without relying on cloud services.</p>
+
+        <h2>Why Use MQTT with Tasmota?</h2>
+        
+        <p>MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol perfect for IoT devices. When combined with Tasmota, it offers significant advantages:</p>
+        
+        <ul>
+          <li><strong>Local control</strong> — No internet required, your smart home works even without cloud connectivity</li>
+          <li><strong>Fast response</strong> — Near-instant device control and status updates</li>
+          <li><strong>Low bandwidth</strong> — Minimal network overhead, ideal for devices like ESP8266</li>
+          <li><strong>Scalability</strong> — One MQTT broker can handle hundreds of devices</li>
+          <li><strong>Integration flexibility</strong> — Connect to Home Assistant, Node-RED, openHAB, or custom scripts</li>
+        </ul>
+        
+        <p>For makers building DIY smart home projects—whether it's a <a href="diy-smart-door-lock.html">DIY smart door lock</a> or monitoring a <a href="raspberry-pi-nas-build.html">Raspberry Pi NAS</a>—MQTT provides the communication layer that ties everything together.</p>
+
+        <h2>Prerequisites</h2>
+        
+        <p>Before configuring Tasmota MQTT, ensure you have:</p>
+        
+        <ul>
+          <li><strong>Tasmota-flashed device</strong> — Follow our <a href="tasmota-sonoff-flash-guide.html">complete Tasmota flashing guide</a> if you haven't done this yet</li>
+          <li><strong>MQTT broker</strong> — Home Assistant's Mosquitto add-on, standalone Mosquitto, or cloud broker like HiveMQ</li>
+          <li><strong>Home Assistant</strong> — Already set up with MQTT integration (we'll cover this)</li>
+          <li><strong>Network access</strong> — Your Tasmota device and MQTT broker on the same network</li>
+        </ul>
+        
+        <p>If you're new to Home Assistant, start with our <a href="home-assistant-raspberry-pi-setup.html">Raspberry Pi Home Assistant setup guide</a>.</p>
+
+        <h2>Step 1: Set Up an MQTT Broker</h2>
+        
+        <h3>Option A: Home Assistant Mosquitto Add-on (Recommended)</h3>
+        
+        <p>If you're running Home Assistant OS or Supervised, the Mosquitto broker add-on is the easiest option:</p>
+        
+        <ol>
+          <li>Go to <strong>Settings → Add-ons → Add-on Store</strong></li>
+          <li>Search for "Mosquitto broker" and click Install</li>
+          <li>Before starting, configure authentication:
+            <ul>
+              <li>Go to <strong>Configuration</strong> tab</li>
+              <li>Leave defaults for basic setup</li>
+            </ul>
+          </li>
+          <li>Start the add-on and enable "Watchdog" for auto-restart</li>
+        </ol>
+        
+        <p>Home Assistant's Mosquitto integrates seamlessly with Home Assistant users—your HA login credentials work automatically.</p>
+        
+        <h3>Option B: Standalone Mosquitto Broker</h3>
+        
+        <p>For advanced setups or non-Home Assistant environments, install Mosquitto on a Linux server or Raspberry Pi:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>sudo apt update
+sudo apt install mosquitto mosquitto-clients
+sudo systemctl enable mosquitto
+sudo systemctl start mosquitto</code></pre>
+        
+        <p>Create a user for Tasmota devices:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>sudo mosquitto_passwd -c /etc/mosquitto/passwd tasmota_user
+# Enter password when prompted</code></pre>
+        
+        <p>Edit Mosquitto configuration to require authentication:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>sudo nano /etc/mosquitto/mosquitto.conf
+
+# Add these lines:
+allow_anonymous false
+password_file /etc/mosquitto/passwd
+listener 1883</code></pre>
+        
+        <p>Restart Mosquitto:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>sudo systemctl restart mosquitto</code></pre>
+
+        <h2>Step 2: Configure MQTT in Home Assistant</h2>
+        
+        <p>With Mosquitto running, add the MQTT integration to Home Assistant:</p>
+        
+        <ol>
+          <li>Go to <strong>Settings → Devices & Services</strong></li>
+          <li>Click <strong>Add Integration</strong> (bottom right)</li>
+          <li>Search for "MQTT" and select it</li>
+          <li>Enter your broker details:
+            <ul>
+              <li><strong>Broker</strong> — Home Assistant IP or "core-mosquitto" if using the add-on</li>
+              <li><strong>Port</strong> — 1883 (default)</li>
+              <li><strong>Username</strong> — Your Home Assistant username (for add-on) or Mosquitto user</li>
+              <li><strong>Password</strong> — Corresponding password</li>
+            </ul>
+          </li>
+          <li>Click Submit to connect</li>
+        </ol>
+        
+        <p>If successful, you'll see "MQTT" in your integrations list with a green checkmark.</p>
+
+        <h2>Step 3: Configure Tasmota MQTT Settings</h2>
+        
+        <p>Now connect your Tasmota device to the MQTT broker:</p>
+        
+        <ol>
+          <li>Access your Tasmota device's web interface (enter its IP in your browser)</li>
+          <li>Go to <strong>Configuration → Configure MQTT</strong></li>
+          <li>Enter your MQTT settings:
+            <ul>
+              <li><strong>Host</strong> — Your MQTT broker IP (e.g., 192.168.1.100 or Home Assistant IP)</li>
+              <li><strong>Port</strong> — 1883</li>
+              <li><strong>User</strong> — MQTT username (leave blank if no auth)</li>
+              <li><strong>Password</strong> — MQTT password</li>
+              <li><strong>Client</strong> — Unique identifier (e.g., "sonoff_livingroom")</li>
+              <li><strong>Topic</strong> — Base topic for this device (e.g., "sonoff_lr")</li>
+              <li><strong>Full Topic</strong> — Leave as default "%prefix%/%topic%/"</li>
+            </ul>
+          </li>
+          <li>Click Save</li>
+        </ol>
+        
+        <p>The device will restart. After reboot, verify MQTT connection in the Tasmota console:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>Status 5</code></pre>
+        
+        <p>Look for "MQTT" showing "Connected" with your broker IP.</p>
+
+        <h2>Step 4: Enable Home Assistant Auto-Discovery</h2>
+        
+        <p>Tasmota can automatically create entities in Home Assistant using MQTT auto-discovery. This is the easiest way to integrate devices.</p>
+        
+        <h3>Enable Auto-Discovery in Tasmota</h3>
+        
+        <p>In the Tasmota console, run:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>SetOption19 1</code></pre>
+        
+        <p>Restart the device:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>Restart 1</code></pre>
+        
+        <p>After reboot, check Home Assistant:</p>
+        
+        <ol>
+          <li>Go to <strong>Settings → Devices & Services → MQTT</strong></li>
+          <li>Click "Configure" on the MQTT integration</li>
+          <li>Look for new devices in the "MQTT" section</li>
+          <li>Your Tasmota device should appear with entities (switch, sensor, etc.)</li>
+        </ol>
+        
+        <p>For most basic devices like Sonoff switches, auto-discovery creates:</p>
+        
+        <ul>
+          <li><strong>Switch entity</strong> — Control power state</li>
+          <li><strong>Sensor entities</strong> — WiFi signal, uptime (if enabled)</li>
+          <li><strong>Energy sensors</strong> — For POW devices with energy monitoring</li>
+        </ul>
+        
+        <p>For devices with energy monitoring, see our <a href="tasmota-energy-monitoring.html">Tasmota energy monitoring guide</a>.</p>
+
+        <h2>Step 5: Manual MQTT Configuration (Advanced)</h2>
+        
+        <p>For custom setups or when auto-discovery doesn't meet your needs, manually configure MQTT entities in Home Assistant's <code>configuration.yaml</code>:</p>
+        
+        <h3>Manual Switch Configuration</h3>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>mqtt:
+  switch:
+    - name: "Living Room Light"
+      state_topic: "stat/sonoff_lr/POWER"
+      command_topic: "cmnd/sonoff_lr/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      state_on: "ON"
+      state_off: "OFF"</code></pre>
+        
+        <h3>Manual Sensor Configuration</h3>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>mqtt:
+  sensor:
+    - name: "Living Room Temperature"
+      state_topic: "tele/sonoff_lr/SENSOR"
+      value_template: "{{ value_json.Temperature }}"
+      unit_of_measurement: "°C"</code></pre>
+        
+        <h3>Understanding Tasmota MQTT Topics</h3>
+        
+        <p>Tasmota uses a structured topic format:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #2a2b45;">
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Prefix</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Purpose</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">cmnd</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Commands sent to device</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">cmnd/sonoff_lr/POWER</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">stat</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Device status responses</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">stat/sonoff_lr/POWER</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">tele</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Telemetry data (periodic)</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">tele/sonoff_lr/SENSOR</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <p>For example, to turn on a device via MQTT:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code># Publish to:
+cmnd/sonoff_lr/POWER
+
+# Payload:
+ON</code></pre>
+
+        <h2>Step 6: Verify MQTT Communication</h2>
+        
+        <p>Test your setup using MQTT tools:</p>
+        
+        <h3>Using Home Assistant Developer Tools</h3>
+        
+        <ol>
+          <li>Go to <strong>Developer Tools → MQTT</strong></li>
+          <li>In "Listen to a topic", enter <code>#</code> (wildcard to see all messages)</li>
+          <li>Click "Start Listening"</li>
+          <li>Toggle your Tasmota device—you should see MQTT messages appear</li>
+        </ol>
+        
+        <h3>Using Mosquitto CLI Clients</h3>
+        
+        <p>Subscribe to all Tasmota messages:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>mosquitto_sub -h BROKER_IP -u USERNAME -P PASSWORD -t "#"</code></pre>
+        
+        <p>Test publishing a command:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>mosquitto_pub -h BROKER_IP -u USERNAME -P PASSWORD -t "cmnd/sonoff_lr/POWER" -m "ON"</code></pre>
+
+        <h2>Creating Automations with Tasmota MQTT</h2>
+        
+        <p>With MQTT configured, create powerful Home Assistant automations. Here are practical examples:</p>
+        
+        <h3>Example 1: Button Press Automation</h3>
+        
+        <p>Trigger actions when a Tasmota device's button is pressed:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>alias: "Button Press - Toggle Living Room"
+trigger:
+  - platform: mqtt
+    topic: "stat/sonoff_button/POWER"
+    payload: "ON"
+action:
+  - service: light.toggle
+    target:
+      entity_id: light.living_room</code></pre>
+        
+        <h3>Example 2: Periodic Telemetry Logging</h3>
+        
+        <p>Tasmota sends telemetry data every 5 minutes (configurable). Use this for monitoring:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>alias: "Log Low WiFi Signal"
+trigger:
+  - platform: mqtt
+    topic: "tele/sonoff_lr/STATE"
+condition:
+  - condition: template
+    value_template: "{{ trigger.payload_json.Wifi.RSSI | int < -70 }}"
+action:
+  - service: notify.mobile_app
+    data:
+      message: "Poor WiFi signal on sonoff_lr: {{ trigger.payload_json.Wifi.RSSI }} dBm"</code></pre>
+        
+        <p>For more automation ideas, see our <a href="home-assistant-automations-beginners.html">Home Assistant automations for beginners</a> guide.</p>
+
+        <h2>Tasmota MQTT Configuration Commands Reference</h2>
+        
+        <p>Essential console commands for MQTT configuration:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #2a2b45;">
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Command</th>
+              <th style="padding: 12px; text-align: left; border: 1px solid #3a3b55;">Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">MqttHost &lt;ip&gt;</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set MQTT broker IP</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">MqttPort &lt;port&gt;</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set MQTT broker port</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">MqttUser &lt;user&gt;</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set MQTT username</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">MqttPassword &lt;pass&gt;</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set MQTT password</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">Topic &lt;name&gt;</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set device topic</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">SetOption19 1</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Enable Home Assistant auto-discovery</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">TelePeriod &lt;seconds&gt;</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Set telemetry interval (default 300)</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #3a3b55; font-family: monospace;">Status 5</td>
+              <td style="padding: 12px; border: 1px solid #3a3b55;">Show MQTT status</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Troubleshooting Common MQTT Issues</h2>
+        
+        <h3>Tasmota shows "MQTT: Disconnected"</h3>
+        <p>Verify broker IP, username, and password. Check if the broker is running. For Home Assistant Mosquitto, ensure the add-on is started. Test connectivity with <code>Ping &lt;broker_ip&gt;</code> in Tasmota console.</p>
+        
+        <h3>Home Assistant doesn't discover the device</h3>
+        <p>Confirm <code>SetOption19 1</code> is enabled. Check Home Assistant's MQTT integration is active. Restart the Tasmota device after enabling auto-discovery. Verify the device's MQTT topic doesn't conflict with existing devices.</p>
+        
+        <h3>Commands sent but device doesn't respond</h3>
+        <p>Verify command topic format: <code>cmnd/&lt;topic&gt;/POWER</code>. Check payload is exactly "ON" or "OFF" (case-sensitive). Use MQTT listener to see if messages arrive at the device.</p>
+        
+        <h3>Intermittent disconnections</h3>
+        <p>Check WiFi signal strength (<code>Status 11</code> in console). Increase MQTT keepalive with <code>MqttKeepAlive 60</code>. Consider using static IP for the device.</p>
+        
+        <h3>Multiple devices with same topic conflict</h3>
+        <p>Each Tasmota device needs a unique topic. Use descriptive names like "sonoff_kitchen", "sonoff_bedroom" rather than generic "sonoff1", "sonoff2".</p>
+        
+        <p>For systematic troubleshooting approaches, see our <a href="3d-print-troubleshooting-flowchart.html">troubleshooting methodology guide</a>—the same principles apply.</p>
+
+        <h2>Best Practices for Tasmota MQTT Setup</h2>
+        
+        <ul>
+          <li><strong>Use descriptive topics</strong> — "sonoff_livingroom_main" is better than "sonoff1"</li>
+          <li><strong>Enable MQTT logging</strong> — <code>LogPort 1883</code> sends logs via MQTT for debugging</li>
+          <li><strong>Set appropriate TelePeriod</strong> — Balance between data freshness and network traffic</li>
+          <li><strong>Use MQTT retain flag</strong> — Devices remember last state after restart (<code>SetOption20 1</code>)</li>
+          <li><strong>Group related devices</strong> — Use consistent topic naming for easier management</li>
+          <li><strong>Secure your broker</strong> — Always use authentication, especially if exposed to the internet</li>
+        </ul>
+
+        <h2>Advanced MQTT: Retained Messages and LWT</h2>
+        
+        <h3>Last Will and Testament (LWT)</h3>
+        
+        <p>Tasmota automatically configures LWT—messages published when the device disconnects unexpectedly. This appears in Home Assistant as an "availability" topic. Devices show "unavailable" instead of "unknown" when offline.</p>
+        
+        <h3>Retained Messages</h3>
+        
+        <p>Enable retained messages so devices remember their state after power loss:</p>
+        
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0;"><code>SetOption20 1</code></pre>
+        
+        <p>This stores the last state in the MQTT broker, so devices report correct state immediately after restart.</p>
+
+        <h2>Integrating Custom ESP32/ESP8266 Projects</h2>
+        
+        <p>Tasmota MQTT isn't just for Sonoff devices. You can flash Tasmota on generic ESP32 boards for custom projects:</p>
+        
+        <ul>
+          <li><strong>Temperature sensors</strong> — Combine with <a href="esphome-getting-started-guide.html">ESPHome sensors</a> for Home Assistant</li>
+          <li><strong>Relay controllers</strong> — Build custom switch panels</li>
+          <li><strong>RGB controllers</strong> — Control LED strips with Tasmota's lighting features</li>
+          <li><strong>Garage door controllers</strong> — Monitor and control garage doors</li>
+        </ul>
+        
+        <p>For DIY electronics projects, pair Tasmota with our guides on <a href="best-soldering-station-beginners.html">soldering stations</a> and <a href="best-multimeter-for-electronics.html">multimeters</a>.</p>
+
+        <h2>Conclusion</h2>
+        
+        <p>Tasmota MQTT configuration unlocks the full potential of your smart home devices. With local control, fast response times, and seamless Home Assistant integration, you get professional-grade smart home functionality without monthly fees or cloud dependencies.</p>
+        
+        <p>Whether you're controlling a single Sonoff switch or building a comprehensive DIY smart home with dozens of ESP32 sensors, MQTT provides the reliable, efficient communication layer that makes everything work together.</p>
+        
+        <p><strong>Next steps:</strong> After setting up MQTT, explore <a href="tasmota-rules-and-automations.html">Tasmota rules</a> to add device-side automation without Home Assistant, or learn about <a href="sonoff-tasmota-vs-esphome.html">Tasmota vs ESPHome</a> to choose the right firmware for your next project.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="tasmota-sonoff-flash-guide.html">How to Flash Tasmota Firmware on Sonoff Devices: Complete Guide</a></li>
+          <li><a href="tasmota-rules-and-automations.html">Tasmota Rules and Automations: Programming Smart Devices Without Code</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="diy-smart-door-lock.html">How to Build a DIY Smart Door Lock with ESP32 and Home Assistant</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

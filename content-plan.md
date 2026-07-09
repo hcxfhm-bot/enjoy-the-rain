@@ -331,15 +331,15 @@
 - [x] tasmota-rules-and-automations — Tasmota Rules and Automations: Programming Smart Devices Without Code ✅ 2026-07-06
 - [x] sonoff-tasmota-vs-esphome — Sonoff with Tasmota vs ESPHome: Which Custom Firmware Is Better? ✅ 2026-07-07
 - [x] tasmota-energy-monitoring — Tasmota Energy Monitoring: Track Power Usage with Sonoff POW ✅ 2026-07-08
-- [ ] tasmota-mqtt-home-assistant — Tasmota MQTT Setup: Connect Your Devices to Home Assistant ✅
+- [x] tasmota-mqtt-home-assistant — Tasmota MQTT Setup: Connect Your Devices to Home Assistant ✅ 2026-07-09
 - [ ] best-sonoff-devices-2026 — Best Sonoff Smart Home Devices in 2026: Complete Buyer's Guide ✅
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 232 篇 ✅ (批次43进行中)
+- **已完成**: 233 篇 ✅ (批次43进行中)
 - **当前批次**: 批次43（Tasmota & Sonoff Smart Home）
-- **剩余**: 68 篇
+- **剩余**: 67 篇
 
 ## 生成规则
 
