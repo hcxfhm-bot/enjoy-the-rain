@@ -334,12 +334,20 @@
 - [x] tasmota-mqtt-home-assistant — Tasmota MQTT Setup: Connect Your Devices to Home Assistant ✅ 2026-07-09
 - [x] best-sonoff-devices-2026 — Best Sonoff Smart Home Devices in 2026: Complete Buyer's Guide ✅ 2026-07-10
 
+### 批次 44：SHELLY & WIRELESS SMART HOME (6篇) 🆕
+- [x] shelly-smart-home-devices-guide — Best Shelly Smart Home Devices in 2026: Complete Buyer's Guide ✅ 2026-07-12
+- [ ] shelly-plus-1pm-installation-guide — Shelly Plus 1PM Installation Guide: Replace Any Light Switch
+- [ ] shelly-vs-sonoff-comparison — Shelly vs Sonoff: Which Budget Smart Home Platform Is Better in 2026?
+- [ ] best-wireless-smart-home-ecosystem-2026 — Best Wireless Smart Home Ecosystems in 2026: Wi-Fi, Zigbee, Z-Wave Compared
+- [ ] diy-smart-light-dimmer-arduino — DIY Smart Light Dimmer with Arduino and TRIAC: Custom dimmer control
+- [ ] smart-home-mqtt-broker-setup — How to Set Up an MQTT Broker for Your Smart Home (Mosquitto on Raspberry Pi)
+
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 234 篇 ✅ (批次43完成)
-- **当前批次**: 批次43（Tasmota & Sonoff Smart Home）✅ 已完成
-- **剩余**: 66 篇
+- **已完成**: 235 篇 ✅ (批次44进行中)
+- **当前批次**: 批次44（Shelly & Wireless Smart Home）
+- **剩余**: 65 篇
 
 ## 生成规则
 
