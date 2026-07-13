@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelly Plus 1PM Installation Guide: Replace Any Light Switch</title>
+  <meta name="description" content="Complete step-by-step guide to installing the Shelly Plus 1PM smart relay. Learn how to replace any standard light switch with power monitoring and Home Assistant integration.">
+  <meta name="keywords" content="Shelly Plus 1PM, smart relay installation, smart light switch, Shelly 1PM setup, Home Assistant Shelly, power monitoring relay, WiFi smart switch">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>Shelly Plus 1PM Installation Guide: Replace Any Light Switch</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 13, 2026</span>
+        <span>⏱️ 8 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>The <strong>Shelly Plus 1PM</strong> is one of the most versatile smart relays on the market. Unlike bulky smart switches, this tiny device fits behind any standard light switch and adds <strong>WiFi control, power monitoring, and automation</strong> capabilities without changing your home's appearance.</p>
+
+        <p>In this guide, I'll walk you through the complete installation process—from wiring to configuration—so you can smarten up any light circuit in under 30 minutes.</p>
+
+        <h2>What Is the Shelly Plus 1PM?</h2>
+
+        <p>The Shelly Plus 1PM is a <strong>1-channel WiFi relay with power metering</strong>. It's the upgraded version of the popular Shelly 1PM, featuring:</p>
+
+        <ul>
+          <li><strong>16A maximum load</strong> — suitable for most residential lighting circuits</li>
+          <li><strong>Built-in power meter</strong> — track energy consumption in real-time</li>
+          <li><strong>Works with existing switches</strong> — toggle lights manually or via app</li>
+          <li><strong>Native Home Assistant integration</strong> — no cloud required</li>
+          <li><strong>Overheating protection</strong> — auto-shutoff at 70°C</li>
+          <li><strong>Detached mode</strong> — use the switch for scenes while controlling lights independently</li>
+        </ul>
+
+        <p>Unlike smart bulbs, the Shelly Plus 1PM keeps your <strong>existing light fixtures</strong> and lets you use <strong>any switch style</strong>—toggle, paddle, or momentary.</p>
+
+        <h2>What You'll Need</h2>
+
+        <p>Before starting, gather these tools and materials:</p>
+
+        <h3>Required Tools</h3>
+        <ul>
+          <li>Voltage tester (non-contact or multimeter)</li>
+          <li>Phillips and flathead screwdrivers</li>
+          <li>Wire strippers</li>
+          <li>Needle-nose pliers</li>
+          <li>Electrical tape</li>
+        </ul>
+
+        <h3>Materials</h3>
+        <ul>
+          <li>Shelly Plus 1PM device</li>
+          <li>Wago connectors or wire nuts (2-3 connectors)</li>
+          <li>Optional: 3D printed enclosure (for outdoor or exposed installations)</li>
+        </ul>
+
+        <div class="tip-box" style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0;">
+          <strong>💡 Tip:</strong> If you're installing multiple Shelly devices, check out our <a href="best-sonoff-devices-2026.html">smart home device comparison guide</a> to choose the right hardware for each circuit.
+        </div>
+
+        <h2>Safety First: Turn Off Power</h2>
+
+        <p><strong>Before touching any wires, shut off the circuit breaker</strong> for the light switch you're working on. Don't rely on the wall switch—always cut power at the panel.</p>
+
+        <ol>
+          <li>Locate your electrical panel</li>
+          <li>Flip the breaker for the target circuit to OFF</li>
+          <li>Use a voltage tester to confirm no power at the switch</li>
+          <li>Place a piece of tape over the breaker labeled "DO NOT TURN ON"</li>
+        </ol>
+
+        <p>If you're unsure which breaker controls the switch, turn off the main breaker. It's better to be safe than electrocuted.</p>
+
+        <h2>Understanding Your Wiring</h2>
+
+        <p>The Shelly Plus 1PM requires a <strong>neutral wire</strong> to operate. If your switch box doesn't have a neutral bundle (a group of white wires connected together), you may need to run one or use a different device like the Shelly 1L (which works without neutral but has limitations).</p>
+
+        <h3>Standard Switch Box Wires</h3>
+
+        <ul>
+          <li><strong>Line (Hot)</strong> — Usually black, brings power from the breaker</li>
+          <li><strong>Load</strong> — Usually black or red, goes to the light fixture</li>
+          <li><strong>Neutral</strong> — White wires bundled together</li>
+          <li><strong>Ground</strong> — Bare copper or green, for safety</li>
+        </ul>
+
+        <p>Use your voltage tester to identify the <strong>line wire</strong> (it'll show voltage when the breaker is on, even with the switch off). The load wire only shows voltage when the switch is ON.</p>
+
+        <h2>Wiring the Shelly Plus 1PM</h2>
+
+        <p>The Shelly Plus 1PM has 5 terminals:</p>
+
+        <ul>
+          <li><strong>N</strong> — Neutral</li>
+          <li><strong>L</strong> — Line (hot)</li>
+          <li><strong>O</strong> — Output (to light fixture)</li>
+          <li><strong>I</strong> — Input (from switch)</li>
+          <li><strong>SW</strong> — Switch terminal</li>
+        </ul>
+
+        <h3>Step-by-Step Wiring</h3>
+
+        <ol>
+          <li><strong>Disconnect the existing switch</strong> — Unscrew and pull out the switch, noting which wire was on which terminal</li>
+          <li><strong>Connect the neutral wire</strong> — Join a short white pigtail to the neutral bundle using a Wago connector, then connect it to Shelly's N terminal</li>
+          <li><strong>Connect the line wire</strong> — The incoming hot wire goes to Shelly's L terminal</li>
+          <li><strong>Connect the load wire</strong> — The wire going to your light fixture connects to Shelly's O terminal</li>
+          <li><strong>Connect the switch</strong> — Use two short wires (pigtails) to connect the switch to Shelly's I and SW terminals</li>
+          <li><strong>Ground the switch</strong> — Keep existing ground connections intact</li>
+        </ol>
+
+        <h3>Wiring Diagram (Text Version)</h3>
+
+        <pre style="background: #1a1b30; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem;">
+LINE (from breaker) ────────► Shelly L terminal
+                              │
+                              └────► Switch (one terminal)
+
+NEUTRAL bundle ─────────────► Shelly N terminal
+
+LOAD (to light) ────────────► Shelly O terminal
+
+Switch (other terminal) ────► Shelly SW terminal
+        </pre>
+
+        <div class="warning-box" style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 1rem; margin: 1.5rem 0;">
+          <strong>⚠️ Warning:</strong> Never exceed the 16A maximum load. For high-wattage circuits (like heaters or AC units), use a Shelly Pro series with a contactor. The Plus 1PM is designed for <strong>lighting and small appliance loads only</strong>.
+        </div>
+
+        <h2>Physical Installation</h2>
+
+        <p>Once wired, carefully fold the wires and tuck the Shelly Plus 1PM behind the switch:</p>
+
+        <ol>
+          <li><strong>Organize wires</strong> — Fold neatly to avoid pinching when the switch is mounted</li>
+          <li><strong>Secure the Shelly</strong> — Use the included adhesive pad or zip-ties to prevent rattling</li>
+          <li><strong>Mount the switch</strong> — Screw it back into the box, ensuring no wires get crushed</li>
+          <li><strong>Install the faceplate</strong> — Snap or screw the cover back on</li>
+        </ol>
+
+        <p>The Shelly Plus 1PM is compact (39 × 36 × 17 mm) and fits in most standard switch boxes. If your box is crowded, consider replacing it with a deeper box during installation.</p>
+
+        <h2>Initial Configuration</h2>
+
+        <p>With power restored, it's time to configure the device:</p>
+
+        <h3>Step 1: Connect to Shelly's WiFi</h3>
+
+        <ol>
+          <li>Open your phone's WiFi settings</li>
+          <li>Find and connect to <code>ShellyPlus1PM-XXXXXX</code> (the default password is on the device)</li>
+          <li>Open a browser and go to <code>192.168.33.1</code></li>
+        </ol>
+
+        <h3>Step 2: Connect to Your Network</h3>
+
+        <p>In the Shelly's web interface:</p>
+
+        <ol>
+          <li>Go to <strong>Settings → WiFi</strong></li>
+          <li>Scan for your home network</li>
+          <li>Enter your WiFi password</li>
+          <li>Click <strong>Connect</strong></li>
+        </ol>
+
+        <p>The device will reboot and connect to your network. You can now access it via its IP address (check your router's DHCP table) or through the Shelly Cloud app.</p>
+
+        <h3>Step 3: Configure Settings</h3>
+
+        <p>In the Shelly web interface or app, adjust these recommended settings:</p>
+
+        <ul>
+          <li><strong>Button type</strong> — Set to "Toggle" for standard switches or "Momentary" for push-button switches</li>
+          <li><strong>Power metering</strong> — Enable to track energy usage</li>
+          <li><strong>Auto-on</strong> — Optional: automatically turn on at sunset</li>
+          <li><strong>Schedule</strong> — Set timers for automatic control</li>
+        </ul>
+
+        <h2>Home Assistant Integration</h2>
+
+        <p>One of the Shelly Plus 1PM's biggest advantages is <strong>native Home Assistant support</strong>. Here's how to add it:</p>
+
+        <h3>Method 1: Discovery (Automatic)</h3>
+
+        <ol>
+          <li>Go to <strong>Settings → Devices & Services</strong></li>
+          <li>Click <strong>Add Integration</strong></li>
+          <li>Search for "Shelly"</li>
+          <li>Home Assistant will discover the device automatically</li>
+        </ol>
+
+        <h3>Method 2: Manual Configuration</h3>
+
+        <p>If discovery fails, you can configure it manually:</p>
+
+        <ol>
+          <li>Find the device's IP address in your router</li>
+          <li>In Home Assistant, add the Shelly integration with the IP</li>
+          <li>Optionally, disable cloud access in the Shelly settings for local-only operation</li>
+        </ol>
+
+        <p>Once integrated, you'll have access to:</p>
+
+        <ul>
+          <li>Light control (on/off)</li>
+          <li>Power consumption sensors</li>
+          <li>Energy total (daily/monthly)</li>
+          <li>Temperature sensor (internal)</li>
+          <li>Overheating alerts</li>
+        </ul>
+
+        <p>For more Home Assistant automation ideas, see our <a href="home-assistant-automations-beginners.html">beginner's automation guide</a>.</p>
+
+        <h2>Using Detached Mode</h2>
+
+        <p><strong>Detached mode</strong> is a powerful feature that separates the physical switch from the relay output:</p>
+
+        <ul>
+          <li>The switch becomes a <strong>scene controller</strong> — pressing it can trigger any automation</li>
+          <li>The light can be controlled <strong>independently</strong> via app, voice, or automation</li>
+          <li>Perfect for "double-tap" scenes or controlling multiple devices</li>
+        </ul>
+
+        <p>To enable detached mode:</p>
+
+        <ol>
+          <li>Go to <strong>Settings → Input</strong></li>
+          <li>Set "Button Type" to <strong>Detached</strong></li>
+          <li>Configure actions in Home Assistant using the <code>shelly.click</code> event</li>
+        </ol>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>Device Won't Power On</h3>
+
+        <ul>
+          <li>Check all wire connections with the breaker off</li>
+          <li>Verify neutral wire is properly connected</li>
+          <li>Use a multimeter to confirm power at the L terminal</li>
+        </ul>
+
+        <h3>Light Won't Turn On</h3>
+
+        <ul>
+          <li>Check the load wire connection at the O terminal</li>
+          <li>Verify the bulb isn't burnt out</li>
+          <li>Test the relay in the Shelly app (manual control)</li>
+        </ul>
+
+        <h3>WiFi Connection Drops</h3>
+
+        <ul>
+          <li>Move the device closer to your router (metal boxes can block signal)</li>
+          <li>Check for interference from other 2.4GHz devices</li>
+          <li>Set a static IP in your router to prevent DHCP conflicts</li>
+        </ul>
+
+        <h3>Power Metering Shows Zero</h3>
+
+        <ul>
+          <li>The load may be too low (under 5W) for accurate measurement</li>
+          <li>Verify the O terminal is connected to the load, not line</li>
+          <li>Check if power metering is enabled in settings</li>
+        </ul>
+
+        <h2>3D Printed Enclosures</h2>
+
+        <p>If you're installing the Shelly Plus 1PM in an exposed location (like an outdoor junction box or inside a light fixture), consider <a href="3d-printed-esp32-case-design.html">3D printing a custom enclosure</a> for protection.</p>
+
+        <p>Search Printables or Thingiverse for "Shelly Plus 1PM case" — there are dozens of designs optimized for different installation scenarios, including:</p>
+
+        <ul>
+          <li>Waterproof outdoor boxes</li>
+          <li>DIN rail mounts</li>
+          <li>Surface-mount enclosures</li>
+        </ul>
+
+        <h2>Shelly Plus 1PM vs. Competitors</h2>
+
+        <p>How does it compare to other smart relays? Check out our detailed <a href="shelly-smart-home-devices-guide.html">Shelly device buyer's guide</a> and <a href="shelly-vs-sonoff-comparison.html">Shelly vs. Sonoff comparison</a>.</p>
+
+        <p>Quick summary:</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #1a1b30;">
+              <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #3b82f6;">Feature</th>
+              <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #3b82f6;">Shelly Plus 1PM</th>
+              <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #3b82f6;">Sonoff Mini R4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">Max Load</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">16A</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">16A</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">Power Metering</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">✅ Yes</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">❌ No (Pro version only)</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">Local Control</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">✅ Full API</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">✅ Tasmota/ESPHome</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">Detached Mode</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">✅ Native</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">⚠️ Requires firmware</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">Price</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">~$18</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #333;">~$12</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Conclusion</h2>
+
+        <p>The <strong>Shelly Plus 1PM</strong> is an excellent choice for smartening up your home's lighting. It's reliable, feature-packed, and works with your existing switches—no need to replace fixtures or learn complex automation systems.</p>
+
+        <p>With native Home Assistant integration and power metering, you get <strong>real-time energy data</strong> and <strong>local control</strong> without relying on the cloud. Whether you're building your first smart home or upgrading an existing setup, the Plus 1PM deserves a spot in your toolkit.</p>
+
+        <p>Ready to install more Shelly devices? Check out our guides on <a href="tasmota-mqtt-home-assistant.html">MQTT setup</a> and <a href="smart-light-switch-wiring-guide.html">smart switch wiring basics</a> to expand your smart home network.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="shelly-smart-home-devices-guide.html">Best Shelly Smart Home Devices in 2026: Complete Buyer's Guide</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="smart-light-switch-wiring-guide.html">Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff</a></li>
+          <li><a href="tasmota-mqtt-home-assistant.html">Tasmota MQTT Setup: Connect Your Devices to Home Assistant</a></li>
+          <li><a href="best-sonoff-devices-2026.html">Best Sonoff Smart Home Devices in 2026: Complete Buyer's Guide</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
