@@ -1499,4 +1499,10 @@
     <ns0:changefreq>weekly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/shelly-plus-1pm-installation-guide.html</ns0:loc>
+    <ns0:lastmod>2026-07-13</ns0:lastmod>
+    <ns0:changefreq>weekly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
 </ns0:urlset>
