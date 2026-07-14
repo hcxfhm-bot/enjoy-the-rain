@@ -337,7 +337,7 @@
 ### 批次 44：SHELLY & WIRELESS SMART HOME (6篇) 🆕
 - [x] shelly-smart-home-devices-guide — Best Shelly Smart Home Devices in 2026: Complete Buyer's Guide ✅ 2026-07-12
 - [x] shelly-plus-1pm-installation-guide — Shelly Plus 1PM Installation Guide: Replace Any Light Switch ✅ 2026-07-13
-- [ ] shelly-vs-sonoff-comparison — Shelly vs Sonoff: Which Budget Smart Home Platform Is Better in 2026?
+- [x] shelly-vs-sonoff-comparison — Shelly vs Sonoff: Which Budget Smart Home Platform Is Better in 2026? ✅ 2026-07-14
 - [ ] best-wireless-smart-home-ecosystem-2026 — Best Wireless Smart Home Ecosystems in 2026: Wi-Fi, Zigbee, Z-Wave Compared
 - [ ] diy-smart-light-dimmer-arduino — DIY Smart Light Dimmer with Arduino and TRIAC: Custom dimmer control
 - [ ] smart-home-mqtt-broker-setup — How to Set Up an MQTT Broker for Your Smart Home (Mosquitto on Raspberry Pi)
