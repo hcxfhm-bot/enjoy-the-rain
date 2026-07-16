@@ -340,14 +340,14 @@
 - [x] shelly-vs-sonoff-comparison — Shelly vs Sonoff: Which Budget Smart Home Platform Is Better in 2026? ✅ 2026-07-14
 - [x] best-wireless-smart-home-ecosystem-2026 — Best Wireless Smart Home Ecosystems in 2026: Wi-Fi, Zigbee, Z-Wave Compared ✅ 2026-07-16
 - [ ] diy-smart-light-dimmer-arduino — DIY Smart Light Dimmer with Arduino and TRIAC: Custom dimmer control
-- [ ] smart-home-mqtt-broker-setup — How to Set Up an MQTT Broker for Your Smart Home (Mosquitto on Raspberry Pi)
+- [x] smart-home-mqtt-broker-setup — How to Set Up an MQTT Broker for Your Smart Home (Mosquitto on Raspberry Pi) ✅ 2026-07-16
 
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 236 篇 ✅ (批次44进行中)
+- **已完成**: 237 篇 ✅ (批次44进行中)
 - **当前批次**: 批次44（Shelly & Wireless Smart Home）
-- **剩余**: 65 篇
+- **剩余**: 64 篇
 
 ## 生成规则
 
