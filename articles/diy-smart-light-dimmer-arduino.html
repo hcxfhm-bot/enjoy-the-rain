@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Smart Light Dimmer with Arduino and TRIAC: Custom Dimmer Control (2026)</title>
+  <meta name="description" content="Build a DIY smart light dimmer with Arduino and TRIAC. Complete guide covering circuit design, zero-cross detection, PWM dimming, and Home Assistant integration.">
+  <meta name="keywords" content="DIY smart dimmer, Arduino dimmer, TRIAC dimmer, AC dimming, MT1, BT138, zero cross detection, Arduino light dimmer, smart home dimmer, TRIAC circuit, AC PWM dimmer, ESP32 dimmer, Home Assistant dimmer">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Projects</span>
+      </nav>
+
+      <h1>DIY Smart Light Dimmer with Arduino and TRIAC: Custom Dimmer Control (2026)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 17, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Commercial smart dimmers work well, but they lock you into a specific ecosystem, limit your control options, and often can't handle unusual load types. If you want full control over your dimming logic — or just want to learn how AC dimming actually works — building your own TRIAC-based dimmer with an Arduino or ESP32 is one of the most rewarding maker projects you can tackle.</p>
+
+        <p>In this guide, you'll learn how AC dimming works at the circuit level, how to detect zero-crossing for precise timing, and how to build a fully functional smart dimmer you can control via serial, web interface, or integrate directly into <a href="../articles/home-assistant-raspberry-pi-setup.html">Home Assistant</a>.</p>
+
+        <h2>What Is TRIAC Dimming and How Does It Work?</h2>
+
+        <p>A TRIAC (Triode for Alternating Current) is a semiconductor device that acts like a switch for AC circuits. Unlike a relay that is either fully on or fully off, a TRIAC can be triggered partway through each AC half-cycle — allowing you to control the average power delivered to a load.</p>
+
+        <p>Here's the key concept: mains AC oscillates at 50Hz or 60Hz, crossing through zero voltage 100 or 120 times per second. By triggering the TRIAC at a specific delay after each zero-crossing, you control what percentage of each AC wave reaches your light bulb. Trigger early → full brightness. Trigger late → dim. No trigger → light off.</p>
+
+        <p>This technique is called <strong>phase-angle dimming</strong>, and it's exactly how wall dimmer switches, lamp dimmers, and motor speed controllers all work under the hood.</p>
+
+        <h2>Components You Need</h2>
+
+        <p>Here's the full parts list for a safe, functional TRIAC dimmer:</p>
+
+        <ul>
+          <li><strong>Arduino Uno / Nano or ESP32</strong> — your controller of choice</li>
+          <li><strong>TRIAC — BT138-600 or BTA16-600</strong> — rated for 16A, 600V, handles most residential loads</li>
+          <li><strong>Zero-cross detection module — H11AA1 or 4N25 optocoupler</strong> — detects AC zero-crossing point</li>
+          <li><strong>MOC3021 or MOC3023 optocoupler</strong> — isolates your microcontroller from the high-voltage AC side</li>
+          <li><strong>Resistors — 10kΩ, 330Ω, 470Ω</strong> — voltage division and current limiting</li>
+          <li><strong>Capacitor — 100nF / 275V</strong> — snubber for TRIAC protection</li>
+          <li><strong>Prototyping board or custom PCB</strong></li>
+          <li><strong>Enclosure</strong> — ideally 3D printed, see below</li>
+          <li><strong>Terminal blocks</strong> — for AC mains and load connections</li>
+        </ul>
+
+        <p>⚠️ <strong>Safety note:</strong> This project involves mains voltage (120V/240V AC). Never work on the AC side of the circuit while it's live. Build in a proper enclosure, use correct gauge wiring for the current, and always double-check your wiring before applying power. If you're uncomfortable working with mains voltage, consider using a 12V DC dimmer circuit instead.</p>
+
+        <h2>Understanding the Zero-Cross Detection Circuit</h2>
+
+        <p>The zero-cross detection circuit is what makes precise dimming possible. The optocoupler produces a pulse every time the AC waveform crosses zero, which your Arduino uses as a timing reference. Without this, you'd be triggering the TRIAC blind.</p>
+
+        <p>The typical circuit uses a full-wave bridge rectifier feeding the optocoupler's LED. The output goes HIGH when AC crosses zero and LOW during the rest of the cycle. Your code measures the time between zero-crossings to calculate the correct firing delay for your desired brightness level.</p>
+
+        <p>For a 50Hz AC supply, the full cycle is 20ms. For 60Hz, it's 16.67ms. The delay after zero-crossing controls brightness:</p>
+
+        <ul>
+          <li><strong>0ms delay</strong> → full wave → 100% brightness</li>
+          <li><strong>5ms delay (50Hz)</strong> / 4.17ms (60Hz) → half wave → 50% brightness</li>
+          <li><strong>Near full delay</strong> → barely any wave → barely any light</li>
+        </ul>
+
+        <h2>Building the Dimmer Circuit</h2>
+
+        <p>Here's the complete circuit connection diagram:</p>
+
+        <p><strong>Zero-cross detection branch:</strong> Connect mains Live through a 10kΩ resistor to the anode of the optocoupler LED. Connect the cathode to Neutral. The optocoupler's transistor output connects between Arduino pin 2 (or any interrupt-capable pin) and Ground, with a 10kΩ pull-up to 5V.</p>
+
+        <p><strong>TRIAC gate control:</strong> Connect Arduino pin 3 (or any PWM-capable pin) through a 330Ω resistor to pin 1 (anode) of the MOC3021 optocoupler. Connect pin 2 (cathode) to Ground. The MOC3021's output (pins 4 and 6) connects to the TRIAC's gate pin through a small resistor (typically 47-100Ω). Pin 4 of the MOC3021 goes to MT1 of the BT138, and pin 6 goes to the gate.</p>
+
+        <p><strong>AC connections:</strong> Connect mains Live to one side of your load. The other side of the load connects to the TRIAC's MT2 pin. The TRIAC's MT1 connects back to mains Neutral. The snubber capacitor (100nF, rated for 275V) connects across MT1 and MT2.</p>
+
+        <p>For ESP32 users, the logic is identical — just ensure you're using 3.3V logic levels. A level shifter or careful resistor selection ensures the MOC3021 triggers reliably.</p>
+
+        <h2>Arduino Code for TRIAC Dimmer Control</h2>
+
+        <p>Here's a clean, functional implementation using interrupts for precise timing:</p>
+
+<pre><code>const int ZC_PIN = 2;      // Zero-cross detection pin
+const int TRIAC_PIN = 3;    // TRIAC gate control pin
+const int AC_FREQ = 60;    // Set to 50 for 50Hz countries
+const int HALF_CYCLE = 1000000 / (AC_FREQ * 2); // microseconds
+
+volatile int brightness = 0;   // 0-100%
+volatile bool triacFired = false;
+
+void setup() {
+  pinMode(ZC_PIN, INPUT_PULLUP);
+  pinMode(TRIAC_PIN, OUTPUT);
+  digitalWrite(TRIAC_PIN, LOW);
+
+  // Trigger on zero-crossing (FALLING = end of half cycle)
+  attachInterrupt(digitalPinToInterrupt(ZC_PIN), zeroCross, FALLING);
+  Serial.begin(115200);
+}
+
+void loop() {
+  // Adjust brightness via serial for testing
+  if (Serial.available()) {
+    int val = Serial.parseInt();
+    if (val >= 0 && val <= 100) {
+      brightness = val;
+      Serial.print("Brightness set to: ");
+      Serial.println(brightness);
+    }
+  }
+}
+
+ICACHE_RAM_ATTR void zeroCross() {
+  triacFired = false;
+  if (brightness == 0) {
+    digitalWrite(TRIAC_PIN, LOW);
+    return;
+  }
+  if (brightness == 100) {
+    digitalWrite(TRIAC_PIN, HIGH);
+    return;
+  }
+
+  // Calculate delay in microseconds
+  // Full delay = half_cycle, no delay = 0
+  int delayMicros = map(brightness, 0, 100, halfCycleDelay(brightness), 0);
+  
+  // Schedule TRIAC fire using micros()
+  // We'll use a simple delay-based approach here
+  delayMicroseconds(delayMicros);
+  digitalWrite(TRIAC_PIN, HIGH);
+  triacFired = true;
+  delayMicroseconds(100); // Minimum gate pulse width
+  digitalWrite(TRIAC_PIN, LOW);
+}
+
+int halfCycleDelay(int b) {
+  // Maps brightness to delay in microseconds
+  // brightness=100 → 0 delay (full wave)
+  // brightness=1 → near full half-cycle delay
+  return (HALF_CYCLE * (100 - b)) / 100;
+}</code></pre>
+
+        <p>This basic sketch gives you serial control over brightness. But the real power comes from connecting it to a web dashboard or <a href="../articles/home-assistant-automations-beginners.html">Home Assistant automations</a>.</p>
+
+        <h2>Adding Web Control with ESP32</h2>
+
+        <p>If you use an ESP32, you can add a web server directly on the dimmer — no Home Assistant required, though integration is easy if you have it. The ESP32's WiFi capability means you can control the dimmer from any browser or phone:</p>
+
+        <pre><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+const char* ssid = "YOUR_WIFI";
+const char* password = "YOUR_PASSWORD";
+
+WebServer server(80);
+int brightness = 50;
+
+void handleRoot() {
+  String html = "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Smart Dimmer Control&lt;/h1&gt;";
+  html += "&lt;p&gt;Brightness: &lt;span id='val'&gt;" + String(brightness) + "&lt;/span&gt;%&lt;/p&gt;";
+  html += "&lt;input type='range' min='0' max='100' value='" + String(brightness) + "' ";
+  html += "onchange='setBrightness(this.value)'&gt;";
+  html += "&lt;script&gt;function setBrightness(v){";
+  html += "fetch('/set?b='+v).then(r=&gt;document.getElementById('val').innerText=v);";
+  html += "}&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;";
+  server.send(200, "text/html", html);
+}
+
+void handleSet() {
+  if (server.hasArg("b")) {
+    brightness = server.arg("b").toInt();
+    // Update TRIAC firing delay
+  }
+  server.send(200, "text/plain", "OK");
+}
+
+void setup() {
+  WiFi.begin(ssid, password);
+  server.on("/", handleRoot);
+  server.on("/set", handleSet);
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+  // TRIAC control logic runs on interrupt
+}</code></pre>
+
+        <p>This gives you a slider-based web interface. Customize the HTML with your own styling for a sleek in-wall look.</p>
+
+        <h2>Integrating with Home Assistant via MQTT</h2>
+
+        <p>For a fully integrated smart home experience, connect your DIY dimmer to Home Assistant using MQTT. This lets you use Home Assistant's UI, voice assistants, and automations to control your dimmer alongside your commercial devices.</p>
+
+        <p>Set up your ESP32 to publish brightness state and subscribe to brightness commands via MQTT. In Home Assistant, add a light entity using the MQTT light platform:</p>
+
+        <pre><code>mqtt:
+  light:
+    - name: "DIY TRIAC Dimmer"
+      command_topic: "home/dimmer/set"
+      state_topic: "home/dimmer/state"
+      payload_on: "ON"
+      payload_off: "OFF"
+      brightness_command_topic: "home/dimmer/brightness"
+      brightness_state_topic: "home/dimmer/brightness_state"
+      qos: 1</code></pre>
+
+        <p>This same MQTT approach works with <a href="../articles/tasmota-mqtt-home-assistant.html">Tasmota devices</a>, giving you a consistent control interface across all your smart home gear.</p>
+
+        <h2>Using Relay Modules as an Alternative</h2>
+
+        <p>If the complexity of TRIAC circuits feels intimidating, a simpler approach for on/off and multi-level control uses <a href="../articles/relay-module-arduino-esp32.html">relay modules with Arduino and ESP32</a>. While relays can't do true dimming, you can create a stepped dimmer by wiring multiple bulbs through separate relays and switching combinations on and off. This is coarse and limited, but completely safe and easy to debug.</p>
+
+        <p>For precise brightness control, though, TRIAC is the only real option at the DIY level.</p>
+
+        <h2>3D Printing a Custom Enclosure</h2>
+
+        <p>Your dimmer needs a proper enclosure — never leave exposed mains voltage circuits in the open. You can design a custom enclosure in <a href="../articles/custom-knob-3d-print-home-assistant.html">Tinkercad or Fusion 360</a> to fit:</p>
+
+        <ul>
+          <li>The PCB or breadboard with all components</li>
+          <li>Terminal blocks for AC wiring</li>
+          <li>A rotary encoder with a 3D printed knob for manual control</li>
+          <li>An ESP32 with its antenna extending outside the enclosure</li>
+        </ul>
+
+        <p>For PLA, print at 100% infill around high-heat components and consider PETG for better heat resistance. If your dimmer controls a heavy load (high-wattage halogen or LED), add ventilation holes and consider printing the enclosure in ASA or ABS for heat resistance. See our guide on <a href="../articles/diy-outdoor-sensor-enclosure-3d-print.html">designing weatherproof enclosures</a> for tips on thermal management and cable glands.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <p><strong>Flickering at low brightness:</strong> This is usually caused by inconsistent zero-cross detection. Check your optocoupler's wiring, ensure the resistors are correctly rated, and consider adding a small capacitor to smooth the zero-cross signal.</p>
+
+        <p><strong>LED bulbs flickering or not dimming smoothly:</strong> Most LED bulbs are not designed for TRIAC dimming. Use dimmable LED bulbs explicitly labeled as "dimmable" or "TRIAC compatible." Regular LEDs may buzz, flicker, or refuse to dim at all. Smart LEDs controlled via PWM work much better for this use case.</p>
+
+        <p><strong>TRIAC overheating:</strong> If the TRIAC gets hot to the touch, you may be exceeding its current rating. Add a heatsink or reduce the load. The BTA16 (16A) should handle most residential lighting but verify your actual load current.</p>
+
+        <p><strong>ESP32 not triggering properly:</strong> ESP32 runs at 3.3V. The MOC3021 needs at least 15mA forward current — use a 220Ω resistor instead of 330Ω for 3.3V logic to ensure reliable triggering.</p>
+
+        <h2>What Can You Control with This Dimmer?</h2>
+
+        <p>Beyond standard incandescent and dimmable LED bulbs, a TRIAC dimmer can control:</p>
+
+        <ul>
+          <li><strong>Halogen lamps</strong> — traditional use, works flawlessly</li>
+          <li><strong>Low-voltage halogen with magnetic transformers</strong> — works but watch for transformer hum</li>
+          <li><strong>Universal LED drivers marked dimmable</strong> — test before committing</li>
+          <li><strong>AC fans and motors</strong> — for motor speed control (use with appropriate current rating)</li>
+          <li><strong>Solde</strong>ring stations — many hakko-style stations use TRIAC dimmer control internally</li>
+        </ul>
+
+        <h2>Expanding the Project</h2>
+
+        <p>Once your basic dimmer works, consider these upgrades:</p>
+
+        <ul>
+          <li><strong>Add a rotary encoder</strong> for tactile physical dimming control alongside the digital interface</li>
+          <li><strong>Multi-channel dimming</strong> — use multiple TRIAC/MOC combos for RGBW control or multiple zones</li>
+          <li><strong>Integrate with Alexa or Google Home</strong> using FauxmoESP or Google Assistant SDK on ESP32</li>
+          <li><strong>Add an OLED display</strong> showing current brightness level and mode</li>
+          <li><strong>Build it into a wall box</strong> using a standard Decora faceplate with a custom 3D printed insert</li>
+        </ul>
+
+        <p>You can also combine this project with our guide to <a href="../articles/smart-light-switch-wiring-guide.html">smart light switch wiring</a> if you want to retrofit existing wall switches with your DIY dimmer.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Building a DIY smart light dimmer with Arduino and TRIAC is one of the most educational maker projects you can do. It touches on AC power electronics, microcontroller interrupts, real-time control systems, and smart home integration — all in one project. The satisfaction of controlling your lights with a custom-built device, through your own code, is hard to beat.</p>
+
+        <p>Start with low-voltage testing if you're new to this, use proper enclosures, and don't rush the safety aspects. Once it's working, you'll have a dimmer that's fully customizable to your exact needs — something no commercial product can offer.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/relay-module-arduino-esp32.html">How to Use Relay Modules with Arduino and ESP32: Complete Guide</a></li>
+          <li><a href="../articles/smart-light-switch-wiring-guide.html">Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff</a></li>
+          <li><a href="../articles/home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="../articles/arduino-uno-r4-review.html">Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade?</a></li>
+          <li><a href="../articles/custom-knob-3d-print-home-assistant.html">How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
