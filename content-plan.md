@@ -342,6 +342,14 @@
 - [x] diy-smart-light-dimmer-arduino — DIY Smart Light Dimmer with Arduino and TRIAC: Custom dimmer control ✅ 2026-07-17
 - [x] smart-home-mqtt-broker-setup — How to Set Up an MQTT Broker for Your Smart Home (Mosquitto on Raspberry Pi) ✅ 2026-07-16
 
+### 批次 45：ZIGBEE & MATTER PROTOCOL (6篇) 🆕
+- [x] zigbee-vs-zwave-smart-home — Zigbee vs Z-Wave: Which Smart Home Protocol Should You Choose in 2026? ✅ 2026-07-20
+- [ ] zigbee-smart-home-beginners — Zigbee Smart Home Guide: How to Build a Zigbee Network from Scratch
+- [ ] matter-smart-home-protocol — Matter Protocol Explained: The Future of Smart Home Compatibility
+- [ ] how-to-set-up-matter-devices — How to Set Up Matter Devices with Home Assistant: Step-by-Step Guide
+- [ ] zigbee2mqtt-setup-guide — Zigbee2MQTT Setup Guide: Bridge Your Zigbee Devices to Home Assistant
+- [ ] smart-home-network-setup-guide — Smart Home Network Setup: Wi-Fi, Ethernet, and VPN Configuration
+
 ## 进度
 
 - **总目标**: 300 篇
