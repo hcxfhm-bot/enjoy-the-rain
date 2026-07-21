@@ -344,7 +344,7 @@
 
 ### 批次 45：ZIGBEE & MATTER PROTOCOL (6篇) 🆕
 - [x] zigbee-vs-zwave-smart-home — Zigbee vs Z-Wave: Which Smart Home Protocol Should You Choose in 2026? ✅ 2026-07-20
-- [ ] zigbee-smart-home-beginners — Zigbee Smart Home Guide: How to Build a Zigbee Network from Scratch
+- [x] zigbee-smart-home-beginners — Zigbee Smart Home Guide: How to Build a Zigbee Network from Scratch ✅ 2026-07-21
 - [ ] matter-smart-home-protocol — Matter Protocol Explained: The Future of Smart Home Compatibility
 - [ ] how-to-set-up-matter-devices — How to Set Up Matter Devices with Home Assistant: Step-by-Step Guide
 - [ ] zigbee2mqtt-setup-guide — Zigbee2MQTT Setup Guide: Bridge Your Zigbee Devices to Home Assistant
@@ -353,9 +353,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 237 篇 ✅ (批次44进行中)
-- **当前批次**: 批次44（Shelly & Wireless Smart Home）
-- **剩余**: 64 篇
+- **已完成**: 238 篇 ✅ (批次45进行中)
+- **当前批次**: 批次45（Zigbee & Matter Protocol）
+- **剩余**: 63 篇
 
 ## 生成规则
 
