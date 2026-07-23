@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Set Up Matter Devices with Home Assistant: Step-by-Step Guide</title>
+  <meta name="description" content="Complete guide to setting up Matter devices with Home Assistant. Learn Matter commissioning, Thread setup, Wi-Fi Matter devices, and troubleshooting tips for 2026.">
+  <meta name="keywords" content="Matter Home Assistant setup, how to set up Matter devices, Matter commissioning, Home Assistant Matter integration, Matter Thread setup, Matter Wi-Fi setup, Matter device setup guide">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span>
+      </nav>
+
+      <h1>How to Set Up Matter Devices with Home Assistant: Step-by-Step Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 23, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🏠</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+        <p>You've just unboxed a shiny new Matter device — maybe a smart bulb, a contact sensor, or a Thread-enabled thermostat. The box promises "Works with Matter" and "Easy setup." But now you're staring at your Home Assistant dashboard, wondering how to actually get this thing connected.</p>
+
+        <p>You're not alone. Matter is the future of smart home connectivity, but "easy setup" is relative. In this guide, I'll walk you through <strong>exactly how to set up Matter devices with Home Assistant</strong> — whether they're Wi-Fi Matter devices, Thread-based sensors, or Matter over Thread border routers.</p>
+
+        <h2>Understanding the Matter Setup Requirements</h2>
+
+        <p>Before diving into the step-by-step process, let's clarify what you need. Setting up Matter devices with Home Assistant requires:</p>
+
+        <ul>
+          <li><strong>Home Assistant</strong> — Running on Raspberry Pi, mini PC, NAS, or Docker</li>
+          <li><strong>Home Assistant 2023.11 or later</strong> — The Matter server integration is included by default</li>
+          <li><strong>A Matter-compatible device</strong> — Wi-Fi or Thread-based Matter certified product</li>
+          <li><strong>Commissioning codes</strong> — The QR code or numeric code that comes with your device</li>
+          <li><strong>Optional: Thread border router</strong> — Required only for Thread-based Matter devices</li>
+        </ul>
+
+        <p>If you haven't set up Home Assistant yet, check out our comprehensive <a href="../articles/home-assistant-raspberry-pi-setup.html">Home Assistant Raspberry Pi setup guide</a> for step-by-step instructions from scratch.</p>
+
+        <h2>Prerequisites: Preparing Your Home Assistant</h2>
+
+        <p>Let's make sure your Home Assistant is ready for Matter devices before attempting any setup.</p>
+
+        <h3>Check Your Home Assistant Version</h3>
+
+        <p>Home Assistant has included Matter support since version 2023.11. To check your version:</p>
+
+        <ol>
+          <li>Open Home Assistant in your browser</li>
+          <li>Click on your profile icon (bottom left)</li>
+          <li>Scroll down to see the Home Assistant version</li>
+          <li>If you're below 2023.11, update through <strong>Settings → System → Updates</strong></li>
+        </ol>
+
+        <h3>Verify the Matter Server Add-On</h3>
+
+        <p>The Matter server runs as a Home Assistant add-on. To check if it's installed:</p>
+
+        <ol>
+          <li>Go to <strong>Settings → Add-ons</strong></li>
+          <li>Look for "Matter Server" in the add-on list</li>
+          <li>If it's not installed, click <strong>Add Add-on Store</strong> and search for "Matter"</li>
+          <li>Install the official "Matter Server" add-on by Home Assistant</li>
+          <li>Start the add-on and enable auto-start</li>
+        </ol>
+
+        <p>The Matter Server add-on handles all the complex pairing and communication protocols so you don't have to deal with them manually.</p>
+
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder inline" style="margin: 2rem 0; padding: 1.5rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Method 1: Setting Up Wi-Fi Matter Devices</h2>
+
+        <p>Wi-Fi Matter devices are the simplest to set up since they connect directly to your existing network without requiring Thread border routers. Most smart bulbs, plugs, and switches fall into this category.</p>
+
+        <h3>Step 1: Put Your Device in Pairing Mode</h3>
+
+        <p>Every Matter device has a specific way to enter pairing mode. Common methods include:</p>
+
+        <ul>
+          <li><strong>Factory reset</strong> — Usually power on/off 3-5 times, or hold a button for 10 seconds</li>
+          <li><strong>LED indicators</strong> — Look for blinking patterns (often amber or blue)</li>
+          <li><strong>Documentation</strong> — Check the manual for the specific pairing sequence</li>
+        </ul>
+
+        <p>The device's LED will typically blink rapidly when it's in pairing mode and ready to be discovered.</p>
+
+        <h3>Step 2: Add Matter Integration in Home Assistant</h3>
+
+        <ol>
+          <li>Open Home Assistant and go to <strong>Settings → Devices & Services</strong></li>
+          <li>Click <strong>Add Integration</strong></li>
+          <li>Search for "Matter" and select it</li>
+          <li>Click <strong>Submit</strong> to confirm the Matter server is running</li>
+          <li>Home Assistant will scan your network for Matter devices in pairing mode</li>
+        </ol>
+
+        <h3>Step 3: Commission Your Device</h3>
+
+        <p>If your device doesn't appear automatically, you'll need to commission it manually using the QR code:</p>
+
+        <ol>
+          <li>In the Matter integration, click <strong>Add Device</strong></li>
+          <li>A camera window will open — position the device's QR code in frame</li>
+          <li>Home Assistant will read the code and begin commissioning</li>
+          <li>Wait 30-60 seconds for the process to complete</li>
+          <li>The device will appear in your device list with all its entities</li>
+        </ol>
+
+        <p>If you're using a device without a camera-accessible QR code (some Thread devices), you can enter the numeric code manually. Look for a 11-21 digit number on the device or its packaging.</p>
+
+        <h3>Step 4: Organize Your Device</h3>
+
+        <p>After commissioning, assign your device to the appropriate area in Home Assistant:</p>
+
+        <ol>
+          <li>Click on your new device in the device list</li>
+          <li>Click the <strong>Edit</strong> button (pencil icon)</li>
+          <li>Select the room or area from the dropdown</li>
+          <li>Give the device a friendly name</li>
+          <li>Click <strong>Update</strong></li>
+        </ol>
+
+        <h2>Method 2: Setting Up Thread-Based Matter Devices</h2>
+
+        <p>Thread devices offer superior battery life and mesh networking, but they require a Thread border router to communicate with your Matter network. Here's how to set them up.</p>
+
+        <h3>Understanding Thread Border Routers</h3>
+
+        <p>A Thread border router bridges your Thread network to your Wi-Fi/Ethernet network. Without one, Thread devices can't communicate with Home Assistant. Compatible Thread border routers include:</p>
+
+        <ul>
+          <li><strong>Apple HomePod mini or HomePod</strong> — Most reliable Thread border router for Home Assistant users</li>
+          <li><strong>Apple TV 4K</strong> — Also functions as a Thread border router</li>
+          <li><strong>Google Nest Hub (2nd gen)</strong> — Thread support varies by firmware version</li>
+          <li><strong>Amazon Echo (4th gen)</strong> — Thread border router capabilities expanding</li>
+        </ul>
+
+        <p>If you don't have any Thread border routers, you'll need at least one to use Thread-based Matter devices. Apple devices tend to be the most reliable for Home Assistant integration.</p>
+
+        <h3>Step 1: Set Up Your Thread Network</h3>
+
+        <ol>
+          <li>Place your Thread border router device near your Home Assistant server</li>
+          <li>Ensure your Thread device is powered on and in pairing mode</li>
+          <li>Wait for the Thread border router to detect and commission the device</li>
+          <li>The device should now appear in your Thread network</li>
+        </ol>
+
+        <h3>Step 2: Connect Thread to Home Assistant</h3>
+
+        <p>Home Assistant needs to know about your Thread network to see Thread devices:</p>
+
+        <ol>
+          <li>Go to <strong>Settings → Devices & Services → Matter</strong></li>
+          <li>Click <strong>Configure</strong> on the Matter integration</li>
+          <li>Enable <strong>Scan for nearby devices</strong></li>
+          <li>Home Assistant will discover your Thread border router and Thread devices</li>
+          <li>Approved devices will be added to your Home Assistant device list</li>
+        </ol>
+
+        <p>For a deeper understanding of how Thread works with Matter, read our <a href="../articles/matter-smart-home-protocol.html">Matter protocol explained guide</a> which covers the technical details of Thread networking.</p>
+
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder inline" style="margin: 2rem 0; padding: 1.5rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Method 3: Bridging Existing Devices to Matter</h2>
+
+        <p>Don't have Matter-native devices? You can bridge your existing Zigbee, Z-Wave, and Wi-Fi devices to appear as Matter devices in Home Assistant.</p>
+
+        <h3>Using Home Assistant's Built-in Bridges</h3>
+
+        <p>Home Assistant's Matter integration automatically exposes compatible devices as Matter devices:</p>
+
+        <ol>
+          <li>Ensure your existing devices are already integrated in Home Assistant</li>
+          <li>Go to <strong>Settings → Devices & Services → Matter</strong></li>
+          <li>Click <strong>Add via BLE</strong> or wait for devices to auto-discover</li>
+          <li>Your existing entities will appear as Matter-compatible devices</li>
+        </ol>
+
+        <h3>Zigbee2MQTT Bridge</h3>
+
+        <p>If you're using Zigbee2MQTT with Home Assistant, you can expose Zigbee devices as Matter devices:</p>
+
+        <ol>
+          <li>Install the Zigbee2MQTT Matter bridge add-on</li>
+          <li>Configure which Zigbee devices to expose</li>
+          <li>The bridge will create Matter-equivalent devices in Home Assistant</li>
+        </ol>
+
+        <p>For detailed Zigbee setup instructions, see our <a href="../articles/zigbee2mqtt-setup-guide.html">Zigbee2MQTT setup guide</a> which covers the complete installation process.</p>
+
+        <h2>Verifying Your Matter Device Setup</h2>
+
+        <p>After commissioning, verify everything is working correctly:</p>
+
+        <h3>Check Device Status</h3>
+
+        <p>In Home Assistant:</p>
+
+        <ul>
+          <li>Navigate to <strong>Settings → Devices & Services</strong></li>
+          <li>Click on your Matter device</li>
+          <li>Verify all entities (switches, sensors, etc.) are present</li>
+          <li>Check the "Last updated" timestamp to confirm connectivity</li>
+        </ul>
+
+        <h3>Test Device Control</h3>
+
+        <p>Try controlling your device through Home Assistant:</p>
+
+        <ul>
+          <li>Toggle a light on and off</li>
+          <li>Check sensor readings update in real-time</li>
+          <li>Test automations involving the Matter device</li>
+          <li>Verify the device responds within 1-2 seconds</li>
+        </ul>
+
+        <h3>Check Network Diagnostics</h3>
+
+        <p>If you have issues, Home Assistant provides diagnostic information:</p>
+
+        <ol>
+          <li>Go to <strong>Settings → Devices & Services</strong></li>
+          <li>Click on the Matter integration</li>
+          <li>Select <strong>1 device</strong> (or however many you have)</li>
+          <li>Click <strong>Diagnose</strong> for detailed connection information</li>
+        </ol>
+
+        <h2>Troubleshooting Common Matter Setup Issues</h2>
+
+        <p>Even with a standard like Matter, things don't always go smoothly. Here are solutions to the most common problems.</p>
+
+        <h3>Device Not Appearing in Pairing Mode</h3>
+
+        <p><strong>Problem:</strong> Your Matter device is in pairing mode but Home Assistant can't find it.</p>
+
+        <p><strong>Solutions:</strong></p>
+
+        <ul>
+          <li>Move the device closer to your Home Assistant server or Thread border router</li>
+          <li>Ensure your Wi-Fi network isn't blocking device discovery (some routers have "IoT isolation")</li>
+          <li>Try factory resetting the device and starting the pairing process again</li>
+          <li>Check that the Matter Server add-on is running without errors</li>
+          <li>Restart Home Assistant and try again</li>
+        </ul>
+
+        <h3>Thread Device Keeps Going Offline</h3>
+
+        <p><strong>Problem:</strong> Thread sensor or device frequently disconnects.</p>
+
+        <p><strong>Solutions:</strong></p>
+
+        <ul>
+          <li>Add more Thread border routers to extend mesh coverage</li>
+          <li>Move the device closer to an existing Thread router</li>
+          <li>Check for Wi-Fi interference — Thread operates on 2.4GHz and can be disrupted</li>
+          <li>Update Thread border router firmware to the latest version</li>
+          <li>Replace batteries if the device is battery-powered</li>
+        </ul>
+
+        <h3>Commissioning QR Code Not Scanning</h3>
+
+        <p><strong>Problem:</strong> Home Assistant can't read the Matter QR code.</p>
+
+        <p><strong>Solutions:</strong></p>
+
+        <ul>
+          <li>Ensure adequate lighting — the camera needs to see the code clearly</li>
+          <li>Clean the camera lens on your device running Home Assistant</li>
+          <li>Use the manual numeric code entry instead of the QR code</li>
+          <li>Try a different browser if accessing Home Assistant via web interface</li>
+          <li>Some devices have the code printed twice — try the backup code</li>
+        </ul>
+
+        <h3>Device Added But Entities Missing</h3>
+
+        <p><strong>Problem:</strong> The Matter device shows in Home Assistant but has no controllable entities.</p>
+
+        <p><strong>Solutions:</strong></p>
+
+        <ul>
+          <li>Wait 30-60 seconds after adding — entities sometimes appear with a delay</li>
+          <li>Check the device diagnostics for entity information</li>
+          <li>The device may require a firmware update before all entities appear</li>
+          <li>Remove and re-commission the device</li>
+          <li>Check if the device manufacturer has limited Matter feature support</li>
+        </ul>
+
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder inline" style="margin: 2rem 0; padding: 1.5rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Optimizing Your Matter Network</h2>
+
+        <p>Once your Matter devices are set up, a few optimizations will make your smart home more reliable and responsive.</p>
+
+        <h3>Organize Devices in Areas</h3>
+
+        <p>Proper area assignment makes automations and dashboards much easier:</p>
+
+        <ul>
+          <li>Group devices by room (Living Room, Bedroom, Kitchen)</li>
+          <li>Create logical groupings (all lighting, all climate, all security)</li>
+          <li>Use consistent naming conventions across devices</li>
+        </ul>
+
+        <h3>Configure Appropriate Update Intervals</h3>
+
+        <p>Battery-powered devices benefit from longer update intervals to preserve battery life:</p>
+
+        <ul>
+          <li>Temperature/humidity sensors — 30-60 seconds</li>
+          <li>Motion sensors — 10-30 seconds</li>
+          <li>Contact sensors — on-change only (most efficient)</li>
+          <li>Mains-powered devices — 5-15 seconds for responsive control</li>
+        </ul>
+
+        <h3>Create Helpful Automations</h3>
+
+        <p>Now that your Matter devices are integrated, create automations to make them useful:</p>
+
+        <ul>
+          <li>Turn on lights when motion is detected after sunset</li>
+          <li>Send notifications when doors/windows open</li>
+          <li>Adjust thermostat based on temperature sensors</li>
+          <li>Control multiple Matter devices with a single button press</li>
+        </ul>
+
+        <p>For automation inspiration, see our guide on <a href="../articles/home-assistant-automations-beginners.html">Home Assistant automations for beginners</a> with 10 practical examples.</p>
+
+        <h2>Using Matter Devices with Multiple Platforms</h2>
+
+        <p>One of Matter's greatest strengths is cross-platform compatibility. Here's how to use your Matter devices across multiple ecosystems.</p>
+
+        <h3>Simultaneous Home Assistant and Apple Home</h3>
+
+        <p>If you have an Apple HomePod as your Thread border router:</p>
+
+        <ol>
+          <li>Commission the device to Apple Home first</li>
+          <li>Open Home Assistant and add via the Matter integration</li>
+          <li>Both platforms will recognize the same device</li>
+          <li>Control from either Home Assistant or Apple Home app</li>
+        </ol>
+
+        <p>For more on bridging Apple HomeKit with Home Assistant, check our guide on <a href="../articles/homekit-home-assistant-bridge.html">connecting HomeKit to Home Assistant</a>.</p>
+
+        <h3>Google Home and Home Assistant</h3>
+
+        <p>Google Home can also access your Matter devices:</p>
+
+        <ol>
+          <li>Ensure your Google Home hub supports Matter</li>
+          <li>Use the Google Home app to scan Matter QR codes</li>
+          <li>Devices will be available in both Google Home and Home Assistant</li>
+          <li>Voice control works through Google Assistant</li>
+        </ol>
+
+        <h2>Securing Your Matter Network</h2>
+
+        <p>Matter includes robust security by default, but you should take additional precautions:</p>
+
+        <h3>Network Segmentation</h3>
+
+        <p>Consider placing smart home devices on a separate VLAN:</p>
+
+        <ul>
+          <li>Isolates IoT devices from your main network</li>
+          <li>Protects computers and phones if an IoT device is compromised</li>
+          <li>Many routers support automatic IoT network creation</li>
+        </ul>
+
+        <p>For detailed network setup, see our guide on <a href="../articles/smart-home-network-setup-guide.html">smart home network configuration</a> which covers VLANs, firewalls, and security best practices.</p>
+
+        <h3>Keep Firmware Updated</h3>
+
+        <p>Matter devices receive security updates through the standard protocol:</p>
+
+        <ul>
+          <li>Check for firmware updates monthly</li>
+          <li>Enable automatic updates where available</li>
+          <li>Replace devices that no longer receive security patches</li>
+          <li>Monitor Home Assistant notifications for Matter update alerts</li>
+        </ul>
+
+        <h2>Expanding Your Matter Setup</h2>
+
+        <p>Now that you have your first Matter device working, here are ideas for expanding your setup:</p>
+
+        <h3>Add More Devices</h3>
+
+        <p>Each new Matter device strengthens your network:</p>
+
+        <ul>
+          <li><strong>Smart bulbs</strong> — Start in one room, expand from there</li>
+          <li><strong>Contact sensors</strong> — Doors, windows, cabinets</li>
+          <li><strong>Motion sensors</strong> — Hallways, bathrooms, closets</li>
+          <li><strong>Temperature sensors</strong> — Every room for zoned climate control</li>
+          <li><strong>Smart locks</strong> — Front door, back door, garage</li>
+        </ul>
+
+        <h3>Consider Thread Devices for Battery-Powered Needs</h3>
+
+        <p>If you need many battery-powered sensors, Thread-based Matter devices are ideal:</p>
+
+        <ul>
+          <li>Battery life measured in years, not months</li>
+          <li>Mesh networking extends range without additional hubs</li>
+          <li>Fast response times even on battery power</li>
+        </ul>
+
+        <h3>Create a Comprehensive Dashboard</h3>
+
+        <p>Use Home Assistant's dashboard capabilities to create a unified control center:</p>
+
+        <ul>
+          <li>Overview of all Matter device statuses</li>
+          <li>Quick-toggle controls for frequently used devices</li>
+          <li>Historical charts for sensor data</li>
+          <li>Automation status and manual triggers</li>
+        </ul>
+
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder inline" style="margin: 2rem 0; padding: 1.5rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
+          📢 Advertisement — Ad Placeholder (Google AdSense)
+        </div>
+
+        <h2>Conclusion</h2>
+
+        <p>Setting up Matter devices with Home Assistant might seem daunting at first, but once you understand the process, adding new devices becomes second nature. The key points to remember are:</p>
+
+        <ul>
+          <li><strong>Wi-Fi Matter devices</strong> connect directly to your network and are commissioned through Home Assistant's Matter integration</li>
+          <li><strong>Thread devices</strong> require a Thread border router (Apple HomePod recommended for Home Assistant users)</li>
+          <li><strong>QR codes</strong> make commissioning fast, but numeric codes work when scanning fails</li>
+          <li><strong>Organization</strong> is essential — proper naming and area assignment make automations much easier</li>
+          <li><strong>Cross-platform</strong> compatibility is Matter's killer feature — use it to your advantage</li>
+        </ul>
+
+        <p>With your Matter devices integrated into Home Assistant, you've built a foundation that will serve your smart home for years to come. Matter is designed to be future-proof, and devices you buy today will remain compatible with the ecosystem as it evolves.</p>
+
+        <p>Ready to take your Matter setup further? Explore our guides on <a href="../articles/matter-smart-home-protocol.html">understanding the Matter protocol</a> and <a href="../articles/home-assistant-automations-beginners.html">creating Home Assistant automations</a> to unlock the full potential of your unified smart home.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0; padding: 1.5rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="matter-smart-home-protocol.html">Matter Protocol Explained: The Future of Smart Home Compatibility</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="homekit-home-assistant-bridge.html">How to Bridge Home Assistant to Apple HomeKit</a></li>
+          <li><a href="zigbee-smart-home-beginners.html">Zigbee Smart Home Guide: How to Build a Zigbee Network from Scratch</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
