@@ -350,11 +350,19 @@
 - [x] zigbee2mqtt-setup-guide — Zigbee2MQTT Setup Guide: Bridge Your Zigbee Devices to Home Assistant ✅ 2026-07-24
 - [x] smart-home-network-setup-guide — Smart Home Network Setup: Wi-Fi, Ethernet, and VPN Configuration ✅ 2026-07-27
 
+### 批次 46：DIY MAKER TOOLS & SMART HOME CONTINUED (6篇) 🆕
+- [x] best-laser-engraver-beginners-2026 — Best Laser Engravers for Beginners: CO2, Diode, and Fiber Compared (2026) ✅ 2026-07-28
+- [ ] lightburn-software-guide — LightBurn Software Guide: How to Use It for Any Laser Engraver (2026)
+- [ ] diy-smart-doorbell-raspberry-pi — How to Build a DIY Smart Doorbell with Raspberry Pi and Home Assistant
+- [ ] best-3d-printer-settings-home-automation — Best 3D Printing Settings for Smart Home Enclosures and Sensor Cases
+- [ ] smart-home-voice-control-comparison — Smart Home Voice Assistants Compared: Alexa vs Google Home vs Siri in 2026
+- [ ] how-to-use-multimeter-electronics — How to Use a Multimeter: Complete Guide for Electronics and Smart Home Projects
+
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 239 篇 ✅ (批次45进行中)
-- **当前批次**: 批次45（Zigbee & Matter Protocol）
+- **已完成**: 239 篇 ✅ (批次45完成)
+- **当前批次**: 批次46（DIY Maker Tools & Smart Home Continued）
 - **剩余**: 61 篇
 
 ## 生成规则
