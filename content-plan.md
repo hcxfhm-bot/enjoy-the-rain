@@ -352,7 +352,7 @@
 
 ### 批次 46：DIY MAKER TOOLS & SMART HOME CONTINUED (6篇) 🆕
 - [x] best-laser-engraver-beginners-2026 — Best Laser Engravers for Beginners: CO2, Diode, and Fiber Compared (2026) ✅ 2026-07-28
-- [ ] lightburn-software-guide — LightBurn Software Guide: How to Use It for Any Laser Engraver (2026)
+- [x] lightburn-software-guide — LightBurn Software Guide: How to Use It for Any Laser Engraver (2026) ✅ 2026-07-29
 - [ ] diy-smart-doorbell-raspberry-pi — How to Build a DIY Smart Doorbell with Raspberry Pi and Home Assistant
 - [ ] best-3d-printer-settings-home-automation — Best 3D Printing Settings for Smart Home Enclosures and Sensor Cases
 - [ ] smart-home-voice-control-comparison — Smart Home Voice Assistants Compared: Alexa vs Google Home vs Siri in 2026

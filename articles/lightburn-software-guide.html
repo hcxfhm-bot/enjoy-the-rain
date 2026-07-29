@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LightBurn Software Guide: How to Use It for Any Laser Engraver (2026)</title>
+  <meta name="description" content="Complete LightBurn software guide for beginners. Learn how to set up, use, and master LightBurn for laser engraving on any CO2, diode, or fiber laser in 2026.">
+  <meta name="keywords" content="LightBurn software guide, LightBurn tutorial, LightBurn laser settings, LightBurn beginners, how to use LightBurn, laser engraving software, LightBurn vs LaserGRBL, LightBurn workspace">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Tools</span>
+      </nav>
+
+      <h1>LightBurn Software Guide: How to Use It for Any Laser Engraver (2026)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 July 29, 2026</span>
+        <span>⏱️ 13 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚙️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+<p>You've got your laser engraver — now what? The machine itself is only half the equation. The software controls everything: where the laser fires, how fast it moves, how much power it uses, and which areas of your design get engraved vs. cut. Get the software right, and you'll pull off professional-quality results consistently. Get it wrong, and you'll wonder why your $400 machine keeps ruining projects.</p>
+
+<p><strong>LightBurn</strong> is the software most serious laser hobbyists and pros use — and for good reason. It works with virtually every hobbyist laser on the market (CO2, diode, and fiber), has a one-time license fee instead of a subscription, and offers a depth of control that free tools simply can't match. This guide walks you through everything you need to go from zero to your first successful laser project.</p>
+
+<h2>What Is LightBurn and Why Should You Use It?</h2>
+
+<p>LightBurn is a dedicated laser engraving and cutting software developed by LightBurn Software LLC. Unlike basic tools that only send pre-made patterns to your machine, LightBurn lets you import designs, convert images to vector paths, organize layers for multi-pass jobs, and precisely control speed, power, and frequency for every part of your project.</p>
+
+<p>If you've ever used a slicer for 3D printing — think Cura, PrusaSlicer, or Bambu Studio — LightBurn is that equivalent for laser work. It's the control center for your entire laser workflow.</p>
+
+<p>The key advantage over free tools like LaserGRBL is its <strong>layer-based workflow</strong>. When you want to cut through a piece of wood but only engrave a logo on the surface, LightBurn lets you assign those operations to different layers, each with its own speed, power, and pass settings. Free software often forces you to run separate jobs or manually tweak settings between passes.</p>
+
+<h3>LightBurn at a Glance</h3>
+
+<ul>
+  <li><strong>License cost</strong>: $60-100 one-time (varies by platform; lifetime license)</li>
+  <li><strong>Supported lasers</strong>: Almost every CO2, diode, and fiber laser on the market</li>
+  <li><strong>Supported file formats</strong>: SVG, PNG, JPG, BMP, GIF, DXF, AI, PDF, and more</li>
+  <li><strong>Platforms</strong>: Windows, macOS, Linux</li>
+  <li><strong>Trial</strong>: Full-featured 30-day trial; no watermarks during trial</li>
+</ul>
+
+<h2>Installing and Setting Up LightBurn</h2>
+
+<p>Getting LightBurn installed and connected to your laser takes about 15 minutes. Here's the step-by-step process.</p>
+
+<h3>Step 1: Download and Install</h3>
+
+<p>Head to <strong>lightburnsoftware.com</strong> and download the version for your operating system. The installer is straightforward — just run the .exe (Windows) or .dmg (macOS) and follow the prompts. No license key is needed during the trial period.</p>
+
+<h3>Step 2: Connect Your Laser</h3>
+
+<p>Connect your laser engraver to your computer via USB. Before opening LightBurn, make sure your laser is powered on. When you launch LightBurn for the first time:</p>
+
+<ol>
+  <li>Click <strong>Devices</strong> in the toolbar (or go to Edit → Devices)</li>
+  <li>Click <strong>Add New Device</strong></li>
+  <li>Select your laser brand or controller type from the list</li>
+  <li>Follow the wizard to name your device, set the work area dimensions, and confirm connection settings</li>
+</ol>
+
+<p>For most diode lasers (Ortur, Atomstack, Creality, Sculpfun), LightBurn has pre-built device profiles. Just select your exact model and the software handles the rest. For CO2 lasers with Ruida or other controllers, select the controller type and manually enter your bed dimensions.</p>
+
+<h3>Step 3: Configure Device Settings</h3>
+
+<p>After the device wizard completes, open <strong>Edit → Device Settings</strong> to verify:</p>
+
+<ul>
+  <li><strong>Working size</strong>: Match your laser's actual bed dimensions (e.g., 400×400 mm for most diode lasers)</li>
+  <li><strong>Origin position</strong>: Set where your machine's home position is (front-left is common)</li>
+  <li><strong>Auto-home</strong>: Enable if your machine has homing sensors — this lets you trust that the machine knows where zero is</li>
+</ul>
+
+<h3>Step 4: Test the Connection</h3>
+
+<p>Before running any real job, click the <strong>Move</strong> buttons in the Move/Absolute Coords window to send your laser head to different positions. If the head moves in the right direction and distance, you're connected and calibrated. If it moves in the wrong direction, check your device settings — most controllers have a flip option for X or Y axis.</p>
+
+<div class="ad-placeholder inline" style="margin: 1.5rem 0;">
+  📢 Advertisement — Ad Placeholder (Google AdSense)
+</div>
+
+<h2>The LightBurn Interface: Key Areas Explained</h2>
+
+<p>LightBurn's interface has several zones that you'll use constantly. Here's what each does:</p>
+
+<h3>The Canvas (Center)</h3>
+
+<p>The large central area is your canvas — essentially the bed of your laser. You can drag designs here, position them, scale them, and see exactly where they'll be engraved on your material. The canvas shows your machine's work area boundaries and any configured origin offset.</p>
+
+<h3>The Tools Window (Left Sidebar)</h3>
+
+<p>The left sidebar contains your primary editing tools:</p>
+
+<ul>
+  <li><strong>Select/Move</strong>: Click and drag to move elements around the canvas</li>
+  <li><strong>Shape tools</strong>: Draw rectangles, ellipses, lines, and polygons directly in LightBurn</li>
+  <li><strong>Text tool</strong>: Type text and convert it to vector paths</li>
+  <li><strong>Image edit</strong>: Import raster images and adjust how they're converted to engraving paths</li>
+  <li><strong>Node editing</strong>: Fine-tune individual vector points and curves</li>
+</ul>
+
+<h3>The Cuts/Layers Window (Bottom Right)</h3>
+
+<p>This is where the magic happens. Every element on your canvas can be assigned to a <strong>layer</strong>, and each layer has its own settings:</p>
+
+<ul>
+  <li><strong>Layer color</strong>: Visual grouping — helps you see which parts of your design use which settings</li>
+  <li><strong>Speed</strong>: How fast the laser head moves (mm/min). Higher = faster but lighter mark.</li>
+  <li><strong>Power</strong>: Laser intensity (0-100%). Higher = deeper/darker mark but more heat.</li>
+  <li><strong>Passes</strong>: How many times the laser runs over the same path</li>
+  <li><strong>Mode</strong>: Line, Fill, or Cross-hatch — controls how the laser covers an area</li>
+</ul>
+
+<p>Understanding this panel is the key to mastering LightBurn. A typical workflow assigns engraving operations to one layer (higher speed, lower power) and cutting operations to another (lower speed, higher power, multiple passes).</p>
+
+<h3>The Laser Window (Top Right)</h3>
+
+<p>Shows real-time position of your laser head and the job progress when running. Use the origin buttons to send the laser home or to a specific corner position.</p>
+
+<h2>Your First Laser Job: Step-by-Step Walkthrough</h2>
+
+<p>Let's walk through a complete job from import to finished product. We'll engrave a custom name onto a wooden cutting board — one of the most popular beginner laser projects.</p>
+
+<h3>Step 1: Import or Create Your Design</h3>
+
+<p>Click <strong>File → Import</strong> or drag a file directly onto the canvas. LightBurn accepts SVG, PNG, JPG, DXF, AI, and PDF files. For this project, I'll use a simple SVG with the name "MAKER" in a decorative font.</p>
+
+<p>Alternatively, use the Text tool: click the text icon, click on the canvas, type your text, and choose a font from your system. Convert text to paths before sending to the laser — this ensures the font renders correctly regardless of what fonts are installed on your machine later.</p>
+
+<p>Right-click the text → <strong>Convert to Path</strong>. Now it's a vector shape that any laser can cut cleanly.</p>
+
+<h3>Step 2: Position and Scale</h3>
+
+<p>Click and drag your design to position it. Use the corner handles to scale it proportionally (hold Shift to scale freely). LightBurn shows dimensions as you drag — aim for a size that fits your material with comfortable margins. For a cutting board, something like 180×60 mm looks proportional.</p>
+
+<h3>Step 3: Assign Layer Settings</h3>
+
+<p>Select your design and look at the Cuts/Layers panel. For wood engraving, a good starting point is:</p>
+
+<ul>
+  <li><strong>Speed</strong>: 300 mm/min</li>
+  <li><strong>Power</strong>: 60%</li>
+  <li><strong>Passes</strong>: 1</li>
+  <li><strong>Mode</strong>: Line (for vector text outlines) or Fill (for filled text shapes)</li>
+</ul>
+
+<p>Different materials need different settings. The Laser Marking guide in LightBurn's built-in documentation (Help → Documentation) has a materials reference table with recommended speed/power combinations for wood, leather, acrylic, anodized aluminum, and more. As you gain experience, you'll develop your own settings through trial and error.</p>
+
+<h3>Step 4: Set the Origin</h3>
+
+<p>Before running the job, you need to tell LightBurn where on your material the laser should start. There are two approaches:</p>
+
+<ul>
+  <li><strong>Set origin here</strong>: Move your laser head manually to the exact spot on your material where you want the top-left of your design, then click the "Set Origin" button (crosshair icon). LightBurn will treat that position as (0,0).</li>
+  <li><strong>Use current position</strong>: Click the "Use Current Position" button. If you've already moved the laser head to your desired start point, this works well.</li>
+</ul>
+
+<h3>Step 5: Test with Low Power</h3>
+
+<p>Always do a test burn first. Reduce the power to 20% and run the job. You should see a light trace of your design on the material. This confirms positioning is correct before committing to a full-power pass. If it's off-center, adjust the origin and test again.</p>
+
+<h3>Step 6: Run the Full Job</h3>
+
+<p>Once the test looks right, set power back to your target setting and click <strong>Send</strong>. Stay nearby and watch the machine — never leave a running laser unattended. A small fire can start in seconds if settings are wrong or material shifts.</p>
+
+<div class="ad-placeholder inline" style="margin: 1.5rem 0;">
+  📢 Advertisement — Ad Placeholder (Google AdSense)
+</div>
+
+<h2>Working with Images: Raster vs. Vector Engraving</h2>
+
+<p>LightBurn handles two fundamentally different types of content — and knowing when to use each matters.</p>
+
+<h3>Vector Engraving</h3>
+
+<p>Vector paths are clean lines and curves — like the outline of a shape or text. The laser follows the path exactly, producing crisp, clean results. Vector engraving uses the <strong>Line</strong> mode in LightBurn. It's faster and produces cleaner results for logos, text, and geometric designs.</p>
+
+<p>Best for: Text, logos, decorative borders, thin line art.</p>
+
+<h3>Raster Engraving</h3>
+
+<p>Raster images (photos, scanned images, detailed bitmap art) need to be converted into engraving paths. LightBurn does this automatically when you import a PNG or JPG. The laser sweeps back and forth across the image, burning pixels row by row — similar to how an inkjet printer works.</p>
+
+<p>Raster mode is slower but can reproduce photographic detail, grayscale shading, and complex images that would be impossible to draw as vectors. For raster jobs, LightBurn offers several image processing options:</p>
+
+<ul>
+  <li><strong>Threshold</strong>: Converts the image to pure black and white — good for high-contrast designs</li>
+  <li><strong>Stucki/Floyd-Steinberg dithering</strong>: Produces more nuanced shading by arranging black dots in patterns — better for photos and gradients</li>
+  <li><strong>Intensity map</strong>: Uses grayscale values to control laser power dynamically — creates variable depth shading on the right materials</li>
+</ul>
+
+<h3>Converting Images to Vector</h3>
+
+<p>One powerful technique is converting a raster image to a vector trace in LightBurn. Import your image, select it, then click <strong>Auto-Trace</strong> in the toolbar. LightBurn analyzes the image edges and converts them to vector paths. This gives you the crispness of vector work with the detail of an image. Great for logos extracted from photos or illustrations with clean outlines.</p>
+
+<h2>Advanced Features: Layers, Array, and Rotary Setup</h2>
+
+<h3>Using Layers for Multi-Pass Jobs</h3>
+
+<p>The layer system is where LightBurn really shines for complex projects. Imagine you want to cut out a shape AND engrave an image inside it. You'd assign the cut operation to one layer (slow speed, high power, 1-3 passes) and the image to another (faster, lower power, 1 pass). When you click Send, LightBurn runs them in order — engrave first, then cut — all in one automated job.</p>
+
+<p>You can assign up to 64 layers in LightBurn, each with completely independent settings. This is essential for:</p>
+
+<ul>
+  <li><strong>Combined cut + engrave jobs</strong> — One pass for the design, a second pass at lower speed/higher power to cut through</li>
+  <li><strong>Multi-color marking</strong> — Use different laser power levels to create lighter and darker marks on anodized aluminum</li>
+  <li><strong>Depth stacking</strong> — Multiple passes at increasing power to build up deeper engravings on stone or metal</li>
+</ul>
+
+<h3>Array and Repeat Functions</h3>
+
+<p>Need to engrave the same design 20 times on a sheet of material? Use <strong>Edit → Array</strong> to create a grid of copies, then arrange them to maximize your material usage. LightBurn will run them as one continuous job — just reload your material between batches.</p>
+
+<h3>Rotary Attachment Setup</h3>
+
+<p>If you add a rotary attachment (lets you engrave on cylindrical objects like cups, bottles, and rings), LightBurn has built-in rotary configuration. Go to <strong>Edit → Device Settings → Rotary</strong>, select your rotary type (roller or chuck), enter the object diameter, and calibrate using the provided wizard. The software then converts your flat design to wrap around the curved surface automatically.</p>
+
+<h2>LightBurn Settings for Common Materials</h2>
+
+<p>Here's a quick reference table for popular materials. These are starting points — always test on a scrap piece first:</p>
+
+<table style="width:100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem;">
+  <thead>
+    <tr style="background: #252640; color: white;">
+      <th style="padding: 12px; text-align: left;">Material</th>
+      <th style="padding: 12px; text-align: left;">Speed (mm/min)</th>
+      <th style="padding: 12px; text-align: left;">Power (%)</th>
+      <th style="padding: 12px; text-align: left;">Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #1a1b30; color: #e0e0e0;">
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Basswood / Plywood</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">300–400</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">50–70</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Line or Fill</td>
+    </tr>
+    <tr style="background: #252640; color: white;">
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Birch plywood (3mm cut)</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">120–180</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">100</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Line (2-3 passes)</td>
+    </tr>
+    <tr style="background: #1a1b30; color: #e0e0e0;">
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Acrylic (3mm cut)</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">200–300</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">100</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Line (1-2 passes)</td>
+    </tr>
+    <tr style="background: #252640; color: white;">
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Leather</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">400–500</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">30–50</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Fill</td>
+    </tr>
+    <tr style="background: #1a1b30; color: #e0e0e0;">
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Anodized aluminum</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">600–800</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">20–35</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">Line (for marks)</td>
+    </tr>
+    <tr style="background: #252640; color: white;">
+      <td style="padding: 10px;">Glass (frosted effect)</td>
+      <td style="padding: 10px;">250–350</td>
+      <td style="padding: 10px;">40–60</td>
+      <td style="padding: 10px;">Fill or Line</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These settings assume a 10-22W diode laser on a well-focused machine. CO2 lasers generally run faster at equivalent power levels due to the different wavelength. Fiber lasers require completely different settings — typically much faster speeds (800-1200 mm/min) and very low power (10-25%) for metal annealing.</p>
+
+<h2>Troubleshooting Common LightBurn Issues</h2>
+
+<h3>The laser doesn't fire</h3>
+
+<p>Check that your machine's controller is set to <strong>Laser mode</strong>, not <strong>Spindle mode</strong> (this is a common mistake with Ruida controllers). In LightBurn, go to Edit → Device Settings → and look for the mode toggle. Also verify that your USB cable is data-capable — some cheap USB cables only carry power.</p>
+
+<h3>Design appears mirrored on the material</h3>
+
+<p>In the Cuts/Layers panel, find the "Mirror X" or "Mirror Y" checkbox for your layer. Toggle the one that corrects the orientation. If both are wrong, you likely set your origin incorrectly — the laser is treating the wrong corner as (0,0).</p>
+
+<h3>Image quality is poor</h3>
+
+<p>Raster images need sufficient resolution — 300 DPI is the minimum for good quality. If your image looks pixelated, increase the resolution in the image edit settings or use a higher-quality source image. For photos, try switching from Threshold to Stucki dithering — it handles gradients much better.</p>
+
+<h3>Laser cuts through material when it should only engrave</h3>
+
+<p>Reduce the power setting first. If that's already low (below 30%), increase the speed. The combination of high power + slow speed is what causes deep penetration. Also check your focal distance — engraving slightly out of focus creates a larger spot that produces a lighter mark without cutting through.</p>
+
+<h2>LightBurn vs. the Alternatives</h2>
+
+<p>Is LightBurn worth the $60-100 license fee compared to free options? Here's the honest comparison:</p>
+
+<ul>
+  <li><strong>LightBurn vs. LaserGRBL</strong>: LaserGRBL is free and works well for basic jobs, but lacks layer management, image processing tools, and automatic device profiles. For occasional simple engravings, LaserGRBL is fine. For anything beyond that, LightBurn pays for itself in saved frustration.</li>
+  <li><strong>LightBurn vs. manufacturer software</strong>: Most bundled software (xCS, Sculpfun S1, Ortur OLM) is based on older LaserGRBL code and has the same limitations. LightBurn's interface and feature set is significantly more polished. If your machine supports LightBurn natively (most do), use it.</li>
+  <li><strong>LightBurn vs. paid subscriptions</strong>: Some competitors charge monthly fees. LightBurn's one-time purchase model is better long-term value, especially if you keep your machine for multiple years.</li>
+</ul>
+
+<h2>Smart Home Projects You Can Make with LightBurn</h2>
+
+<p>Once you're comfortable with LightBurn, the project possibilities expand dramatically. Here are some smart home and maker projects that combine laser work with other maker skills:</p>
+
+<ul>
+  <li><strong>Labeled sensor panels</strong> — Engrave professional-looking faceplates for your Home Assistant dashboard components or ESP32 project enclosures. Use LightBurn's text tool to create precise labels with scale markings and legends. Pair this with our <a href="../articles/3d-printed-esp32-case-design.html">ESP32 case design guide</a> for perfectly matched printed + engraved enclosures.</li>
+  <li><strong>Custom Raspberry Pi cases with ventilation</strong> — Design a case in Tinkercad, 3D print the frame, then laser-cut a front panel with ventilation holes, port labels, and a branded logo. Our <a href="../articles/tinkercad-3d-printing-tutorial.html">Tinkercad beginner tutorial</a> covers the design basics, while LightBurn handles the precision panel work.</li>
+  <li><strong>Smart home device wall plates</strong> — Replace generic outlet covers with custom laser-engraved plates that identify your smart switches, sensors, and control panels. Combine with <a href="../articles/smart-light-switch-wiring-guide.html">smart switch wiring guides</a> for a clean, professional installation look.</li>
+  <li><strong>Custom gift boxes</strong> — Laser-cut and engrave personalized boxes for smart home gadgets, tools, or maker kits. Great for holiday gifts or maker marketplace products.</li>
+</ul>
+
+<div class="ad-placeholder inline" style="margin: 1.5rem 0;">
+  📢 Advertisement — Ad Placeholder (Google AdSense)
+</div>
+
+<h2>Conclusion: Master LightBurn, Unlock Your Laser's Potential</h2>
+
+<p>LightBurn is the single most important tool in your laser workflow after the machine itself. It takes an hour or two to learn the basics — import, position, set power and speed, send — but that investment pays dividends every time you use your laser.</p>
+
+<p>The key things to remember:</p>
+
+<ul>
+  <li><strong>Always test on scrap material</strong> before running a full job at full power</li>
+  <li><strong>Use layers</strong> to separate engraving from cutting operations — this alone makes LightBurn worth the price</li>
+  <li><strong>Start with conservative settings</strong> and work up — you can always increase power, but you can't undo a burned mark</li>
+  <li><strong>Keep the software updated</strong> — LightBurn releases frequent updates that add features and improve compatibility with new machines</li>
+</ul>
+
+<p>Once you're comfortable with LightBurn's core workflow, explore the advanced features: auto-tracing images, array/repeat for batch production, variable power settings for gradient shading, and rotary setup for cylindrical engraving. Each one opens up new project categories that most hobbyists never reach because they're still fighting with bad software.</p>
+
+<p>Pair your laser knowledge with 3D printing skills and you've got a maker toolkit that can produce professional-quality products — from <a href="../articles/custom-knob-3d-print-home-assistant.html">custom Home Assistant control panels</a> to <a href="../articles/diy-smart-doorbell-raspberry-pi.html">smart doorbells with laser-cut enclosures</a>. The combination of these tools is what separates hobbyists from serious makers.</p>
+
+<p>Start your free 30-day LightBurn trial today, run through this guide, and you'll have your first successful engraving within an hour. No excuses — the software is free to try and the results speak for themselves.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/best-budget-laser-cutter-beginners.html">Best Budget Laser Cutters and Engravers for Beginners in 2026</a></li>
+          <li><a href="../articles/diy-electronics-workbench-setup.html">How to Set Up a DIY Electronics Workbench: Essential Tools and Layout</a></li>
+          <li><a href="../articles/3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 and Sensor Cases</a></li>
+          <li><a href="../articles/tinkercad-3d-printing-tutorial.html">Tinkercad for 3D Printing: Design Your First Model in 30 Minutes</a></li>
+          <li><a href="../articles/custom-knob-3d-print-home-assistant.html">How to 3D Print Custom Knobs and Dials for Home Assistant Dashboards</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
