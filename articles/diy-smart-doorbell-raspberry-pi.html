@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Build a DIY Smart Doorbell with Raspberry Pi and Home Assistant (2026 Guide)</title>
-  <meta name="description" content="Build your own DIY smart doorbell with Raspberry Pi and Home Assistant for under $50. Step-by-step guide covering ESP32-CAM, doorbell button wiring, push notifications, and 3D printed enclosure.">
-  <meta name="keywords" content="DIY smart doorbell, Raspberry Pi doorbell, Home Assistant doorbell, smart doorbell project, Raspberry Pi video doorbell, DIY video doorbell, ESP32 camera doorbell, smart doorbell without subscription">
+  <title>How to Build a DIY Smart Doorbell with Raspberry Pi and Home Assistant</title>
+  <meta name="description" content="Build your own smart doorbell with Raspberry Pi for under $50. DIY video doorbell with motion detection, Home Assistant integration, and local storage — no subscription fees.">
+  <meta name="keywords" content="diy smart doorbell, raspberry pi doorbell, home assistant doorbell, smart doorbell diy, esp32 doorbell, video doorbell raspberry pi, home assistant motion detection">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +36,7 @@
     <article class="article-page">
       <!-- Breadcrumb -->
       <nav class="breadcrumb">
-        <a href="../index.html">Home</a> &raquo; <span>DIY Maker & Smart Home</span>
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home & Maker</span>
       </nav>
 
       <h1>How to Build a DIY Smart Doorbell with Raspberry Pi and Home Assistant</h1>
@@ -48,7 +48,7 @@
         <span>✍️ 3D Print Starter Team</span>
       </div>
 
-      <!-- Featured Image Placeholder -->
+      <!-- Featured Image -->
       <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
         <span style="font-size: 4rem;">🔔</span>
       </div>
@@ -56,436 +56,301 @@
       <!-- Article Body -->
       <div class="article-body">
 
-        <p>Commercial smart doorbells like Ring, Nest, and Eufy cost <strong>$100–$250</strong> — and they often lock you into monthly cloud subscription fees just to view recorded footage. But here's the secret: you can build a <strong>DIY smart doorbell</strong> for under <strong>$50</strong> that's entirely local, has no subscription costs, and integrates natively with <a href="../articles/home-assistant-raspberry-pi-setup.html">Home Assistant</a>.</p>
+<p>Store-bought smart doorbells like Ring or Nest cost $100-$250 — and that's before the optional monthly subscription for cloud storage. If you already have a <strong>Raspberry Pi</strong> sitting around and want full control over your data, building a DIY smart doorbell is surprisingly straightforward. You get video streaming, motion alerts, two-way audio, and tight <strong>Home Assistant</strong> integration — all running locally with zero subscription fees.</p>
 
-        <p>In this guide, I'll walk you through building a complete <strong>Raspberry Pi doorbell</strong> system: a Raspberry Pi running Home Assistant as your brain, an ESP32-CAM module for live video, a physical doorbell button that triggers push notifications to your phone, and a 3D printed enclosure for a polished look. No cloud dependency, no monthly fees — just pure, private smart home goodness.</p>
+<p>This guide walks you through building a complete smart doorbell system using a Raspberry Pi, a camera module, and free open-source software. Total cost: under $50 if you reuse old parts, or around $70-80 for a fresh build.</p>
 
-        <p>This is one of the most rewarding <strong>Raspberry Pi DIY projects</strong> you can build, and by the end of this tutorial, you'll have a fully functional video doorbell that rivals anything on the market.</p>
+<p>If you're new to Raspberry Pi projects, check out our <a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners guide</a> for foundational setup tips before diving in.</p>
 
-        <h2>How This DIY Smart Doorbell Works</h2>
+<h2>What You'll Build</h2>
 
-        <p>Before we dive into the build, here's a quick overview of the system architecture:</p>
+<p>By the end of this project, your DIY smart doorbell will include:</p>
 
-        <ul>
-          <li><strong>Raspberry Pi</strong> — Runs Home Assistant OS, the central brain that connects everything together</li>
-          <li><strong>ESP32-CAM</strong> — Streams live video from your front door and detects motion events</li>
-          <li><strong>Momentary push button</strong> — A physical doorbell button connected to the ESP32</li>
-          <li><strong>Home Assistant automations</strong> — Send push notifications with a snapshot to your phone when someone rings the bell</li>
-          <li><strong>3D printed enclosure</strong> — A weatherproof housing for the ESP32-CAM and button</li>
-        </ul>
+<ul>
+  <li><strong>HD video streaming</strong> — Live view through Home Assistant or any browser</li>
+  <li><strong>Motion detection</strong> — Get alerts when someone approaches your door</li>
+  <li><strong>Two-way audio</strong> — Talk to visitors from your phone</li>
+  <li><strong>Local video storage</strong> — Save clips to NAS, microSD, or network storage</li>
+  <li><strong>Home Assistant integration</strong> — Trigger automations, lights, and more</li>
+  <li><strong>Optional: 3D-printed enclosure</strong> — A custom case that looks professional</li>
+</ul>
 
-        <p>When a visitor presses the button, the ESP32 sends an MQTT message to Home Assistant, which immediately triggers a notification on your phone with a live camera snapshot. You can then view the video feed, talk through your phone, or trigger automations like unlocking a smart door lock — all from the same dashboard.</p>
+<h2>Components You Need</h2>
 
-        <div class="ad-placeholder inline" style="margin: 2rem 0;">
-          📢 Advertisement — Ad Placeholder (Google AdSense)
-        </div>
+<p>Here's the hardware list for a complete DIY smart doorbell:</p>
 
-        <h2>Parts List: What You'll Need</h2>
+<ul>
+  <li><strong>Raspberry Pi Zero 2 W</strong> or <strong>Raspberry Pi 3/4</strong> — Zero 2 W is ideal for low power consumption</li>
+  <li><strong>Raspberry Pi Camera Module</strong> — HQ Camera for better quality, or the standard v2 for budget builds</li>
+  <li><strong>Wide-angle lens</strong> (optional) — 160° or 180° lens for better doorframe coverage</li>
+  <li><strong>USB microphone</strong> or <strong>IO-HighPi add-on board</strong> — For two-way audio</li>
+  <li><strong>5V 2A power supply</strong> — Stable power is critical for reliability</li>
+  <li><strong>MicroSD card</strong> — 16GB minimum, 32GB recommended</li>
+  <li><strong>Doorbell transformer</strong> (optional) — If integrating with existing doorbell wiring</li>
+  <li><strong>3D-printed enclosure</strong> — Or a waterproof junction box</li>
+</ul>
 
-        <p>Here's the complete hardware list for this <strong>smart doorbell project</strong>. Most of these items are available on Amazon, AliExpress, or your local electronics store:</p>
+<p>If you want to integrate this with existing <strong>smart home ecosystems</strong>, you'll also need a MQTT broker set up. See our guide on <a href="smart-home-mqtt-broker-setup.html">setting up an MQTT broker for Home Assistant</a> for the details.</p>
 
-        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
-          <tr style="background: #252640; color: #e0e0e0;">
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Component</th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Est. Cost</th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Purpose</th>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">Raspberry Pi 4 or 5 (2GB+ RAM)</td>
-            <td style="padding: 10px; border: 1px solid #333;">$35–55</td>
-            <td style="padding: 10px; border: 1px solid #333;">Runs Home Assistant OS</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;">32GB+ microSD card</td>
-            <td style="padding: 10px; border: 1px solid #333;">$8–12</td>
-            <td style="padding: 10px; border: 1px solid #333;">Storage for Home Assistant</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">ESP32-CAM (AI-Thinker)</td>
-            <td style="padding: 10px; border: 1px solid #333;">$7–10</td>
-            <td style="padding: 10px; border: 1px solid #333;">Camera + Wi-Fi module</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;">FTDI USB-to-TTL programmer</td>
-            <td style="padding: 10px; border: 1px solid #333;">$4–7</td>
-            <td style="padding: 10px; border: 1px solid #333;">First-time ESP32 firmware flash</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">Momentary push button (waterproof)</td>
-            <td style="padding: 10px; border: 1px solid #333;">$2–5</td>
-            <td style="padding: 10px; border: 1px solid #333;">Physical doorbell button</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;">5V power supply (USB-C)</td>
-            <td style="padding: 10px; border: 1px solid #333;">$8–12</td>
-            <td style="padding: 10px; border: 1px solid #333;">Power for Pi + ESP32-CAM</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">Jumper wires + breadboard</td>
-            <td style="padding: 10px; border: 1px solid #333;">$3–5</td>
-            <td style="padding: 10px; border: 1px solid #333;">Prototyping connections</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;">3D printed enclosure</td>
-            <td style="padding: 10px; border: 1px solid #333;">~$1–2 (filament)</td>
-            <td style="padding: 10px; border: 1px solid #333;">Weatherproof housing</td>
-          </tr>
-        </table>
+<h2>Software Options</h2>
 
-        <p><strong>Total cost: approximately $45–55</strong> (assuming you already have a Raspberry Pi). If you're starting from scratch, grab a Raspberry Pi 4 or 5 starter kit — it's the foundation of many <a href="../articles/raspberry-pi-diy-projects-beginners.html">Raspberry Pi DIY projects</a> and worth the investment.</p>
+<p>There are several solid open-source options for running a video doorbell on Raspberry Pi. Here are the main contenders:</p>
 
-        <p>If you already built our <a href="../articles/diy-esp32-cam-security-camera.html">ESP32-CAM security camera guide</a>, you can reuse much of the hardware — the ESP32-CAM module is identical, just configured differently for doorbell duty.</p>
+<h3>Option 1: Frigate NVR (Recommended for Home Assistant Users)</h3>
 
-        <h2>Step 1: Set Up Home Assistant on Your Raspberry Pi</h2>
+<p><strong>Frigate</strong> is a dedicated NVR (Network Video Recorder) built specifically for Home Assistant. It runs as a Docker container, handles motion detection locally using OpenCV, and integrates seamlessly with Home Assistant's entity system.</p>
 
-        <p>If you haven't already installed Home Assistant, now's the time. We have a complete <a href="../articles/home-assistant-raspberry-pi-setup.html">Home Assistant on Raspberry Pi setup guide</a>, but here's the quick version:</p>
+<p>Key features:</p>
+<ul>
+  <li>AI-powered person/vehicle/animal detection (with Coral TPU accelerator)</li>
+  <li>Sub-500ms motion-to-alert latency</li>
+  <li>Home Assistant notifications with snapshot thumbnails</li>
+  <li>Frigate Proxy integration for live view in Home Assistant</li>
+  <li>Recordings stored locally, accessible anytime</li>
+</ul>
 
-        <ol>
-          <li><strong>Download Home Assistant OS</strong> — Grab the Raspberry Pi-specific image from the official Home Assistant website</li>
-          <li><strong>Flash the image</strong> — Use Raspberry Pi Imager or Balena Etcher to flash the OS to your microSD card</li>
-          <li><strong>Boot and configure</strong> — Insert the card into your Pi, connect Ethernet (or configure Wi-Fi on the card beforehand), and power it on</li>
-          <li><strong>Access the web UI</strong> — After a few minutes, visit <code>http://homeassistant.local:8123</code> to complete the setup wizard</li>
-          <li><strong>Install the ESPHome add-on</strong> — From the Supervisor panel, search for ESPHome and install it</li>
-        </ol>
+<h3>Option 2: motionEyeOS</h3>
 
-        <p>Once Home Assistant is running, you'll also want to install the <strong>MQTT broker add-on</strong> (Mosquitto). The ESP32-CAM communicates via MQTT, and having a local broker keeps everything fast and private.</p>
+<p><strong>motionEyeOS</strong> is a purpose-built Linux distro for security cameras. Flash it to an SD card, configure through a web interface, and you're done. Simpler than Frigate but less integrated with Home Assistant.</p>
 
-        <div class="ad-placeholder inline" style="margin: 2rem 0;">
-          📢 Advertisement — Ad Placeholder (Google AdSense)
-        </div>
+<h3>Option 3: RTSP + Generic Camera Platform</h3>
 
-        <h2>Step 2: Flash ESPHome Firmware to the ESP32-CAM</h2>
+<p>For maximum flexibility, stream video via RTSP from the Pi and connect to Home Assistant using the <strong>Generic Camera</strong> integration or <strong>ESP32-CAM</strong> with custom firmware.</p>
 
-        <p>The ESP32-CAM comes with no firmware — you have to program it yourself. We'll use <strong>ESPHome</strong>, which integrates natively with Home Assistant and requires almost no coding.</p>
+<p>If you're using an ESP32-CAM module instead of a Raspberry Pi Camera, check out our guide on <a href="diy-esp32-cam-security-camera.html">building a smart security camera with ESP32-CAM</a> — the same concepts apply.</p>
 
-        <h3>2.1 Wire the FTDI Programmer to the ESP32-CAM</h3>
+<h2>Step 1: Install Raspberry Pi OS</h2>
 
-        <p>For the first flash, you need an FTDI programmer connected like this:</p>
+<p>Start with a fresh Raspberry Pi OS Lite (or full) installation. If you need help with initial setup, our <a href="home-assistant-raspberry-pi-setup.html">Home Assistant on Raspberry Pi guide</a> covers the basics of flashing OS, enabling SSH, and configuring Wi-Fi.</p>
 
-        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
-          <tr style="background: #252640; color: #e0e0e0;">
-            <th style="padding: 8px; text-align: left; border: 1px solid #333;">FTDI Pin</th>
-            <th style="padding: 8px; text-align: left; border: 1px solid #333;">ESP32-CAM Pin</th>
-          </tr>
-          <tr>
-            <td style="padding: 8px; border: 1px solid #333;">3.3V (VCC)</td>
-            <td style="padding: 8px; border: 1px solid #333;">3.3V</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 8px; border: 1px solid #333;">GND</td>
-            <td style="padding: 8px; border: 1px solid #333;">GND</td>
-          </tr>
-          <tr>
-            <td style="padding: 8px; border: 1px solid #333;">TX</td>
-            <td style="padding: 8px; border: 1px solid #333;">U0R (RX)</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 8px; border: 1px solid #333;">RX</td>
-            <td style="padding: 8px; border: 1px solid #333;">U0T (TX)</td>
-          </tr>
-          <tr>
-            <td style="padding: 8px; border: 1px solid #333;">DTR → RTS</td>
-            <td style="padding: 8px; border: 1px solid #333;">GPIO0 → GND (for flash mode)</td>
-          </tr>
-        </table>
+<p>For the doorbell, enable the camera interface:</p>
 
-        <p><strong>Important:</strong> To enter flash mode, connect <strong>GPIO0 to GND</strong> before powering on the ESP32-CAM. This tells the chip to listen for new firmware. Disconnect GPIO0 from GND after flashing.</p>
+<pre><code>sudo raspi-config
+# Navigate to: Interface Options → Camera → Enable
+# Save and reboot</code></pre>
 
-        <h3>2.2 Create the ESPHome Device</h3>
+<p>For Raspberry Pi Zero, you'll need to connect the camera via the dedicated flat flex cable — be careful when inserting it, as the connectors are delicate.</p>
 
-        <p>In the ESPHome add-on dashboard, click "+ New Device" and paste this configuration:</p>
+<h2>Step 2: Install Frigate</h2>
 
-        <pre style="background: #1a1b30; padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; line-height: 1.5; color: #e0e0e0; border: 1px solid #333;">
-<code>esphome:
-  name: front-door-doorbell
-  platform: ESP32
-  board: esp32dev  # AI-Thinker ESP32-CAM variant
+<p>Frigate runs as a Docker container alongside Home Assistant (or on a separate machine if you prefer). Here's the quick setup:</p>
 
-wifi:
-  ssid: "Your_WiFi_Name"
-  password: "Your_WiFi_Password"
+<pre><code># Install Docker if not already installed
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
 
-# Enable fallback hotspot in case WiFi fails
-captive_portal:
+# Create Frigate config directory
+sudo mkdir -p /opt/frigate
+cd /opt/frigate
 
-# Enable logging
-logger:
+# Create docker-compose.yml
+sudo nano docker-compose.yml</code></pre>
 
-# Enable Home Assistant API
-api:
+<p>Add this configuration:</p>
 
-# OTA updates
-ota:
+<pre><code>version: '3.8'
+services:
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate:stable
+    shm_size: '64mb'
+    volumes:
+      - ./config.yml:/config/config.yml
+      - /path/to/storage:/media/frigate
+    ports:
+      - "5000:5000"
+      - "8554:8554"
+    environment:
+      FRIGATE_RTSP_PASSWORD: "your-secure-password"
+</code></pre>
 
-mqtt:
-  broker: 192.168.1.100  # Your Home Assistant IP
-  topic_prefix: doorbell/front
+<p>Create the config file with your camera settings, then start Frigate:</p>
 
-esp32_camera:
-  external_clock:
-    pin: GPIO0
-    frequency: 20MHz
-  i2c_pins:
-    sda: GPIO26
-    scl: GPIO27
-  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
-  vsync_pin: GPIO25
-  href_pin: GPIO23
-  pixel_clock_pin: GPIO22
-  power_down_pin: GPIO32
-  resolution: 800x600
+<pre><code>docker-compose up -d</code></pre>
 
-# Doorbell button on GPIO13
-binary_sensor:
-  - platform: gpio
-    pin:
-      number: GPIO13
-      mode: INPUT_PULLUP
-    name: "Front Doorbell Button"
-    device_class: occupancy
-    filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
-    on_press:
-      - mqtt.publish:
-          topic: doorbell/front/pressed
-          payload: "ON"
+<h2>Step 3: Configure Your Camera</h2>
 
-# Keep the camera powered for streaming
-switch:
-  - platform: gpio
-    pin: GPIO4
-    name: "Camera Flash"
-    id: flash_light
-    icon: "mdi:flashlight"</code></pre>
+<p>In your Frigate config.yml, add your Raspberry Pi camera:</p>
 
-        <p>This configuration sets up the ESP32-CAM to stream video and monitor a doorbell button on <strong>GPIO13</strong>. When the button is pressed, it publishes an MQTT message that Home Assistant can trigger on.</p>
+<pre><code>cameras:
+  doorbell:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/stream
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 1280
+      height: 720
+    record:
+      enabled: true
+      retain:
+        days: 7
+        mode: motion
+    snapshots:
+      enabled: true
+      retain:
+        default: 7
+    motion:
+      mask:
+        - "0,0,0,800,1280,800,1280,0"</code></pre>
 
-        <h3>2.3 Flash and Test</h3>
+<p>If using the Raspberry Pi Camera Module via RTSP, you'll need to install an RTSP server on the Pi. The <strong>rtsp-simple-server</strong> or <strong>RPi Camera RTSP</strong> projects handle this well.</p>
 
-        <p>Plug the FTDI programmer into your computer, click "Install" in ESPHome, and choose "Plug into this computer." After the flash completes (about 60 seconds), unplug GPIO0 from GND and power-cycle the ESP32-CAM. You should see a live camera stream in the ESPHome logs.</p>
+<h2>Step 4: Add Two-Way Audio</h2>
 
-        <h2>Step 3: Configure Home Assistant Automations</h2>
+<p>For two-way audio, you need a microphone and speaker connected to your Raspberry Pi. The simplest approach is a USB sound card with a microphone jack, or the ReSpeaker USB Mic Array for better audio quality.</p>
 
-        <p>Now for the fun part — making your <strong>Home Assistant doorbell</strong> actually do something useful. We'll create an automation that sends a push notification with a snapshot when the button is pressed.</p>
+<p>Configure audio in Frigate:</p>
 
-        <h3>3.1 Install the Camera Entity</h3>
+<pre><code>snapshots:
+  enabled: true
+  audio:
+    enabled: true
+    threshold: 0.005
+    volume_scale: 2.0</code></pre>
 
-        <p>Once the ESP32-CAM connects to your network, ESPHome automatically creates a camera entity in Home Assistant. Go to Settings → Devices & Services → ESPHome and you should see "front-door-doorbell" with a camera entity ready to use.</p>
+<p>For two-way communication, Frigate supports this through its web interface — visitors can press a "Talk" button in the live view, and audio plays through your Pi's speaker.</p>
 
-        <h3>3.2 Create the Automation</h3>
+<h2>Step 5: Connect to Home Assistant</h2>
 
-        <p>Navigate to Settings → Automations & Scenes and create a new automation. Paste this YAML:</p>
+<p>Frigate integrates with Home Assistant through the native integration or HACS integration. Once connected, you'll see:</p>
 
-        <pre style="background: #1a1b30; padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; line-height: 1.5; color: #e0e0e0; border: 1px solid #333;">
-<code>alias: "Front Doorbell Pressed"
-description: "Notify when someone rings the doorbell"
-trigger:
-  - platform: mqtt
-    topic: doorbell/front/pressed
-    payload: "ON"
-action:
-  - service: camera.snapshot
-    target:
-      entity_id: camera.front_door_doorbell
-    data:
-      filename: /media/snapshots/doorbell_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg
-  - delay:
-      milliseconds: 500
-  - service: notify.mobile_app_your_phone
-    data:
-      title: "🔔 Doorbell Ring!"
-      message: "Someone is at the front door"
+<ul>
+  <li><strong>Camera entities</strong> — Live view in Home Assistant dashboards</li>
+  <li><strong>Motion sensors</strong> — Trigger automations when movement is detected</li>
+  <li><strong>Binary sensors</strong> — Person/vehicle/animal detection states</li>
+  <li><strong>Services</strong> — Record on demand, go fullscreen, snapshot</li>
+</ul>
+
+<p>Create automations in Home Assistant for common scenarios:</p>
+
+<pre><code>automation:
+  - alias: Doorbell Motion - Turn On Porch Light
+    trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell_person
+      to: 'on'
+    action:
+      service: switch.turn_on
+      target:
+        entity_id: switch.porch_light
+
+  - alias: Doorbell Press - Announce in Home
+    trigger:
+      platform: mqtt
+      topic: home/doorbell/ring
+    action:
+      service: notify.mobile_app_your_phone
       data:
-        image: /media/snapshots/doorbell_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg
-        url: /lovelace/doorbell
-mode: single</code></pre>
+        message: "Someone is at the door!"
+        data:
+          priority: high
+          ttl: 0</code></pre>
 
-        <p>Replace <code>notify.mobile_app_your_phone</code> with your actual mobile app notification service (it appears automatically after you install the Home Assistant Companion app on your phone).</p>
+<p>If you're new to Home Assistant automations, our <a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners guide</a> covers the basics of triggers, conditions, and actions.</p>
 
-        <p>For more ideas, check out our <a href="../articles/home-assistant-automations-beginners.html">Home Assistant automations for beginners</a> guide — it covers 10 automation patterns that work perfectly with your new doorbell.</p>
+<h2>Step 6: Build or Print the Enclosure</h2>
 
-        <div class="ad-placeholder inline" style="margin: 2rem 0;">
-          📢 Advertisement — Ad Placeholder (Google AdSense)</div>
+<p>A clean enclosure keeps your doorbell protected from weather and looks professional. You have two options:</p>
 
-        <h2>Step 4: 3D Print a Weatherproof Enclosure</h2>
+<h3>3D Printed Enclosure (Recommended)</h3>
 
-        <p>This is where your 3D printer shines. Instead of zip-tying a bare circuit board to your doorframe, you can print a professional-looking enclosure that's weather-resistant and integrates the camera lens and button perfectly.</p>
+<p>Design or download a weatherproof case for your Raspberry Pi and camera. Key design considerations:</p>
 
-        <h3>Design Considerations for an Outdoor Enclosure</h3>
+<ul>
+  <li><strong>Waterproof rating</strong> — IP65 or higher for outdoor use</li>
+  <li><strong>Lens opening</strong> — Precisely sized for your camera module or lens</li>
+  <li><strong>Ventilation</strong> — Small vents to prevent condensation</li>
+  <li><strong>Mounting points</strong> — Keyhole slot or screw holes for wall mounting</li>
+</ul>
 
-        <ul>
-          <li><strong>Material choice</strong> — Use PETG or ASA filament. PLA will warp in direct sunlight and degrade from UV exposure. PETG offers a great balance of printability and outdoor durability.</li>
-          <li><strong>Camera lens window</strong> — Leave a precisely sized hole for the camera lens. You can press-fit a piece of acrylic or clear resin behind the opening for weather protection.</li>
-          <li><strong>Button seal</strong> — Use a silicone gasket or rubber O-ring around the push button to prevent water ingress.</li>
-          <li><strong>Ventilation</strong> — Small drainage holes at the bottom prevent moisture buildup inside the enclosure.</li>
-          <li><strong>Mounting</strong> — Design screw holes or a slide-on bracket so you can mount it securely without adhesives.</li>
-        </ul>
+<p>PETG or ABS filament works best for outdoor enclosures — they're more UV and temperature resistant than PLA. See our guide on <a href="diy-outdoor-sensor-enclosure-3d-print.html">designing weatherproof outdoor sensor enclosures</a> for detailed printing tips.</p>
 
-        <p>You can find ready-made ESP32-CAM doorbell enclosure STL files on <a href="https://www.printables.com" target="_blank" rel="noopener">Printables</a> and <a href="https://www.thingiverse.com" target="_blank" rel="noopener">Thingiverse</a>, or design your own. If you're new to enclosure design, our guide on <a href="../articles/3d-printed-esp32-case-design.html">designing and 3D printing custom ESP32 and sensor cases</a> has detailed tips for creating functional enclosures.</p>
+<h3>Junction Box Solution</h3>
 
-        <p><strong>Print settings for PETG:</strong></p>
-        <ul>
-          <li>Nozzle: 240°C | Bed: 80°C</li>
-          <li>Layer height: 0.2mm for walls, 0.12mm for the camera window area</li>
-          <li>4 perimeter walls for strength</li>
-          <li>15–20% infill (gyroid or grid)</li>
-          <li>Enable supports for button recess and screw holes</li>
-        </ul>
+<p>A simple ABS waterproof junction box from the hardware store works well. Drill holes for the camera lens, USB ports for power, and mount everything inside. Sand the box flat and paint it to match your house trim.</p>
 
-        <h2>Step 5: Advanced Features to Add</h2>
+<h2>Step 7: Power Options</h2>
 
-        <p>Once the basic <strong>video doorbell</strong> is working, here are several upgrades to consider:</p>
+<p>How you power your doorbell depends on your setup:</p>
 
-        <h3>Motion Detection</h3>
-        <p>Add motion detection to your ESPHome configuration so you get alerts even when someone walks past the door without ringing. ESPHome's built-in motion detection compares pixel changes between frames:</p>
+<h3>Power Over Ethernet (PoE)</h3>
 
-        <pre style="background: #1a1b30; padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; line-height: 1.5; color: #e0e0e0; border: 1px solid #333;">
-<code># Add to ESPHome config
-switch:
-  - platform: esp32_camera_web_server
-    name: "Camera Web Server"
-    port: 8080
+<p>The cleanest solution. Use a <strong>PoE splitter</strong> or a Raspberry Pi with native PoE (Pi 3B+ or Zero W with PoE hat). Run a single Ethernet cable — no electrical wiring needed.</p>
 
-binary_sensor:
-  - platform: esp32_camera
-    name: "Front Door Motion"
-    id: motion_sensor
-    update_interval: 500ms
-    on_motion_detected:
-      - mqtt.publish:
-          topic: doorbell/front/motion
-          payload: "ON"</code></pre>
+<h3>Doorbell Transformer</h3>
 
-        <h3>Two-Way Audio</h3>
-        <p>Add a small I2S microphone (like the INMP441) and speaker module (MAX98357 + small speaker) to the ESP32. ESPHome supports audio streaming, which lets you talk to visitors through your phone via Home Assistant.</p>
+<p>If you're replacing an existing wired doorbell, tap into the transformer wiring. Most doorbell transformers output 16-24V AC, which you'll need to convert to 5V DC using a buck converter.</p>
 
-        <h3>Smart Lock Integration</h3>
-        <p>Pair your doorbell with a <a href="../articles/diy-smart-door-lock.html">DIY smart door lock</a> so you can unlock the door directly from the doorbell notification. Create an automation that shows an "Unlock" button when the doorbell rings.</p>
+<pre><code># Typical wiring:
+Doorbell Transformer (16-24V AC)
+  → Buck Converter (to 5V DC)
+  → Raspberry Pi microUSB</code></pre>
 
-        <h3>Night Vision</h3>
-        <p>The ESP32-CAM has two built-in LEDs for IR illumination. Enable them in firmware and add an IR-cut filter to the camera lens for clear nighttime video. Swap the lens for one with a wider field of view (120°+) to capture the full porch area.</p>
+<p>For smart light switch integration and wiring basics, see our guide on <a href="smart-light-switch-wiring-guide.html">smart light switch wiring</a> — the electrical principles are similar.</p>
 
-        <div class="ad-placeholder inline" style="margin: 2rem 0;">
-          📢 Advertisement — Ad Placeholder (Google AdSense)</div>
+<h3>Battery Backup</h3>
 
-        <h2>Cost Comparison: DIY vs Commercial Smart Doorbells</h2>
+<p>Add a USB power bank as a UPS to keep your doorbell online during power outages. A 10,000mAh bank will run a Pi Zero 2 W for 12-18 hours.</p>
 
-        <p>Let's talk numbers. Here's how the DIY approach stacks up against commercial options:</p>
+<h2>Advanced: Add Face Recognition</h2>
 
-        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
-          <tr style="background: #252640; color: #e0e0e0;">
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;"></th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">DIY (This Guide)</th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Ring Video Doorbell</th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Nest Doorbell</th>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;"><strong>Hardware cost</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;">$45–55</td>
-            <td style="padding: 10px; border: 1px solid #333;">$99–199</td>
-            <td style="padding: 10px; border: 1px solid #333;">$179–229</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;"><strong>Monthly subscription</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;">$0</td>
-            <td style="padding: 10px; border: 1px solid #333;">$3.99–$10/mo</td>
-            <td style="padding: 10px; border: 1px solid #333;">$6–$12/mo</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;"><strong>Local storage</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;">✅ Yes (unlimited)</td>
-            <td style="padding: 10px; border: 1px solid #333;">❌ Cloud only</td>
-            <td style="padding: 10px; border: 1px solid #333;">❌ Cloud only</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;"><strong>Privacy</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;">✅ 100% local</td>
-            <td style="padding: 10px; border: 1px solid #333;">❌ Cloud dependent</td>
-            <td style="padding: 10px; border: 1px solid #333;">❌ Cloud dependent</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;"><strong>Customizable</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;">✅ Fully open</td>
-            <td style="padding: 10px; border: 1px solid #333;">❌ Limited</td>
-            <td style="padding: 10px; border: 1px solid #333;">❌ Limited</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;"><strong>Year 1 total</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;"><strong>$50</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;"><strong>$147–319</strong></td>
-            <td style="padding: 10px; border: 1px solid #333;"><strong>$251–373</strong></td>
-          </tr>
-        </table>
+<p>Want your doorbell to know who visitors are? Add face recognition using <strong>DeepStack</strong> or <strong>TensorFlow Lite</strong> on your Raspberry Pi.</p>
 
-        <p>Over five years, the DIY doorbell saves you <strong>$500+</strong> compared to a subscription-based commercial doorbell. And you never have to worry about a company shutting down their cloud service or raising prices.</p>
+<p>Train the model with photos of family members, then modify your automations:</p>
 
-        <h2>Troubleshooting Common Issues</h2>
+<pre><code>automation:
+  - alias: Known Visitor - Open Gate
+    trigger:
+      platform: state
+      entity_id: sensor.front_door_recognized_face
+    condition:
+      - condition: state
+        entity_id: sensor.front_door_recognized_face
+        state: "Dad"
+    action:
+      service: switch.turn_on
+      target:
+        entity_id: switch.gate_opener</code></pre>
 
-        <p>Here are the most common problems you might encounter and how to fix them:</p>
+<h2>Troubleshooting Common Issues</h2>
 
-        <table style="width:100%; border-collapse: collapse; margin: 1.5rem 0;">
-          <tr style="background: #252640; color: #e0e0e0;">
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Issue</th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Likely Cause</th>
-            <th style="padding: 10px; text-align: left; border: 1px solid #333;">Fix</th>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">ESP32 not flashing</td>
-            <td style="padding: 10px; border: 1px solid #333;">GPIO0 not connected to GND</td>
-            <td style="padding: 10px; border: 1px solid #333;">Check GPIO0 → GND jumper before powering</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;">No camera stream</td>
-            <td style="padding: 10px; border: 1px solid #333;">PSRAM not enabled in config</td>
-            <td style="padding: 10px; border: 1px solid #333;">Add <code>psram: enable</code> to ESPHome YAML</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">Button press not detected</td>
-            <td style="padding: 10px; border: 1px solid #333;">Wiring or pull-up resistor issue</td>
-            <td style="padding: 10px; border: 1px solid #333;">Enable INPUT_PULLUP in config; check ground</td>
-          </tr>
-          <tr style="background: #1a1b30;">
-            <td style="padding: 10px; border: 1px solid #333;">Notifications not arriving</td>
-            <td style="padding: 10px; border: 1px solid #333;">MQTT topic mismatch</td>
-            <td style="padding: 10px; border: 1px solid #333;">Verify topic in ESPHome matches automation trigger</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #333;">Camera disconnects randomly</td>
-            <td style="padding: 10px; border: 1px solid #333;">Wi-Fi signal too weak</td>
-            <td style="padding: 10px; border: 1px solid #333;">Add a Wi-Fi extender or move router closer</td>
-          </tr>
-        </table>
+<h3>Camera Not Detected</h3>
+<p>Check that the camera flex cable is seated properly in both connectors. On Pi Zero, ensure the silver contacts face the correct direction. Run <code>libcamera-hello</code> to test.</p>
 
-        <h2>Securing Your Local Doorbell System</h2>
+<h3>High CPU Usage</h3>
+<p>The Raspberry Pi Zero 2 W can handle one camera at 720p. If performance is sluggish, reduce resolution to 640x480 or offload detection to a Coral TPU USB stick.</p>
 
-        <p>Since your doorbell is accessible from outside your home, security matters. Here are key measures:</p>
+<h3>Video Lag or Drops</h3>
+<p>Use a wired Ethernet connection for the doorbell Pi. WiFi on the Zero 2 W works, but interference and congestion can cause dropped frames. A PoE connection is most reliable.</p>
 
-        <ul>
-          <li><strong>Use a dedicated IoT VLAN</strong> — Isolate your doorbell and other smart devices on a separate network segment. Your main computer and phone network should be separate.</li>
-          <li><strong>Enable HTTPS</strong> — Home Assistant supports Let's Encrypt certificates for encrypted remote access. Never expose the dashboard over plain HTTP.</li>
-          <li><strong>Use strong passwords</strong> — Don't use default credentials for your Wi-Fi, MQTT broker, or Home Assistant login.</li>
-          <li><strong>Keep firmware updated</strong> — ESPHome and Home Assistant both receive regular security updates. Enable automatic updates in the Supervisor panel.</li>
-          <li><strong>Disable OTA after deployment</strong> — If you don't need over-the-air updates, disable the OTA feature in your ESPHome config to prevent unauthorized firmware pushes.</li>
-        </ul>
+<h3>Audio Not Working</h3>
+<p>Set the correct audio input device in Frigate config. USB microphones often show up as index 1. Test with <code>arecord -l</code> and <code>aplay -l</code> to confirm device numbers.</p>
 
-        <p>For complete home security coverage, combine your doorbell with a <a href="../articles/diy-home-security-system.html">DIY home security system</a> — motion sensors, door/window contact sensors, and sirens all integrate into the same Home Assistant dashboard.</p>
+<h2>Privacy and Security Considerations</h2>
 
-        <h2>Final Thoughts</h2>
+<p>Since your doorbell is always watching, security matters:</p>
 
-        <p>Building a <strong>DIY smart doorbell with Raspberry Pi and Home Assistant</strong> is one of the most practical and rewarding maker projects you can tackle. For about the cost of a dinner out, you get a fully featured video doorbell that:</p>
+<ul>
+  <li><strong>Change default passwords</strong> — Every service (SSH, Frigate, MQTT) needs strong unique passwords</li>
+  <li><strong>Use HTTPS</strong> — Set up Let's Encrypt for Home Assistant to encrypt all traffic</li>
+  <li><strong>Firewall rules</strong> — Only allow access from your local network; never expose directly to the internet</li>
+  <li><strong>Regular updates</strong> — Keep Raspberry Pi OS, Docker, and Frigate updated</li>
+  <li><strong>VPN access</strong> — Use Tailscale or WireGuard for remote access without port forwarding</li>
+</ul>
 
-        <ul>
-          <li>Streams live HD video from your front door</li>
-          <li>Sends instant push notifications with snapshots</li>
-          <li>Stores everything locally with no subscription</li>
-          <li>Integrates with your entire smart home ecosystem</li>
-          <li>Is completely customizable with 3D printed parts</li>
-        </ul>
+<p>If you're building multiple smart devices, our guide on <a href="smart-home-network-setup-guide.html">smart home network setup</a> covers how to segment IoT devices from your main network for security.</p>
 
-        <p>The best part? You own every piece of it — the hardware, the software, and your data. No company can change your terms of service, raise your subscription price, or disable features you rely on.</p>
+<h2>Final Thoughts</h2>
 
-        <p>If you run into issues during the build, drop a comment below or check out our <a href="../articles/raspberry-pi-diy-projects-beginners.html">Raspberry Pi DIY projects</a> collection for more inspiration. Happy building!</p>
+<p>A DIY smart doorbell gives you everything the commercial options offer — and more. No subscription fees, no cloud dependency, full data ownership, and the flexibility to add whatever features you want. Whether you keep it simple with motion alerts and local storage, or go all-in with face recognition and home automation triggers, the core build costs under $80 and can be assembled in an afternoon.</p>
+
+<p>The hardest part is usually the physical installation: routing power, running cables, and mounting the enclosure. Once that's done, everything else is software — and with Home Assistant, you're limited only by your imagination.</p>
+
+<p>If you enjoyed this project, explore more <strong>Raspberry Pi smart home builds</strong> in our collection — from <a href="diy-weather-station-raspberry-pi.html">weather stations</a> to <a href="diy-smart-mirror-raspberry-pi.html">smart mirrors</a>, the Pi can do almost anything.</p>
 
       </div>
 
@@ -498,11 +363,11 @@ binary_sensor:
       <div class="related-articles">
         <h2>📖 You Might Also Like</h2>
         <ul>
-          <li><a href="../articles/home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
-          <li><a href="../articles/diy-esp32-cam-security-camera.html">How to Build a Smart Security Camera with ESP32-CAM</a></li>
-          <li><a href="../articles/diy-home-security-system.html">How to Build a DIY Home Security System with ESP32 and Home Assistant</a></li>
-          <li><a href="../articles/home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
-          <li><a href="../articles/raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi</a></li>
+          <li><a href="diy-esp32-cam-security-camera.html">How to Build a Smart Security Camera with ESP32-CAM</a></li>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners</a></li>
+          <li><a href="smart-home-mqtt-broker-setup.html">How to Set Up an MQTT Broker for Your Smart Home</a></li>
+          <li><a href="homekit-home-assistant-bridge.html">How to Bridge Home Assistant to Apple HomeKit</a></li>
         </ul>
       </div>
     </article>
