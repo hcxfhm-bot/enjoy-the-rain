@@ -355,7 +355,7 @@
 - [x] lightburn-software-guide — LightBurn Software Guide: How to Use It for Any Laser Engraver (2026) ✅ 2026-07-29
 - [x] diy-smart-doorbell-raspberry-pi — How to Build a DIY Smart Doorbell with Raspberry Pi and Home Assistant ✅ 2026-07-30
 - [x] best-3d-printer-settings-home-automation — Best 3D Printing Settings for Smart Home Enclosures and Sensor Cases ✅ 2026-07-31
-- [ ] smart-home-voice-control-comparison — Smart Home Voice Assistants Compared: Alexa vs Google Home vs Siri in 2026
+- [x] smart-home-voice-control-comparison — Smart Home Voice Assistants Compared: Alexa vs Google Home vs Siri in 2026 ✅ 2026-08-01
 - [ ] how-to-use-multimeter-electronics — How to Use a Multimeter: Complete Guide for Electronics and Smart Home Projects
 
 ## 进度
