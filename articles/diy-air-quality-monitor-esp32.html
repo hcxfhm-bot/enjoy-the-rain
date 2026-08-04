@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Air Quality Monitor with ESP32 and Home Assistant: Complete Guide</title>
+  <meta name="description" content="Build your own DIY air quality monitor with ESP32 and Home Assistant. Monitor PM2.5, CO2, VOCs, temperature and humidity. Complete wiring guide, ESPHome config, and custom 3D printed enclosure tips.">
+  <meta name="keywords" content="DIY air quality monitor, ESP32 air quality sensor, Home Assistant air quality, PMS5003 sensor, air quality monitor DIY, CO2 sensor ESP32, smart home air quality, indoor air quality monitor">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span> &raquo; <span>DIY Projects</span>
+      </nav>
+
+      <h1>DIY Air Quality Monitor with ESP32 and Home Assistant: Complete Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 4, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">💨</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Air quality matters more than most people realize. The EPA estimates Americans spend 90% of their time indoors, where pollutant concentrations can be 2-5x higher than outside. Wildfire smoke, cooking fumes, off-gassing from furniture, and poor ventilation all degrade indoor air quality — and you might not even notice until symptoms appear.</p>
+
+        <p>Commercial air quality monitors cost $100-300, but you can build one for $30-50 with an ESP32 and the right sensors. In this guide, I'll show you how to build a complete DIY air quality monitor that tracks PM2.5, CO2, VOCs, temperature, and humidity — all feeding real-time data into Home Assistant.</p>
+
+        <p>If you're new to ESP32 and Home Assistant, start with our <a href="esphome-getting-started-guide.html">ESPHome Getting Started Guide</a> to understand the basics before diving in.</p>
+
+        <h2>What Sensors Do You Need for an Air Quality Monitor?</h2>
+
+        <p>A comprehensive air quality monitor needs to measure several different parameters. Here's what each sensor tells you:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Pollutant</th>
+              <th>Sensor</th>
+              <th>What It Measures</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Particulate Matter</td>
+              <td>PMS5003</td>
+              <td>PM1.0, PM2.5, PM10 particles</td>
+              <td>High — wildfire smoke, dust</td>
+            </tr>
+            <tr>
+              <td>Carbon Dioxide</td>
+              <td>SGP30 or MH-Z19</td>
+              <td>CO2 levels (0-5000 ppm)</td>
+              <td>Medium — indicates ventilation</td>
+            </tr>
+            <tr>
+              <td>VOCs</td>
+              <td>SGP30, BME680</td>
+              <td>Volatile organic compounds</td>
+              <td>Medium — paints, cleaners, furniture</td>
+            </tr>
+            <tr>
+              <td>Temperature</td>
+              <td>BME280, DHT22</td>
+              <td>Ambient temperature</td>
+              <td>Low — affects comfort</td>
+            </tr>
+            <tr>
+              <td>Humidity</td>
+              <td>BME280, DHT22</td>
+              <td>Relative humidity (20-80%)</td>
+              <td>Medium — mold risk, comfort</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>My recommended starter combination:</strong> PMS5003 + SGP30 + BME280. This gives you particulate matter, CO2/VOCs, and temperature/humidity in one package. Total cost: around $25-35.</p>
+
+        <h2>Shopping List: What to Buy</h2>
+
+        <h3>Required Components</h3>
+
+        <ul>
+          <li><strong>ESP32 DevKit</strong> ($5-8) — Any ESP32 board works. See our <a href="best-esp32-development-board.html">Best ESP32 Development Boards</a> guide for recommendations.</li>
+          <li><strong>PMS5003 particulate sensor</strong> ($10-15) — Measures PM1.0, PM2.5, PM10. Get the version with the connector cable.</li>
+          <li><strong>SGP30 or BME680</strong> ($8-12) — SGP30 is easier to use, BME680 adds pressure sensing.</li>
+          <li><strong>BME280</strong> ($4-6) — I2C temperature, humidity, and pressure sensor for additional accuracy.</li>
+          <li><strong>Jumper wires</strong> ($2-3) — Various male-to-female and male-to-male wires.</li>
+          <li><strong>Micro USB cable</strong> — For power and programming.</li>
+        </ul>
+
+        <h3>Optional but Recommended</h3>
+
+        <ul>
+          <li><strong>3.3V to 5V logic level shifter</strong> — PMS5003 uses 5V logic; ESP32 uses 3.3V.</li>
+          <li><strong>Perfboard and headers</strong> — For a more permanent build.</li>
+          <li><strong>3D printed enclosure</strong> — We'll cover design tips later.</li>
+        </ul>
+
+        <h2>Wiring Diagram: Connecting Everything</h2>
+
+        <p>The wiring is straightforward once you understand which pins to use. Here's the complete connection table:</p>
+
+        <h3>PMS5003 Connections</h3>
+
+        <ul>
+          <li><strong>VCC</strong> → 5V (external supply, not ESP32's 5V pin if drawing >500mA)</li>
+          <li><strong>GND</strong> → ESP32 GND</li>
+          <li><strong>TX</strong> → ESP32 GPIO 16 (RX2)</li>
+          <li><strong>RX</strong> → ESP32 GPIO 17 (TX2)</li>
+        </ul>
+
+        <h3>BME280 Connections (I2C)</h3>
+
+        <ul>
+          <li><strong>VCC</strong> → ESP32 3.3V</li>
+          <li><strong>GND</strong> → ESP32 GND</li>
+          <li><strong>SDA</strong> → ESP32 GPIO 21</li>
+          <li><strong>SCL</strong> → ESP32 GPIO 22</li>
+        </ul>
+
+        <h3>SGP30 Connections (I2C)</h3>
+
+        <ul>
+          <li><strong>VCC</strong> → ESP32 3.3V</li>
+          <li><strong>GND</strong> → ESP32 GND</li>
+          <li><strong>SDA</strong> → ESP32 GPIO 21 (shared with BME280)</li>
+          <li><strong>SCL</strong> → ESP32 GPIO 22 (shared with BME280)</li>
+        </ul>
+
+        <p><strong>Pro tip:</strong> Both BME280 and SGP30 use the same I2C pins, which is fine — I2C allows multiple devices on the same bus as long as they have different addresses. BME280 defaults to 0x76 or 0x77; SGP30 uses 0x58.</p>
+
+        <h2>ESPHome Configuration: The Software</h2>
+
+        <p>ESPHome makes sensor integration seamless. Here's the complete YAML configuration for your air quality monitor:</p>
+
+        <h3>Base Configuration</h3>
+
+        <pre><code>esphome:
+  name: air-quality-monitor
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "YourWiFiSSID"
+  password: "YourWiFiPassword"
+
+api:
+  password: "esphome_api_password"
+
+ota:
+  password: "esphome_ota_password"
+
+logger:</code></pre>
+
+        <h3>I2C Setup</h3>
+
+        <pre><code>i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+  id: i2c_bus</code></pre>
+
+        <h3>PMS5003 Particulate Sensor</h3>
+
+        <pre><code>uart:
+  id: uart_bus
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 9600
+
+sensor:
+  - platform: pmsx003
+    type: PMS5003T
+    uart_id: uart_bus
+    pm_1_0:
+      name: "Particulate Matter 1.0 µm"
+      id: pm1_0
+    pm_2_5:
+      name: "Particulate Matter 2.5 µm"
+      id: pm2_5
+    pm_10_0:
+      name: "Particulate Matter 10 µm"
+      id: pm10_0
+    temperature:
+      name: "PMS5003 Temperature"
+      id: pms_temp
+    humidity:
+      name: "PMS5003 Humidity"
+      id: pms_humidity
+    update_interval: 30s</code></pre>
+
+        <h3>BME280 Sensor</h3>
+
+        <pre><code>  - platform: bme280_i2c
+    i2c_id: i2c_bus
+    address: 0x76
+    temperature:
+      name: "Air Monitor Temperature"
+      id: bme_temp
+      oversampling: 4x
+    humidity:
+      name: "Air Monitor Humidity"
+      id: bme_humidity
+      oversampling: 4x
+    pressure:
+      name: "Air Monitor Pressure"
+      id: bme_pressure
+    update_interval: 30s</code></pre>
+
+        <h3>SGP30 CO2 and VOC Sensor</h3>
+
+        <pre><code>  - platform: sgp30
+    i2c_id: i2c_bus
+   eco2:
+      name: "SGP30 eCO2"
+      id: sgp_eco2
+    tvoc:
+      name: "SGP30 TVOC"
+      id: sgp_tvoc
+    update_interval: 5s
+
+  - platform: sgp30
+    i2c_id: i2c_bus
+    eco2_baseline:
+      name: "SGP30 eCO2 Baseline"
+      id: sgp_eco2_baseline
+    tvoc_baseline:
+      name: "SGP30 TVOC Baseline"
+      id: sgp_tvoc_baseline
+    update_interval: 5s</code></pre>
+
+        <h3>Air Quality Index Calculation</h3>
+
+        <p>Create a template sensor that calculates a unified Air Quality Index (AQI) based on EPA standards:</p>
+
+        <pre><code>  - platform: template
+    name: "Air Quality Index"
+    id: aqi
+    lambda: |-
+      // Based on EPA PM2.5 AQI formula
+      float pm25 = id(pm2_5).state;
+      float aqi;
+      
+      if (pm25 <= 12.0) {
+        aqi = (50 - 0) / (12.0 - 0) * (pm25 - 0) + 0;
+      } else if (pm25 <= 35.4) {
+        aqi = (100 - 51) / (35.4 - 12.1) * (pm25 - 12.1) + 51;
+      } else if (pm25 <= 55.4) {
+        aqi = (150 - 101) / (55.4 - 35.5) * (pm25 - 35.5) + 101;
+      } else if (pm25 <= 150.4) {
+        aqi = (200 - 151) / (150.4 - 55.5) * (pm25 - 55.5) + 151;
+      } else if (pm25 <= 250.4) {
+        aqi = (300 - 201) / (250.4 - 150.5) * (pm25 - 150.5) + 201;
+      } else if (pm25 <= 350.4) {
+        aqi = (400 - 301) / (350.4 - 250.5) * (pm25 - 250.5) + 301;
+      } else {
+        aqi = (500 - 401) / (500.4 - 350.5) * (pm25 - 350.5) + 401;
+      }
+      return round(aqi);
+    unit_of_measurement: "AQI"
+    icon: "mdi:air-filter"
+    update_interval: 30s</code></pre>
+
+        <p>Upload this config to your ESP32 and watch the sensors appear in Home Assistant automatically.</p>
+
+        <h2>Creating Useful Home Assistant Automations</h2>
+
+        <p>Raw data is only useful if it triggers action. Here are automations that make your air quality monitor actually work for you:</p>
+
+        <h3>Automation 1: Alert When PM2.5 is Dangerous</h3>
+
+        <pre><code>alias: "Alert: Dangerous PM2.5 Levels"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.pm2_5
+    above: 55
+condition:
+  - condition: state
+    entity_id: input_boolean.air_alerts_enabled
+    state: "on"
+action:
+  - service: notify.persistent_notification
+    data:
+      title: "⚠️ Air Quality Alert"
+      message: "PM2.5 is {{ states('sensor.pm2_5') }} µg/m³. Consider closing windows or running an air purifier."
+  - service: notify.mobile_app_your_phone
+    data:
+      title: "Air Quality Warning"
+      message: "PM2.5: {{ states('sensor.pm2_5') }} µg/m³"</code></pre>
+
+        <h3>Automation 2: CO2 Alert for Ventilation</h3>
+
+        <pre><code>alias: "Alert: High CO2 — Open Windows"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.sgp30_eco2
+    above: 1000
+action:
+  - service: notify.persistent_notification
+    data:
+      title: "💨 High CO2 Alert"
+      message: "CO2 levels at {{ states('sensor.sgp30_eco2') }} ppm. Time to ventilate!"
+  - service: switch.turn_on
+    entity_id: switch.window_fan</code></pre>
+
+        <h3>Automation 3: Auto-Run Air Purifier</h3>
+
+        <pre><code>alias: "Auto: Air Purifier on Bad Air Quality"
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.air_quality_index
+    above: 100
+for:
+  minutes: 15
+action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.air_purifier</code></pre>
+
+        <p>For more automation ideas, check out our <a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners</a> guide.</p>
+
+        <h2>3D Printing an Enclosure</h2>
+
+        <p>A proper enclosure keeps dust off sensors while allowing airflow. Here's what to consider for your 3D printed case:</p>
+
+        <h3>Design Considerations</h3>
+
+        <ul>
+          <li><strong>Airflow holes:</strong> PMS5003 needs unobstructed airflow. Add honeycomb or slotted vents on at least two sides.</li>
+          <li><strong>Sensor separation:</strong> Keep the BME680/SGP30 away from the ESP32's heat output to avoid false temperature readings.</li>
+          <li><strong>Sensor positioning:</strong> PMS5003 intake and exhaust should be on opposite sides of the case.</li>
+          <li><strong>Ventilation chamber:</strong> Create a small chamber specifically for gas sensors to get accurate ambient readings.</li>
+        </ul>
+
+        <h3>Recommended Print Settings</h3>
+
+        <p>For a functional enclosure that fits all components:</p>
+
+        <ul>
+          <li><strong>Layer height:</strong> 0.2mm (balance between strength and print time)</li>
+          <li><strong>Walls:</strong> 3-4 perimeters for structural integrity</li>
+          <li><strong>Infill:</strong> 15-20% for most parts, 100% for mounting brackets</li>
+          <li><strong>Material:</strong> PLA works fine for indoor use. PETG for better heat resistance near electronics.</li>
+        </ul>
+
+        <p>For detailed enclosure design tips, see our guides on <a href="3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 Cases</a> and <a href="diy-outdoor-sensor-enclosure-3d-print.html">Weatherproof Outdoor Sensor Enclosures</a>.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>PMS5003 Shows All Zeros</h3>
+
+        <ul>
+          <li>Check UART wiring (TX→RX, RX→TX is correct)</li>
+          <li>Verify baud rate is 9600 in ESPHome config</li>
+          <li>Make sure sensor is getting 5V power — it won't work at 3.3V</li>
+          <li>Wait 30 seconds after power-on — PMS5003 needs time to initialize</li>
+        </ul>
+
+        <h3>SGP30 Reads Very Low eCO2</h3>
+
+        <p>The SGP30 needs 12 hours of initial burn-in and then 1 hour per day to stabilize readings. Fresh sensors will read 400 ppm (outdoor baseline) until warmed up. After burn-in, it should track relative CO2 changes accurately.</p>
+
+        <h3>BME280 Not Detected</h3>
+
+        <ul>
+          <li>Check I2C scan in ESPHome logs — it should list devices at 0x58, 0x76, 0x77</li>
+          <li>Verify SDA/SCL pins are correct (GPIO 21/22 on most ESP32)</li>
+          <li>Try different address (0x76 vs 0x77) — some BME280 modules use 0x77</li>
+        </ul>
+
+        <h3>Temperature Reading is Wrong</h3>
+
+        <p>ESP32 chips get warm when under load. Keep the temperature sensor away from the processor and consider using the PMS5003's built-in temperature sensor for more accurate readings in the airflow.</p>
+
+        <h2>Advanced: Adding More Sensors</h2>
+
+        <p>Once your basic monitor works, consider upgrading with:</p>
+
+        <ul>
+          <li><strong>MH-Z19 CO2 sensor</strong> — More accurate than SGP30 for CO2, but larger and more expensive</li>
+          <li><strong>ENS160 sensor</strong> — Newer AQI sensor with better VOC accuracy</li>
+          <li><strong>CCS811</strong> — Budget VOC/eCO2 option (less accurate than SGP30)</li>
+          <li><strong>SDS011</strong> — High-quality PM sensor for professional monitoring</li>
+        </ul>
+
+        <p>For sensor comparisons, see our <a href="sensor-guide-beginners.html">Electronics Sensor Guide for Beginners</a> with detailed specs and use cases.</p>
+
+        <h2>Building Your Own Outdoor Sensor</h2>
+
+        <p>The same principles apply to outdoor air quality monitoring, but you'll need weatherproofing. Key modifications:</p>
+
+        <ul>
+          <li>Use IP65+ rated enclosures with ventilation membranes</li>
+          <li>Add a protective cover over PMS5003 intake to block rain</li>
+          <li>Consider solar power for remote locations</li>
+          <li>Use shielded cables to reduce noise</li>
+        </ul>
+
+        <p>See our <a href="diy-weather-station-raspberry-pi.html">DIY Weather Station</a> guide for solar power and outdoor enclosure tips that apply to air quality monitoring too.</p>
+
+        <h2>Conclusion: Breathe Better with Smart Monitoring</h2>
+
+        <p>A DIY air quality monitor costs a fraction of commercial solutions while giving you complete control over data and integrations. Once your monitor is running, you'll gain visibility into how your home's air quality changes throughout the day — and the data often surprises people.</p>
+
+        <p>After building several air quality monitors around my home, I discovered that cooking without the range hood on immediately spikes PM2.5 to unhealthy levels, that CO2 climbs dangerously high during long work meetings, and that my daughter's room has chronically low humidity in winter.</p>
+
+        <p>The ESP32 + Home Assistant combination makes it easy to log historical data, create long-term trends, and build automations that respond automatically to air quality changes. Start with the basics — PMS5003 + BME280 — and expand from there.</p>
+
+        <p>For more smart home projects, explore our collection of <a href="diy-home-security-system.html">DIY Smart Home Projects</a> or learn about <a href="smart-home-mqtt-broker-setup.html">Setting Up MQTT</a> for advanced sensor networks.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="esphome-sensor-integration.html">ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant</a></li>
+          <li><a href="diy-home-security-system.html">How to Build a DIY Home Security System with ESP32 and Home Assistant</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="best-esp32-development-board.html">Best ESP32 Development Boards in 2026: DevKit, WROOM, and WROVER Compared</a></li>
+          <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

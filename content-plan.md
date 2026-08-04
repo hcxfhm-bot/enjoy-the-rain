@@ -361,13 +361,13 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 244 篇 ✅ (批次46已完成)
+- **已完成**: 245 篇 ✅ (批次47进行中)
 - **当前批次**: 批次47进行中
-- **剩余**: 56 篇
+- **剩余**: 55 篇
 
 ### 批次 47：MAKER TOOLS & PROJECTS CONTINUED (6篇) 🆕
 - [x] best-raspberry-pi-alternatives-2026 — Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi & More Compared ✅ 2026-08-03
-- [ ] diy-air-quality-monitor-esp32 — DIY Air Quality Monitor with ESP32 and Home Assistant
+- [x] diy-air-quality-monitor-esp32 — DIY Air Quality Monitor with ESP32 and Home Assistant ✅ 2026-08-04
 - [ ] best-heat-gun-electronics — Best Heat Gun for Electronics and 3D Printing in 2026
 - [ ] how-to-solder-circuit-boards-beginners — How to Solder Circuit Boards: Complete Beginner's Guide
 - [ ] diy-smart-garage-door-opener — DIY Smart Garage Door Opener with ESP32 and Home Assistant
