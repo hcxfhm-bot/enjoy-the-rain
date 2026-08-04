@@ -817,6 +817,12 @@
     <ns0:priority>0.6</ns0:priority>
   </ns0:url>
   <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/diy-air-quality-monitor-esp32.html</ns0:loc>
+    <ns0:lastmod>2026-08-04</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
     <ns0:loc>https://3dprintstarter.com/articles/diy-3d-printer-enclosure.html</ns0:loc>
     <ns0:lastmod>2026-06-04</ns0:lastmod>
     <ns0:changefreq>monthly</ns0:changefreq>
