@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Solder Circuit Boards: Complete Beginner's Guide (2026)</title>
+  <meta name="description" content="Learn how to solder circuit boards from scratch. Step-by-step guide covering tools, techniques, safety, and common mistakes for beginners in electronics and DIY projects.">
+  <meta name="keywords" content="how to solder circuit boards, soldering tutorial, beginner soldering guide, electronics soldering, PCB soldering, through-hole soldering, solder joints, soldering iron technique, electronics DIY, maker skills, soldering for beginners, solder types, flux soldering, circuit board repair">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker & DIY Tools</span>
+      </nav>
+
+      <h1>How to Solder Circuit Boards: Complete Beginner's Guide (2026)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 6, 2026</span>
+        <span>⏱️ 14 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a2a1a, #254025); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔧</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>There's a moment every maker dreads: your Arduino project is almost done, but you need to attach these header pins... and that means soldering. Or maybe your <a href="../esp32-smart-home-beginners.html">ESP32 smart home sensor</a> stopped working, and a visual inspection reveals a cracked joint on the board. Or you're building a <a href="../diy-weather-station-raspberry-pi.html">Raspberry Pi weather station</a>, and the PCB kit requires assembly before you can power it up.</p>
+
+        <p>In each of these scenarios, soldering is the bridge between individual components and a working circuit. And unlike many maker skills that require expensive equipment, soldering is remarkably accessible — you can get started with a quality iron for under $30 and produce professional results with practice.</p>
+
+        <p>This guide takes you from zero knowledge to confident through-hole soldering. We'll cover every tool you need, the science behind why solder flows the way it does, step-by-step technique, and how to diagnose and fix common problems. By the end, you'll be ready to tackle those header pins, repair that broken toy, and build your own custom circuits.</p>
+
+        <h2>What Is Soldering, Anyway?</h2>
+
+        <p>Soldering is a joining process that uses a metal alloy (solder) with a lower melting point than the workpieces. When you heat the joint with a soldering iron, the solder melts and flows over the cleaned metal surfaces, forming a conductive bond as it cools. Unlike welding, soldering doesn't melt the base metals — it only melts the solder itself, which is why it's perfect for joining delicate electronic components without damaging them.</p>
+
+        <p>The key to good soldering is heat transfer. Your iron tip must transfer enough heat to bring both the component lead AND the copper pad up to the solder's melting point. Too little heat, and the solder balls up without flowing. Too much heat, or for too long, and you damage the component or lift the copper pad from the board. Getting this balance right is the core skill of soldering.</p>
+
+        <h2>Essential Tools for Beginners</h2>
+
+        <p>Before you touch an iron to a board, gather your tools. Here's what you actually need:</p>
+
+        <h3>1. Soldering Iron or Station</h3>
+
+        <p>For beginners, a temperature-controlled iron is essential. Fixed-temperature irons (that plug directly into the wall) run too hot and make it nearly impossible to produce consistent joints. Our <a href="../best-soldering-station-beginners.html">best soldering station guide</a> covers options from $26 to $550, but here's the quick recommendation:</p>
+
+        <ul>
+          <li><strong>Budget ($20-35):</strong> Pinecil V2 — USB-C powered, temperature controlled, open-source firmware</li>
+          <li><strong>Mid-range ($100-150):</strong> Hakko FX-888D — the workhorse station trusted by hobbyists for over a decade</li>
+          <li><strong>Premium ($250+):</strong> Hakko FX-951 — cartridge tips with excellent thermal recovery for SMD work</li>
+        </ul>
+
+        <p>For pure beginners, start with the Pinecil V2. You probably already own a USB-C charger, making the total investment under $40.</p>
+
+        <h3>2. Solder Wire</h3>
+
+        <p>For electronics, use <strong>rosin-core solder wire</strong> (also called flux-core). The rosin inside acts as a cleaning agent and flow enhancer. Two main types:</p>
+
+        <ul>
+          <li><strong>Leaded solder (63/37 or 60/40 Sn/Pb):</strong> Easier to work with, lower melting point (183-188°C), shinier joints. Despite lead concerns, it's still the preferred choice for hobbyist electronics work.</li>
+          <li><strong>Lead-free solder (SAC305: Sn96.5/Ag3.0/Cu0.5):</strong> Environmentally friendly, higher melting point (217°C), slightly harder to work with but increasingly standard in commercial manufacturing.</li>
+        </ul>
+
+        <p>For beginners, I strongly recommend starting with 63/37 leaded solder. The lower temperature and more forgiving flow characteristics make learning easier. Get 0.5mm or 0.8mm diameter — these are the most versatile sizes.</p>
+
+        <h3>3. Brass Wire Tip Cleaner</h3>
+
+        <p>Skip the wet sponge that comes with many stations. Brass wire tip cleaners (a coil of fine brass wire in a small cup) clean the tip without thermal shock, which extends tip life significantly. The tip stays hot and ready while you work. A quality brass cleaner costs $5-10 and is the single best investment for tip longevity.</p>
+
+        <h3>4. Flux</h3>
+
+        <p>Even though your solder wire has flux core, additional flux dramatically improves joint quality — especially on oxidized surfaces, older components, or when rework is needed. A small bottle of <strong>no-clean rosin flux (RMA type)</strong> and a flux pen for precision application costs under $10 total. You'll use this more than you expect.</p>
+
+        <h3>5. Multimeter</h3>
+
+        <p>Not strictly required for soldering, but essential for <a href="../how-to-use-multimeter-electronics.html">testing your work and troubleshooting problems</a>. After completing a joint, use continuity mode to verify the connection is solid. Before soldering, use resistance mode to check if a component is already damaged.</p>
+
+        <h3>6. Safety Gear</h3>
+
+        <ul>
+          <li><strong>Safety glasses:</strong> Molten solder can spatter, especially when it hits contamination. Protect your eyes — it's the one body part that really matters.</li>
+          <li><strong>Fume extraction:</strong> Rosin flux fumes aren't healthy to breathe. A $25 benchtop fume extractor with activated carbon filters makes a huge difference. At minimum, work near an open window.</li>
+          <li><strong>No gloves:</strong> You need fine tactile feedback when soldering. Just wash your hands thoroughly after each session.</li>
+        </ul>
+
+        <h2>Understanding Your Workstation</h2>
+
+        <h3>Temperature Settings</h3>
+
+        <p>Different solders and joints need different temperatures:</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+          <thead>
+            <tr style="background: #252640; color: white;">
+              <th style="padding: 0.75rem; text-align: left; border: 1px solid #3a3b55;">Application</th>
+              <th style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">Leaded Solder</th>
+              <th style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">Lead-Free Solder</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b55;">Through-hole components</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">315-340°C</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">350-370°C</td>
+            </tr>
+            <tr style="background: #1a1b30;">
+              <td style="padding: 0.75rem; border: 1px solid #3a3b55;">Connectors, larger joints</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">340-360°C</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">370-390°C</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; border: 1px solid #3a3b55;">SMD components</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">300-320°C</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">330-350°C</td>
+            </tr>
+            <tr style="background: #1a1b30;">
+              <td style="padding: 0.75rem; border: 1px solid #3a3b55;">Heat-sensitive parts</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">280-300°C</td>
+              <td style="padding: 0.75rem; text-align: center; border: 1px solid #3a3b55;">310-330°C</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>If you're unsure, start lower and work up. A joint that won't flow after 3-4 seconds of contact means your temperature is too low. Raise it in 10°C increments until the solder flows easily.</p>
+
+        <h3>Tip Selection</h3>
+
+        <p>The tip shape matters more than most beginners realize:</p>
+
+        <ul>
+          <li><strong>Chisel tip (recommended for beginners):</strong> Flat, squared-off end. Provides maximum thermal contact for through-hole work. The broad face efficiently heats both the pad and component lead simultaneously.</li>
+          <li><strong>Conical tip:</strong> Pointed end. Good for precision SMD work but harder to use for beginners — less thermal mass means slower recovery.</li>
+          <li><strong>Bevel (knife) tip:</strong> Angled flat edge. Excellent for drag soldering and working on integrated circuits, but specialized.</li>
+        </ul>
+
+        <p>Start with a small-to-medium chisel tip (2-3mm wide for most work). It's the most forgiving shape for learning and handles 90% of through-hole soldering tasks.</p>
+
+        <h2>Step-by-Step: Making Your First Solder Joint</h2>
+
+        <p>Follow this sequence precisely. Each step builds on the last, and rushing leads to poor joints.</p>
+
+        <h3>Step 1: Prepare Your Iron</h3>
+
+        <p>Turn on your iron and set the temperature. Wait for it to fully heat (most stations indicate ready state). Then:</p>
+
+        <ol>
+          <li>Clean the tip on your brass wire cleaner — give it 5-6 wipes</li>
+          <li>Apply a small amount of fresh solder to the tip — this is called "tinning"</li>
+          <li>The tip should look shiny and wet, not dull or pitted</li>
+        </ol>
+
+        <p>If your tip is pitted, dark, or won't take solder, it may be corroded or burned out. A lightly used tip should last months; a neglected tip can die in days.</p>
+
+        <h3>Step 2: Prepare the Workpiece</h3>
+
+        <p>Before soldering, inspect your components and board:</p>
+
+        <ul>
+          <li>New components usually have clean leads — they're ready to solder</li>
+          <li>Salvaged or older components may have oxidized leads — clean them with fine sandpaper (400-600 grit) or a fiberglass pen</li>
+          <li>Ensure the component is seated correctly before soldering. Once soldered, it's difficult to remove without hot air or solder wick</li>
+        </ul>
+
+        <h3>Step 3: Heat the Joint (Not the Solder)</h3>
+
+        <p>This is the critical step that separates good joints from cold joints. Place the iron tip so it touches BOTH the component lead AND the copper pad simultaneously. The entire thermal contact area should be covered.</p>
+
+        <p>Hold the iron steady for 2-3 seconds. You're not melting the solder yet — you're bringing the joint up to temperature. You'll know the joint is ready when the tip begins to "wet" slightly with solder flowing across its surface.</p>
+
+        <h3>Step 4: Apply Solder</h3>
+
+        <p>Once the joint is hot, bring your solder wire to the opposite side of the tip from where it's touching the joint. The solder should touch the heated metal, not the tip directly.</p>
+
+        <p>Feed enough solder to form a concave fillet around the lead — about 1-2mm of solder diameter flowing around the joint. The solder should flow toward the heat source naturally. If it balls up and won't flow, the joint isn't hot enough yet.</p>
+
+        <h3>Step 5: Remove Iron and Let Cool</h3>
+
+        <p>After applying solder, remove the solder wire first, then remove the iron. Don't move the component for 3-5 seconds while the solder solidifies. A good joint:</p>
+
+        <ul>
+          <li>Looks shiny (not dull or grainy)</li>
+          <li>Has a concave, volcano-like shape flowing around the lead</li>
+          <li>Shows no cracks, gaps, or lift from the pad</li>
+        </ul>
+
+        <p>Practice this sequence 20-30 times on scrap components before tackling your actual project. A broken PCB kit is heartbreaking; practice boards are cheap.</p>
+
+        <h2>Through-Hole vs SMD: What's the Difference?</h2>
+
+        <h3>Through-Hole Components</h3>
+
+        <p>Traditional components with wire leads that pass through holes in the PCB. The component leads are soldered on the opposite side from the components. Examples: Arduino headers, large capacitors, connectors, IC sockets.</p>
+
+        <p>Through-hole is where every beginner should start. The larger components and pads are forgiving, and you can see exactly what you're doing. Most <a href="../raspberry-pi-diy-projects-beginners.html">Raspberry Pi projects</a> and starter kits use through-hole components for this reason.</p>
+
+        <h3>Surface Mount (SMD/SMT)</h3>
+
+        <p>Components with metal pads on the bottom that sit directly on the PCB surface, without passing through holes. Examples: Most modern microcontrollers, resistors/capacitors in small packages (0603, 0402), LED strips.</p>
+
+        <p>SMD requires steadier hands and better vision, but isn't impossible for beginners. For <a href="../esp32-smart-home-beginners.html">ESP32 projects</a>, most breakout boards come pre-assembled, but SMD soldering becomes relevant for custom PCB projects and <a href="../diy-pcb-design-beginners.html">DIY PCB design</a>.</p>
+
+        <h2>Diagnosing Common Problems</h2>
+
+        <h3>Cold Joint</h3>
+
+        <p><strong>What it looks like:</strong> Dull, grainy, or crystallized surface. The solder looks like it was scattered rather than flowed.</p>
+
+        <p><strong>What caused it:</strong> Insufficient heat during soldering. The solder melted but never properly flowed onto the surfaces.</p>
+
+        <p><strong>How to fix:</strong> Clean the joint with flux, then reflow with the iron at slightly higher temperature. Hold the iron on the joint until you see the solder become liquid and shiny, then remove.</p>
+
+        <h3>Disturbed Joint</h3>
+
+        <p><strong>What it looks like:</strong> Cracked or fractured surface, often with a visible seam running through it.</p>
+
+        <p><strong>What caused it:</strong> Moving the component while the solder was still cooling. Even small vibrations can fracture a joint.</p>
+
+        <p><strong>How to fix:</strong> Apply fresh solder and flux, then reflow. If the pad has lifted from the board, the repair is much harder and may require wire bridging.</p>
+
+        <h3>Solder Bridge</h3>
+
+        <p><strong>What it looks like:</strong> A connection between two adjacent pins that should be separate. The solder forms an unintended conductive path.</p>
+
+        <p><strong>What caused it:</strong> Too much solder, or solder flowing where you didn't want it.</p>
+
+        <p><strong>How to fix:</strong> Use desoldering braid (copper braid that wicks up solder) or a solder sucker to remove excess solder between the pins. Apply fresh flux before attempting removal.</p>
+
+        <h3>Pad Lifted from Board</h3>
+
+        <p><strong>What it looks like:</strong> The copper pad has peeled away from the fiberglass board substrate, often still connected by the via underneath.</p>
+
+        <p><strong>What caused it:</strong> Overheating, applying too much force, or using the wrong technique.</p>
+
+        <p><strong>How to fix:</strong> This is one of the trickiest repairs. You need to bridge the component lead directly to the via or trace underneath using wire. It's often easier to bypass the pad entirely with a thin wire.</p>
+
+        <h2>Desoldering: Fixing Mistakes</h2>
+
+        <p>Everyone makes mistakes. Here's how to undo a solder joint:</p>
+
+        <h3>Solder Sucker (Desoldering Pump)</h3>
+
+        <p>A spring-loaded tool that creates suction to pull molten solder away from a joint. To use:</p>
+
+        <ol>
+          <li>Heat the joint with your iron</li>
+          <li>Position the tip of the sucker right next to your iron</li>
+          <li>Press the release button to create suction</li>
+          <li>The solder is pulled into the cylinder</li>
+        </ol>
+
+        <p>Solder suckers work best on through-hole joints with plenty of solder. For small SMD work, they're nearly useless.</p>
+
+        <h3>Desoldering Braid</h3>
+
+        <p>Also called solder wick — a copper braid that capillary-action draws molten solder into itself. To use:</p>
+
+        <ol>
+          <li>Place the braid over the solder you want to remove</li>
+          <li>Press your hot iron onto the top of the braid</li>
+          <li>Heat transfers through the braid to the solder</li>
+          <li>Molten solder soaks into the braid</li>
+          <li>Remove braid while still hot — it has absorbed the solder</li>
+        </ol>
+
+        <p>Braid is excellent for removing excess solder, clearing bridges, and working on fine-pitch components. Quality braid (ChipQuik or Chemtronics) makes a big difference.</p>
+
+        <h3>Combination Tools</h3>
+
+        <p>For SMD and rework, a <strong>hot air station</strong> is the ultimate tool. It blows hot air (typically 200-400°C) to reflow all the solder on a component simultaneously. Hot air stations range from $50 (budget Hakko clones) to $300+ (JBC, Quick). They're essential for SMD rework and worth considering if you plan to do a lot of electronics work.</p>
+
+        <h2>Soldering Projects for Practice</h2>
+
+        <p>Once you've practiced basic joints, try these intermediate projects:</p>
+
+        <h3>Arduino Shield Prototype</h3>
+
+        <p>Solder pin headers to a blank Arduino prototype shield. Then add a few components: an LED, a resistor, and a small circuit. You'll practice both soldering and basic circuit design.</p>
+
+        <h3>ESP32 Sensor Breakout</h3>
+
+        <p>Build a <a href="../esphome-getting-started-guide.html">custom ESP32 sensor board</a> by soldering header pins to a perfboard and wiring up a DHT22 temperature/humidity sensor. The result is a sensor you can actually use in your <a href="../home-assistant-raspberry-pi-setup.html">Home Assistant setup</a>.</p>
+
+        <h3>Custom LED Matrix</h3>
+
+        <p>Solder individual WS2812B LEDs to a PCB matrix. Each LED requires four solder joints (VCC, GND, DATA IN, DATA OUT), giving you excellent practice. The completed matrix makes a great <a href="../ws2812b-led-strip-esp32.html">addressable LED project</a> when connected to an ESP32.</p>
+
+        <h2>Soldering Safety: Non-Negotiable Rules</h2>
+
+        <ol>
+          <li><strong>Ventilation is mandatory.</strong> Rosin flux fumes cause respiratory irritation and can trigger sensitization with repeated exposure. Use a fume extractor or work near open windows. Never seal yourself in a small room with soldering smoke.</li>
+          <li><strong>Never touch the tip.</strong> Soldering iron tips run at 300-400°C — hot enough to cause serious burns instantly. The metal barrel behind the tip is also dangerously hot. Only touch the insulated handle.</li>
+          <li><strong>Return the iron to its stand.</strong> A hot iron left on a desk can roll off, fall on cables, or be grabbed accidentally. A stable iron stand with a weighted base prevents accidents.</li>
+          <li><strong>Wear safety glasses.</strong> Solder spatters when it contacts moisture, flux, or contaminants. Tiny droplets of molten metal in your eye will ruin your day.</li>
+          <li><strong>Wash hands after soldering.</strong> Even lead-free solder contains metals and flux residue. Wash thoroughly before eating, drinking, or touching your face.</li>
+          <li><strong>Know your fire extinguisher location.</strong> Accidents happen. Keep a small ABC fire extinguisher or fire blanket within reach. Never use water on an electrical fire.</li>
+        </ol>
+
+        <h2>When to Upgrade Your Skills</h2>
+
+        <h3>SMD Soldering</h3>
+
+        <p>Once through-hole feels natural, graduate to SMD. Start with larger packages like SOIC-8 or TQFP-32 before attempting fine-pitch components. SMD requires:</p>
+
+        <ul>
+          <li>Fine-tip iron (conical or small chisel, 0.5-1mm)</li>
+          <li>Flux — lots of it. You cannot use too much for SMD</li>
+          <li>Fine tweezers for component placement</li>
+          <li>Magnification (headset magnifier or digital microscope)</li>
+        </ul>
+
+        <h3>Hot Air Rework</h3>
+
+        <p>For replacing SMD chips, reflowing entire boards, or working with BGA packages, a hot air station is essential. It's also the tool that makes complex repairs possible. The <a href="../diy-pcb-design-beginners.html">DIY PCB projects</a> become much more achievable once you have hot air for rework.</p>
+
+        <h3>Custom PCB Design</h3>
+
+        <p>After building several projects on perfboard and stripboard, you'll naturally want cleaner results. <a href="../diy-pcb-design-beginners.html">Custom PCB design</a> using KiCad or EasyEDA lets you order professional boards from manufacturers like JLCPCB or PCBWay for a few dollars. Designing your own PCBs combines CAD skills, electronics knowledge, and soldering ability into one cohesive maker skill.</p>
+
+        <h2>Final Thoughts</h2>
+
+        <p>Soldering is a foundational maker skill — the gateway to building custom electronics, repairing devices, and creating projects that go beyond what's available off the shelf. The good news: it's much easier to learn than most people expect. With a quality temperature-controlled iron, quality solder, and patient practice, you'll be making professional joints in your first hour.</p>
+
+        <p>The key is to go slow, heat properly, and never rush the joint. A good solder joint takes 3-5 seconds from iron contact to completion. Rushing leads to cold joints, lifted pads, and frustration. Take your time, follow the sequence, and every joint will be solid.</p>
+
+        <p>Once you're confident with basic soldering, you'll find opportunities everywhere: <a href="../diy-smart-door-lock.html">building custom smart locks</a>, <a href="../diy-weather-station-raspberry-pi.html">creating weather monitoring stations</a>, upgrading your <a href="../3d-printer-silent-board-upgrade.html">3D printer with custom electronics</a>, or designing your own PCBs from scratch. Soldering is the skill that transforms "I have an idea" into "I built it myself."</p>
+
+        <p>Start practicing today. Your first few joints will be rough — that's normal. By joint #50, you'll be wondering why you ever thought this was difficult.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../best-soldering-station-beginners.html">Best Soldering Station for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="../how-to-use-multimeter-electronics.html">How to Use a Multimeter: Complete Guide for Electronics and Smart Home Projects</a></li>
+          <li><a href="../best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="../diy-electronics-workbench-setup.html">How to Set Up a DIY Electronics Workbench: Essential Tools and Layout</a></li>
+          <li><a href="../esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -369,7 +369,7 @@
 - [x] best-raspberry-pi-alternatives-2026 — Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi & More Compared ✅ 2026-08-03
 - [x] diy-air-quality-monitor-esp32 — DIY Air Quality Monitor with ESP32 and Home Assistant ✅ 2026-08-04
 - [x] best-heat-gun-electronics — Best Heat Gun for Electronics and 3D Printing in 2026 ✅ 2026-08-05
-- [ ] how-to-solder-circuit-boards-beginners — How to Solder Circuit Boards: Complete Beginner's Guide
+- [x] how-to-solder-circuit-boards-beginners — How to Solder Circuit Boards: Complete Beginner's Guide ✅ 2026-08-06
 - [ ] diy-smart-garage-door-opener — DIY Smart Garage Door Opener with ESP32 and Home Assistant
 - [ ] best-hot-air-rework-station — Best Hot Air Rework Station for PCB Repair in 2026
 
