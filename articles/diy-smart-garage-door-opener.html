@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Smart Garage Door Opener with ESP32 and Home Assistant: Complete Guide</title>
+  <meta name="description" content="Build a DIY smart garage door opener with ESP32 and Home Assistant. Control your garage from anywhere, get status notifications, and integrate with voice assistants. Complete wiring, ESPHome config, and 3D printed mount guide.">
+  <meta name="keywords" content="smart garage door opener, ESP32 garage door, Home Assistant garage door, DIY smart garage, WiFi garage door controller, garage door sensor, Tasmota garage door, smart home garage">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span> &raquo; <span>DIY Projects</span>
+      </nav>
+
+      <h1>DIY Smart Garage Door Opener with ESP32 and Home Assistant: Complete Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 7, 2026</span>
+        <span>⏱️ 15 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🚗</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Your garage door is probably one of the least "smart" things in your home — yet it's also one of the most useful to automate. Imagine checking whether you left it open while at work, closing it remotely when a delivery arrives, or integrating it into your "goodnight" routine so every door locks and the garage secures itself automatically.</p>
+
+        <p>Commercial smart garage door controllers like MyQ cost $30-50 and require a subscription for app features. You can build a better DIY version with an ESP32, a few sensors, and Home Assistant — for roughly the same price, but with zero ongoing costs and full local control. In this guide, I'll walk you through the complete build.</p>
+
+        <p>If you're new to ESP32 and Home Assistant, start with our <a href="esphome-getting-started-guide.html">ESPHome Getting Started Guide</a> to understand the basics before diving in.</p>
+
+        <h2>What You'll Build: Smart Garage Door Features</h2>
+
+        <p>Before we start wiring, let's define what "smart" means for this project. A proper smart garage door opener should do the following:</p>
+
+        <ul>
+          <li><strong>Remote control</strong> — Open and close the door from anywhere via Home Assistant app or web interface</li>
+          <li><strong>Status monitoring</strong> — Know whether the door is open or closed at all times</li>
+          <li><strong>Notifications</strong> — Get alerts when the door opens, closes, or stays open too long</li>
+          <li><strong>Safety</strong> — Don't let you close the door if something (or someone) is in the way</li>
+          <li><strong>Voice control</strong> — Integrate with Alexa, Google Home, or Siri</li>
+          <li><strong>History</strong> — Log all open/close events for security review</li>
+        </ul>
+
+        <p>Commercial MyQ systems only give you open/closed status and remote control. With DIY, you get all of the above — plus full control over your data.</p>
+
+        <h2>Shopping List: What You Need</h2>
+
+        <h3>Required Components</h3>
+
+        <ul>
+          <li><strong>ESP32 DevKit board</strong> ($5-8) — Any ESP32 will work. See our <a href="best-esp32-development-board.html">Best ESP32 Development Boards</a> guide for recommendations.</li>
+          <li><strong>Door status sensors</strong> — Two magnetic reed switches ($2-5 for a pair) to detect open and closed positions</li>
+          <li><strong>Relay module</strong> — Single-channel 5V relay ($2-3) to trigger the garage door button</li>
+          <li><strong>Power supply</strong> — 5V micro USB charger or a 5V/3A wall adapter</li>
+          <li><strong>Jumper wires</strong> — Male-to-femaleDupont cables for connecting sensors</li>
+          <li><strong>Terminal block</strong> — Optional, but makes connecting garage door wiring cleaner</li>
+        </ul>
+
+        <h3>Optional Components</h3>
+
+        <ul>
+          <li><strong>PIR motion sensor</strong> — HC-SR501 ($1-2) to detect movement inside the garage as a safety backup</li>
+          <li><strong>DHT22 sensor</strong> ($4-5) — Monitor temperature and humidity in the garage</li>
+          <li><strong>Status LED</strong> — 3mm or 5mm LED with 220Ω resistor for visual status</li>
+          <li><strong>3D printed enclosure</strong> — We'll cover the design below</li>
+        </ul>
+
+        <p><strong>Important:</strong> You don't need to replace your existing garage door opener. This system taps into the existing wall button wiring, so your standard remote and wall switch continue to work normally.</p>
+
+        <h2>How Garage Door Openers Work: The Basics</h2>
+
+        <p>Before wiring anything, understand how your garage door opener works. The wall button (the one inside your garage) is simply a switch that, when pressed, completes a circuit. The opener's control board detects this and triggers the motor.</p>
+
+        <p>Your opener has two terminals (usually labeled "RELAY" or "WHT/BLU") that you connect the relay to. When the ESP32 energizes the relay, it simulates a button press — exactly like pressing the wall switch.</p>
+
+        <p>The door status is detected using magnetic reed switches. One magnet goes on the door, one on the frame. When the door is fully open, the reed switch at the top is closed; when fully closed, the switch at the bottom is closed. If neither is closed, the door is somewhere in between.</p>
+
+        <h2>Wiring Diagram: Connecting Everything</h2>
+
+        <h3>Step 1: Install Door Status Sensors</h3>
+
+        <p>Mount the reed switches to detect fully-open and fully-closed positions:</p>
+
+        <ul>
+          <li><strong>Closed sensor:</strong> Mount on the door track near the floor and the corresponding magnet on the door itself</li>
+          <li><strong>Open sensor:</strong> Mount at the highest point of door travel, magnet on the top section of the door</li>
+          <li>Run wires from both sensors to where you'll mount the ESP32</li>
+          <li>Wire both sensors in series — one end of each connects to ESP32 GND, the other ends go to GPIO pins</li>
+        </ul>
+
+        <h3>Step 2: Wire the Relay</h3>
+
+        <p>The relay simulates pressing the garage door button:</p>
+
+        <ul>
+          <li><strong>NO (Normally Open)</strong> → One terminal on the garage door opener's wall button terminals</li>
+          <li><strong>COM (Common)</strong> → The other wall button terminal</li>
+          <li><strong>IN (Signal)</strong> → ESP32 GPIO 26</li>
+          <li><strong>VCC</strong> → ESP32 5V</li>
+          <li><strong>GND</strong> → ESP32 GND</li>
+        </ul>
+
+        <p><strong>Safety note:</strong> The relay only handles a small signal voltage from the wall button circuit (typically 12-24V AC). It does NOT switch the high-voltage motor circuit. This is safe to work with — just keep the relay's signal wires separate from any mains wiring.</p>
+
+        <h3>Step 3: Wire Status Sensors to ESP32</h3>
+
+        <ul>
+          <li><strong>Closed sensor</strong> → ESP32 GPIO 23 (using INPUT_PULLUP)</li>
+          <li><strong>Open sensor</strong> → ESP32 GPIO 22 (using INPUT_PULLUP)</li>
+          <li><strong>PIR sensor (optional)</strong> → ESP32 GPIO 19</li>
+        </ul>
+
+        <p>For a cleaner installation, consider using a prototype PCB or terminal adapter board to wire everything together neatly.</p>
+
+        <h2>ESPHome Configuration</h2>
+
+        <p>ESPHome makes the software side straightforward. Here's the complete configuration:</p>
+
+        <h3>Base Configuration</h3>
+
+        <pre><code>esphome:
+  name: smart-garage-door
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "YourWiFiSSID"
+  password: "YourWiFiPassword"
+
+api:
+  password: "esphome_api_password"
+
+ota:
+  password: "esphome_ota_password"
+
+logger:</code></pre>
+
+        <h3>Cover Component (Garage Door)</h3>
+
+        <p>ESPHome has a built-in <code>cover</code> component specifically for garage doors, which handles the open/stopped/closed states:</p>
+
+        <pre><code>cover:
+  - platform: template
+    name: "Garage Door"
+    id: garage_door
+    optimistic: false
+    assumed_state: false
+
+    open_action:
+      - switch.turn_on: garage_relay
+      - delay: 500ms
+      - switch.turn_off: garage_relay
+
+    close_action:
+      - switch.turn_on: garage_relay
+      - delay: 500ms
+      - switch.turn_off: garage_relay
+
+    stop_action:
+      - switch.turn_on: garage_relay
+      - delay: 500ms
+      - switch.turn_off: garage_relay</code></pre>
+
+        <h3>Door Status Sensors</h3>
+
+        <pre><code>binary_sensor:
+  - platform: gpio
+    name: "Garage Door Closed"
+    pin:
+      number: GPIO23
+      mode: INPUT_PULLUP
+      inverted: true
+    id: door_closed_sensor
+    filters:
+      - delayed_on: 100ms
+      - delayed_off: 100ms
+
+  - platform: gpio
+    name: "Garage Door Open"
+    pin:
+      number: GPIO22
+      mode: INPUT_PULLUP
+      inverted: true
+    id: door_open_sensor
+    filters:
+      - delayed_on: 100ms
+      - delayed_off: 100ms</code></pre>
+
+        <h3>Relay Switch</h3>
+
+        <pre><code>switch:
+  - platform: gpio
+    name: "Garage Door Trigger"
+    pin: GPIO26
+    id: garage_relay
+    internal: true</code></pre>
+
+        <h3>Optional: Temperature and Motion</h3>
+
+        <pre><code>  - platform: dht
+    pin: GPIO27
+    temperature:
+      name: "Garage Temperature"
+      id: garage_temp
+    humidity:
+      name: "Garage Humidity"
+      id: garage_humidity
+    update_interval: 60s
+
+  - platform: gpio
+    name: "Garage Motion"
+    pin: GPIO19
+    id: garage_motion</code></pre>
+
+        <p>Upload this configuration to your ESP32 and it will automatically appear in Home Assistant as a cover entity with open/close/stop controls.</p>
+
+        <h2>Assistant Configuration</h2>
+
+        <p>With ESPHome, the garage door cover appears in Home Assistant automatically. But to get the most from it, you'll want to set up some helper automations.</p>
+
+        <h3>Home Assistant Cover Configuration</h3>
+
+        <p>For fine-tuned control, add this to your <code>configuration.yaml</code>:</p>
+
+        <pre><code>homeassistant:
+  customize:
+    cover.garage_door:
+      device_class: garage_door
+      icon: mdi:garage</code></pre>
+
+        <h3>Automation: Alert When Left Open</h3>
+
+        <p>One of the most useful automations — alert you if the garage stays open for more than 30 minutes:</p>
+
+        <pre><code>automation:
+  - alias: "Alert: Garage Door Open Too Long"
+    trigger:
+      - platform: state
+        entity_id: cover.garage_door
+        to: "open"
+        for:
+          minutes: 30
+    action:
+      - service: notify.notify
+        data:
+          title: "🚗 Garage Door Alert"
+          message: "Your garage door has been open for 30 minutes."
+      - condition: time
+        after: "21:00:00"
+        before: "06:00:00"
+      - service: notify.mobile_app_your_phone
+        data:
+          title: "🚗 Garage Left Open"
+          message: "The garage door has been open for 30 minutes."</code></pre>
+
+        <h3>Automation: Close When Leaving</h3>
+
+        <p>If you have a presence sensor or phone tracking set up:</p>
+
+        <pre><code>automation:
+  - alias: "Auto-close Garage When Leaving"
+    trigger:
+      - platform: state
+        entity_id: group.family
+        to: "not_home"
+        for:
+          minutes: 2
+    condition:
+      - condition: state
+        entity_id: cover.garage_door
+        state: "open"
+      - condition: numeric_state
+        entity_id: binary_sensor.garage_motion
+        below: 1
+        for:
+          minutes: 5
+    action:
+      - service: cover.close_cover
+        target:
+          entity_id: cover.garage_door
+      - delay: 10s
+      - condition: state
+        entity_id: cover.garage_door
+        state: "open"
+      - service: notify.notify
+        data:
+          message: "Garage door did not close. Please check manually."</code></pre>
+
+        <h3>Automation: Goodnight Routine</h3>
+
+        <p>Include your garage door in your bedtime routine:</p>
+
+        <pre><code>automation:
+  - alias: "Goodnight: Secure Garage"
+    trigger:
+      - platform: time
+        at: "23:00:00"
+    condition:
+      - condition: state
+        entity_id: cover.garage_door
+        state: "open"
+    action:
+      - service: cover.close_cover
+        target:
+          entity_id: cover.garage_door
+      - delay: 30s
+      - condition: state
+        entity_id: cover.garage_door
+        state: "closed"
+      - service: notify.notify
+        data:
+          message: "Goodnight. Garage door is now closed."</code></pre>
+
+        <p>For more automation ideas, check out our guide on <a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners</a>.</p>
+
+        <h2>Adding Voice Control</h2>
+
+        <p>Once your garage door is in Home Assistant, you can add it to voice assistants. The exact steps depend on your assistant, but here's the general process:</p>
+
+        <h3>Alexa (Amazon Echo)</h3>
+
+        <p>In the Alexa app, go to Devices → Add Device → Other → and select "Discover Devices." Home Assistant's Cloud integration (or the Nabu Casa subscription) can also expose devices directly to Alexa without the app discovery process.</p>
+
+        <p>Then you can say:</p>
+        <ul>
+          <li>"Alexa, open the garage door"</li>
+          <li>"Alexa, close the garage door"</li>
+          <li>"Alexa, is the garage door open?"</li>
+        </ul>
+
+        <h3>Google Home</h3>
+
+        <p>With the Home Assistant Cloud or the Google Assistant integration, your garage door appears automatically. You can then use:</p>
+        <ul>
+          <li>"Hey Google, open the garage door"</li>
+          <li>"Hey Google, close the garage door"</li>
+        </ul>
+
+        <p><strong>Safety note:</strong> Both Alexa and Google have built-in safeguards for garage doors — they may ask for confirmation before executing the command, which is a good safety feature.</p>
+
+        <h2>3D Printed Enclosure</h2>
+
+        <p>A clean enclosure protects your ESP32 and makes the installation look professional. Here's what to consider when designing or printing one:</p>
+
+        <h3>Design Requirements</h3>
+
+        <ul>
+          <li><strong>Mounting holes:</strong> Match your ESP32 DevKit dimensions (typically 25mm × 52mm mounting pattern)</li>
+          <li><strong>Relay clearance:</strong> The relay module needs its own compartment, ideally isolated from the ESP32</li>
+          <li><strong>Wire routing:</strong> Include cable glands or slots for the sensor wires and power cable</li>
+          <li><strong>Ventilation:</strong> If adding temperature sensors, ensure airflow through the case</li>
+          <li><strong>Mounting method:</strong> Screw holes for wall mounting or DIN rail clip (if using a DIN rail enclosure box)</li>
+        </ul>
+
+        <h3>Recommended Print Settings</h3>
+
+        <p>For a durable enclosure that will live in a garage:</p>
+
+        <ul>
+          <li><strong>Material:</strong> PETG — more heat and humidity resistant than PLA</li>
+          <li><strong>Layer height:</strong> 0.2mm for good surface finish</li>
+          <li><strong>Walls:</strong> 3-4 perimeters for durability</li>
+          <li><strong>Infill:</strong> 20% for the main case, 100% for mounting brackets</li>
+          <li><strong>No supports needed</strong> if you orient the case correctly for printing</li>
+        </ul>
+
+        <p>For more enclosure design tips, see our guides on <a href="3d-printed-esp32-case-design.html">Designing and 3D Printing Custom ESP32 Cases</a> and <a href="diy-outdoor-sensor-enclosure-3d-print.html">Weatherproof Outdoor Sensor Enclosures</a>.</p>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <h3>Garage Door Doesn't Respond</h3>
+
+        <ul>
+          <li>Check relay wiring — the NO and COM terminals must go to the wall button terminals on the opener</li>
+          <li>Verify the relay is getting 5V power — LEDs on the relay board should light up</li>
+          <li>Test the relay manually by shorting the NO and COM terminals with a screwdriver</li>
+          <li>Check ESPHome logs via the web dashboard for connection issues</li>
+        </ul>
+
+        <h3>Status Shows Wrong State</h3>
+
+        <p>If Home Assistant shows the door as open when it's actually closed (or vice versa):</p>
+
+        <ul>
+          <li>Swap the GPIO pin assignments in ESPHome — the reed switches may be inverted</li>
+          <li>Check the magnet positions — the magnet should be within 10mm of the reed switch</li>
+          <li>Adjust the sensor sensitivity — some reed switches need precise alignment</li>
+          <li>Increase the filter delay if the status flickers between states</li>
+        </ul>
+
+        <h3>Garage Door Closes When It Shouldn't</h3>
+
+        <p>If the door randomly closes during the night:</p>
+
+        <ul>
+          <li>Check that your WiFi is stable — ESP32 can occasionally reboot and trigger the relay on startup</li>
+          <li>Add a debounce filter to the automation triggers</li>
+          <li>Ensure the ESP32 doesn't lose power — a brownout can trigger unintended actions</li>
+          <li>Add the motion sensor check to the "close when leaving" automation as a safety gate</li>
+        </ul>
+
+        <h3>ESP32 Keeps Disconnecting</h3>
+
+        <ul>
+          <li>Move the ESP32 closer to your WiFi router — garages often have weak WiFi coverage</li>
+          <li>Consider adding an external antenna ESP32 module for better range</li>
+          <li>Alternatively, run an Ethernet cable to the garage and use a wired ESP32 setup</li>
+          <li>For better connectivity, consider using a Zigbee or Z-Wave door sensor instead — see our <a href="zigbee-smart-home-beginners.html">Zigbee Smart Home Guide</a></li>
+        </ul>
+
+        <h2>Advanced: Adding Security Features</h2>
+
+        <p>Once the basics are working, here are some upgrades worth considering:</p>
+
+        <ul>
+          <li><strong>Ultrasonic distance sensor</strong> — HC-SR04 ($3-5) to detect if a car is actually in the garage before closing</li>
+          <li><strong>Camera integration</strong> — See our <a href="diy-esp32-cam-security-camera.html">ESP32-CAM Security Camera</a> guide for how to add a camera feed to your garage</li>
+          <li><strong>Physical switch backup</strong> — Add a manual switch that only you can access to override the smart system</li>
+          <li><strong>Two-factor authentication</strong> — Require a PIN code in Home Assistant before allowing garage control from outside your local network</li>
+          <li><strong>Event logging</strong> — Use Home Assistant's history feature to track every open/close with timestamps</li>
+        </ul>
+
+        <h2>Alternative: Using Tasmota Firmware</h2>
+
+        <p>If you prefer Tasmota over ESPHome, the same hardware works great. See our <a href="tasmota-sonoff-flash-guide.html">Tasmota Firmware Flashing Guide</a> for how to install Tasmota on your ESP32. Once flashed, configure Tasmota with:</p>
+
+        <ul>
+          <li>Configure GPIO 26 as Relay1 (button trigger)</li>
+          <li>Configure GPIO 22 and GPIO 23 as Switch1 and Switch2 (door sensors)</li>
+          <li>Enable MQTT for Home Assistant integration</li>
+          <li>Set up <a href="tasmota-mqtt-home-assistant.html">Tasmota MQTT with Home Assistant</a> for seamless control</li>
+        </ul>
+
+        <p>Both ESPHome and Tasmota are excellent choices — ESPHome offers tighter Home Assistant integration, while Tasmota provides a web interface and can work independently of Home Assistant.</p>
+
+        <h2>Conclusion: Smarter Garage, Safer Home</h2>
+
+        <p>A smart garage door is one of those projects that delivers outsized value relative to the effort. For about $20 in hardware and an afternoon of wiring, you get remote control, status monitoring, voice integration, and automated safety alerts — all without subscription fees and with full local control.</p>
+
+        <p>The peace of mind alone is worth it. I've been using this setup for over a year, and the automatic "garage left open" notification has saved me twice. The kids leaving for school in the morning and forgetting to close it happens more often than you'd think.</p>
+
+        <p>Start with the basic version — just the relay and two reed switches — and add features as you need them. The beauty of DIY is that you can expand it to match exactly what your home requires.</p>
+
+        <p>For more smart home project ideas, explore our collection of <a href="diy-home-security-system.html">DIY Smart Home Projects</a> including <a href="diy-smart-door-lock.html">Smart Door Locks</a> and <a href="smart-light-switch-wiring-guide.html">Smart Light Switches</a> to round out your home automation system.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="diy-home-security-system.html">How to Build a DIY Home Security System with ESP32 and Home Assistant</a></li>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="diy-esp32-cam-security-camera.html">How to Build a Smart Security Camera with ESP32-CAM</a></li>
+          <li><a href="home-assistant-automations-beginners.html">Home Assistant Automations for Beginners: 10 Easy Ways to Automate Your Home</a></li>
+          <li><a href="smart-light-switch-wiring-guide.html">Smart Light Switch Wiring Guide: Replace a Wall Switch with Tuya or Sonoff</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
