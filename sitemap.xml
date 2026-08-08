@@ -1611,7 +1611,13 @@
     <ns0:loc>https://3dprintstarter.com/articles/best-heat-gun-electronics.html</ns0:loc>
     <ns0:lastmod>2026-08-05</ns0:lastmod>
     <ns0:changefreq>monthly</ns0:changefreq>
-    <ns0:priority>0.6</ns0:priority>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/best-hot-air-rework-station.html</ns0:loc>
+    <ns0:lastmod>2026-08-08</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
   </ns0:url>
   <ns0:url>
     <ns0:loc>https://3dprintstarter.com/articles/how-to-solder-circuit-boards-beginners.html</ns0:loc>

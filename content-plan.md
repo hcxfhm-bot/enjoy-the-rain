@@ -371,7 +371,7 @@
 - [x] best-heat-gun-electronics — Best Heat Gun for Electronics and 3D Printing in 2026 ✅ 2026-08-05
 - [x] how-to-solder-circuit-boards-beginners — How to Solder Circuit Boards: Complete Beginner's Guide ✅ 2026-08-06
 - [x] diy-smart-garage-door-opener — DIY Smart Garage Door Opener with ESP32 and Home Assistant ✅ 2026-08-07
-- [ ] best-hot-air-rework-station — Best Hot Air Rework Station for PCB Repair in 2026
+- [x] best-hot-air-rework-station — Best Hot Air Rework Station for PCB Repair in 2026 ✅ 2026-08-08
 
 ## 生成规则
 
