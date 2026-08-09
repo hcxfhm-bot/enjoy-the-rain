@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Drone with Raspberry Pi: Complete Beginner's Guide</title>
+  <meta name="description" content="Learn how to build a drone with Raspberry Pi from scratch. This complete guide covers hardware selection, flight controller setup, and your first flight. Perfect for makers and DIY enthusiasts.">
+  <meta name="keywords" content="raspberry pi drone, build a drone, drone building kit, quadcopter, flight controller, FPV drone, DIY drone, pi drone">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Projects</span>
+      </nav>
+
+      <h1>How to Build a Drone with Raspberry Pi: Complete Beginner's Guide</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 9, 2026</span>
+        <span>⏱️ 13 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🚁</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Building your own drone might sound like a project reserved for aerospace engineers, but the reality is far more accessible. With a <strong>Raspberry Pi</strong>, some basic components, and this guide, you can have a fully functional quadcopter in the air within a weekend. Whether you want to learn about flight dynamics, create a platform for aerial photography, or simply enjoy the satisfaction of flying something you built yourself, a Raspberry Pi drone is one of the most rewarding maker projects you can tackle.</p>
+
+        <p>In this complete guide, we'll walk through every step—from selecting the right components to configuring the flight controller and executing your first successful flight. You'll learn why the Raspberry Pi makes an excellent brain for your drone, what parts you actually need (and which ones you can skip), and how to tie everything together into a cohesive flying machine.</p>
+
+        <h2>Why Build a Drone with Raspberry Pi?</h2>
+
+        <p>Commercial drones are everywhere, so why bother building your own? The answer lies in <strong>customization, learning, and cost</strong>. A Raspberry Pi gives you complete control over every aspect of your drone's behavior. You can program custom flight modes, integrate sensors, add computer vision capabilities, or build a dedicated FPV system—all things that are either impossible or extremely limited on consumer drones.</p>
+
+        <p>From a learning perspective, building a drone covers an incredible range of skills: electronics (power distribution, motor control), physics (flight dynamics, aerodynamics), programming (Python, embedded systems), and mechanical design. If you're looking for a project that ties multiple disciplines together, this is it.</p>
+
+        <p>Cost-wise, a DIY Raspberry Pi drone typically runs between $150 and $300, depending on your specifications. That's comparable to entry-level commercial drones, but you get vastly more flexibility and a much deeper understanding of how everything works.</p>
+
+        <h2>Understanding Drone Basics: How Quadcopters Fly</h2>
+
+        <p>Before diving into components, let's cover the fundamentals. A quadcopter uses four motors arranged in a square pattern, each driving a propeller. By varying the speed of each motor, the flight controller can manipulate the drone in three axes:</p>
+
+        <ul>
+          <li><strong>Pitch</strong>: Tilting forward or backward by speeding up rear motors (or front motors) to move in that direction.</li>
+          <li><strong>Roll</strong>: Tilting left or right by speeding up motors on one side.</li>
+          <li><strong>Yaw</strong>: Rotating around the vertical axis by spinning diagonal motor pairs in opposite directions.</li>
+        </ul>
+
+        <p>The flight controller constantly monitors these three axes using an IMU (Inertial Measurement Unit) that combines accelerometers and gyroscopes. It makes thousands of adjustments per second to keep the drone stable. The Raspberry Pi running a flight controller stack like <strong>ArduPilot</strong> or <strong>Betaflight</strong> handles all of this math in real time.</p>
+
+        <h2>Essential Components for Your Raspberry Pi Drone</h2>
+
+        <p>Let's break down every component you need, organized by category. We'll go with a standard 5-inch FPV-style frame that's widely supported and easy to find parts for.</p>
+
+        <h3>The Frame</h3>
+
+        <p>The frame is your drone's skeleton. A 5-inch quadcopter frame (measured diagonally between motor mounts) offers the best balance of size, agility, and payload capacity for a Raspberry Pi build. Look for carbon fiber for durability and weight savings, though fiberglass or even 3D-printed frames work fine for learning builds.</p>
+
+        <p>Key specs to consider:</p>
+        <ul>
+          <li><strong>Wheelbase</strong>: 5 inches (≈220mm) is the sweet spot</li>
+          <li><strong>Material</strong>: Carbon fiber > Fiberglass > 3D Printed PLA/PETG</li>
+          <li><strong>Stack height</strong>: Ensure enough room between top and bottom plates for your Pi and electronics</li>
+        </ul>
+
+        <p>If you have access to a 3D printer, you can even <a href="../articles/3d-printed-esp32-case-design.html">design your own custom frame components</a> to house the Raspberry Pi and protect sensitive electronics.</p>
+
+        <h3>Flight Controller</h3>
+
+        <p>While the Raspberry Pi handles high-level logic, you need a dedicated flight controller running real-time calculations. Popular choices include:</p>
+        <ul>
+          <li><strong>STM32F4 based</strong>: Butterflight, Betaflight compatible</li>
+          <li><strong>STM32H7 based</strong>: More processing power for complex autonomous missions</li>
+          <li><strong>Navio2 HAT</strong>: Designed specifically for Raspberry Pi, runs ArduPilot natively</li>
+          <li><strong>CUAV Nora / Pixhawk</strong>: Higher-end options with more sensors</li>
+        </ul>
+
+        <p>The Navio2 is particularly elegant for Raspberry Pi builds because it stacks directly on the Pi's GPIO header and runs ArduPilot, a powerful open-source autopilot stack that supports autonomous waypoint navigation, mission planning, and more.</p>
+
+        <h3>Motors and ESCs</h3>
+
+        <p>For a 5-inch frame, you'll need four <strong>2306 or 2207 brushless motors</strong> in the KV800-1800 range (higher KV = faster spin, lower KV = more torque). Pair these with <strong>20A-30A electronic speed controllers (ESCs)</strong> that support DShot600 or BLHeli_32 protocol for responsive motor control.</p>
+
+        <p>ESC protocol matters: DShot is digital and far more reliable than traditional PWM signaling because it's noise-resistant and doesn't require calibration. Most modern ESCs support DShot out of the box.</p>
+
+        <h3>Propellers</h3>
+
+        <p>5-inch propellers in the 51466 or 5152 geometry (5.1" diameter, 4.6/5.2" pitch) are standard. Prop choice affects both thrust and efficiency—higher pitch props move more air per rotation (more speed) but require more power. Gemfan and DALPROP are reliable budget brands.</p>
+
+        <p>Always use balanced props. Imbalanced propellers cause vibration that throws off your IMU readings and leads to unstable flight.</p>
+
+        <h3>Battery</h3>
+
+        <p>A 4S LiPo battery (14.8V nominal) in the 1300-2200mAh range provides the best power-to-weight ratio for this class of drone. A 4S 1500mAh battery gives you roughly 10-15 minutes of flight time depending on your flying style.</p>
+
+        <p>Never discharge a LiPo below 3.3V per cell (13.2V for a 4S pack). Invest in a <a href="../articles/how-to-use-multimeter-electronics.html">good battery checker and low-voltage alarm</a> to avoid damaging your battery mid-flight.</p>
+
+        <h3>Raspberry Pi Models: Which to Choose?</h3>
+
+        <p>Not every Raspberry Pi is suited for drone duty. Here's the breakdown:</p>
+
+        <ul>
+          <li><strong>Raspberry Pi Zero 2 W</strong>: Light and compact, but limited CPU means no computer vision. Good for basic telemetry and mission control.</li>
+          <li><strong>Raspberry Pi 3 B+</strong>: Decent processing power, widely available, acceptable power consumption. A practical choice for most builds.</li>
+          <li><strong>Raspberry Pi 4 B</strong>: Best performance, especially for computer vision (OpenCV, TensorFlow Lite), but higher power draw and heat output. Requires active cooling.</li>
+          <li><strong>Raspberry Pi 5</strong>: Latest and most powerful, but check compatibility with your flight controller HAT before committing.</li>
+        </ul>
+
+        <p>For this guide, we'll assume a <strong>Raspberry Pi 3 B+ or 4</strong> as the sweet spot between capability and practicality.</p>
+
+        <h2>Power Distribution and Wiring</h2>
+
+        <p>This is where many beginners get overwhelmed, but it's simpler than it looks. A typical power distribution setup:</p>
+
+        <ol>
+          <li><strong>Battery → ESCs</strong>: The battery's XT60 connector plugs into a power distribution board (PDB) that splits power to all four ESCs.</li>
+          <li><strong>Battery → Flight Controller</strong>: Most modern PDBs include a 5V BEC (Battery Eliminator Circuit) to power the flight controller and Raspberry Pi. Alternatively, use a separate 5V BEC or UBEC.</li>
+          <li><strong>ESC → Motors</strong>: Each ESC's three motor wires connect to the corresponding motor's three terminals. The order matters—swap any two wires to reverse motor direction.</li>
+          <li><strong>Flight Controller → Raspberry Pi</strong>: Connect via USB or directly to the Pi's GPIO pins (5V, GND, TX, RX) if using a HAT like Navio2.</li>
+        </ol>
+
+        <p>Use 14 AWG wire for main power connections and 22-24 AWG for signal connections. Invest in quality connectors—loose connections are the number one cause of in-flight failures.</p>
+
+        <h2>Installing and Configuring ArduPilot on Raspberry Pi</h2>
+
+        <p>ArduPilot is the gold standard for open-source drone autopilot software. It runs on the Raspberry Pi and communicates with your flight controller over MAVLink, a lightweight messaging protocol for drone communication.</p>
+
+        <h3>Step 1: Flash the Flight Controller Firmware</h3>
+
+        <p>Using QGroundControl (available for Windows, macOS, and Linux):</p>
+        <ol>
+          <li>Connect your flight controller via USB</li>
+          <li>Open QGroundControl → Firmware tab</li>
+          <li>Select "ArduCopter" (for copter/drone) → click OK</li>
+          <li>Wait for upload to complete</li>
+        </ol>
+
+        <h3>Step 2: Install ArduPilot on Raspberry Pi</h3>
+
+        <p>SSH into your Pi and run:</p>
+
+        <pre><code>sudo apt update
+sudo apt install python3-pip
+sudo pip3 install dronekit pymavlink
+git clone https://github.com/ArduPilot/ardupilot.git
+cd ardupilot
+git submodule update --init --recursive</code></pre>
+
+        <p>For the Navio2, there's a pre-built image that includes everything you need. For other setups, compile ArduPilot for your board:</p>
+
+        <pre><code>./waf configure --board=linux
+./waf build --board=linux</code></pre>
+
+        <h3>Step 3: Configure Parameters</h3>
+
+        <p>Connect to QGroundControl via UDP (the Pi and your ground station computer must be on the same network). Navigate to the Parameters tab and configure:</p>
+
+        <ul>
+          <li><strong>FRAME_CLASS</strong>: 1 (Quad) for a standard X-frame</li>
+          <li><strong>FRAME_TYPE</strong>: 0 (X) or 1 (+ configuration)</li>
+          <li><strong>Motor mapping</strong>: Match your ESC wiring to the correct motor outputs in the parameters</li>
+          <li><strong>Arming settings</strong>: Configure switch-based arming for safety</li>
+        </ul>
+
+        <h2>Adding a Camera and FPV System</h2>
+
+        <p>No drone build is complete without eyes in the sky. An FPV (First Person View) system consists of a camera, video transmitter (VTX), and goggles or a monitor on the ground.</p>
+
+        <p>For the camera, a <strong>Raspberry Pi Camera Module v2</strong> or HQ camera works great if you want to do computer vision tasks on the Pi itself. For pure FPV flying, a dedicated action camera like a GoPro or RunCam is lighter and offers lower latency video.</p>
+
+        <p>Pair your camera with a <strong>5.8GHz VTX</strong> that transmits video to FPV goggles. Popular choices include the Eachine TX805S or Rush Cherry. Keep your VTX power output within legal limits (25mW-800mW depending on your region).</p>
+
+        <h2>Pre-Flight Checks: Don't Skip These</h2>
+
+        <p>Before every flight, run through this checklist:</p>
+
+        <ul>
+          <li><strong>Battery voltage</strong>: Must be above 14.8V for a 4S pack</li>
+          <li><strong>Propeller security</strong>: Tighten until snug, check for cracks</li>
+          <li><strong>Motor spin test</strong>: Arm in QGroundControl and verify each motor spins the correct direction</li>
+          <li><strong>IMU calibration</strong>: Level the drone and run the accelerometer calibration</li>
+          <li><strong>Compass calibration</strong>: Wave the drone in a figure-8 pattern outdoors</li>
+          <li><strong>Control range test</strong>: Walk away and verify you maintain full control</li>
+          <li><strong>Return-to-home verification</strong>: Set a home point and test that RTH triggers correctly</li>
+        </ul>
+
+        <h2>Troubleshooting Common Raspberry Pi Drone Issues</h2>
+
+        <p>Even well-built drones can have problems. Here are the most common issues and fixes:</p>
+
+        <h3>Motors spin but drone won't arm</h3>
+
+        <p>Check the pre-arm safety checks in QGroundControl. Common reasons include: compass interference (move away from metal), GPS not locked, battery voltage too low, or throttle below minimum. Review the HUD in QGroundControl for specific error messages.</p>
+
+        <h3>Drone flies erratically or shakes</h3>
+
+        <p>Vibration from unbalanced props is the most likely culprit. Swap to balanced props and check that your motor mounts aren't loose. Also verify that your PID (Proportional-Integral-Derivative) tuning isn't too aggressive—start with default values and tune gradually.</p>
+
+        <h3>Raspberry Pi shuts down mid-flight</h3>
+
+        <p>This is a power delivery issue. Your 5V supply can't handle the current surge during motor acceleration. Solutions: use a separate BEC for the Pi, add a capacitor across the power rails, or ensure your UBEC can deliver at least 3A continuously.</p>
+
+        <h3>MAVLink connection drops</h3>
+
+        <p>If you lose telemetry link, check your Wi-Fi signal strength and latency. For more reliable connections, consider using a dedicated radio transceiver like the Holybro SiK Telemetry Radio instead of Wi-Fi.</p>
+
+        <h2>Next Steps: Autonomous Flight and Beyond</h2>
+
+        <p>Once you've mastered manual flight, ArduPilot opens up a world of autonomous capabilities:</p>
+
+        <ul>
+          <li><strong>Waypoint navigation</strong>: Program a flight path and let the drone fly it automatically.</li>
+          <li><strong>Follow-me mode</strong>: The drone tracks your GPS position—perfect for hiking or cycling shots.</li>
+          <li><strong>Mission planning</strong>: Design complex multi-waypoint missions in QGroundControl.</li>
+          <li><strong>Computer vision</strong>: With a Raspberry Pi, you can add obstacle avoidance using OpenCV and depth cameras.</li>
+        </ul>
+
+        <p>For inspiration on sensor integrations, check out our guides on <a href="../articles/diy-air-quality-monitor-esp32.html">DIY environmental monitoring</a> and <a href="../articles/diy-weather-station-raspberry-pi.html">weather station projects</a>—many of the same sensor principles apply to drone applications.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Building a drone with Raspberry Pi is one of the most educational and satisfying maker projects you can undertake. You don't just end up with a flying robot—you gain skills in electronics, embedded programming, aerodynamics, and systems integration that transfer to countless other projects.</p>
+
+        <p>The key is to start simple: get airborne first, then iterate. Don't try to add autonomous navigation, computer vision, and payload delivery all at once. Master basic flight, understand how your drone responds to control inputs, and build up complexity from there.</p>
+
+        <p>Whether you end up using your drone for aerial photography, environmental sensing, or just backyard flying, you've built something incredible from scratch. And when you see your Raspberry Pi drone hovering steadily in the air—stabilized by thousands of calculations per second that you configured—you'll understand exactly why this project is worth the effort.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror</a></li>
+          <li><a href="../articles/diy-air-quality-monitor-esp32.html">DIY Air Quality Monitor with ESP32 and Home Assistant</a></li>
+          <li><a href="../articles/diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+          <li><a href="../articles/best-raspberry-pi-alternatives-2026.html">Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi & More Compared</a></li>
+          <li><a href="../articles/3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 and Sensor Cases</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

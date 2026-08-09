@@ -361,17 +361,25 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 246 篇 ✅ (批次47进行中)
-- **当前批次**: 批次47进行中
+- **已完成**: 246 篇 ✅ (批次48进行中)
+- **当前批次**: 批次48进行中
 - **剩余**: 54 篇
 
-### 批次 47：MAKER TOOLS & PROJECTS CONTINUED (6篇) 🆕
+### 批次 47：MAKER TOOLS & PROJECTS CONTINUED (6篇) 🆕 ✅
 - [x] best-raspberry-pi-alternatives-2026 — Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi & More Compared ✅ 2026-08-03
 - [x] diy-air-quality-monitor-esp32 — DIY Air Quality Monitor with ESP32 and Home Assistant ✅ 2026-08-04
 - [x] best-heat-gun-electronics — Best Heat Gun for Electronics and 3D Printing in 2026 ✅ 2026-08-05
 - [x] how-to-solder-circuit-boards-beginners — How to Solder Circuit Boards: Complete Beginner's Guide ✅ 2026-08-06
 - [x] diy-smart-garage-door-opener — DIY Smart Garage Door Opener with ESP32 and Home Assistant ✅ 2026-08-07
 - [x] best-hot-air-rework-station — Best Hot Air Rework Station for PCB Repair in 2026 ✅ 2026-08-08
+
+### 批次 48：MAKER PROJECT DEEP-DIVE (6篇) 🆕
+- [x] drone-building-raspberry-pi — How to Build a Drone with Raspberry Pi: Complete Beginner's Guide ✅ 2026-08-09
+- [ ] best-retropie-diy-console — How to Build a DIY Retro Gaming Console with RetroPie and Raspberry Pi
+- [ ] diy-tablet-raspberry-pi — How to Build a DIY Tablet with Raspberry Pi: Touchscreen Project Guide
+- [ ] best-logic-analyzer-beginners — Best Logic Analyzer for Electronics & DIY Makers in 2026
+- [ ] smart-home-energy-monitoring — DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker
+- [ ] best-3d-printer-for-makers — Best 3D Printers for Makers & DIY Enthusiasts in 2026
 
 ## 生成规则
 
