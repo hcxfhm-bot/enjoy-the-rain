@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a DIY Retro Gaming Console with RetroPie and Raspberry Pi</title>
+  <meta name="description" content="Build a DIY retro gaming console with RetroPie and Raspberry Pi. Complete guide to hardware, SD card setup, controller config, 3D printed cases, and ROM legality.">
+  <meta name="keywords" content="retropie, diy retro gaming console, raspberry pi retro console, retropie setup, raspberry pi emulation, retro gaming build, 3d printed retropie case, emulationstation">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Projects</span>
+      </nav>
+
+      <h1>How to Build a DIY Retro Gaming Console with RetroPie and Raspberry Pi</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 10, 2026</span>
+        <span>⏱️ 11 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🕹️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>There's something deeply satisfying about a <strong>DIY retro gaming console</strong> that you assembled yourself, flashed yourself, and housed in a case you printed yourself. <strong>RetroPie</strong> turns a $50 Raspberry Pi into a machine that plays four decades of gaming history — NES, SNES, Genesis, PlayStation, arcade cabinets, and more — all behind one clean, controller-driven interface.</p>
+
+        <p>This guide walks you through the entire build: choosing the right Pi, picking a power supply that won't cause mysterious crashes, flashing RetroPie, configuring controllers, transferring games, and finishing it off with a 3D printed enclosure. Expect to spend an afternoon on the software and a weekend on the case if you want it to look properly good.</p>
+
+        <h2>What Is RetroPie, Exactly?</h2>
+
+        <p>RetroPie isn't a single emulator — it's a curated software stack. Underneath, it's Raspberry Pi OS (Debian). On top of that sits <strong>RetroArch</strong>, a front-end that runs dozens of emulator "cores" through one unified API. Wrapping all of it is <strong>EmulationStation</strong>, the big-tile, scrollable interface you actually see on your TV.</p>
+
+        <p>The practical benefit of that layering: you configure your controller once in RetroArch, and it works across every system. You don't map buttons separately for SNES, Genesis, and PlayStation. That single design decision is why RetroPie beat out most of its competition.</p>
+
+        <p>Worth knowing about the alternatives before you commit:</p>
+
+        <ul>
+          <li><strong>RetroPie</strong> — Most mature, biggest community, best documentation. Best default choice.</li>
+          <li><strong>Batocera</strong> — Runs entirely from the SD card as a read-only image. Harder to break, harder to customize.</li>
+          <li><strong>Lakka</strong> — Minimal, pure RetroArch. Boots fast, does less.</li>
+          <li><strong>RecalBox</strong> — Friendliest for absolute beginners, but fewer advanced options.</li>
+        </ul>
+
+        <p>If this is your first build, use RetroPie. When something goes wrong at 11pm, the answer is already on a forum somewhere.</p>
+
+        <h2>Choosing the Right Raspberry Pi for Your Retro Console</h2>
+
+        <p>This is the decision that determines what you can actually play, so don't skimp based on price alone.</p>
+
+        <h3>Raspberry Pi 5 (8GB)</h3>
+
+        <p>The current flagship. It handles Dreamcast, Saturn, and most PSP titles that older boards choke on. The catch: RetroPie's Pi 5 support arrived later than Batocera's, and a few older cores still need manual tweaking. It also runs hot enough that <strong>active cooling is mandatory</strong>, not optional — plan for a fan in your enclosure design.</p>
+
+        <h3>Raspberry Pi 4 (4GB) — The Sweet Spot</h3>
+
+        <p>For most people building a retro console, the Pi 4 is the right call. It comfortably runs everything through PlayStation 1, Nintendo 64, and Dreamcast, plus the vast majority of arcade ROM sets. RetroPie support is rock solid, thousands of guides target it specifically, and prices have softened now that the Pi 5 exists. 4GB is plenty — 8GB buys you nothing for emulation.</p>
+
+        <h3>Raspberry Pi Zero 2 W</h3>
+
+        <p>Tiny, cheap, and surprisingly capable up to the 16-bit era. Perfect for a handheld build or a console that lives inside a controller shell. Don't expect PS1 or N64 performance. Its real advantage is physical: it fits in enclosures nothing else will.</p>
+
+        <p>If Pi availability or pricing in your region is a problem, several single-board alternatives run comparable software stacks — we broke those down in our guide to the <a href="../articles/best-raspberry-pi-alternatives-2026.html">best Raspberry Pi alternatives in 2026</a>. Just be aware that emulation support outside the Pi ecosystem is noticeably patchier.</p>
+
+        <h2>The Complete Parts List</h2>
+
+        <p>Here's everything you actually need, plus honest notes on where cheaping out will bite you.</p>
+
+        <table>
+          <thead>
+            <tr><th>Component</th><th>Recommendation</th><th>Approx. Cost</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Raspberry Pi 4 (4GB)</td><td>Official board only</td><td>$55–70</td></tr>
+            <tr><td>Power supply</td><td>Official 5V/3A USB-C</td><td>$8–12</td></tr>
+            <tr><td>microSD card</td><td>SanDisk Extreme A2, 64GB</td><td>$12–18</td></tr>
+            <tr><td>Cooling</td><td>Heatsinks + 30mm fan</td><td>$6–10</td></tr>
+            <tr><td>Controllers</td><td>8BitDo SN30 Pro (x2)</td><td>$45–90</td></tr>
+            <tr><td>Micro-HDMI cable</td><td>Any 4K-rated cable</td><td>$8</td></tr>
+            <tr><td>Case</td><td>3D printed (filament only)</td><td>$2–4</td></tr>
+          </tbody>
+        </table>
+
+        <p>Realistic total: <strong>$140–210</strong> depending on how many controllers you buy.</p>
+
+        <p>Two parts deserve special attention, because they cause the majority of "my RetroPie is broken" posts:</p>
+
+        <p><strong>The power supply.</strong> Undervoltage is the single most common cause of random freezes, controller dropouts, and SD card corruption. A phone charger rated "5V 2.4A" will boot the Pi and then fail you intermittently for weeks. Use the official adapter or an equivalent 5V/3A supply. If you ever see the lightning-bolt icon on screen, that's your Pi telling you the power is inadequate. Our <a href="../articles/power-supply-guide-beginners.html">power supply guide for beginners</a> covers how to read those specs properly.</p>
+
+        <p><strong>The SD card.</strong> Emulation is read-heavy, and cheap cards die fast. Look for the <strong>A1 or A2 application-performance rating</strong> — it measures random IOPS, which matters far more here than the sequential speeds printed on the packaging. A 64GB A2 card runs about $15 and will outlive three no-name 128GB cards.</p>
+
+        <h2>Flashing RetroPie: Step by Step</h2>
+
+        <h3>Step 1 — Write the Image</h3>
+
+        <p>Download <strong>Raspberry Pi Imager</strong> from the official site. Under "Choose OS," navigate to <em>Emulation and game OS → RetroPie</em>, then select the image matching your board (Pi 4/400 or Pi 5). Select your SD card and write.</p>
+
+        <p>Before clicking write, open the gear icon and set the hostname, enable SSH, and enter your Wi-Fi credentials. Doing this now saves you plugging in a keyboard later — you'll be able to reach the Pi over the network from the first boot.</p>
+
+        <h3>Step 2 — First Boot</h3>
+
+        <p>Insert the card, connect HDMI to <strong>port HDMI0</strong> (the one nearest the USB-C jack — using the wrong port gives you a blank screen and a lot of confusion), plug in a controller, and power on. RetroPie expands the filesystem automatically and reboots once.</p>
+
+        <h3>Step 3 — Configure Your Controller</h3>
+
+        <p>EmulationStation detects your gamepad and walks you through button mapping. Two things to know:</p>
+
+        <ul>
+          <li>You can <strong>skip any button</strong> by holding a face button for a few seconds — useful for controllers that lack certain inputs.</li>
+          <li>Set a <strong>hotkey button</strong> when prompted (Select is the convention). Hotkey + Start exits a game, hotkey + R1 saves state, hotkey + L1 loads. Without this you'll be unplugging the Pi to quit games.</li>
+        </ul>
+
+        <h3>Step 4 — Update Everything</h3>
+
+        <p>From the RetroPie menu, run <em>RetroPie Setup → Update all installed packages</em>. Released images are usually months behind current cores, and updated cores fix a lot of performance issues you'd otherwise spend the evening debugging. This takes 20–40 minutes. Let it finish.</p>
+
+        <h2>Getting Games Onto Your Console — Legally</h2>
+
+        <p>Let's be direct about this, because it matters. <strong>RetroPie ships with zero games.</strong> Downloading ROMs for games you don't own is copyright infringement in most jurisdictions, regardless of how old the game is or whether it's commercially available. Emulators themselves are entirely legal; the ROMs are the issue.</p>
+
+        <p>Legitimate ways to fill your library:</p>
+
+        <ul>
+          <li><strong>Dump your own cartridges.</strong> Devices like the Retrode or an Open Source Cartridge Reader let you extract data from carts you physically own.</li>
+          <li><strong>Rip your own discs.</strong> PS1 and Dreamcast games you own can be imaged to disc formats RetroPie reads.</li>
+          <li><strong>Homebrew.</strong> There's a huge scene of freely distributed modern games written for retro hardware. Some of it is genuinely excellent.</li>
+          <li><strong>Officially free releases.</strong> Several publishers have released classic titles into the public domain or as free downloads.</li>
+        </ul>
+
+        <p>Transferring files is easy once you're on the network. With Samba enabled (it is by default), open <code>\\retropie\roms</code> from Windows or <code>smb://retropie/roms</code> from macOS, then drop files into the matching system folder — <code>snes</code>, <code>megadrive</code>, <code>psx</code>, and so on. Restart EmulationStation and the new systems appear on the carousel.</p>
+
+        <h2>Designing and Printing the Enclosure</h2>
+
+        <p>This is where a Raspberry Pi in a naked plastic box becomes an actual console — and where a 3D printer stops being a toy and starts being useful.</p>
+
+        <h3>What Your Case Design Must Get Right</h3>
+
+        <ul>
+          <li><strong>Airflow.</strong> A Pi 4 running PS1 emulation sits around 60–70°C. Sealed cases push it into thermal throttling. Design an intake near the SD slot and an exhaust above the SoC.</li>
+          <li><strong>Port alignment.</strong> Micro-HDMI, USB-C, and Ethernet cutouts need roughly 0.4mm of clearance on each side. Print a small test coupon of just the port face before committing to a six-hour full print.</li>
+          <li><strong>Fan mounting.</strong> A 30mm or 40mm fan needs a proper shroud. Screw it into hexagonal recesses sized for M3 heat-set inserts rather than printed threads — see our guide on <a href="../articles/3d-printing-threaded-inserts.html">using threaded inserts in 3D prints</a> for the technique.</li>
+          <li><strong>Cable strain relief.</strong> The USB-C port on a Pi is soldered to the board and does not appreciate being yanked. Build in a channel that grips the cable.</li>
+        </ul>
+
+        <h3>Material and Print Settings</h3>
+
+        <p>Use <strong>PETG, not PLA</strong>. A console sitting in a warm entertainment centre with a fan-cooled Pi inside can reach temperatures where PLA begins to soften and warp — PETG's higher glass transition temperature handles it comfortably. ABS or ASA work too if you have an enclosure, but PETG is the practical middle ground.</p>
+
+        <p>Suggested settings: 0.2mm layer height, 4 perimeters, 25% gyroid infill, and supports only where port cutouts overhang. Print the main shell face-down so the visible top surface comes off the plate smooth.</p>
+
+        <p>If you want a genuinely premium finish, the surface treatment matters more than the print settings. Light sanding followed by a filler primer hides layer lines almost completely — our walkthrough on <a href="../articles/how-to-paint-3d-prints.html">painting and finishing 3D prints</a> covers the full process. And if you're designing the enclosure from scratch rather than downloading one, <a href="../articles/how-to-design-3d-print-models.html">our guide to designing your own models</a> is a reasonable starting point.</p>
+
+        <h2>Performance Tuning and Common Problems</h2>
+
+        <h3>Games Run Slowly</h3>
+
+        <p>First, check for the undervoltage icon — it's the cause more often than people expect. Then confirm your cooling actually works by running <code>vcgencmd measure_temp</code> over SSH while a game is running. Above 80°C, the Pi throttles hard. If temperatures are fine, try switching emulator cores: press A on a game in the list to bring up the runcommand menu and select a different core. For SNES, <em>snes9x2010</em> is dramatically lighter than <em>bsnes</em>.</p>
+
+        <h3>Audio Crackling</h3>
+
+        <p>Almost always an HDMI audio buffer issue. In <em>RetroArch → Settings → Audio</em>, raise the audio latency from 64ms to 96ms. It's imperceptible in play and fixes the crackle in most cases.</p>
+
+        <h3>Controller Disconnects</h3>
+
+        <p>Bluetooth controllers dropping out mid-game usually points back to power delivery or 2.4GHz interference from Wi-Fi. If your console is wired to Ethernet anyway, disabling onboard Wi-Fi frees up the band and stabilizes things noticeably.</p>
+
+        <h3>Corrupted SD Card After Power Loss</h3>
+
+        <p>Pulling the plug on a running Pi is how SD cards die. Always exit through <em>Start → Quit → Shutdown System</em>. If you want proper console behaviour, add a safe-shutdown circuit — a physical power button wired to a GPIO pin that triggers a clean shutdown script. It's about $5 in parts and eliminates the problem permanently.</p>
+
+        <h2>Where to Take It Next</h2>
+
+        <p>Once the basic console works, the upgrade path is genuinely fun:</p>
+
+        <ul>
+          <li><strong>Scraping artwork.</strong> Run the built-in scraper to pull box art, descriptions, and metadata. It transforms the interface from a file list into something that looks retail.</li>
+          <li><strong>Custom themes.</strong> EmulationStation themes are just XML and images. Swapping one in takes five minutes.</li>
+          <li><strong>Arcade cabinet conversion.</strong> Add a real joystick and buttons via a USB encoder board, then build a bartop cabinet around it.</li>
+          <li><strong>Handheld conversion.</strong> Swap in a Pi Zero 2 W, a small LCD, and a LiPo charging board for a portable build.</li>
+        </ul>
+
+        <p>If this project gives you the single-board-computer bug, there's plenty more to build with the same hardware — our roundup of <a href="../articles/raspberry-pi-diy-projects-beginners.html">Raspberry Pi DIY projects for beginners</a> covers NAS builds, smart mirrors, and more. And if you're still deciding which platform suits your next project, <a href="../articles/arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi</a> lays out where each one actually makes sense.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>A DIY retro gaming console is close to the perfect maker project. The software side is forgiving — worst case you reflash the SD card and lose an hour. The hardware side is simple enough for a first build but has real depth if you want to push it. And the finished object is something you'll actually use, sitting under your TV, rather than a demo that ends up in a drawer.</p>
+
+        <p>Start with the Pi 4, a proper power supply, and a quality A2 SD card. Get it booting and playing before you worry about the enclosure. Then take your time with the case design — that's the part that separates a Raspberry Pi with games on it from something that feels like a real console you built.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror</a></li>
+          <li><a href="../articles/best-raspberry-pi-alternatives-2026.html">Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi &amp; More Compared</a></li>
+          <li><a href="../articles/arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi: Which Should Beginners Choose?</a></li>
+          <li><a href="../articles/raspberry-pi-nas-build.html">How to Build a Raspberry Pi NAS for Home Storage</a></li>
+          <li><a href="../articles/3d-printing-threaded-inserts.html">How to Use Threaded Inserts in 3D Prints</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
