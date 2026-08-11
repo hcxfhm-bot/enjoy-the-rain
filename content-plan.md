@@ -376,7 +376,7 @@
 ### 批次 48：MAKER PROJECT DEEP-DIVE (6篇) 🆕
 - [x] drone-building-raspberry-pi — How to Build a Drone with Raspberry Pi: Complete Beginner's Guide ✅ 2026-08-09
 - [x] best-retropie-diy-console — How to Build a DIY Retro Gaming Console with RetroPie and Raspberry Pi ✅ 2026-08-10
-- [ ] diy-tablet-raspberry-pi — How to Build a DIY Tablet with Raspberry Pi: Touchscreen Project Guide
+- [x] diy-tablet-raspberry-pi — How to Build a DIY Tablet with Raspberry Pi: Touchscreen Project Guide ✅ 2026-08-11
 - [ ] best-logic-analyzer-beginners — Best Logic Analyzer for Electronics & DIY Makers in 2026
 - [ ] smart-home-energy-monitoring — DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker
 - [ ] best-3d-printer-for-makers — Best 3D Printers for Makers & DIY Enthusiasts in 2026
