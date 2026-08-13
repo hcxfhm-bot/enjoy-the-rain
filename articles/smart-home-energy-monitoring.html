@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker (2026 Guide)</title>
+  <meta name="description" content="Build your own DIY energy monitoring system with ESP32 and Home Assistant. Track real-time power usage, individual device consumption, and electricity costs. Complete wiring guide, ESPHome config, and 3D printed enclosure design.">
+  <meta name="keywords" content="DIY energy monitoring, ESP32 power meter, Home Assistant energy dashboard, smart energy monitor, PZEM-004T, SCT-013 current transformer, energy tracking smart home, electricity monitor DIY, power consumption tracker, Home Assistant utility meter">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home</span> &raquo; <span>DIY Projects</span>
+      </nav>
+
+      <h1>DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker (2026 Guide)</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 13, 2026</span>
+        <span>⏱️ 15 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Your electricity bill keeps climbing, but you have no idea what's actually consuming all that power. A gaming PC running 24/7? The always-on server in the garage? The second refrigerator you forgot to clean out? A DIY energy monitoring system with ESP32 and Home Assistant answers all those questions — and it's surprisingly affordable to build.</p>
+
+        <p>In this guide, you'll learn how to assemble a complete energy monitoring setup for under $50, wire it safely to your main circuit panel, configure ESPHome firmware, and create a beautiful real-time dashboard in Home Assistant. You'll also see how to 3D print a clean enclosure to house everything on your workshop wall.</p>
+
+        <h2>Why Build Your Own Energy Monitor?</h2>
+
+        <p>Commercial energy monitors like the Sense or Curb cost $300-$500. You can build a DIY system that monitors your entire home's consumption, individual circuits, and even tracks costs per kilowatt-hour — for a fraction of that price. Beyond saving money, you get:</p>
+
+        <ul>
+          <li><strong>Real-time visibility</strong> into what's running and when</li>
+          <li><strong>Anomaly detection</strong> — spot devices that start drawing unexpectedly high power</li>
+          <li><strong>Cost tracking</strong> — see exactly how much each appliance costs per day, week, or month</li>
+          <li><strong>Integration with Home Assistant</strong> — combine energy data with your existing smart home automations</li>
+          <li><strong>Historical data</strong> — track consumption patterns over months and years</li>
+        </ul>
+
+        <p>If you're already running Home Assistant (as covered in our <a href="../articles/home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi guide</a>), adding energy monitoring is the next logical step to make your smart home truly intelligent.</p>
+
+        <h2>What You Need: Hardware Components</h2>
+
+        <p>The beauty of this project is that you only need a handful of components. Here's the complete shopping list:</p>
+
+        <h3>Core Components</h3>
+
+        <ul>
+          <li><strong>ESP32 Development Board</strong> — The brain of your energy monitor. Any ESP32 DevKit board works. We covered the <a href="../articles/best-esp32-development-board.html">Best ESP32 Development Boards in 2026</a> if you need recommendations.</li>
+          <li><strong>PZEM-004T v3.0 Power Module</strong> — Measures voltage, current, power, and energy. Communicates via TTL serial. One unit handles up to 80A at 220V (or 100A at 110V).</li>
+          <li><strong>SCT-013 Current Transformers (CT Clamps)</strong> — Non-invasive current sensors that clip around wires. Get 100A/50mA rated clamps for whole-house monitoring.</li>
+          <li><strong>3.5" TFT Display (optional)</strong> — For local readout without opening your phone. ILI9488 SPI displays work well with ESP32.</li>
+          <li><strong>5V Power Supply</strong> — A standard USB phone charger or a small AC-DC converter module.</li>
+          <li><strong>Enclosure</strong> — You can 3D print one yourself. We have a guide on <a href="../articles/3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 Cases</a> for this exact project.</li>
+        </ul>
+
+        <h3>For Whole-House Monitoring</h3>
+
+        <p>If you want to monitor your entire home's consumption (not just individual circuits), you'll also need a <strong>Split-Core Current Transformer (CT)</strong> that can clamp around the main service wires entering your breaker panel. These are rated for 100A or 200A depending on your panel's capacity.</p>
+
+        <h2>Safety Warning: Working with Mains Voltage</h2>
+
+        <p><strong>This project involves working with 110V/220V mains electricity.</strong> Unless you are confident in your electrical skills, hire a licensed electrician to install the CT clamps on your main breaker panel. The CT clamps are non-invasive (they just clip around wires, no direct electrical connection), but you still need to be careful around the main panel.</p>
+
+        <p>For beginners, we recommend starting with <strong>individual circuit monitoring</strong> instead — plug a Kill A Watt meter into a specific appliance, or wire a PZEM module to a single outlet circuit you're comfortable working with. You can always expand to whole-house monitoring later.</p>
+
+        <h2>Wiring the PZEM-004T Module</h2>
+
+        <p>The PZEM-004T communicates with your ESP32 via a serial connection. Here's the standard wiring diagram:</p>
+
+        <ul>
+          <li><strong>PZEM TX → ESP32 GPIO 16 (RX2)</strong></li>
+          <li><strong>PZEM RX → ESP32 GPIO 17 (TX2)</strong></li>
+          <li><strong>PZEM VCC → ESP32 5V</strong></li>
+          <li><strong>PZEM GND → ESP32 GND</strong></li>
+          <li><strong>Current Transformer → PZEM Input</strong> (specific port varies by board version)</li>
+        </ul>
+
+        <p>For the AC side, connect the live and neutral wires through the PZEM's power input terminals. The module has built-in voltage measurement, so you don't need a separate voltage sensor. Just wire it inline with the circuit you're monitoring.</p>
+
+        <h2>ESPHome Configuration for Energy Monitoring</h2>
+
+        <p>ESPHome is the easiest way to flash custom firmware onto your ESP32 for this project. We covered the <a href="../articles/esphome-getting-started-guide.html">ESPHome Getting Started guide</a> in detail, but here's the key configuration for energy monitoring:</p>
+
+        <pre style="background: #1a1b2e; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; color: #a8d8a8;"><code>esphome:
+  name: energy-monitor
+  friendly_name: Home Energy Monitor
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "your-encryption-key-here"
+
+ota:
+  password: "your-ota-password"
+
+wifi:
+  ssid: "YourWiFiSSID"
+  password: "YourWiFiPassword"
+
+# UART connection to PZEM-004T v3
+uart:
+  id: uart_bus
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 9600
+
+sensor:
+  - platform: pzemac
+    voltage:
+      name: "PZEM Voltage"
+      accuracy_decimals: 1
+    current:
+      name: "PZEM Current"
+      accuracy_decimals: 2
+    power:
+      name: "PZEM Power"
+      id: measured_power
+      accuracy_decimals: 0
+    frequency:
+      name: "PZEM Frequency"
+    apparent_power:
+      name: "PZEM Apparent Power"
+    reactive_power:
+      name: "PZEM Reactive Power"
+    power_factor:
+      name: "PZEM Power Factor"
+    energy:
+      name: "PZEM Energy"
+      id: total_energy
+      unit_of_measurement: kWh
+      accuracy_decimals: 3
+      filters:
+        - multiply: 0.001
+    update_interval: 10s
+
+# Utility sensor for daily/monthly energy tracking
+utility_meter:
+  energy_daily:
+    source: total_energy
+    name: "Daily Energy Consumption"
+    cycle: daily
+  energy_monthly:
+    source: total_energy
+    name: "Monthly Energy Consumption"
+    cycle: monthly</code></pre>
+
+        <p>This configuration reads voltage, current, real power, and cumulative energy from the PZEM module. The <code>utility_meter</code> sensors automatically reset on daily and monthly cycles — perfect for utility bill tracking.</p>
+
+        <h2>Adding Multiple Circuit Monitors</h2>
+
+        <p>One PZEM module monitors one circuit. For a comprehensive home energy setup, you can add multiple PZEM modules on the same ESP32 using a software serial approach, or use an ESP32 per major circuit group. Common monitored circuits include:</p>
+
+        <ul>
+          <li>Whole house (main breaker)</li>
+          <li>Air conditioning / HVAC</li>
+          <li>Water heater</li>
+          <li>Kitchen outlets</li>
+          <li>Office / server room</li>
+          <li>EV charger (if you have one)</li>
+        </ul>
+
+        <p>The beauty of spreading sensors across multiple ESP32s is fault isolation — if one board crashes, you don't lose monitoring on all circuits. For inspiration on multi-sensor ESP32 projects, check our guide on <a href="../articles/esphome-sensor-integration.html">ESPHome Sensor Integration with DHT22, BME280, and Analog Sensors</a>.</p>
+
+        <h2>Home Assistant Energy Dashboard</h2>
+
+        <p>Once ESPHome is sending data to Home Assistant, you need a dashboard to visualize it. Home Assistant 2024+ has a built-in <strong>Energy Dashboard</strong> that automatically graphs your consumption if you have the right sensors configured.</p>
+
+        <h3>Configuring the Energy Dashboard</h3>
+
+        <p>Navigate to <strong>Settings → Dashboards → Energy</strong> in Home Assistant. Add your utility meter sensors as data sources. Set your electricity rate (cost per kWh) and Home Assistant automatically calculates your daily, weekly, and monthly costs.</p>
+
+        <h3>Creating a Custom Power Monitor Card</h3>
+
+        <p>For a more detailed real-time view, use the <strong>Lovelace</strong> dashboard with a custom card like <code>mini-graph-card</code> or <code>apexcharts-card</strong>. Here's a configuration example for a power monitoring card:</p>
+
+        <pre style="background: #1a1b2e; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; color: #a8d8a8;"><code>type: vertical-stack
+cards:
+  - type: statistic
+    entity: sensor.pzem_power
+    title: Current Power Draw
+    unit: W
+    stat_type: measurement
+    period:
+      rolling: 5
+
+  - type: custom:apexcharts-card
+    chart_type: area
+    span:
+      start: hour
+    series:
+      - entity: sensor.pzem_power
+        name: Power (W)
+        type: area
+        color: orange
+        fill_raw: last
+        group_by:
+          func: last
+          duration: 1min</code></pre>
+
+        <p>MQTT plays a crucial role in this setup too. If you want to integrate other smart home devices or build a more robust data pipeline, our guide on <a href="../articles/smart-home-mqtt-broker-setup.html">Setting Up an MQTT Broker for Smart Home (Mosquitto on Raspberry Pi)</a> covers everything you need.</p>
+
+        <h2>3D Printing the Enclosure</h2>
+
+        <p>Once your circuit is working on a breadboard, it's time to clean things up with a custom 3D printed enclosure. This is where 3D printing and smart home projects intersect beautifully. You can design a wall-mountable case that holds the ESP32, PZEM module, and display in one tidy package.</p>
+
+        <p>We covered the fundamentals of designing custom cases for ESP32 projects in our <a href="../articles/3d-printed-esp32-case-design.html">ESP32 Case Design and 3D Printing Guide</a>. For this energy monitor, design considerations include:</p>
+
+        <ul>
+          <li><strong>Ventilation</strong> — the PZEM module can get warm, so include ventilation slots or gaps</li>
+          <li><strong>CT clamp routing</strong> — slots or channels to route the sensor wires cleanly</li>
+          <li><strong>Display cutout</strong> — if adding a local screen, design a recessed bezel</li>
+          <li><strong>Wall mounting</strong> — screw holes or a snap-fit bracket for the electrical panel</li>
+          <li><strong>PLA vs PETG</strong> — use PETG for better heat resistance near electronics</li>
+        </ul>
+
+        <p>Print settings for a functional enclosure: 20% infill, 3 perimeters, PETG filament, 0.2mm layer height. You can find printable enclosure designs on Thingiverse or design your own in Fusion 360 (see our <a href="../articles/fusion-360-3d-printing-tutorial.html">Fusion 360 for 3D Printing Tutorial</a> for the workflow).</p>
+
+        <h2>Tracking Solar / PV Systems</h2>
+
+        <p>If you have solar panels, you can extend this system to track both consumption and generation. The key addition is a second PZEM module on the solar inverter's AC output. Subtract generation from consumption to calculate your <strong>net energy usage</strong> and see when you're feeding power back to the grid.</p>
+
+        <p>Home Assistant's Energy Dashboard natively supports solar generation data — just add a second sensor for your PV output and configure it in the dashboard settings.</p>
+
+        <h2>Automations Based on Energy Data</h2>
+
+        <p>Now that your energy data is in Home Assistant, you can create powerful automations:</p>
+
+        <ul>
+          <li><strong>Alert when consumption spikes</strong> — if power exceeds 5kW for more than 5 minutes, send a notification</li>
+          <li><strong>Turn off phantom loads</strong> — use a smart plug to cut power to a standby device when it drops below 2W for 30 minutes</li>
+          <li><strong>Peak vs off-peak shifting</strong> — if you have time-of-use electricity rates, automatically run high-consumption devices during off-peak hours</li>
+          <li><strong>Cost tracking notifications</strong> — daily summary of how much you spent on electricity that day</li>
+        </ul>
+
+        <h2>Troubleshooting Common Issues</h2>
+
+        <p><strong>PZEM readings are wrong or zero:</strong> Check your UART wiring (TX/RX aren't reversed). Verify the baud rate is 9600. Make sure the CT clamp is firmly clipped around the correct wire (not the ground wire).</p>
+
+        <p><strong>ESP32 keeps crashing or rebooting:</strong> The PZEM can draw brief current spikes that reset the ESP32. Add a 1000µF capacitor across the 5V and GND rails near the ESP32, or use a separate 3.3V regulator for the PZEM's logic side.</p>
+
+        <p><strong>Energy values not accumulating:</strong> The PZEM's energy counter resets when power is lost. If you need persistent energy tracking, use Home Assistant's <code>utility_meter</code> (which saves to disk) rather than relying solely on the PZEM's built-in energy reading.</p>
+
+        <p><strong>MQTT disconnections:</strong> If you're using MQTT instead of the native Home Assistant API, see our guide on <a href="../articles/tasmota-mqtt-home-assistant.html">Tasmota MQTT Setup: Connect Your Devices to Home Assistant</a> for troubleshooting connection stability.</p>
+
+        <h2>Final Thoughts</h2>
+
+        <p>A DIY energy monitoring system is one of the most satisfying smart home projects because it delivers <strong>immediate, tangible value</strong>. Within a week of monitoring, most people discover at least one device silently draining power — and cutting that waste often pays for the entire project's hardware within a few months.</p>
+
+        <p>The combination of ESP32, PZEM sensors, and Home Assistant gives you professional-grade monitoring at a hobbyist price. And with a 3D printed enclosure, it looks polished enough to install permanently in your home. Start with one circuit, get it working, then expand — the system grows with your needs.</p>
+
+        <p>Want to extend your smart home monitoring further? Check out our guide on <a href="../articles/diy-air-quality-monitor-esp32.html">DIY Air Quality Monitor with ESP32 and Home Assistant</a> for another low-cost sensor project that integrates into the same Home Assistant dashboard. The possibilities are nearly endless once your ESP32 and Home Assistant foundation is in place.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="../articles/esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="../articles/diy-air-quality-monitor-esp32.html">DIY Air Quality Monitor with ESP32 and Home Assistant</a></li>
+          <li><a href="../articles/smart-home-mqtt-broker-setup.html">How to Set Up an MQTT Broker for Smart Home (Mosquitto on Raspberry Pi)</a></li>
+          <li><a href="../articles/3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 Cases</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

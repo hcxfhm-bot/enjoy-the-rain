@@ -378,7 +378,7 @@
 - [x] best-retropie-diy-console — How to Build a DIY Retro Gaming Console with RetroPie and Raspberry Pi ✅ 2026-08-10
 - [x] diy-tablet-raspberry-pi — How to Build a DIY Tablet with Raspberry Pi: Touchscreen Project Guide ✅ 2026-08-11
 - [x] best-logic-analyzer-beginners — Best Logic Analyzer for Electronics & DIY Makers in 2026 ✅ 2026-08-12
-- [ ] smart-home-energy-monitoring — DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker
+- [x] smart-home-energy-monitoring — DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker ✅ 2026-08-13
 - [ ] best-3d-printer-for-makers — Best 3D Printers for Makers & DIY Enthusiasts in 2026
 
 ## 生成规则

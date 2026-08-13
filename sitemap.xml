@@ -1550,6 +1550,12 @@
   <ns0:url>
     <ns0:loc>https://3dprintstarter.com/articles/diy-smart-light-dimmer-arduino.html</ns0:loc>
     <ns0:lastmod>2026-07-17</ns0:lastmod>
+  </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/smart-home-energy-monitoring.html</ns0:loc>
+    <ns0:lastmod>2026-08-13</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
     <ns0:changefreq>monthly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
