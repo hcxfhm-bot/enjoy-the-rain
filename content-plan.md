@@ -361,9 +361,17 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 248 篇 ✅ (批次48进行中)
-- **当前批次**: 批次48进行中
-- **剩余**: 52 篇
+- **已完成**: 249 篇 ✅ (批次49进行中)
+- **当前批次**: 批次49
+- **剩余**: 51 篇
+
+### 批次 49：MAKER PROJECTS & IOT CONTINUED (6篇) 🆕
+- [x] diy-robot-car-arduino — How to Build a DIY Robot Car with Arduino: Line Following and Obstacle Avoidance ✅ 2026-08-15
+- [ ] best-thermal-camera-electronics — Best Thermal Cameras for Electronics and Home Inspection in 2026
+- [ ] esp32-web-server-tutorial — ESP32 Web Server Tutorial: Control LEDs and Sensors from Your Browser
+- [ ] diy-smart-thermostat-esp32 — DIY Smart Thermostat with ESP32 and Home Assistant: Complete Build Guide
+- [ ] raspberry-pi-cluster-computing — Raspberry Pi Cluster Computing: Build Your Own Mini Supercomputer
+- [ ] best-digital-storage-oscilloscope-2026 — Best Digital Storage Oscilloscopes for Hobbyists in 2026
 
 ### 批次 47：MAKER TOOLS & PROJECTS CONTINUED (6篇) 🆕 ✅
 - [x] best-raspberry-pi-alternatives-2026 — Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi & More Compared ✅ 2026-08-03

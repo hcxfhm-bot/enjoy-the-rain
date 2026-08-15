@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a DIY Robot Car with Arduino: Line Following and Obstacle Avoidance</title>
+  <meta name="description" content="Learn how to build your own Arduino robot car with line following and obstacle avoidance capabilities. Complete guide with parts list, wiring diagrams, and code.">
+  <meta name="keywords" content="Arduino robot car, DIY robot, line following robot, obstacle avoiding robot, Arduino Uno project, L298N motor driver, HC-SR04 ultrasonic sensor, IR sensor robot">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>DIY Projects</span>
+      </nav>
+
+      <h1>How to Build a DIY Robot Car with Arduino: Line Following and Obstacle Avoidance</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 15, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🤖</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Building an <strong>Arduino robot car</strong> is one of the most rewarding projects for electronics beginners. Not only do you learn about microcontrollers, sensors, and motor control, but you end up with a functional autonomous vehicle that can navigate its environment. In this comprehensive guide, I'll walk you through building a dual-mode robot that can both <strong>follow lines</strong> and <strong>avoid obstacles</strong>.</p>
+
+        <h2>What You'll Build</h2>
+        <p>This project creates a smart robot car with two autonomous modes:</p>
+        <ul>
+          <li><strong>Line Following Mode:</strong> The robot uses IR sensors to detect and follow a black line on a white surface</li>
+          <li><strong>Obstacle Avoidance Mode:</strong> Using an ultrasonic sensor, the robot detects obstacles and navigates around them</li>
+        </ul>
+        <p>Both modes are perfect for learning fundamental robotics concepts that apply to everything from Roomba vacuums to autonomous vehicles.</p>
+
+        <h2>Parts List</h2>
+        <p>Here's everything you need to build this project (total cost: approximately $40-60):</p>
+
+        <h3>Core Components</h3>
+        <ul>
+          <li><strong>Arduino Uno</strong> (or compatible) — The brain of your robot</li>
+          <li><strong>L298N Motor Driver</strong> — Controls the DC motors and allows speed/direction control</li>
+          <li><strong>Robot Car Chassis</strong> — 2-wheel drive with DC motors and wheels (many kits include this)</li>
+          <li><strong>HC-SR04 Ultrasonic Sensor</strong> — For obstacle detection (range: 2-400cm)</li>
+          <li><strong>IR Sensor Modules (x2)</strong> — For line detection (usually come in 3-5 packs)</li>
+          <li><strong>Servo Motor (SG90)</strong> — Mounts the ultrasonic sensor for scanning</li>
+        </ul>
+
+        <h3>Power and Connections</h3>
+        <ul>
+          <li><strong>9V Battery</strong> or <strong>2x 18650 Li-ion batteries</strong> with holder</li>
+          <li><strong>Breadboard</strong> and <strong>jumper wires</strong> (M-M, M-F, F-F)</li>
+          <li><strong>Switch</strong> for power on/off</li>
+        </ul>
+
+        <p><strong>Pro tip:</strong> I recommend buying a <a href="../best-3d-printer-under-500.html">complete robot car kit</a> that includes the chassis, motors, wheels, and L298N driver. This saves time sourcing individual parts and ensures compatibility.</p>
+
+        <h2>How It Works</h2>
+        <p>Before diving into wiring, let's understand the core systems:</p>
+
+        <h3>Line Following Logic</h3>
+        <p>Two IR sensors mounted at the front detect the contrast between a black line and white surface. When light reflects off a white surface, the sensor outputs HIGH. When it hits a black line (absorbing light), it outputs LOW. By reading both sensors, the Arduino determines:</p>
+        <ul>
+          <li>Both sensors HIGH → On white, go straight</li>
+          <li>Left sensor LOW → Line detected on left, turn left</li>
+          <li>Right sensor LOW → Line detected on right, turn right</li>
+          <li>Both sensors LOW → Intersection or end of line, stop or turn</li>
+        </ul>
+
+        <h3>Obstacle Avoidance Logic</h3>
+        <p>The HC-SR04 ultrasonic sensor sends out sound pulses and measures how long they take to bounce back. Using the speed of sound, the Arduino calculates distance to the nearest object. When an obstacle is detected within a threshold (say, 20cm), the robot:</p>
+        <ol>
+          <li>Stops and scans left and right using the servo</li>
+          <li>Measures distance in both directions</li>
+          <li>Turns toward the clearer path and continues</li>
+        </ol>
+
+        <h2>Wiring Diagram</h2>
+        <p>Let's wire everything step by step. I recommend building and testing each subsystem separately before combining them.</p>
+
+        <h3>Step 1: Motor Driver (L298N) Connections</h3>
+        <p>The L298N is your motor controller. Here's how to connect it:</p>
+        <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+          <tr style="background: #f0f0f0;">
+            <th style="border: 1px solid #ddd; padding: 8px;">L298N Pin</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Connect To</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">ENA (Enable A)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arduino Pin 5 (PWM)</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">IN1</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arduino Pin 4</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">IN2</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arduino Pin 3</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">IN3</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arduino Pin 2</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">IN4</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arduino Pin 7</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">ENB (Enable B)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arduino Pin 6 (PWM)</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">OUT1, OUT2</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Left Motor</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">OUT3, OUT4</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Right Motor</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">12V</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Battery Positive</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">GND</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Battery Negative + Arduino GND</td>
+          </tr>
+        </table>
+
+        <p><strong>Important:</strong> The L298N has a 5V output pin, but I recommend powering the Arduino separately via USB or its own power supply to avoid voltage drops affecting sensor readings.</p>
+
+        <h3>Step 2: IR Sensors for Line Following</h3>
+        <p>Mount two IR sensors at the front of your robot, spaced about 1.5-2cm apart. Connect each sensor:</p>
+        <ul>
+          <li><strong>VCC</strong> → Arduino 5V</li>
+          <li><strong>GND</strong> → Arduino GND</li>
+          <li><strong>OUT (Left sensor)</strong> → Arduino Pin A0</li>
+          <li><strong>OUT (Right sensor)</strong> → Arduino Pin A1</li>
+        </ul>
+
+        <p>Most IR sensor modules have a potentiometer to adjust sensitivity. Start with the module about 1cm above the ground and adjust until it reliably detects your test line.</p>
+
+        <h3>Step 3: Ultrasonic Sensor (HC-SR04)</h3>
+        <p>For obstacle avoidance:</p>
+        <ul>
+          <li><strong>VCC</strong> → Arduino 5V</li>
+          <li><strong>GND</strong> → Arduino GND</li>
+          <li><strong>TRIG</strong> → Arduino Pin 9</li>
+          <li><strong>ECHO</strong> → Arduino Pin 10</li>
+        </ul>
+
+        <p>Mount the sensor on a servo for scanning capability. Connect the servo signal wire to Arduino Pin 11. This lets the robot "look around" when deciding which way to turn.</p>
+
+        <h2>The Code</h2>
+        <p>Here's the complete Arduino sketch. You can switch between line-following and obstacle-avoidance modes by changing a single variable at the top.</p>
+
+        <pre style="background: #f4f4f4; padding: 1rem; overflow-x: auto; font-size: 0.85rem;"><code>// Robot Car - Line Following + Obstacle Avoidance
+// Mode selection: 1 = Line Follow, 2 = Obstacle Avoid
+int MODE = 2;
+
+// Motor pins
+#define ENA 5
+#define IN1 4
+#define IN2 3
+#define IN3 2
+#define IN4 7
+#define ENB 6
+
+// IR Sensor pins (Line Following)
+#define LEFT_IR A0
+#define RIGHT_IR A1
+
+// Ultrasonic Sensor pins
+#define TRIG 9
+#define ECHO 10
+
+// Servo pin
+#define SERVO_PIN 11
+
+// Obstacle distance threshold (cm)
+#define OBSTACLE_DIST 20
+
+void setup() {
+  // Motor pins as outputs
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  
+  // IR sensors as inputs
+  pinMode(LEFT_IR, INPUT);
+  pinMode(RIGHT_IR, INPUT);
+  
+  // Ultrasonic sensor
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  
+  // Servo
+  pinMode(SERVO_PIN, OUTPUT);
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (MODE == 1) {
+    lineFollow();
+  } else {
+    obstacleAvoid();
+  }
+}
+
+// === MOTOR CONTROL FUNCTIONS ===
+void moveForward(int speed) {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENA, speed);
+  analogWrite(ENB, speed);
+}
+
+void turnLeft(int speed) {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENA, speed);
+  analogWrite(ENB, speed);
+}
+
+void turnRight(int speed) {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENA, speed);
+  analogWrite(ENB, speed);
+}
+
+void stopMotors() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+// === LINE FOLLOWING ===
+void lineFollow() {
+  int leftVal = digitalRead(LEFT_IR);
+  int rightVal = digitalRead(RIGHT_IR);
+  
+  if (leftVal == HIGH && rightVal == HIGH) {
+    // Both on white - go forward
+    moveForward(150);
+  } else if (leftVal == LOW && rightVal == HIGH) {
+    // Line on left - turn left
+    turnLeft(100);
+  } else if (leftVal == HIGH && rightVal == LOW) {
+    // Line on right - turn right
+    turnRight(100);
+  } else {
+    // Both on black - stop
+    stopMotors();
+  }
+}
+
+// === OBSTACLE AVOIDANCE ===
+void obstacleAvoid() {
+  int distance = getDistance();
+  
+  if (distance > OBSTACLE_DIST || distance == 0) {
+    moveForward(180);
+  } else {
+    stopMotors();
+    delay(500);
+    
+    // Scan right
+    servoWrite(30);
+    delay(500);
+    int rightDist = getDistance();
+    
+    // Scan left
+    servoWrite(150);
+    delay(500);
+    int leftDist = getDistance();
+    
+    // Return to center
+    servoWrite(90);
+    delay(300);
+    
+    // Decide direction
+    if (leftDist > rightDist) {
+      turnLeft(180);
+      delay(400);
+    } else {
+      turnRight(180);
+      delay(400);
+    }
+  }
+}
+
+int getDistance() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  
+  long duration = pulseIn(ECHO, HIGH);
+  int distance = duration * 0.034 / 2;
+  return distance;
+}
+
+// Simple servo control (no library)
+void servoWrite(int angle) {
+  int pulse = map(angle, 0, 180, 500, 2400);
+  for (int i = 0; i < 20; i++) {
+    digitalWrite(SERVO_PIN, HIGH);
+    delayMicroseconds(pulse);
+    digitalWrite(SERVO_PIN, LOW);
+    delayMicroseconds(20000 - pulse);
+  }
+}</code></pre>
+
+        <p>Upload this code to your Arduino using the <a href="../how-to-use-3d-printer-slicer.html">Arduino IDE</a>. The servo control function is simplified—if you have the Servo library installed, you can replace it with <code>servo.write(angle)</code>.</p>
+
+        <h2>Testing and Calibration</h2>
+
+        <h3>Line Following Calibration</h3>
+        <ol>
+          <li>Create a test track using black electrical tape on a white poster board or floor</li>
+          <li>Start with gentle curves—save sharp turns for later</li>
+          <li>Adjust the potentiometer on each IR sensor until the indicator LED lights when over white and turns off over black</li>
+          <li>If the robot wobbles excessively, reduce motor speed in the code</li>
+        </ol>
+
+        <h3>Obstacle Avoidance Calibration</h3>
+        <ol>
+          <li>Place objects 30cm in front of the robot and verify it stops</li>
+          <li>Adjust <code>OBSTACLE_DIST</code> in the code if needed (larger = stops sooner)</li>
+          <li>Test that the servo scans correctly before deciding direction</li>
+          <li>If the robot turns the wrong way, swap the turnLeft and turnRight logic</li>
+        </ol>
+
+        <h2>Troubleshooting Common Issues</h2>
+        <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+          <tr style="background: #f0f0f0;">
+            <th style="border: 1px solid #ddd; padding: 8px;">Problem</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Solution</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Robot moves backward</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Swap the wires on one or both motors</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Motors don't move</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Check battery voltage; verify L298N jumpers are in place</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Line sensor always reads LOW</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Adjust potentiometer; check wiring; sensors may be too high off ground</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ultrasonic gives 0 distance</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Check TRIG/ECHO wiring; ensure sensor has clear line of sight</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Robot turns circles</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">One motor may be reversed; check IN1-IN4 logic</td>
+          </tr>
+        </table>
+
+        <h2>3D Printed Upgrades</h2>
+        <p>One advantage of building your own robot is customization. If you have access to a <a href="../best-budget-3d-printer-under-200.html">3D printer</a>, you can print:</p>
+        <ul>
+          <li><strong>Sensor mounts:</strong> Custom brackets for optimal sensor positioning</li>
+          <li><strong>Cable management:</strong> Keep wires organized with printed clips and channels</li>
+          <li><strong>Protective covers:</strong> Shield your electronics from dust and damage</li>
+          <li><strong>Wheel upgrades:</strong> Custom wheels with better traction or interesting designs</li>
+        </ul>
+        <p>Check out our guide on <a href="../3d-print-smart-home-case.html">3D printing custom enclosures</a> for design tips that apply to robot parts too.</p>
+
+        <h2>Next Steps: Expanding Your Robot</h2>
+        <p>Once you've mastered the basics, consider these upgrades:</p>
+        <ul>
+          <li><strong>Add Bluetooth:</strong> Use an HC-05 module for smartphone control</li>
+          <li><strong>Speed encoders:</strong> Add wheel encoders for precise distance tracking</li>
+          <li><strong>Camera module:</strong> An ESP32-CAM enables basic computer vision</li>
+          <li><strong>IMU sensor:</strong> An MPU6050 adds balance and orientation sensing</li>
+          <li><strong>Arduino Mega upgrade:</strong> More pins for additional sensors and features</li>
+        </ul>
+        <p>For more advanced autonomous projects, check out our guides on <a href="../esp32-smart-home-beginners.html">ESP32 projects</a> and <a href="../diy-smart-door-lock.html">DIY smart devices</a>.</p>
+
+        <h2>Conclusion</h2>
+        <p>Building an Arduino robot car teaches you practical skills in electronics, programming, and mechanical design. The line-following mode demonstrates basic sensor integration and logic, while obstacle avoidance introduces decision-making algorithms. Both concepts scale up to advanced robotics and autonomous systems.</p>
+        <p>Start simple, test often, and don't be afraid to experiment with code modifications. The skills you develop here—reading sensors, controlling motors, making decisions—apply to countless future projects. Happy building!</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../best-breadboard-projects-beginners.html">10 Best Breadboard Projects for Electronics Beginners</a></li>
+          <li><a href="../arduino-uno-r4-review.html">Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade?</a></li>
+          <li><a href="../best-esp32-development-board.html">Best ESP32 Development Boards in 2026</a></li>
+          <li><a href="../how-to-solder-circuit-boards-beginners.html">How to Solder Circuit Boards: Complete Beginner's Guide</a></li>
+          <li><a href="../best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
