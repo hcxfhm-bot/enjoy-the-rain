@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Web Server Tutorial: Control LEDs and Sensors from Your Browser</title>
+  <meta name="description" content="Learn how to build an ESP32 web server from scratch. Control LEDs, read sensors, and create a responsive web dashboard — no external libraries needed. Step-by-step guide with code examples.">
+  <meta name="keywords" content="ESP32 web server, ESP32 WiFi server, Arduino web server, ESP32 control LED, IoT web dashboard, ESP32 sensor data, ESP8266 vs ESP32, Tasmota, ESPHome">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../projects.html">Projects</a> &raquo; ESP32 Web Server
+      </nav>
+
+      <h1>ESP32 Web Server Tutorial: Control LEDs and Sensors from Your Browser</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 18, 2026</span>
+        <span>⏱️ 12 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🌐</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+<p>One of the most powerful features of the ESP32 is its built-in Wi-Fi capability. Combine that with a little bit of HTML and JavaScript, and you can build a fully functional web server that runs directly on the chip — no Raspberry Pi required, no cloud subscription, no monthly fees. In this ESP32 web server tutorial, you'll learn how to control LEDs, read sensor data, and create a responsive web dashboard that works on any device in your house.</p>
+
+<h2>Why Build an ESP32 Web Server?</h2>
+
+<p>Before we dive in, let's address the obvious question: why not just use a pre-built solution like <a href="https://3dprintstarter.com/articles/tasmota-sonoff-flash-guide.html">Tasmota</a> or <a href="https://3dprintstarter.com/articles/esphome-getting-started-guide.html">ESPHome</a>? Both are excellent platforms that already include web server functionality out of the box.</p>
+
+<p>The answer is customization. When you build your own web server from scratch, you have complete control over every pixel, every API endpoint, and every interaction. Want a button that triggers a specific sequence of events? Want to display sensor data in a custom visualization? Want to integrate with a proprietary API? With a custom ESP32 web server, all of that is possible. And if you're learning embedded web development, building one from the ground up is one of the best exercises you can do.</p>
+
+<h2>What You'll Need</h2>
+
+<p>For this tutorial, you'll need:</p>
+
+<ul>
+  <li><strong>ESP32 DevKit or ESP32-WROOM-32</strong> — Any variant works, though the DevKit with USB-C is the most convenient</li>
+  <li><strong>Micro USB cable</strong> — For programming and power</li>
+  <li><strong>LED (any color)</strong> — With a 330Ω resistor</li>
+  <li><strong>DHT22 temperature and humidity sensor</strong> — Optional, for the sensor reading section</li>
+  <li><strong>Breadboard and jumper wires</strong></li>
+  <li><strong>Arduino IDE or PlatformIO</strong> — We'll use Arduino IDE for simplicity</li>
+</ul>
+
+<h2>Step 1: Setting Up the Arduino IDE</h2>
+
+<p>If you haven't already, install the ESP32 board package in the Arduino IDE. Open <strong>File → Preferences</strong> and add this URL to the "Additional Board Manager URLs" field:</p>
+
+<pre><code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code></pre>
+
+<p>Then go to <strong>Tools → Board → Board Manager</strong>, search for "ESP32," and install the package by Espressif Systems. Once installed, select your board from <strong>Tools → Board → ESP32 Arduino → ESP32 Dev Module</strong>.</p>
+
+<h2>Step 2: The Basic Web Server Skeleton</h2>
+
+<p>Let's start with the simplest possible ESP32 web server. This sketch creates a Wi-Fi access point and serves a single HTML page when you connect to it:</p>
+
+<pre><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+// Replace with your network credentials
+const char* ssid = "ESP32_AP";
+const char* password = "12345678";
+
+WebServer server(80);
+
+void setup() {
+  Serial.begin(115200);
+  
+  // Create Wi-Fi access point
+  WiFi.softAP(ssid, password);
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.softAPIP());
+
+  // Handle root page
+  server.on("/", HTTP_GET, []() {
+    server.send(200, "text/html",
+      "&lt;html&gt;&lt;body&gt;&lt;h1&gt;ESP32 Web Server&lt;/h1&gt;"
+      "&lt;p&gt;Hello from ESP32!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+    );
+  });
+
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}</code></pre>
+
+<p>Upload this sketch, then connect your phone or laptop to the Wi-Fi network named "ESP32_AP" with password "12345678." Open a browser and navigate to <strong>192.168.4.1</strong>. You should see your message displayed on the page. Congratulations — you've just built a web server on a $5 chip.</p>
+
+<h2>Step 3: Controlling an LED Over the Web</h2>
+
+<p>Now let's make it actually useful. We'll add buttons to turn an LED on and off. Wire the LED's longer leg (anode) to GPIO 2 through the 330Ω resistor, and the shorter leg (cathode) to GND.</p>
+
+<p>Here's the complete sketch with LED control:</p>
+
+<pre><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+const char* ssid = "ESP32_AP";
+const char* password = "12345678";
+
+WebServer server(80);
+
+const int ledPin = 2; // Built-in LED on most ESP32 DevKits
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  
+  WiFi.softAP(ssid, password);
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.softAPIP());
+
+  // HTML page with ON/OFF buttons
+  server.on("/", HTTP_GET, []() {
+    String html = R"=====(
+      &lt;!DOCTYPE html&gt;
+      &lt;html&gt;
+      &lt;head&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+        &lt;style&gt;
+          body { font-family: Arial; text-align: center; margin-top: 50px; }
+          .btn { padding: 15px 32px; font-size: 18px; margin: 5px; cursor: pointer; }
+          .on { background-color: #4CAF50; color: white; border: none; }
+          .off { background-color: #f44336; color: white; border: none; }
+          .status { font-size: 24px; margin: 20px; }
+        &lt;/style&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;h1&gt;ESP32 LED Control&lt;/h1&gt;
+        &lt;p class="status"&gt;LED is &lt;span id="status"&gt;OFF&lt;/span&gt;&lt;/p&gt;
+        &lt;button class="btn on" onclick="ledOn()"&gt;ON&lt;/button&gt;
+        &lt;button class="btn off" onclick="ledOff()"&gt;OFF&lt;/button&gt;
+        &lt;script&gt;
+          function ledOn() {
+            fetch('/led/on').then(r =&gt; location.reload());
+          }
+          function ledOff() {
+            fetch('/led/off').then(r =&gt; location.reload());
+          }
+        &lt;/script&gt;
+      &lt;/body&gt;
+      &lt;/html&gt;
+    )=====";
+    server.send(200, "text/html", html);
+  });
+
+  // LED ON endpoint
+  server.on("/led/on", HTTP_GET, []() {
+    digitalWrite(ledPin, HIGH);
+    server.send(200, "text/plain", "LED ON");
+  });
+
+  // LED OFF endpoint
+  server.on("/led/off", HTTP_GET, []() {
+    digitalWrite(ledPin, LOW);
+    server.send(200, "text/plain", "LED OFF");
+  });
+
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}</code></pre>
+
+<p>The key here is the <code>server.on()</code> function, which registers callback handlers for specific URL paths. When you visit <code>/led/on</code>, the ESP32 sets the GPIO pin HIGH and returns a plain text response. The HTML page uses the <code>fetch()</code> API to make requests without refreshing, making the interface feel snappy and responsive.</p>
+
+<h2>Step 4: Reading Sensor Data in Real Time</h2>
+
+<p>Controlling an LED is just the beginning. Let's add a DHT22 sensor and display the readings on our web page. Connect the DHT22's DATA pin to GPIO 4, VCC to 3.3V, and GND to GND. You'll also need the <strong>DHT sensor library</strong> by Adafruit — install it from the Arduino Library Manager.</p>
+
+<pre><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+#include &lt;DHT.h&gt;
+
+const char* ssid = "ESP32_AP";
+const char* password = "12345678";
+WebServer server(80);
+
+#define DHTPIN 4
+#define DHTTYPE DHT22
+DHT dht(DHTPIN, DHTTYPE);
+
+const int ledPin = 2;
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+  pinMode(ledPin, OUTPUT);
+  
+  WiFi.softAP(ssid, password);
+  Serial.println(WiFi.softAPIP());
+
+  server.on("/", HTTP_GET, []() {
+    float temp = dht.readTemperature();
+    float hum = dht.readHumidity();
+
+    String html = R"=====(
+      &lt;!DOCTYPE html&gt;
+      &lt;html&gt;
+      &lt;head&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+        &lt;style&gt;
+          body { font-family: Arial; text-align: center; margin-top: 50px; }
+          .card { background: #f0f0f0; padding: 20px; border-radius: 10px; display: inline-block; margin: 10px; }
+          h2 { color: #333; }
+          .value { font-size: 36px; font-weight: bold; color: #2c3e50; }
+          .unit { font-size: 18px; color: #666; }
+          .btn { padding: 15px 32px; font-size: 18px; margin: 10px; cursor: pointer; border: none; }
+          .on { background-color: #4CAF50; color: white; }
+          .off { background-color: #f44336; color: white; }
+        &lt;/style&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;h1&gt;🌡️ ESP32 Sensor Dashboard&lt;/h1&gt;
+        &lt;div class="card"&gt;
+          &lt;h2&gt;Temperature&lt;/h2&gt;
+          &lt;p class="value"&gt;%%TEMP%%&lt;span class="unit"&gt;°C&lt;/span&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="card"&gt;
+          &lt;h2&gt;Humidity&lt;/h2&gt;
+          &lt;p class="value"&gt;%%HUM%%&lt;span class="unit"&gt;%&lt;/span&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;br&gt;
+        &lt;button class="btn on" onclick="ledOn()"&gt;LED ON&lt;/button&gt;
+        &lt;button class="btn off" onclick="ledOff()"&gt;LED OFF&lt;/button&gt;
+        &lt;br&gt;
+        &lt;p&gt;Refresh page for updated readings.&lt;/p&gt;
+        &lt;script&gt;
+          function ledOn() { fetch('/led/on'); }
+          function ledOff() { fetch('/led/off'); }
+        &lt;/script&gt;
+      &lt;/body&gt;
+      &lt;/html&gt;
+    )=====";
+    
+    html.replace("%%TEMP%%", isnan(temp) ? "--" : String(temp, 1));
+    html.replace("%%HUM%%", isnan(hum) ? "--" : String(hum, 1));
+    server.send(200, "text/html", html);
+  });
+
+  server.on("/led/on", HTTP_GET, []() {
+    digitalWrite(ledPin, HIGH);
+    server.send(200, "text/plain", "ON");
+  });
+  server.on("/led/off", HTTP_GET, []() {
+    digitalWrite(ledPin, LOW);
+    server.send(200, "text/plain", "OFF");
+  });
+
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}</code></pre>
+
+<p>The <code>String.replace()</code> trick lets you embed dynamic values into the HTML template before sending it. This is a lightweight approach that works well for simple dashboards. For more complex applications, consider returning JSON data from a dedicated API endpoint and updating the page with JavaScript.</p>
+
+<h2>Step 5: Connecting to Your Home Wi-Fi</h2>
+
+<p>So far we've been using the ESP32 as an access point, which means your devices connect directly to the ESP32. But you can also connect the ESP32 to your existing home network, letting you access the web server from any device on your Wi-Fi without switching networks:</p>
+
+<pre><code>const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";</code></pre>
+
+<p>Replace the <code>WiFi.softAP()</code> call with:</p>
+
+<pre><code>WiFi.begin(ssid, password);
+while (WiFi.status() != WL_CONNECTED) {
+  delay(500);
+  Serial.print(".");
+}
+Serial.println("");
+Serial.println("WiFi connected");
+Serial.print("IP Address: ");
+Serial.println(WiFi.localIP());</code></pre>
+
+<p>After uploading, open the Serial Monitor at 115200 baud. Once connected, it will print the ESP32's IP address on your local network. Type that IP into any browser on your network, and you'll see your dashboard.</p>
+
+<h2>Step 6: Adding AJAX for Real-Time Updates</h2>
+
+<p>The pages we've built so far require a manual refresh to get new sensor data. Let's fix that with AJAX polling, which fetches fresh data in the background every few seconds:</p>
+
+<pre><code>&lt;script&gt;
+  setInterval(() =&gt; {
+    fetch('/sensor')
+      .then(r =&gt; r.json())
+      .then(data =&gt; {
+        document.getElementById('temp').innerText = data.temp + '°C';
+        document.getElementById('hum').innerText = data.hum + '%';
+      });
+  }, 3000); // Update every 3 seconds
+&lt;/script&gt;</code></pre>
+
+<p>And add this endpoint on the ESP32 side:</p>
+
+<pre><code>server.on("/sensor", HTTP_GET, []() {
+  float temp = dht.readTemperature();
+  float hum = dht.readHumidity();
+  String json = "{\"temp\":" + String(temp, 1) + ",\"hum\":" + String(hum, 1) + "}";
+  server.send(200, "application/json", json);
+});</code></pre>
+
+<p>Now your dashboard updates automatically without any page refreshes. This pattern is the foundation of every modern IoT dashboard.</p>
+
+<h2>Taking It Further</h2>
+
+<p>From here, the possibilities are nearly endless. Here are some natural next steps:</p>
+
+<ul>
+  <li><strong>Add more GPIO controls</strong> — Control relays, motors, or servo motors the same way you control the LED</li>
+  <li><strong>Add a web config page</strong> — Let users change Wi-Fi credentials and GPIO assignments without re-flashing the firmware</li>
+  <li><strong>Integrate with Home Assistant</strong> — Check out our <a href="https://3dprintstarter.com/articles/esphome-getting-started-guide.html">ESPHome Getting Started Guide</a> for a more powerful alternative that plays nicely with the broader smart home ecosystem</li>
+  <li><strong>Add MQTT</strong> — Follow our <a href="https://3dprintstarter.com/articles/tasmota-mqtt-home-assistant.html">Tasmota MQTT guide</a> to learn how to send your sensor data to a central hub</li>
+  <li><strong>3D print an enclosure</strong> — Design a custom case for your project using our guide to <a href="https://3dprintstarter.com/articles/3d-printed-esp32-case-design.html">3D printing custom ESP32 cases</a></li>
+</ul>
+
+<h2>Troubleshooting Common Issues</h2>
+
+<p>If your ESP32 web server isn't responding, here are the most common causes:</p>
+
+<p><strong>Can't connect to Wi-Fi:</strong> Double-check your SSID and password. Make sure the ESP32 is within range of your router. If using AP mode, make sure you're connecting to the ESP32's network, not your regular Wi-Fi.</p>
+
+<p><strong>Page loads but controls don't work:</strong> Verify the correct GPIO pin in your code matches your actual wiring. Remember that ESP32 pins are numbered differently than the physical pin numbers on the board.</p>
+
+<p><strong>Sensor readings are NaN:</strong> Check your wiring connections and make sure the DHT22's data pin matches the pin number in your code. Give the sensor a few seconds to initialize after power-on.</p>
+
+<p><strong>Web page is slow to respond:</strong> The ESP32 handles one request at a time. Avoid long-running operations in your request handlers. For high-frequency data, use AJAX polling rather than page refreshes.</p>
+
+<h2>Conclusion</h2>
+
+<p>Building an ESP32 web server is one of the most rewarding beginner projects because the results are immediately tangible — you can open a web browser and see your hardware respond in real time. You've learned the core concepts of handling HTTP requests, serving HTML, processing form inputs, and serving JSON data. These same patterns apply whether you're building a simple LED controller or a full home automation dashboard.</p>
+
+<p>The best part? The entire thing runs locally on a $5 chip with no cloud dependencies, no subscription fees, and no privacy concerns. Your data never leaves your network. That's the DIY maker ethos at its finest.</p>
+
+<p>If you enjoyed this tutorial, you might also like our guide to <a href="https://3dprintstarter.com/articles/diy-weather-station-raspberry-pi.html">building a DIY weather station with Raspberry Pi</a>, or learn how to <a href="https://3dprintstarter.com/articles/diy-smart-thermostat-esp32.html">build a DIY smart thermostat with ESP32</a> for a more advanced project that puts everything together.</p>
+
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="esphome-getting-started-guide.html">ESPHome Getting Started: Flash Custom Firmware on ESP32 and ESP8266</a></li>
+          <li><a href="esp32-smart-home-beginners.html">ESP32 Smart Home Projects: Tasmota and ESPHome for Beginners</a></li>
+          <li><a href="ws2812b-led-strip-esp32.html">How to Control WS2812B LED Strips with ESP32: FastLED and WLED Guide</a></li>
+          <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+          <li><a href="esphome-sensor-integration.html">ESPHome Sensor Integration: DHT22, BME280, and Analog Sensors with Home Assistant</a></li>
+          <li><a href="3d-printed-esp32-case-design.html">How to Design and 3D Print Custom ESP32 and Sensor Cases</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
