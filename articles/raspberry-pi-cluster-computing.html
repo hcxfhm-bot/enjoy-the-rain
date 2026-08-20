@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raspberry Pi Cluster Computing: Build Your Own Mini Supercomputer in 2026</title>
+  <meta name="description" content="Learn how to build a Raspberry Pi cluster computer from scratch. Step-by-step guide covering hardware setup, Kubernetes and Docker Swarm installation, cluster computing use cases, and performance benchmarks for your DIY mini supercomputer.">
+  <meta name="keywords" content="Raspberry Pi cluster, cluster computing, mini supercomputer, Raspberry Pi HPC, Kubernetes Raspberry Pi, Docker Swarm, parallel computing Raspberry Pi, Pi cluster setup, distributed computing">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Projects</span> &raquo; <span>Raspberry Pi</span>
+      </nav>
+
+      <h1>Raspberry Pi Cluster Computing: Build Your Own Mini Supercomputer in 2026</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 20, 2026</span>
+        <span>⏱️ 15 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🖥️</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>Supercomputers used to require millions of dollars and entire buildings. Not anymore. With Raspberry Pi boards selling for under $50 each, you can build a legitimate cluster computer — a network of small computers working together — for a few hundred dollars and some free software. Whether you want to learn distributed computing, run a personal cloud, experiment with Kubernetes, or just want the satisfaction of building your own mini supercomputer, a Raspberry Pi cluster is one of the most rewarding maker projects you can tackle.</p>
+
+        <p>If you're completely new to Raspberry Pi, start with our <a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners</a> guide to get familiar with the platform first.</p>
+
+        <h2>What Is a Raspberry Pi Cluster?</h2>
+
+        <p>A cluster is simply multiple computers connected together that work as a single system. Each computer in the cluster is called a "node." The master node distributes tasks to worker nodes, which process them in parallel and report results back. The aggregate power of all nodes together far exceeds what any single machine could handle.</p>
+
+        <p>Clusters aren't magic — they're a specific tool for specific problems. Your cluster will excel at:</p>
+
+        <ul>
+          <li><strong>Web hosting and web apps</strong> — Serve multiple sites or handle traffic from friends and family</li>
+          <li><strong>Docker containers</strong> — Run dozens of services simultaneously (Home Assistant, Pi-hole, Nextcloud, Plex, etc.)</li>
+          <li><strong>Parallel computations</strong> — Compile code, render videos, or process data across multiple nodes</li>
+          <li><strong>Learning DevOps</strong> — Practice Kubernetes, Ansible, and cluster management in a real environment</li>
+          <li><strong>Distributed computing projects</strong> — Join Folding@Home or similar citizen science projects</li>
+        </ul>
+
+        <p>Your cluster will NOT turn a bunch of $50 Pis into a gaming rig or a fast desktop. For single-threaded tasks, one good PC will always beat a cluster of Pis. Clusters win through parallelism — when you can split a job into many independent parts that run simultaneously.</p>
+
+        <h2>Hardware: What You'll Need</h2>
+
+        <h3>The Nodes: Raspberry Pi Boards</h3>
+
+        <p>For a 2026 cluster, we recommend <strong>Raspberry Pi 5 (4GB or 8GB)</strong> boards. The extra RAM is critical for running containers smoothly. Here's a quick comparison:</p>
+
+        <ul>
+          <li><strong>Raspberry Pi 5 4GB</strong> — Good for small clusters (2-4 nodes), budget-friendly at ~$60 each</li>
+          <li><strong>Raspberry Pi 5 8GB</strong> — Recommended for most clusters; $80 each, handles containers well</li>
+          <li><strong>Raspberry Pi 4 (4GB)</strong> — Viable if on a budget, still supported, ~$55</li>
+        </ul>
+
+        <p>You'll want at least <strong>3 nodes minimum</strong> (1 master + 2 workers) to experience real clustering benefits. A 4-6 node cluster is ideal for most hobbyists — enough to learn cluster concepts without overwhelming power bills or desk space.</p>
+
+        <h3>Networking</h3>
+
+        <ul>
+          <li><strong>Network switch</strong> — A gigabit unmanaged switch (5-port is fine, ~$20) to connect all Pis to the same local network</li>
+          <li><strong>Ethernet cables</strong> — Cat5e or Cat6, one per Pi (Raspberry Pi 5 has built-in gigabit Ethernet)</li>
+          <li><strong>WiFi</strong> — Works, but Ethernet is strongly recommended for cluster communication to avoid bottlenecks</li>
+        </ul>
+
+        <h3>Power</h3>
+
+        <ul>
+          <li><strong>USB-C power supplies</strong> — Official Raspberry Pi 27W USB-C PD power supplies, one per board ($12 each)</li>
+          <li><strong>OR a powered USB hub</strong> — Some makers use a quality powered USB hub to consolidate power, but individual supplies are more reliable</li>
+          <li><strong>Power strip</strong> — With enough outlets for all your power supplies</li>
+        </ul>
+
+        <h3>Storage</h3>
+
+        <p>SD cards work for learning, but they wear out quickly under heavy Docker workloads. For a production cluster:</p>
+
+        <ul>
+          <li><strong>NVMe SSD via USB 3.0</strong> — Samsung T7 or similar portable SSD ($50-80 per node) connected via USB 3. This is the recommended approach for speed and longevity</li>
+          <li><strong>SD card</strong> — Only for initial boot; use a larger card (32GB+) if you must. Expect them to fail under heavy use</li>
+        </ul>
+
+        <h3>Cluster Housing</h3>
+
+        <p>This is where your 3D printer earns its keep. A cluster needs physical organization:</p>
+
+        <ul>
+          <li><strong>3D printed stackable case</strong> — Many open-source designs exist on Thingiverse and Printables. Search for "Raspberry Pi cluster case" for options like the CloudPi, ClusterHat case, or custom builds</li>
+          <li><strong>Acrylic stackable case</strong> — Official Raspberry Pi cases can be stacked</li>
+          <li><strong>Custom 3D printed rack</strong> — Design your own with ventilation and cable management</li>
+          <li><strong>Project enclosure box</strong> — A large rubbermaid-style bin with holes for cables</li>
+        </ul>
+
+        <p>For a professional look, consider printing a custom enclosure. Our guide on <a href="3d-printed-wall-mount-smart-home.html">3D Printed Wall Mounts for Smart Home Devices</a> has tips on designing and printing durable enclosures that also apply to cluster housing.</p>
+
+        <h3>Total Cost Estimate</h3>
+
+        <p>Here's what a 4-node Raspberry Pi 5 cluster costs:</p>
+
+        <ul>
+          <li>4× Raspberry Pi 5 8GB: $320</li>
+          <li>4× 27W USB-C power supply: $48</li>
+          <li>4× Samsung T7 500GB SSD: $240</li>
+          <li>5-port gigabit switch: $20</li>
+          <li>Ethernet cables (×4): $10</li>
+          <li>Cluster case (3D printed or bought): $0-40</li>
+          <li><strong>Total: ~$640-680</strong></li>
+        </ul>
+
+        <p>You can cut this to ~$350 by using Pi 4 boards and SD cards instead of NVMe SSDs — still a very capable learning cluster for the price.</p>
+
+        <h2>Step 1: Flash the Operating System</h2>
+
+        <p>Use the <strong>Raspberry Pi Imager</strong> (available at <a href="https://www.raspberrypi.com/software/" target="_blank" rel="noopener noreferrer">raspberrypi.com/software</a>) to flash Raspberry Pi OS Lite (64-bit) to each SD card or SSD. Configure the following for each node during the flashing process:</p>
+
+        <h3>Per-Node Settings</h3>
+
+        <ul>
+          <li><strong>Hostname</strong> — Give each node a unique name: <code>pi-cluster-master</code>, <code>pi-cluster-worker1</code>, <code>pi-cluster-worker2</code>, <code>pi-cluster-worker3</code></li>
+          <li><strong>Enable SSH</strong> — Critical for remote cluster management</li>
+          <li><strong>Set a username and password</strong> — Use the same username (e.g., <code>pi</code>) across all nodes for easier management</li>
+          <li><strong>Configure WiFi</strong> — Only if you're not using Ethernet; Ethernet is better</li>
+          <li><strong>Set locale and timezone</strong></li>
+        </ul>
+
+        <h3>Initial Boot</h3>
+
+        <p>Insert the storage into each Pi, connect them to the switch with Ethernet cables, and power them on. Wait 2-3 minutes for first boot. Then find their IP addresses using your router's connected devices list, or run:</p>
+
+        <pre><code>ping pi-cluster-master.local
+ping pi-cluster-worker1.local</code></pre>
+
+        <p>Connect to the master node via SSH:</p>
+
+        <pre><code>ssh pi@pi-cluster-master.local</code></pre>
+
+        <h2>Step 2: Configure the Master Node</h2>
+
+        <p>On the master node, run through these setup steps:</p>
+
+        <h3>Update the System</h3>
+
+        <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+
+        <h3>Set a Static IP</h3>
+
+        <p>Edit the DHCP configuration to assign fixed IPs (subnet depends on your network):</p>
+
+        <pre><code>sudo nano /etc/dhcpcd.conf</code></pre>
+
+        <p>Add these lines for the master node:</p>
+
+        <pre><code>interface eth0
+static ip_address=192.168.1.100/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1</code></pre>
+
+        <p>Repeat for each worker node with IPs 192.168.1.101, 192.168.1.102, etc.</p>
+
+        <h3>Update /etc/hosts</h3>
+
+        <p>Add all cluster nodes to the hosts file on every node so they can resolve each other by name:</p>
+
+        <pre><code>sudo nano /etc/hosts
+# Add these lines:
+192.168.1.100   pi-cluster-master
+192.168.1.101   pi-cluster-worker1
+192.168.1.102   pi-cluster-worker2
+192.168.1.103   pi-cluster-worker3</code></pre>
+
+        <h3>Set Up SSH Key Authentication</h3>
+
+        <p>Generate an SSH key on the master and distribute it to all workers for passwordless login:</p>
+
+        <pre><code>ssh-keygen -t ed25519 -C "cluster-master"
+ssh-copy-id pi@pi-cluster-worker1
+ssh-copy-id pi@pi-cluster-worker2
+ssh-copy-id pi@pi-cluster-worker3</code></pre>
+
+        <p>From here, you can choose your orchestration platform: <strong>Docker Swarm</strong> (simpler, built into Docker) or <strong>Kubernetes</strong> (more powerful, industry-standard). We'll cover both approaches below.</p>
+
+        <h2>Option A: Docker Swarm (Easier Path)</h2>
+
+        <p>Docker Swarm is built into Docker and is the simplest way to get a cluster running. It's perfect for learning and running containerized services.</p>
+
+        <h3>Install Docker on All Nodes</h3>
+
+        <p>On each node, install Docker:</p>
+
+        <pre><code>curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER</code></pre>
+
+        <p>Log out and back in for the group change to take effect. Repeat on all worker nodes.</p>
+
+        <h3>Initialize the Swarm on Master</h3>
+
+        <pre><code>docker swarm init --advertise-addr 192.168.1.100</code></pre>
+
+        <p>Docker will output a join command. Copy it and run it on each worker:</p>
+
+        <pre><code># On worker1:
+docker swarm join --token &lt;TOKEN&gt; 192.168.1.100:2377
+
+# On worker2:
+docker swarm join --token &lt;TOKEN&gt; 192.168.1.100:2377
+
+# On worker3:
+docker swarm join --token &lt;TOKEN&gt; 192.168.1.100:2377</code></pre>
+
+        <h3>Verify the Cluster</h3>
+
+        <pre><code>docker node ls</code></pre>
+
+        <p>You should see all 4 nodes listed with their status as "Ready."</p>
+
+        <h3>Deploy a Service</h3>
+
+        <p>Deploy a simple service across the cluster:</p>
+
+        <pre><code>docker service create --name nginx --replicas 4 -p 80:80 nginx:latest</code></pre>
+
+        <p>This deploys 4 nginx containers across your cluster, automatically distributing them to different nodes. Docker Swarm handles load balancing automatically.</p>
+
+        <p>For more advanced Docker projects on your Pi, check out our guide on <a href="raspberry-pi-nas-build.html">Building a NAS with Raspberry Pi and OpenMediaVault</a> — many NAS features can also run as Docker containers on your cluster.</p>
+
+        <h2>Option B: Kubernetes with k3s (More Powerful)</h2>
+
+        <p>For a more production-grade cluster that mirrors real-world DevOps environments, use <strong>k3s</strong> — a lightweight Kubernetes distribution designed for edge and IoT. It's faster to install than stock Kubernetes and uses half the memory.</p>
+
+        <h3>Install k3s on Master</h3>
+
+        <pre><code>curl -sfL https://get.k3s.io | sh -
+# Wait for it to complete, then get the node token:
+sudo cat /var/lib/rancher/k3s/server/node-token</code></pre>
+
+        <h3>Join Worker Nodes</h3>
+
+        <pre><code>curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.100:6443 K3S_TOKEN=&lt;NODE-TOKEN&gt; sh -</code></pre>
+
+        <h3>Manage the Cluster</h3>
+
+        <pre><code># From your laptop/desktop, install kubectl:
+# Then configure it to talk to your cluster:
+kubectl get nodes</code></pre>
+
+        <p>You now have a proper Kubernetes cluster. Deploy applications using YAML manifests:</p>
+
+        <pre><code>kubectl apply -f deployment.yaml
+kubectl get pods -A</code></pre>
+
+        <h2>Use Cases: What to Run on Your Cluster</h2>
+
+        <p>Now that your cluster is running, here are the best projects to deploy on it:</p>
+
+        <h3>Personal Cloud Services</h3>
+
+        <ul>
+          <li><strong>Home Assistant</strong> — Run your smart home hub with redundancy. See our <a href="home-assistant-raspberry-pi-setup.html">Home Assistant on Raspberry Pi Setup Guide</a></li>
+          <li><strong>Nextcloud</strong> — Self-hosted Dropbox alternative</li>
+          <li><strong>Plex / Jellyfin</strong> — Media server for streaming video</li>
+          <li><strong>Pi-hole</strong> — Network-wide ad blocking for every device in your home</li>
+          <li><strong>Gitea</strong> — Self-hosted Git repository hosting (like GitHub)</li>
+        </ul>
+
+        <h3>Learning and Development</h3>
+
+        <ul>
+          <li><strong>Jenkins or GitLab Runner</strong> — Continuous integration for your coding projects</li>
+          <li><strong>Portainer</strong> — Web-based Docker management interface</li>
+          <li><strong>Monitoring stack</strong> — Prometheus + Grafana for cluster metrics</li>
+          <li><strong>Code Server</strong> — VS Code in the browser, running on your cluster</li>
+        </ul>
+
+        <h3>Compute Projects</h3>
+
+        <ul>
+          <li><strong>Distributed computing</strong> — Folding@Home, BOINC, or SETI@Home</li>
+          <li><strong>Video encoding</strong> — FFmpeg distributed encoding cluster</li>
+          <li><strong>Machine learning inference</strong> — Deploy Ollama or similar LLM tools for local AI</li>
+          <li><strong>Compile farm</strong> — Speed up firmware or kernel builds</li>
+        </ul>
+
+        <h2>Performance: What to Expect</h2>
+
+        <p>A 4-node Raspberry Pi 5 8GB cluster won't rival a data center, but it delivers impressive numbers for the cost:</p>
+
+        <ul>
+          <li><strong>Total cores:</strong> 16 cores (4× 4-core Cortex-A76 CPUs)</li>
+          <li><strong>Total RAM:</strong> 32GB distributed across nodes</li>
+          <li><strong>Docker containers:</strong> Can run 40-60+ lightweight containers simultaneously</li>
+          <li><strong>Web traffic:</strong> Can serve 500-1000 concurrent requests with nginx</li>
+          <li><strong>Compile times:</strong> ~3-4× faster than a single Pi for parallel builds</li>
+        </ul>
+
+        <p>The cluster's real power emerges with parallelizable tasks. If you're running a single-threaded workload, one Raspberry Pi 5 will finish before the cluster even finishes distributing the job. Always match your problem to your architecture.</p>
+
+        <h2>Common Problems and Fixes</h2>
+
+        <h3>Nodes Won't Join the Swarm/Cluster</h3>
+
+        <ul>
+          <li>Check that all nodes are on the same network and can ping each other</li>
+          <li>Verify firewall rules — Docker Swarm requires port 2377 for cluster communication</li>
+          <li>Make sure all nodes are on the same Docker version</li>
+          <li>The join token may have changed — re-run <code>docker swarm join-token</code> on the master</li>
+        </ul>
+
+        <h3>Services Won't Schedule to Worker Nodes</h3>
+
+        <p>If Docker Swarm schedules all containers to the master:</p>
+
+        <ul>
+          <li>Check that workers show as "Ready" in <code>docker node ls</code></li>
+          <li>Inspect the service: <code>docker service ps &lt;service-name&gt;</code></li>
+          <li>Check available memory on worker nodes — containers may be too large</li>
+          <li>Add placement constraints: <code>--constraint 'node.role==worker'</code></li>
+        </ul>
+
+        <h3>SD Cards or SSDs Overheating</h3>
+
+        <p>Raspberry Pi 5 has a thermal management system, but clusters generate heat when packed together:</p>
+
+        <ul>
+          <li>Add small 5V fans between Pi boards or in the case</li>
+          <li>Use heat sinks on all boards</li>
+          <li>Ensure ventilation gaps between stacked boards</li>
+          <li>Monitor temperatures with <code>vcgencmd measure_temp</code></li>
+        </ul>
+
+        <h3>Network Bottleneck</h3>
+
+        <p>If your cluster applications are slow, the network might be the culprit:</p>
+
+        <ul>
+          <li>Always use Ethernet, never WiFi, for inter-node communication</li>
+          <li>A gigabit switch is essential — don't chain multiple switches</li>
+          <li>Keep the switch close to the Pis to minimize cable runs</li>
+          <li>Consider a 2.5GbE switch if you need more bandwidth</li>
+        </ul>
+
+        <h2>Maintenance and Monitoring</h2>
+
+        <h3>Keep All Nodes Updated</h3>
+
+        <pre><code># From the master node, run across all nodes:
+for host in pi-cluster-worker1 pi-cluster-worker2 pi-cluster-worker3; do
+    ssh $host "sudo apt update && sudo apt upgrade -y"
+done</code></pre>
+
+        <h3>Monitor Cluster Health</h3>
+
+        <p>Install Portainer on your Docker Swarm for a visual management interface:</p>
+
+        <pre><code>docker stack deploy -c portainer-agent-stack.yml portainer</code></pre>
+
+        <p>Or use a monitoring stack with Prometheus and Grafana to track CPU, memory, and network utilization across all nodes.</p>
+
+        <h3>Back Up Configuration</h3>
+
+        <p>Cluster configs are scattered across nodes. Keep backups of:</p>
+
+        <ul>
+          <li><code>/etc/hosts</code> from each node</li>
+          <li>Docker configs and compose files</li>
+          <li>k3s token (if using Kubernetes)</li>
+          <li>Port forwarding rules on your router</li>
+        </ul>
+
+        <h2>3D Print a Cluster Case</h2>
+
+        <p>Once your cluster is running, invest in a proper case. A well-designed 3D printed cluster case:</p>
+
+        <ul>
+          <li><strong>Organizes cables</strong> — Keeps power and Ethernet cables neat</li>
+          <li><strong>Provides cooling</strong> — Built-in fan mounts and ventilation</li>
+          <li><strong>Protects boards</strong> — Shields from dust and accidental contact</li>
+          <li><strong>Looks professional</strong> — A proper case transforms a mess of cables into a sleek machine</li>
+        </ul>
+
+        <p>Search Printables.com or Thingiverse for "Raspberry Pi cluster case" — many designs are specifically made for Pi 5 and include mounting for SSDs, fans, and even small OLED status displays. For design tips, see our guide on <a href="3d-printed-cable-management-smart-home.html">3D Printed Cable Management for Smart Home Setups</a>.</p>
+
+        <h2>Conclusion: Your Mini Supercomputer Is Ready</h2>
+
+        <p>Building a Raspberry Pi cluster is one of the most educational and rewarding projects in the maker world. You learn Linux administration, containerization, networking, distributed computing, and DevOps — all in one project that actually does something useful when you're done.</p>
+
+        <p>The beauty of the Raspberry Pi cluster is that it scales with your knowledge. Start with Docker Swarm for simplicity. Graduate to k3s Kubernetes when you want industry-standard experience. Add nodes when you want more power. Run it headless in a closet, or build a beautiful custom enclosure that sits on your desk as a conversation piece.</p>
+
+        <p>At around $150-170 per node, a 4-node Raspberry Pi 5 cluster offers more learning value per dollar than almost any other computing project. You'll touch networking, systems administration, software deployment, and distributed architecture — all skills that are in demand in the real world of cloud computing and DevOps.</p>
+
+        <p>For more advanced Raspberry Pi projects, explore our collection including <a href="diy-weather-station-raspberry-pi.html">Building a Weather Station with Raspberry Pi</a>, <a href="drone-building-raspberry-pi.html">Building a Drone with Raspberry Pi</a>, and <a href="best-retropie-diy-console.html">Retro Gaming Console with RetroPie</a> to get the most out of your Pi boards.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="raspberry-pi-diy-projects-beginners.html">10 Raspberry Pi DIY Projects for Beginners: From NAS to Smart Mirror</a></li>
+          <li><a href="raspberry-pi-nas-build.html">How to Build a Home NAS with Raspberry Pi: OpenMediaVault Setup</a></li>
+          <li><a href="home-assistant-raspberry-pi-setup.html">Getting Started with Home Assistant on Raspberry Pi: Your First Smart Home Hub</a></li>
+          <li><a href="best-raspberry-pi-alternatives-2026.html">Best Raspberry Pi Alternatives in 2026: Orange Pi, Banana Pi & More Compared</a></li>
+          <li><a href="diy-weather-station-raspberry-pi.html">How to Build a DIY Weather Station with Raspberry Pi</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

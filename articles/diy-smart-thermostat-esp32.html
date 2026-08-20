@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Smart Thermostat with ESP32 and Home Assistant: Complete Build Guide</title>
+  <meta name="description" content="Build your own smart thermostat with ESP32 and Home Assistant for under $40. Step-by-step guide covering hardware, ESPHome config, HVAC wiring, and automation scripts.">
+  <meta name="keywords" content="ESP32 thermostat, DIY smart thermostat, Home Assistant thermostat, ESPHome thermostat, smart HVAC control, ESP32 HVAC, room temperature controller">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body
+><nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon"><0xF0><0x9F><0x96><0xA8>️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <a href="../projects.html">Projects</a> &raquo; DIY Smart Thermostat
+      </nav>
+      <h1>DIY Smart Thermostat with ESP32 and Home Assistant: Complete Build Guide</h1>
+      <div class="article-meta">
+        <span>📅 August 19, 2026</span>
+        <span>⏱️ ~13 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🌡️</span>
+      </div>
+      <div class="article-body">
+        <p>Tired of paying high monthly fees for commercial smart thermostats like Nest or Ecobee, or feeling locked into proprietary systems? If you dream of complete control over your home's climate and want to build a truly custom, cost-effective solution, then building your own <strong>DIY smart thermostat</strong> with an ESP32 and Home Assistant is the perfect project for you. This guide walks you through the entire process—from selecting the hardware and understanding complex HVAC wiring to configuring ESPHome firmware and setting up robust Home Assistant automations. You will learn how to bridge the gap between cutting-edge microcontrollers and traditional HVAC systems, achieving smart HVAC control for an incredible value, often for under $40. By the end of this comprehensive guide, you will not only have a functional smart thermostat but also a deep understanding of the underlying principles of the ESP32 DIY home automation ecosystem. Let's dive into the hardware and start building your smart climate system!</p>
+
+        <h2 id="why-build-own-thermostat">Why Build Your Own Thermostat?</h2>
+        <p>There are compelling reasons why hobbyists and DIY enthusiasts choose to bypass commercial solutions and opt for a custom build using an ESP32. The primary motivation is centered around <strong>cost savings</strong> and gaining <strong>full local control</strong>. Commercial systems often come with hidden costs, including mandatory subscription fees for advanced features, forcing a vendor lock-in. By contrast, a DIY approach allows you to manage your climate entirely locally, eliminating recurring subscription costs. Furthermore, you gain unparalleled flexibility in system integration. You are no longer limited by the features offered by a single manufacturer; you can design your system to interface seamlessly with any HVAC setup you own, whether it's conventional furnace, heat pump, or a complex multi-zone system. This flexibility is paramount when working within the powerful, local-first philosophy of Home Assistant. Learning to code and configure this system provides an invaluable learning opportunity in embedded systems and IoT integration. Finally, there is the aspect of <strong>privacy</strong>. With commercial systems, your temperature data often resides on remote servers, raising privacy concerns. In a DIY setup, all data processing and control happen locally within your network, giving you complete control over your home's climate data.</p>
+
+        <h2 id="hardware-shopping-list">What You'll Need — Hardware Shopping List</h2>
+        <p>Before diving into the wiring, let's look at the components you'll need to bring your smart thermostat to life. The hardware selection is crucial for both functionality and safety. Here is a suggested shopping list, keeping the budget low while ensuring performance:</p>
+        <ul>
+          <li><strong>ESP32 DevKit board</strong> (~$8-12): The brain of your operation. It offers sufficient processing power and built-in Wi-Fi capabilities essential for connecting to the internet and communicating with Home Assistant.</li>
+          <li><strong>5V Relay Module</strong> (~$5): This is your critical switch. Ensure you select a module compatible with the required current. We strongly recommend modules like the <strong>Songle SRD-05VDC-SL-C or equivalent, rated for 10A</strong> to safely handle the load, especially when controlling HVAC components.</li>
+          <li><strong>Temperature/Humidity Sensor</strong> (~$3-5): Choose either a <strong>DHT22</strong> or a <strong>BME280</strong>. The DHT22 is common, but the BME280 offers superior accuracy and humidity measurement, making it a great choice for a high-quality smart thermostat.</li>
+          <li><strong>128x64 OLED Display (SSD1306)</strong> (~$4-6): This will provide a local, visual interface right on the device to show the current temperature and HVAC status.</li>
+          <li><strong>Tactile Push Button (Optional)</strong>: Useful for manual overrides or setting modes directly on the device.</li>
+          <li><strong>5V 2A Power Adapter</strong>: Essential for powering the ESP32 and the relay module stably.</li>
+          <li><strong>Breadboard and Jumper Wires</strong>: For easy prototyping and connecting the various components.</li>
+          <li><strong>Enclosure</strong>: You can 3D print a custom enclosure for this project — check out our guide to designing ESP32 cases for tips. A custom, 3D-printed case is essential for safely housing the electronics and providing a professional look.</li>
+        </ul>
+        <p>Remember, while the core electronics are cheap, the safety and reliability depend on careful component selection, especially concerning the relay module and the power supply. Having a well-designed enclosure enhances the final look and, importantly, protects your sensitive electronics.</p>
+
+        <h2 id="understanding-hvac-wiring-safety">Understanding HVAC Wiring (⚠️ Safety Section)</h2>
+        <p>This section is arguably the most critical part of the entire project. Interfacing with HVAC wiring involves dealing with **mains voltage (120V/240V)**, which poses a severe risk of electrocution and fire. **If you are not completely comfortable and certified in electrical work, you MUST consult a licensed HVAC professional before attempting any wiring.** Safety is non-negotiable in this step.</p>
+        <p>The goal of this DIY project is not to replace the main thermostat unit directly, but to use the ESP32 as a smart controller that interfaces with the low-voltage thermostat wires at the HVAC control board. You will be installing a relay module that acts as an external switch, controlling the flow of power to your HVAC system based on the ESP32's commands.</p>
+        <p>Understanding the common HVAC wiring colors is essential. While conventions vary by region, typical wires relate to:
+        <ul>
+          <li><strong>R (or Rc):</strong> Power line (often 24V AC power to the control board).</li>
+          <li><strong>G:</strong> Fan control.</li>
+          <li><strong>Y:</strong> Cooling control.</li>
+          <li><strong>W:</strong> Heating control.</li>
+          <li><strong>W2:</strong> Second stage heat control.</li>
+          <li><strong>O/B:</strong> Reversing valve signals (for heat pumps).</li>
+        </ul>
+        <p>The ESP32 setup will connect to these low-voltage thermostat wires via the relay. Crucially, the relay module itself **does not** connect directly to the mains voltage. It switches the low-voltage control signals. You must carefully check your specific HVAC wiring setup—whether you have a conventional system or a heat pump—as the wiring diagrams and wire functions can vary significantly. Furthermore, ensuring you correctly manage the **C-wire (Common wire)** for power and understanding the difference between hot/neutral and control wires is vital for safe operation. Always prioritize safety by consulting a professional for mains wiring.</p>
+
+        <h2 id="wiring-diagram">Wiring Diagram</h2>
+        <p>The physical wiring connects the sensing and switching components to the control board. This is a high-level description, as complex diagrams require specific context:</p>
+        <p><strong>Temperature Sensor Connection:</strong> The DHT22 or BME280 connects to the ESP32's 3.3V pin, GND, and a specific GPIO pin for data reading. For the BME280, ensure you follow the specified communication protocol. The sensor needs stable power and a clear data line to the ESP32 to report accurate readings.</p>
+        <p><strong>Relay Control Connection:</strong> The relay module's signal pin is connected to a digital GPIO pin on the ESP32. The relay's COM (Common) and NO/NC (Normally Open/Normally Closed) terminals are wired in series with the HVAC control wires (e.g., between the W and R wires for heating). When the ESP32 activates the relay, it safely switches the low-voltage circuit, thereby controlling the HVAC system. The OLED display connects via the I2C bus, using the ESP32's SDA and SCL pins.</p>
+
+        <h2 id="esphome-configuration">ESPHome Configuration</h2>
+        <p>The ESPHome configuration file (YAML) is the blueprint for your smart thermostat. It defines how the firmware interacts with the hardware and how it communicates with Home Assistant. This configuration must be precise and robust.</p>
+        <p>Here is a comprehensive, copy-pasteable template. Remember to adjust the `mqtt` section for your specific Home Assistant setup (e.g., MQTT broker address and topic structure):</p>
+        <pre><code>
+# Example ESPHome YAML Configuration
+esphome:
+  name: smart_thermostat
+  friendly_name: Smart Thermostat
+  platform: ESP32
+  location: /smart_thermostat
+
+wifi:
+  ssid: "YourWiFiSSID"
+  password: "YourWiFiPassword"
+
+# Enable API for Home Assistant integration
+api:
+  encryption: aes
+  password: "your_mqtt_password"
+
+# MQTT Configuration for Home Assistant
+mqtt:
+  broker: "your_mqtt_broker_ip"
+  port: 1883
+  username: "your_mqtt_user"
+  password: "your_mqtt_password"
+
+# Sensor for Temperature and Humidity (Example using DHT22)
+sensor:
+  - platform: dht
+    pin: GPIO4  # Adjust this pin based on your wiring
+    temperature:
+      name: "Room Temperature"
+      unit_of_measurement: "°C"
+      device_class: temperature
+    humidity:
+      name: "Room Humidity"
+      unit_of_measurement: "%"
+      device_class: humidity
+
+# Switch for HVAC Control (Relay Control)
+switch:
+  - platform: output
+    name: "HVAC Control"
+    id: hvac_control
+    device_class: climate
+    # This switches the relay pin to control the HVAC relay
+    output:
+      - id: hvac_relay
+        pin: GPIO2 # Connect to the relay signal pin
+        id: hvac_output
+        state: OFF
+
+# Display for OLED
+display:
+  - platform: ssd1306
+    id: display
+    address: 0x27 # I2C address for SSD1306
+    digits: 3
+    width: 128
+    height: 64
+
+# Home Assistant Integration Notes
+# Remember to integrate sensor data and switch states into Home Assistant using MQTT or the ESPHome API.
+# For advanced sensor integration like humidity, refer to our guide on sensor integration: <a href="esphome-sensor-integration.html">ESPHome Sensor Integration</a>.
+</code></pre>
+<p><strong>Configuration Explanation:</strong></p>
+<ul>
+  <li><strong>wifi/mqtt:</strong> Sets up the network connection and the MQTT broker details for communication with Home Assistant.</li>
+  <li><strong>sensor:</strong> Configures the DHT22 to read temperature and humidity. <strong>NOTE: If your DHT22 shows NaN readings, you must check the wiring and ensure you have a 10K pull-up resistor connected to the data line.</strong></li>
+  <li><strong>switch:</strong> Defines the HVAC control as a digital output linked to the relay. This switch is what Home Assistant will use to send commands.</li>
+  <li><strong>display:</strong> Configures the OLED screen to display real-time data, such as the current temperature and the HVAC state.</li>
+</ul>
+
+        <h2 id="home-assistant-automations">Home Assistant Automations</h2>
+        <p>The ESP32 provides the sensor and control, but Home Assistant (HA) provides the intelligence and user interface. This is where you define the actual smart behavior of your thermostat.</p>
+        <p>You will define your logic primarily in YAML configuration files (like <code>automations.yaml</code>) or directly in the UI. Here are key automation concepts:</p>
+        <ol>
+          <li><strong>Basic Thermostat Logic:</strong> Create an automation that triggers when the measured room temperature falls below a defined setpoint (e.g., 21°C). If the condition is met, the automation should send a command to toggle the 'HVAC Control' entity (the switch) ON. Conversely, when the temperature rises above a higher threshold (e.g., setpoint + 1 degree), the automation should switch the HVAC control OFF.</li>
+          <li><strong>Hysteresis and Deadband:</strong> It is absolutely crucial to implement **hysteresis** or a **deadband** in your automation logic. Without it, the HVAC system will rapidly switch on and off when the temperature hovers right at the setpoint (short-cycling). Implement a buffer, such as requiring the temperature to be 1 degree below the setpoint to turn on, and 1 degree above the setpoint to turn off. This prevents the system from constantly cycling, saving energy and extending the lifespan of your HVAC unit.</li>
+          <li><strong>Away Mode Automation:</strong> Create an automation that triggers when specific presence sensors (e.g., door/window sensors or a dedicated presence sensor) report that the house is "Away." When this state is active, the automation should automatically set the thermostat to an energy-saving setback temperature (e.g., 15°C) and disable direct temperature control, relying instead on scheduled settings or manual overrides.</li>
+          <li><strong>Dashboard Display:</strong> Set up a Lovelace card (e.g., Entity Card or a custom gauge card) in Home Assistant to beautifully display the current room temperature, the target setpoint, and the current HVAC status reported by the ESP32.</li>
+          <li><strong>Climate Entity Setup:</strong> Ensure your ESPHome setup correctly exposes the HVAC control as a <code>climate</code> entity to Home Assistant. This allows HA to use standard climate entities for complex integration with other devices.</li>
+        </ol>
+        <p>By carefully setting these automations, you transform a simple sensor into an active, energy-saving climate controller. For more advanced sensor integration ideas, explore our guide on <a href="diy-air-quality-monitor-esp32.html">DIY Air Quality Monitor with ESP32 and Home Assistant</a>.</p>
+
+        <h2 id="building-the-enclosure">Building the Enclosure</h2>
+        <p>The final physical step is creating a housing for your electronics. Since you are aiming for a professional look, <strong>3D printing a custom wall-mount enclosure</strong> is highly recommended. This allows you to integrate the circuit board, the display, and the wiring neatly into a cohesive unit.</p>
+        <p>When designing your enclosure, keep these points in mind:</p>
+        <ul>
+          <li><strong>Ventilation:</strong> Ensure there is adequate airflow around the ESP32 and the relay module to prevent overheating. Consider strategically placed vents or cutouts.</li>
+          <li><strong>Cable Routing:</strong> Plan out the path for the HVAC wires and the power cable. Routing cables neatly inside the printed shell will improve aesthetics and safety.</li>
+          <li><strong>Mounting Points:</strong> Design specific mounting holes to align with standard wall bracket configurations.</li>
+        </ul>
+        <p>For detailed design advice and dimension considerations for housing the ESP32, check out our guide on <a href="3d-printed-esp32-case-design.html">Best 3D printing article for ESP32 case design</a>. A well-designed enclosure elevates your project from a simple prototype to a polished, functional smart device.</p>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <p>Even with careful planning, issues can arise. Here is a list of common problems and how to troubleshoot them:</p>
+        <ul>
+          <li><strong>Relay Not Triggering HVAC:</strong> This is often a wiring or hardware issue. First, verify if your relay module is configured correctly (e.g., NO vs NC contacts). Second, check the GPIO voltage level being sent from the ESP32 and ensure the relay is properly powered.</li>
+          <li><strong>DHT22 Reading NaN:</strong> If you see 'Not a Number' readings, the sensor data is likely corrupted. This almost always points to a poor electrical connection, missing pull-up resistors (like the 10K resistor mentioned earlier), or incorrect wiring to the data pin. Test the wiring connections rigorously.</li>
+          <li><strong>ESP32 Keeps Rebooting:</strong> A common cause is insufficient power supply. Ensure you are using a high-quality 5V supply capable of delivering at least 2A for stable operation, especially under load.</li>
+          <li><strong>Home Assistant Not Seeing the Device:</strong> If HA isn't seeing the thermostat entity, check your MQTT broker connection (IP address, port, credentials). Verify that the ESPHome configuration is successfully publishing the sensor and switch states to the correct MQTT topics.</li>
+          <li><strong>HVAC Short-Cycling:</strong> If the system turns on and off too frequently, you need to go back to your Home Assistant automations and significantly increase the deadband (the difference between the setpoint and the activation/deactivation thresholds).</li>
+        </ul>
+
+        <h2 id="conclusion">Conclusion</h2>
+        <p>Building a <strong>DIY smart thermostat</strong> with an ESP32 and integrating it with Home Assistant is an incredibly rewarding journey that delivers complete ownership over your home's climate control. You have successfully navigated the complexities of embedded programming, electrical safety, and IoT integration. The freedom to customize your automation logic, monitor your energy usage, and eliminate subscription fees is a game-changer. Don't stop there! Now that you have a foundation, consider expanding your system by adding humidity control sensors, integrating presence detection for smarter 'Away' modes, or adding energy monitoring to track your HVAC consumption. Continue exploring the vast possibilities of the ESP32 ecosystem and expand your smart home with projects like <a href="smart-home-energy-monitoring.html">DIY Energy Monitoring System: ESP32 + Home Assistant Power Tracker</a>. Happy building!</p>
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3><0xF0><0x9F><0x96><0xA8>️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
