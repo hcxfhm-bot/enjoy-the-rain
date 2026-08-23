@@ -366,7 +366,7 @@
 - **剩余**: 47 篇
 
 ### 批次 50：ELECTRONICS FUNDAMENTALS & ADVANCED MAKER (6篇) 🆕
-- [ ] digital-electronics-beginners — Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained
+- [x] digital-electronics-beginners — Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained ✅ 2026-08-23
 - [ ] how-to-read-circuit-schematics — How to Read Circuit Schematics: A Beginner's Guide to Electronics Diagrams
 - [ ] best-servo-motor-arduino-projects — Best Servo Motor Projects with Arduino and ESP32 in 2026
 - [ ] battery-management-systems-arduino — DIY Battery Management System (BMS) Projects with Arduino and ESP32
