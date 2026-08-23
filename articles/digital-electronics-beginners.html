@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained</title>
+  <meta name="description" content="Learn digital electronics from scratch: logic gates, binary numbers, Ohm's Law, and how digital circuits work. Perfect for Arduino and ESP32 makers.">
+  <meta name="keywords" content="digital electronics for beginners, logic gates, binary numbers, Ohm's Law, digital circuits, electronics tutorial">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Electronics Fundamentals</span>
+      </nav>
+
+      <h1>Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 23, 2026</span>
+        <span>⏱️ 11 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">⚡</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You've been following <a href="../articles/how-to-solder-circuit-boards-beginners.html">our soldering guide</a> and building circuits. But maybe you've wondered — why does a microcontroller actually <em>think</em>? What's really going on inside an Arduino when it reads a sensor or flips a relay? That's where <strong>digital electronics</strong> comes in.</p>
+
+        <p>This guide breaks down the fundamentals: how computers talk in 1s and 0s, what logic gates do, and the core equations that govern every circuit you'll ever build. No engineering degree required — just curiosity and a multimeter.</p>
+
+        <h2>What Is Digital Electronics?</h2>
+
+        <p>Unlike analog electronics, where voltage can be any value between 0V and 5V, <strong>digital electronics</strong> deals with only two states: ON (logic HIGH) and OFF (logic LOW). This binary system is the foundation of every computer, microcontroller, and smart device on the planet.</p>
+
+        <p>In most hobbyist circuits (including Arduino and ESP32), these states translate to:</p>
+        <ul>
+          <li><strong>LOW = 0V</strong> (ground, off, false)</li>
+          <li><strong>HIGH = 3.3V or 5V</strong> (power, on, true)</li>
+        </ul>
+
+        <p>Everything your microcontroller does — reading a button press, sending data over WiFi, driving an LED — comes down to manipulating these 1s and 0s. If you want to dive deeper into the tools that help you measure these signals, check out our <a href="../articles/best-multimeter-for-electronics.html">best multimeter guide for electronics</a>.</p>
+
+        <h2>Understanding Binary Numbers</h2>
+
+        <p>Humans count in base-10 (decimal). Computers count in base-2 (binary). Each binary digit (bit) is either 0 or 1. Here's why that matters for electronics:</p>
+
+        <p>A group of 8 bits is called a <strong>byte</strong>. A byte can represent values from 0 to 255. Here's how to read binary:</p>
+        <ul>
+          <li><code>00000000</code> = 0</li>
+          <li><code>00000001</code> = 1</li>
+          <li><code>00000010</code> = 2</li>
+          <li><code>00000100</code> = 4</li>
+          <li><code>11111111</code> = 255</li>
+        </ul>
+
+        <p>Each position represents a power of 2 (from right to left: 2⁰, 2¹, 2², 2³, and so on). This is exactly how your Arduino stores sensor data, how ESP32 communicates over WiFi, and how your 3D printer's controller interprets G-code commands.</p>
+
+        <p>If you're working with addressable LEDs like WS2812B strips, understanding binary is essential — each LED needs 24 bits of color data (8 bits each for red, green, and blue). Our <a href="../articles/ws2812b-led-strip-esp32.html">WS2812B LED strip guide</a> covers this in practical detail.</p>
+
+        <h2>Ohm's Law: The Equation That Runs Everything</h2>
+
+        <p>If you remember only one equation from electronics, make it <strong>Ohm's Law</strong>:</p>
+
+        <p><code>V = I × R</code></p>
+
+        <p>Where:</p>
+        <ul>
+          <li><strong>V</strong> = Voltage (volts, V)</li>
+          <li><strong>I</strong> = Current (amps, A)</li>
+          <li><strong>R</strong> = Resistance (ohms, Ω)</li>
+        </ul>
+
+        <p>From this, you can derive two more useful formulas:</p>
+        <ul>
+          <li><code>I = V / R</code> — How much current flows through a circuit</li>
+          <li><code>R = V / I</code> — What resistor you need to limit current</li>
+        </ul>
+
+        <p><strong>Practical example:</strong> You have a 5V Arduino and want to drive a red LED (which needs about 2V at 20mA). You need to drop 3V across a resistor. Using Ohm's Law: R = V / I = 3V / 0.020A = <strong>150Ω</strong>. A 150Ω or 220Ω resistor is perfect.</p>
+
+        <p>Power consumption is another critical consideration. You can calculate it with <code>P = V × I</code>. If you're building battery-powered projects with ESP32, understanding power draw is essential — our <a href="../articles/smart-home-energy-monitoring.html">energy monitoring guide</a> covers this in depth.</p>
+
+        <h2>Logic Gates: The Building Blocks of Decision-Making</h2>
+
+        <p><strong>Logic gates</strong> are the fundamental decision-making units in digital circuits. They take one or more binary inputs and produce a binary output based on a logical rule.</p>
+
+        <h3>AND Gate</h3>
+        <p>Output is HIGH only when <em>all</em> inputs are HIGH.</p>
+        <ul>
+          <li>0 AND 0 = 0</li>
+          <li>0 AND 1 = 0</li>
+          <li>1 AND 1 = 1</li>
+        </ul>
+        <p>Think of it as two switches in series — both must be closed for the light to turn on.</p>
+
+        <h3>OR Gate</h3>
+        <p>Output is HIGH when <em>at least one</em> input is HIGH.</p>
+        <ul>
+          <li>0 OR 0 = 0</li>
+          <li>0 OR 1 = 1</li>
+          <li>1 OR 1 = 1</li>
+        </ul>
+        <p>Like two switches in parallel — closing either one turns on the light.</p>
+
+        <h3>NOT Gate (Inverter)</h3>
+        <p>The simplest gate — it flips the input.</p>
+        <ul>
+          <li>NOT 0 = 1</li>
+          <li>NOT 1 = 0</li>
+        </ul>
+
+        <h3>NAND and NOR Gates</h3>
+        <p>These are simply inverted versions of AND and OR. They're actually the most commonly used gates in real circuits because they're cheaper to manufacture and can be combined to build any other logic function.</p>
+
+        <h3>XOR Gate</h3>
+        <p>Exclusive OR — output is HIGH when inputs are <em>different</em>.</p>
+        <ul>
+          <li>0 XOR 0 = 0</li>
+          <li>0 XOR 1 = 1</li>
+          <li>1 XOR 0 = 1</li>
+          <li>1 XOR 1 = 0</li>
+        </ul>
+        <p>XOR gates are essential for arithmetic circuits and error detection.</p>
+
+        <p>When you write code like <code>if (button1 == HIGH && button2 == HIGH)</code> on an Arduino, you're essentially implementing an AND gate in software. Microcontrollers execute these logic operations millions of times per second.</p>
+
+        <h2>Pull-Up and Pull-Down Resistors</h2>
+
+        <p>Here's a concept that trips up many beginners: floating pins. When a microcontroller pin is connected to nothing, it picks up random electrical noise and gives unpredictable readings.</p>
+
+        <p>A <strong>pull-up resistor</strong> (typically 10kΩ) connects the pin to VCC (5V or 3.3V) through a resistor. When the button is open, the pin reads HIGH. When you press the button, it connects directly to ground and reads LOW.</p>
+
+        <p>A <strong>pull-down resistor</strong> does the opposite — it keeps the pin LOW by default and reads HIGH when a button connects it to VCC.</p>
+
+        <p>Most microcontrollers (including Arduino and ESP32) have built-in pull-up resistors you can enable in code with <code>pinMode(pin, INPUT_PULLUP)</code>. Understanding this is critical for reliable button inputs and sensor readings.</p>
+
+        <h2>From Logic Gates to Microcontrollers</h2>
+
+        <p>Modern microcontrollers like the ATmega328P (Arduino Uno) and ESP32 contain millions of logic gates arranged into functional blocks:</p>
+        <ul>
+          <li><strong>CPU</strong> — executes instructions using logic gate combinations</li>
+          <li><strong>Memory</strong> — stores data in flip-flop circuits (basic 1-bit memory cells)</li>
+          <li><strong>Timers/Counters</strong> — use clock signals and flip-flops to measure time</li>
+          <li><strong>Communication modules</strong> — UART, I2C, SPI — all built from logic gate state machines</li>
+        </ul>
+
+        <p>When you learn to program an ESP32, you're essentially telling millions of logic gates what to do. The <a href="../articles/esp32-web-server-tutorial.html">ESP32 web server tutorial</a> we published shows this in action — your code sends HTML over WiFi, which is really just a stream of binary data processed by logic gates.</p>
+
+        <h2>Practical Project: Building a Logic Probe</h2>
+
+        <p>One of the best ways to learn digital electronics is to build a simple <strong>logic probe</strong> — a tool that tells you whether a point in a circuit is HIGH, LOW, or pulsing.</p>
+
+        <p>You'll need:</p>
+        <ul>
+          <li>A breadboard (check our <a href="../articles/best-breadboard-projects-beginners.html">best breadboard projects guide</a>)</li>
+          <li>An LED and 330Ω resistor</li>
+          <li>Some hookup wire</li>
+        </ul>
+
+        <p>Connect the probe tip to a circuit point. If the LED lights up bright, that point is HIGH. If it's dim or off, it's LOW. If it flickers, you have a pulsing signal — exactly what you'd see on an Arduino clock pin or PWM output.</p>
+
+        <p>For more advanced debugging, a logic analyzer (like the ones in our <a href="../articles/best-logic-analyzer-beginners.html">best logic analyzer guide</a>) can capture and display digital waveforms in real time, helping you debug I2C communication, SPI protocols, and timing issues.</p>
+
+        <h2>Where to Go Next</h2>
+
+        <p>Digital electronics is a deep field, but you don't need to master everything before you start building. Here's a learning path:</p>
+        <ol>
+          <li><strong>Master Ohm's Law</strong> — practice with your multimeter on real circuits</li>
+          <li><strong>Learn to read schematics</strong> — understanding circuit diagrams opens up thousands of projects</li>
+          <li><strong>Build logic gate circuits</strong> — start with 74HC08 (AND) and 74HC32 (OR) ICs on a breadboard</li>
+          <li><strong>Understand datasheets</strong> — every component has one, and they're your best reference</li>
+          <li><strong>Progress to microcontrollers</strong> — Arduino is the perfect first step into programmable electronics</li>
+        </ol>
+
+        <p>If you're ready to put this knowledge into practice, our guide on <a href="../articles/diy-electronics-workbench-setup.html">setting up your electronics workbench</a> covers everything from oscilloscopes to organization tips. And if you want to design your own circuits, our <a href="../articles/diy-pcb-design-beginners.html">DIY PCB design guide</a> shows how to go from schematic to physical board.</p>
+
+        <p>Digital electronics isn't just theory — it's the language that makes your projects come alive. Every Arduino sketch, every ESP32 web server, every Home Assistant sensor integration runs on these fundamental principles. Start small, experiment often, and don't be afraid to blow up a few components along the way. That's how every maker learns.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/how-to-solder-circuit-boards-beginners.html">How to Solder Circuit Boards: Complete Beginner's Guide</a></li>
+          <li><a href="../articles/best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="../articles/best-logic-analyzer-beginners.html">Best Logic Analyzer for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="../articles/diy-electronics-workbench-setup.html">How to Set Up a DIY Electronics Workbench</a></li>
+          <li><a href="../articles/esp32-web-server-tutorial.html">ESP32 Web Server Tutorial: Control LEDs and Sensors from Your Browser</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

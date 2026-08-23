@@ -361,11 +361,19 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 254 篇 ✅ (批次49完成)
-- **当前批次**: 批次49
+- **已完成**: 255 篇 ✅ (批次50进行中)
+- **当前批次**: 批次50
 - **剩余**: 47 篇
 
-### 批次 49：MAKER PROJECTS & IOT CONTINUED (6篇) 🆕
+### 批次 50：ELECTRONICS FUNDAMENTALS & ADVANCED MAKER (6篇) 🆕
+- [ ] digital-electronics-beginners — Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained
+- [ ] how-to-read-circuit-schematics — How to Read Circuit Schematics: A Beginner's Guide to Electronics Diagrams
+- [ ] best-servo-motor-arduino-projects — Best Servo Motor Projects with Arduino and ESP32 in 2026
+- [ ] battery-management-systems-arduino — DIY Battery Management System (BMS) Projects with Arduino and ESP32
+- [ ] custom-pcb-ordering-guide — How to Order Custom PCBs Online: From KiCad Design to Doorstep Delivery
+- [ ] how-to-use-logic-analyzer-arduino — How to Use a Logic Analyzer to Debug Arduino and ESP32 Projects
+
+### 批次 49：MAKER PROJECTS & IOT CONTINUED (6篇) 🆕 ✅
 - [x] diy-robot-car-arduino — How to Build a DIY Robot Car with Arduino: Line Following and Obstacle Avoidance ✅ 2026-08-15
 - [x] best-thermal-camera-electronics — Best Thermal Cameras for Electronics and Home Inspection in 2026 ✅ 2026-08-16
 - [x] esp32-web-server-tutorial — ESP32 Web Server Tutorial: Control LEDs and Sensors from Your Browser ✅ 2026-08-18
