@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Servo Motor Projects with Arduino and ESP32 in 2026</title>
+  <meta name="description" content="Discover the best servo motor projects for Arduino and ESP32. Build robot arms, pan-tilt cameras, automated blinds, and more with step-by-step tutorials and code examples.">
+  <meta name="keywords" content="servo motor projects, Arduino servo, ESP32 servo, servo motor tutorial, robot arm servo, pan-tilt servo, SG90 servo, MG996R servo, servo control Arduino">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Projects</span>
+      </nav>
+
+      <h1>Best Servo Motor Projects with Arduino and ESP32 in 2026</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 25, 2026</span>
+        <span>⏱️ 13 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🤖</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You've got an Arduino, a handful of servo motors, and a hunger to build something cool. <strong>Servo motors</strong> are the perfect entry point into robotics and automation — they're precise, affordable, and surprisingly versatile. From simple pan-tilt camera mounts to complex robot arms, servos power thousands of maker projects worldwide.</p>
+
+        <p>This guide showcases the best servo motor projects you can build with Arduino and ESP32 in 2026. Each project includes clear instructions, required components, and code examples. Whether you're a beginner or an experienced maker, you'll find projects that match your skill level and spark new ideas.</p>
+
+        <h2>What Is a Servo Motor?</h2>
+
+        <p>A <strong>servo motor</strong> is a rotary actuator that allows precise control of angular position. Unlike standard DC motors that spin continuously, servos rotate to a specific angle (typically 0-180° or 0-270°) and hold that position. This precision makes them ideal for robotics, RC vehicles, and automation systems.</p>
+
+        <p>Inside a typical hobby servo, you'll find:</p>
+        <ul>
+          <li><strong>DC motor</strong> — provides the rotational force</li>
+          <li><strong>Gear train</strong> — reduces speed and increases torque</li>
+          <li><strong>Potentiometer</strong> — senses the output shaft position</li>
+          <li><strong>Control circuit</strong> — reads position feedback and drives the motor</li>
+        </ul>
+
+        <p>The control circuit receives PWM (Pulse Width Modulation) signals from your Arduino or ESP32. A 1ms pulse moves the servo to 0°, 1.5ms to 90°, and 2ms to 180°. Your code sends these pulses continuously (typically 50 times per second) to maintain position.</p>
+
+        <h2>Popular Servo Motors for Makers</h2>
+
+        <h3>SG90 Micro Servo</h3>
+        <p>The <strong>SG90</strong> is the most common beginner servo. It's tiny (22x11x27mm), lightweight (9g), and costs under $3. With 1.8 kg-cm torque at 4.8V, it's perfect for small projects like sensor mounts, simple robots, and light mechanisms. Limitation: not strong enough for heavy loads or continuous use.</p>
+
+        <h3>MG996R Metal Gear Servo</h3>
+        <p>The <strong>MG996R</strong> is the workhorse of maker projects. Metal gears (brass and aluminum) handle up to 15 kg-cm torque at 6V — enough for robot arms, grippers, and pan-tilt systems with cameras. It costs $8-12 and offers excellent durability. This servo is our top recommendation for most projects.</p>
+
+        <h3>High-Torque Digital Servos</h3>
+        <p>For demanding applications like large robot arms or CNC machines, digital servos like the <strong>DS3218</strong> (20-25 kg-cm) or <strong>DS3225</strong> (30-40 kg-cm) provide serious power. These use metal gears, dual bearings, and advanced control electronics for smoother movement and higher holding torque.</p>
+
+        <h2>Project 1: Pan-Tilt Camera Mount</h2>
+
+        <p><strong>Difficulty:</strong> Beginner</p>
+        <p><strong>Components:</strong> Arduino UNO, 2x SG90 servos, joystick module, pan-tilt kit ($10-15 on Amazon)</p>
+
+        <p>This project builds a 2-axis camera mount controlled by a joystick. It's the foundation for surveillance cameras, FPV drones, and automated tracking systems.</p>
+
+        <h3>How It Works</h3>
+        <p>Two servos handle horizontal (pan) and vertical (tilt) movement. The joystick's X-axis controls pan (0-180°), and the Y-axis controls tilt. The code maps joystick readings (0-1023) to servo angles (0-180°).</p>
+
+        <h3>Wiring</h3>
+        <ul>
+          <li>Pan servo signal → Arduino Pin 9</li>
+          <li>Tilt servo signal → Arduino Pin 10</li>
+          <li>Joystick VRx → Analog Pin A0</li>
+          <li>Joystick VRy → Analog Pin A1</li>
+          <li>Servo VCC → 5V (external supply recommended for multiple servos)</li>
+          <li>All grounds connected together</li>
+        </ul>
+
+        <h3>Code Snippet</h3>
+        <pre><code>#include &lt;Servo.h&gt;
+
+Servo panServo;
+Servo tiltServo;
+
+void setup() {
+  panServo.attach(9);
+  tiltServo.attach(10);
+}
+
+void loop() {
+  int panValue = analogRead(A0);
+  int tiltValue = analogRead(A1);
+  
+  int panAngle = map(panValue, 0, 1023, 0, 180);
+  int tiltAngle = map(tiltValue, 0, 1023, 0, 180);
+  
+  panServo.write(panAngle);
+  tiltServo.write(tiltAngle);
+  delay(15);
+}</code></pre>
+
+        <p>This simple project teaches PWM control, analog input reading, and mechanical assembly. For a WiFi-enabled version, replace Arduino with ESP32 and control the mount from your phone using our <a href="../articles/esp32-web-server-tutorial.html">ESP32 web server tutorial</a>.</p>
+
+        <h2>Project 2: Simple Robot Arm (3-DOF)</h2>
+
+        <p><strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Components:</strong> Arduino UNO, 3x MG996R servos, robot arm kit ($20-30), 5V 3A power supply</p>
+
+        <p>Build a 3-degree-of-freedom (DOF) robot arm that can pick up light objects, draw with a pen, or sort items by color. This project introduces kinematics, servo coordination, and motion planning.</p>
+
+        <h3>Arm Design</h3>
+        <p>Most budget robot arm kits use three servos:</p>
+        <ul>
+          <li><strong>Base servo</strong> — rotates the entire arm horizontally (0-180°)</li>
+          <li><strong>Shoulder servo</strong> — lifts/lowers the arm (creates elevation angle)</li>
+          <li><strong>Elbow servo</strong> — bends the arm (fine positioning)</li>
+        </ul>
+
+        <p>Add a fourth servo for a gripper if you want to pick up objects. Our <a href="../articles/diy-robot-car-arduino.html">robot car project</a> uses similar servo control techniques.</p>
+
+        <h3>Power Considerations</h3>
+        <p><strong>Important:</strong> Three MG996R servos can draw 6A+ under load. Arduino's 5V regulator can't supply this. Use a dedicated 5V 3A power supply or a buck converter from a 12V source. Connect the supply directly to servo VCC, with a common ground to Arduino.</p>
+
+        <h3>Control Methods</h3>
+        <ul>
+          <li><strong>Potentiometer array</strong> — three pots, one for each joint (manual control)</li>
+          <li><strong>Serial commands</strong> — send angle values from Python or a Processing sketch</li>
+          <li><strong>Pre-programmed sequences</strong> — store movement patterns in EEPROM</li>
+          <li><strong>Inverse kinematics</strong> — calculate joint angles from desired gripper position (advanced)</li>
+        </ul>
+
+        <h3>Code Snippet: Pre-programmed Sequence</h3>
+        <pre><code>#include &lt;Servo.h&gt;
+
+Servo baseServo, shoulderServo, elbowServo;
+
+void setup() {
+  baseServo.attach(9);
+  shoulderServo.attach(10);
+  elbowServo.attach(11);
+  
+  // Move to home position
+  baseServo.write(90);
+  shoulderServo.write(45);
+  elbowServo.write(90);
+  delay(1000);
+}
+
+void loop() {
+  // Pick-up sequence
+  shoulderServo.write(90);  // Lower arm
+  delay(500);
+  elbowServo.write(120);    // Extend
+  delay(500);
+  // (Gripper close code would go here)
+  delay(500);
+  shoulderServo.write(30);  // Lift
+  delay(500);
+  baseServo.write(135);     // Rotate
+  delay(1000);
+  // Repeat or add more moves
+}</code></pre>
+
+        <p>This arm works great with our <a href="../articles/best-3d-printer-for-makers.html">3D printed enclosures</a> — print custom grippers, tool holders, and mounting brackets to expand functionality.</p>
+
+        <h2>Project 3: Automated Blinds Controller</h2>
+
+        <p><strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Components:</strong> ESP32, MG996R servo, 3D printed bracket, light sensor (BH1750 or LDR), Home Assistant (optional)</p>
+
+        <p>Automate your window blinds to open at sunrise and close at sunset (or based on room temperature). This smart home project combines servo control with IoT connectivity.</p>
+
+        <h3>Mechanical Design</h3>
+        <p>3D print a bracket that mounts to your window frame and couples the servo to the blind's tilt wand. The servo needs sufficient torque (MG996R works for standard 2" aluminum blinds). For vertical blinds or heavy wooden blinds, use a high-torque servo like the DS3218.</p>
+
+        <h3>ESP32 Integration</h3>
+        <p>The ESP32's WiFi capability lets you control blinds via:</p>
+        <ul>
+          <li><strong>Web interface</strong> — simple HTML page with open/close buttons</li>
+          <li><strong>Home Assistant</strong> — automated scenes and voice control</li>
+          <li><strong>Schedule</strong> — time-based automation (open at 7 AM, close at 7 PM)</li>
+          <li><strong>Light sensor</strong> — respond to ambient light levels</li>
+        </ul>
+
+        <p>For full Home Assistant integration, check our <a href="../articles/home-assistant-automations-beginners.html">automation beginner's guide</a> and <a href="../articles/esphome-sensor-integration.html">ESPHome sensor tutorial</a>.</p>
+
+        <h3>Code Snippet: Light-Based Automation</h3>
+        <pre><code>#include &lt;Servo.h&gt;
+#include &lt;WiFi.h&gt;
+
+Servo blindServo;
+const int lightSensorPin = 34;
+const int threshold = 500;  // Light level threshold
+
+void setup() {
+  blindServo.attach(13);
+  // Connect to WiFi (add your credentials)
+}
+
+void loop() {
+  int lightLevel = analogRead(lightSensorPin);
+  
+  if (lightLevel > threshold) {
+    blindServo.write(180);  // Open blinds
+  } else {
+    blindServo.write(0);    // Close blinds
+  }
+  
+  delay(60000);  // Check every minute
+}</code></pre>
+
+        <h2>Project 4: Solar Panel Tracker</h2>
+
+        <p><strong>Difficulty:</strong> Advanced</p>
+        <p><strong>Components:</strong> ESP32, 2x MG996R servos, 4x LDR sensors, small solar panel (5-10W)</p>
+
+        <p>Build a dual-axis solar tracker that follows the sun across the sky, maximizing energy capture by 30-50% compared to fixed panels. This project demonstrates sensor arrays, servo coordination, and real-time optimization.</p>
+
+        <h3>How It Works</h3>
+        <p>Four light-dependent resistors (LDRs) are positioned at the corners of the solar panel (or in a cross pattern). The ESP32 reads all four sensors and adjusts the panel's tilt and rotation to equalize light across all sensors — meaning the panel faces the sun directly.</p>
+
+        <h3>Sensor Array</h3>
+        <ul>
+          <li><strong>Top-left LDR</strong> vs <strong>Bottom-left LDR</strong> → calculates tilt angle</li>
+          <li><strong>Left pair</strong> vs <strong>Right pair</strong> → calculates rotation angle</li>
+        </ul>
+
+        <p>When the top-left LDR reads higher than bottom-left, the panel tilts upward. When the left pair reads higher than the right pair, the panel rotates right. This feedback loop continuously tracks the sun.</p>
+
+        <h3>Mechanical Design</h3>
+        <p>3D print or build a frame that allows 2-axis movement:</p>
+        <ul>
+          <li><strong>Horizontal axis</strong> — tracks the sun's elevation (sunrise to noon to sunset)</li>
+          <li><strong>Vertical axis</strong> — tracks the sun's azimuth (east to west)</li>
+        </ul>
+
+        <p>Use lazy Susan bearings or a 3D printed turntable for smooth rotation. For our 3D printed mechanical parts guide, see <a href="../articles/3d-printing-mechanical-parts.html">mechanical parts tutorial</a>.</p>
+
+        <h3>Code Snippet: Two-Axis Tracking</h3>
+        <pre><code>#include &lt;Servo.h&gt;
+
+Servo tiltServo, rotateServo;
+const int ldrTL = 34, ldrTR = 35, ldrBL = 32, ldrBR = 33;
+const int tolerance = 50;
+
+void setup() {
+  tiltServo.attach(13);
+  rotateServo.attach(12);
+}
+
+void loop() {
+  int topAvg = (analogRead(ldrTL) + analogRead(ldrTR)) / 2;
+  int bottomAvg = (analogRead(ldrBL) + analogRead(ldrBR)) / 2;
+  int leftAvg = (analogRead(ldrTL) + analogRead(ldrBL)) / 2;
+  int rightAvg = (analogRead(ldrTR) + analogRead(ldrBR)) / 2;
+  
+  int currentTilt = tiltServo.read();
+  int currentRotate = rotateServo.read();
+  
+  if (topAvg - bottomAvg > tolerance) {
+    tiltServo.write(currentTilt + 1);
+  } else if (bottomAvg - topAvg > tolerance) {
+    tiltServo.write(currentTilt - 1);
+  }
+  
+  if (leftAvg - rightAvg > tolerance) {
+    rotateServo.write(currentRotate + 1);
+  } else if (rightAvg - leftAvg > tolerance) {
+    rotateServo.write(currentRotate - 1);
+  }
+  
+  delay(100);
+}</code></pre>
+
+        <h2>Project 5: Animatronic Eyes</h2>
+
+        <p><strong>Difficulty:</strong> Advanced</p>
+        <p><strong>Components:</strong> Arduino Nano, 2x SG90 servos, 2x mini pan-tilt mechanisms, ping-pong balls (for eyeballs), LEDs</p>
+
+        <p>Create realistic moving eyes for Halloween props, robots, or cosplay costumes. Two servos control each eye independently, enabling lifelike saccadic movements, tracking, and expressions.</p>
+
+        <h3>Mechanical Design</h3>
+        <p>Each eye mounts on a mini pan-tilt mechanism (sold for FPV cameras, ~$5 each). The servo horns attach directly to ping-pong balls painted as eyeballs. A 3D printed eyelid mechanism adds blinking capability.</p>
+
+        <h3>Movement Patterns</h3>
+        <ul>
+          <li><strong>Random saccades</strong> — quick, jerky movements every 2-5 seconds</li>
+          <li><strong>Smooth pursuit</strong> — slow, continuous tracking (following a light)</li>
+          <li><strong>Vergence</strong> — eyes converge on near objects (cross-eyed look)</li>
+          <li><strong>Blinking</strong> — mechanical eyelids or LED dimming</li>
+        </ul>
+
+        <h3>Code Snippet: Random Saccades</h3>
+        <pre><code>#include &lt;Servo.h&gt;
+
+Servo leftPan, leftTilt, rightPan, rightTilt;
+
+void setup() {
+  leftPan.attach(3);
+  leftTilt.attach(5);
+  rightPan.attach(6);
+  rightTilt.attach(9);
+  
+  randomSeed(analogRead(A0));
+}
+
+void loop() {
+  // Random quick movement
+  int lPan = random(60, 120);
+  int lTilt = random(60, 120);
+  int rPan = lPan;  // Eyes move together
+  int rTilt = lTilt;
+  
+  leftPan.write(lPan);
+  leftTilt.write(lTilt);
+  rightPan.write(rPan);
+  rightTilt.write(rTilt);
+  
+  delay(random(2000, 5000));  // Wait 2-5 seconds
+}</code></pre>
+
+        <p>This project pairs perfectly with our <a href="../articles/3d-printed-esp32-case-design.html">3D printed enclosure guide</a> — design custom housings that hide the servos and electronics while showing only the moving eyes.</p>
+
+        <h2>Project 6: RC Servo Tester</h2>
+
+        <p><strong>Difficulty:</strong> Beginner</p>
+        <p><strong>Components:</strong> Arduino UNO, 16x2 LCD, potentiometer, 3-pin servo connector</p>
+
+        <p>Build a portable tool that tests any servo's range, torque, and response. Essential for diagnosing dead servos, calibrating center positions, and checking gear wear. This is also a great first project if you're new to servo programming.</p>
+
+        <h3>Features</h3>
+        <ul>
+          <li><strong>Manual mode</strong> — potentiometer controls angle (0-180°)</li>
+          <li><strong>Auto-sweep</strong> — servo continuously moves 0° → 180° → 0°</li>
+          <li><strong>Center finder</strong> — finds exact 90° position</li>
+          <li><strong>LCD display</strong> — shows current angle in real-time</li>
+        </ul>
+
+        <p>This tester works with any hobby servo (SG90, MG996R, high-torque digital servos). Keep it on your bench for quick diagnostics. For more test equipment ideas, see our <a href="../articles/best-oscilloscope-beginners.html">oscilloscope guide</a> and <a href="../articles/best-logic-analyzer-beginners.html">logic analyzer tutorial</a>.</p>
+
+        <h2>Best Practices for Servo Projects</h2>
+
+        <h3>1. Always Use External Power</h3>
+        <p>Arduino's 5V pin can supply ~500mA — enough for one SG90, but not for MG996R or multiple servos. Use a dedicated 5V supply (3A minimum) and connect grounds together. Under-powered servos jitter, overheat, and can reset your Arduino.</p>
+
+        <h3>2. Add Decoupling Capacitors</h3>
+        <p>Place a 100µF electrolytic capacitor across the servo power pins (near the servo). This filters voltage spikes caused by the motor's inductive kickback, preventing noise from affecting your microcontroller.</p>
+
+        <h3>3. Use PWM Libraries for ESP32</h3>
+        <p>ESP32's LEDC library provides more precise PWM control than the standard Servo library. For smooth movement, use ESP32Servo library or write custom PWM code with microsecond pulse control.</p>
+
+        <h3>4. Implement Soft Starts</h3>
+        <p>Instead of commanding a servo to jump from 0° to 180° instantly, increment the angle gradually (e.g., +1° every 10ms). This reduces current spikes and mechanical stress, extending servo life.</p>
+
+        <h3>5. Monitor Temperature</h3>
+        <p>Servos under continuous load (like robot arms holding objects) can overheat. If the case feels hot (>60°C), add a cooling pause or reduce duty cycle. For critical applications, use metal-case servos with better heat dissipation.</p>
+
+        <h3>6. Choose the Right Servo for the Job</h3>
+        <p>Don't use SG90 for heavy loads — it will strip gears. Don't use MG996R for tiny sensor mounts — it's overkill. Match torque and size to your application. Our <a href="../articles/stepper-motor-guide-beginners.html">stepper motor guide</a> helps you decide when to use steppers instead of servos.</p>
+
+        <h2>Common Servo Problems and Solutions</h2>
+
+        <h3>Problem: Servo Jitters or Shakes</h3>
+        <p><strong>Cause:</strong> Insufficient power, PWM noise, or worn potentiometer.</p>
+        <p><strong>Solution:</strong> Use external power supply, add decoupling capacitor, replace servo if potentiometer is worn.</p>
+
+        <h3>Problem: Servo Doesn't Reach Full Range</h3>
+        <p><strong>Cause:</strong> Mechanical obstruction or pulse width limits.</p>
+        <p><strong>Solution:</strong> Check for physical blocks, adjust min/max pulse parameters in code (some servos need 544-2400µs range).</p>
+
+        <h3>Problem: Servo Moves Erratically</h3>
+        <p><strong>Cause:</strong> Floating signal pin or electrical noise.</p>
+        <p><strong>Solution:</strong> Ensure servo signal pin has a stable connection, add 1kΩ pull-down resistor if needed.</p>
+
+        <h3>Problem: Servo Overheats</h3>
+        <p><strong>Cause:</strong> Holding position against heavy load, or continuous back-and-forth movement.</p>
+        <p><strong>Solution:</strong> Reduce load, add cooling pauses, or upgrade to higher-torque servo.</p>
+
+        <h2>Where to Buy Quality Servos</h2>
+
+        <ul>
+          <li><strong>Amazon</strong> — fast shipping, customer reviews, easy returns (avoid cheapest no-name brands)</li>
+          <li><strong>AliExpress</strong> — best prices for MG996R, DS3218, and bulk orders (2-4 week shipping)</li>
+          <li><strong>SparkFun / Adafruit</strong> — curated selection, datasheets, and support (premium price)</li>
+          <li><strong>HobbyKing</strong> — RC-focused, high-end servos for drones and planes</li>
+          <li><strong>Banggood</strong> — good selection of budget robot arm kits and servo bundles</li>
+        </ul>
+
+        <p>When buying from AliExpress, check seller ratings (>95% positive) and read reviews mentioning torque, noise, and durability. For critical projects, buy from reputable brands like TowerPro, Savöx, or Hitec.</p>
+
+        <h2>Expanding Your Servo Skills</h2>
+
+        <p>Once you master basic servo control, explore these advanced topics:</p>
+
+        <ul>
+          <li><strong>Continuous rotation servos</strong> — modified servos that spin 360° (like wheels)</li>
+          <li><strong>Multi-servo coordination</strong> — synchronize 6+ servos for hexapod walkers</li>
+          <li><strong>Feedback servos</strong> — read actual position for closed-loop control</li>
+          <li><strong>Bus servos</strong> — serial-controlled servos (Dynamixel, LewanSoul) that share one data line</li>
+          <li><strong>Servo-driven animatronics</strong> — combine with sound, lights, and sensors for interactive props</li>
+        </ul>
+
+        <p>For microcontroller options, compare <a href="../articles/arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi</a> to choose the best platform for your project. ESP32 offers WiFi and Bluetooth for IoT integration, while Arduino Uno remains the simplest choice for beginners.</p>
+
+        <h2>Start Building Today</h2>
+
+        <p>Servo motors unlock a world of motion and automation. Start with a simple pan-tilt mount (2x SG90 + Arduino), then progress to robot arms, smart home devices, and solar trackers. Each project teaches fundamental skills — PWM control, mechanical design, power management — that apply to all robotics.</p>
+
+        <p>Your first servo project doesn't need to be complex. Even a single servo moving a sensor or opening a box demonstrates the core concepts. From there, expand to multi-servo systems, add sensors for autonomy, and integrate with Home Assistant for smart home control.</p>
+
+        <p>Ready to build? Order your MG996R servos today, grab an ESP32, and start with the pan-tilt project. By this weekend, you'll have your first servo system moving — and a new skill that powers thousands of future projects.</p>
+
+        <p>For more maker inspiration, explore our <a href="../articles/best-breadboard-projects-beginners.html">breadboard project collection</a> and <a href="../articles/diy-electronics-workbench-setup.html">workbench setup guide</a> to create the perfect space for building robots, automation systems, and smart home gadgets.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/stepper-motor-guide-beginners.html">Stepper Motor Guide for Beginners: How They Work and How to Use Them</a></li>
+          <li><a href="../articles/diy-robot-car-arduino.html">How to Build a DIY Robot Car with Arduino: Line Following and Obstacle Avoidance</a></li>
+          <li><a href="../articles/esp32-web-server-tutorial.html">ESP32 Web Server Tutorial: Control LEDs and Sensors from Your Browser</a></li>
+          <li><a href="../articles/arduino-uno-r4-review.html">Arduino UNO R4 Review: Is the New Arduino Worth the Upgrade?</a></li>
+          <li><a href="../articles/diy-electronics-workbench-setup.html">How to Set Up a DIY Electronics Workbench: Essential Tools and Layout</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
