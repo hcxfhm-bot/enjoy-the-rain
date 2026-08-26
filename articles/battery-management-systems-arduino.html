@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Battery Management System (BMS) Projects with Arduino and ESP32</title>
+  <meta name="description" content="Build your own DIY battery management system with Arduino and ESP32. Learn cell balancing, protection circuits, and monitoring dashboards step by step.">
+  <meta name="keywords" content="DIY battery management system, Arduino BMS, ESP32 battery monitor, Li-ion BMS, battery protection circuit, cell balancing, DIY power management">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Smart Home &amp; Maker</span>
+      </nav>
+
+      <h1>DIY Battery Management System (BMS) Projects with Arduino and ESP32</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 26, 2026</span>
+        <span>⏱️ 9 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔋</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>A <strong>DIY battery management system</strong> is one of the most useful things you can build as a maker. The moment your projects leave the desk and run on Li-ion or LiPo cells — a robot car, a portable weather station, a solar gadget, or an off-grid smart home sensor — you need something to keep those cells safe. A proper BMS watches every cell's voltage, balances them, and cuts power before anything overheats, swells, or catches fire. In this guide we'll build two versions: a simple Arduino voltage monitor and a smarter ESP32-based system with a live web dashboard.</p>
+
+        <p>By the end you'll understand what a BMS actually does, which parts you need, and how to wire up protection and monitoring that you can trust. If you've never powered a project from a battery pack before, start with our <a href="../articles/power-supply-guide-beginners.html">power supply guide for electronics beginners</a> so the basics of voltage and current are clear first.</p>
+
+        <h2>What Is a Battery Management System (and Why Build Your Own?)</h2>
+
+        <p>A battery management system (BMS) is the small brain that sits between your battery cells and the rest of your circuit. Its job is to protect the pack and extend its life. Commercial BMS boards are cheap and reliable, and for many builds you should just use one (more on that below). But building your own DIY battery management system with a microcontroller teaches you exactly what's happening, lets you add custom alerts and logging, and is far more flexible when you want a dashboard, a phone notification, or integration with a larger system.</p>
+
+        <p>A BMS typically handles four jobs:</p>
+
+        <ul>
+          <li><strong>Monitoring</strong> — measuring the voltage of each cell and the pack temperature.</li>
+          <li><strong>Balancing</strong> — bleeding a tiny bit of charge from the fullest cells so they all sit at the same level.</li>
+          <li><strong>Protection</strong> — disconnecting the load on over-voltage, under-voltage, over-current, or over-temperature.</li>
+          <li><strong>Reporting</strong> — sending state-of-charge and health data to you or another device.</li>
+        </ul>
+
+        <p>When you build it yourself, the reporting layer is where the fun begins. An ESP32 can push battery data to a web page, Home Assistant, or an MQTT broker in real time.</p>
+
+        <h2>Parts You'll Need for a DIY BMS with Arduino or ESP32</h2>
+
+        <p>For the two builds in this article you'll need a modest parts bin. Most of these overlap with a normal <a href="../articles/best-esp32-development-board.html">ESP32 starter kit</a> or an Arduino Uno setup, so you may already own half of it.</p>
+
+        <ul>
+          <li>An Arduino Nano/Uno or an ESP32 dev board (ESP32 gives you Wi-Fi and a web server for free).</li>
+          <li>A Li-ion or LiPo pack — a 3S (three-cell, ~11.1V nominal) pack is a good starting point.</li>
+          <li>A voltage divider made from two resistors per cell tap, to bring cell voltage down to the 0–3.3V ADC range.</li>
+          <li>A ready-made protection BMS board (the "hardware" safety net) — we'll use it for balancing and cutoff.</li>
+          <li>A MOSFET or relay module to switch the load on and off under software control. Our <a href="../articles/relay-module-arduino-esp32.html">relay module guide</a> covers the wiring in detail.</li>
+          <li>A multimeter for sanity-checking every cell tap. If you don't have one yet, our <a href="../articles/how-to-use-multimeter-electronics.html">multimeter tutorial</a> walks you through measuring voltage safely.</li>
+        </ul>
+
+        <p><strong>Important safety note:</strong> Li-ion cells store a lot of energy and can vent or ignite if abused. Never short a cell, never exceed 4.25V per cell, and never let a cell drop below ~2.5V. A DIY battery management system is a great learning project, but always keep a commercial protection board in the loop for the physical cutoff.</p>
+
+        <h2>Understanding Cell Balancing</h2>
+
+        <p>In a multi-cell pack, no two cells age identically. After a few charge cycles one cell might read 4.10V while another sits at 3.95V. Left alone, the weaker cell becomes the bottleneck: the charger stops when the fullest cell hits 4.20V, so the pack never fully charges; and the discharge stops when the weakest cell hits the cutoff, so you never get full range. <strong>Balancing</strong> fixes this by slowly discharging the highest cells until they match.</p>
+
+        <p>There are two flavors:</p>
+
+        <ul>
+          <li><strong>Passive balancing</strong> — the most common in hobby BMS boards. It burns off excess charge from full cells through a small resistor. Simple, cheap, slightly wasteful.</li>
+          <li><strong>Active balancing</strong> — moves charge from full cells to empty ones. More efficient, more complex, and usually not worth it for a first DIY battery management system.</li>
+        </ul>
+
+        <h3>Over-Voltage, Under-Voltage, and Over-Current Protection</h3>
+
+        <p>Your protection thresholds are the heart of the system. For standard 18650 Li-ion cells, the numbers to live by are:</p>
+
+        <ul>
+          <li><strong>Over-voltage cutoff:</strong> 4.25V per cell (stop charging).</li>
+          <li><strong>Under-voltage cutoff:</strong> 2.5–3.0V per cell (stop discharging).</li>
+          <li><strong>Over-current:</strong> whatever your cells' rated continuous discharge allows (often 5–10A for 18650s).</li>
+        </ul>
+
+        <p>The microcontroller reads cell voltages through the dividers and decides when to trip the MOSFET or relay. But the hardware BMS board should be the final line of defense — your code can be slow or buggy, the board cannot.</p>
+
+        <h2>Build 1: Simple Arduino Voltage Monitor for a 3S Pack</h2>
+
+        <p>This first build just watches the pack and prints the cell voltages to the serial monitor. It's the foundation every bigger DIY battery management system grows from. For a 3S pack we measure three points: the total pack voltage and two intermediate taps.</p>
+
+        <pre><code>// Simple 3S cell monitor on Arduino Uno
+const int tapPins[3] = {A0, A1, A2}; // cell1, cell1+cell2, cell1+cell2+cell3
+float R1 = 10000.0, R2 = 10000.0;    // 1:1 divider -> /2
+float vRef = 5.0;
+
+float readCell(int idx) {
+  int raw = analogRead(tapPins[idx]);
+  float v = (raw / 1023.0) * vRef * ((R1 + R2) / R2);
+  return v;
+}
+
+void loop() {
+  float v1 = readCell(0);
+  float v2 = readCell(1) - v1;
+  float v3 = readCell(2) - v1 - v2;
+  Serial.print("Cell1: "); Serial.print(v1); Serial.println("V");
+  Serial.print("Cell2: "); Serial.print(v2); Serial.println("V");
+  Serial.print("Cell3: "); Serial.print(v3); Serial.println("V");
+  delay(1000);
+}</code></pre>
+
+        <p>Note the trick: because we only have taps at cumulative points, cell 2's voltage is the second tap minus the first, and cell 3 is the third minus the first two. That's the standard way to read a series pack without isolated per-cell ADCs. Double-check each tap against your multimeter before trusting the numbers.</p>
+
+        <h2>Build 2: ESP32 BMS with a Web Dashboard and Alerts</h2>
+
+        <p>The ESP32 version adds the killer feature: a live dashboard you can open from your phone. Instead of staring at a serial monitor, you get a web page that updates every second and warns you when a cell drifts out of range. If you've followed our <a href="../articles/esp32-web-server-tutorial.html">ESP32 web server tutorial</a>, the structure will look familiar.</p>
+
+        <pre><code>// ESP32 BMS dashboard (sketch outline)
+#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+WebServer server(80);
+
+float cellVolts[3]; // filled by your ADC reading function
+
+void handleRoot() {
+  String html = "&lt;h1&gt;DIY BMS&lt;/h1&gt; Pack: " + String(cellVolts[0]+cellVolts[1]+cellVolts[2], 2) + "V&lt;br&gt;";
+  for (int i=0;i&lt;3;i++) html += "Cell " + String(i+1) + ": " + String(cellVolts[i],2) + "V&lt;br&gt;";
+  server.send(200, "text/html", html);
+}
+
+void setup() {
+  WiFi.begin("yourSSID", "yourPASS");
+  server.on("/", handleRoot);
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+  // read cells, check thresholds, trip MOSFET if needed
+}</code></pre>
+
+        <p>Now you can mount the ESP32 next to the pack, point a browser at its IP, and watch every cell breathe. Add a threshold check in <code>loop()</code> that drives a GPIO pin to your MOSFET or relay when any cell crosses 4.25V or drops below 2.7V. For builders who already run a smart home, the same data can be forwarded over MQTT and pulled into Home Assistant exactly like our <a href="../articles/smart-home-energy-monitoring.html">DIY energy monitoring guide</a> does for mains power.</p>
+
+        <h2>Ready-Made BMS Board vs. Rolling Your Own</h2>
+
+        <p>A fair question: if a $3 protection board already balances and cuts off, why build a DIY battery management system at all? Here's the honest split:</p>
+
+        <ul>
+          <li><strong>Use a commercial BMS board when</strong> you just want the pack to be safe and you don't need data. E-bike packs, power banks, and drone batteries should use a proven board.</li>
+          <li><strong>Build your own when</strong> you want telemetry, custom alerts, logging, or integration with other projects. The DIY layer sits on top of the hardware board — it watches and reports, the board physically protects.</li>
+        </ul>
+
+        <p>Think of it as defense in depth: the cheap board is the seatbelt, your Arduino or ESP32 is the dashboard camera that tells you what happened and warns you before the seatbelt ever has to lock.</p>
+
+        <h2>Common Mistakes That Kill Battery Projects</h2>
+
+        <p>Most failed DIY battery management system builds die the same way. Avoid these:</p>
+
+        <ul>
+          <li><strong>Wrong divider math.</strong> If your resistor ratio lets a full cell push more than 3.3V into an ESP32 ADC, you'll cook the pin. Size the divider for 4.25V in → 3.0V out, with margin.</li>
+          <li><strong>Forgetting the common-mode issue.</strong> Measuring a series pack needs differential or cumulative taps — you can't just wire every cell's positive to its own ADC pin.</li>
+          <li><strong>Trusting software-only protection.</strong> Code freezes. Always keep the hardware BMS board as the hard cutoff.</li>
+          <li><strong>Skipping the multimeter check.</strong> Verify every tap with a meter before connecting the microcontroller. It takes two minutes and saves a board.</li>
+          <li><strong>Bad balance of cell ages.</strong> Mixing old and new cells in one pack guarantees imbalance and weak performance.</li>
+        </ul>
+
+        <h2>Taking Your DIY BMS Further</h2>
+
+        <p>Once the monitor works, the project practically expands itself. A few natural next steps:</p>
+
+        <ul>
+          <li><strong>Load control.</strong> Use a relay or MOSFET to shut off a robot car or lamp when the pack gets low — handy for any mobile build from our <a href="../articles/diy-robot-car-arduino.html">Arduino robot car guide</a>.</li>
+          <li><strong>State of charge.</strong> Track amp-hours in and out with a current sensor to estimate remaining battery life, not just voltage.</li>
+          <li><strong>Remote alerts.</strong> Push a Telegram or Home Assistant notification the instant a cell misbehaves, so you catch problems while you're away.</li>
+          <li><strong>Solar input.</strong> Add a charge controller and watch a small off-grid pack charge and discharge over a day.</li>
+        </ul>
+
+        <p>If you're deciding between an Arduino and an ESP32 for this kind of connected project, our <a href="../articles/arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi comparison</a> helps you pick the right controller class — for a battery monitor, an ESP32 usually wins thanks to built-in Wi-Fi.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>A <strong>DIY battery management system</strong> turns a scary stack of Li-ion cells into a project you can actually trust. Start small with an Arduino voltage monitor, graduate to an ESP32 web dashboard, and always keep a real protection board doing the dangerous cutting. With cell balancing, sensible thresholds, and a multimeter in hand, your battery-powered builds will be safer, smarter, and a lot more fun to watch.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="../articles/power-supply-guide-beginners.html">Power Supply Guide for Electronics Beginners</a></li>
+          <li><a href="../articles/how-to-use-multimeter-electronics.html">How to Use a Multimeter: Complete Guide for Electronics</a></li>
+          <li><a href="../articles/best-esp32-development-board.html">Best ESP32 Development Boards in 2026</a></li>
+          <li><a href="../articles/relay-module-arduino-esp32.html">How to Use Relay Modules with Arduino and ESP32</a></li>
+          <li><a href="../articles/arduino-vs-raspberry-pi-beginners.html">Arduino vs Raspberry Pi: Which Is Right for Your Project?</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
