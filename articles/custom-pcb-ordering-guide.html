@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Order Custom PCBs Online: From KiCad Design to Doorstep Delivery</title>
+  <meta name="description" content="Learn how to order custom PCBs online in 2026: prepare Gerbers in KiCad, choose a manufacturer, configure options, and get pro boards delivered to your door for under $5.">
+  <meta name="keywords" content="order custom PCBs online, custom PCB ordering, KiCad Gerber export, PCB fabrication service, JLCPCB PCB order, PCBWay review, PCB assembly service, how to order PCBs">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Electronics Fundamentals</span>
+      </nav>
+
+      <h1>How to Order Custom PCBs Online: From KiCad Design to Doorstep Delivery</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 27, 2026</span>
+        <span>⏱️ 9 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🛒</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>You've finished your schematic, routed every trace, and run the design rule check until it comes back clean. Now comes the satisfying part: you get to <strong>order custom PCBs online</strong> and hold a real, factory-made board in your hands about a week later. The whole process takes less than an hour of your time and often costs less than a single takeout coffee.</p>
+
+        <p>If you've only ever built circuits on breadboards, ordering a professional board feels like a leap. It isn't. In 2026, services like JLCPCB, PCBWay, and ALLPCB have made custom fabrication so cheap and automated that the hardest part is uploading your files correctly. This guide walks you through the entire pipeline—from a finished KiCad project to a package on your doorstep—and flags the mistakes that turn a $4 order into a $4 pile of scrap.</p>
+
+        <h2>Why Order Custom PCBs Online Instead of Etching at Home?</h2>
+
+        <p>Home etching with ferric chloride or a CNC mill is a rite of passage, but it has real downsides: messy chemicals, rough traces, no solder mask, no silkscreen, and boards that rarely survive more than a few months. When you <strong>order custom PCBs online</strong>, a factory plates your copper, coats it in solder mask, prints white labels, and drills holes to 0.1&nbsp;mm precision.</p>
+
+        <p>The price difference is smaller than most beginners expect. Five 100x100&nbsp;mm two-layer boards with a colored solder mask typically run $2-5 plus shipping. Add the fact that you skip hours of messy lab work, and online fabrication wins on cost, quality, and time for virtually every project bigger than a blinky LED.</p>
+
+        <h2>Prerequisites: What You Need Before You Order</h2>
+
+        <p>Before you open a manufacturer's website, make sure you have these four things ready:</p>
+
+        <ul>
+          <li><strong>A complete design</strong> — schematic and PCB layout finished in KiCad, EasyEDA, Eagle, or Altium.</li>
+          <li><strong>Verified footprints</strong> — every component symbol matches the real physical package.</li>
+          <li><strong>A passing Design Rule Check (DRC)</strong> — no unconnected nets or clearance violations.</li>
+          <li><strong>Gerber + drill files</strong> — the universal manufacturing format every fab accepts.</li>
+        </ul>
+
+        <p>If your schematic still confuses you, pause and read our <a href="how-to-read-circuit-schematics.html">beginner's guide to reading circuit schematics</a> before sending anything to a factory. Catching a wiring error at the design stage costs nothing; catching it after the boards arrive costs a full re-order.</p>
+
+        <h2>Step 1 — Finalize and Verify Your Design</h2>
+
+        <p>This is where most problems are prevented. A board is only as good as the design you upload, so treat verification as non-negotiable.</p>
+
+        <h3>Run the Design Rule Check</h3>
+
+        <p>In KiCad, open the PCB Editor and choose <strong>Inspect &raquo; Design Rules &raquo; Run DRC</strong>. Fix every error and every warning you care about. Common culprits are traces too close to pads, missing board edge definition, and unconnected nets hidden under a component. EasyEDA runs a similar check automatically before Gerber export.</p>
+
+        <h3>Generate the Gerber Files</h3>
+
+        <p>Gerbers describe each copper and overlay layer of your board. In KiCad 7+, use <strong>File &raquo; Fabrication Outputs &raquo; Gerbers (.gbr)</strong>. Select all needed layers: front copper, back copper, solder mask top/bottom, silkscreen top/bottom, board edge (Edge.Cuts), and often the paste layer if you plan assembly. Then generate the drill file separately under <strong>Fabrication Outputs &raquo; Drill Files (.drl)</strong>.</p>
+
+        <p>Our <a href="diy-pcb-design-beginners.html">DIY PCB design walkthrough</a> covers footprint assignment and routing in detail, so refer back to it if your first Gerber export looks incomplete.</p>
+
+        <h3>Bundle Everything Into One ZIP</h3>
+
+        <p>Manufacturers want a single archive. Put your .gbr files, the .drl drill file, and optionally a BOM (bill of materials) and CPL (component placement) file into one ZIP folder. A clean, named folder—<em>esp32-breakout-gerbers.zip</em>—saves you headaches later.</p>
+
+        <h2>Step 2 — Choose a PCB Manufacturer</h2>
+
+        <p>Three factories dominate the hobbyist market, and all three ship worldwide:</p>
+
+        <ul>
+          <li><strong>JLCPCB</strong> — Fastest turnaround, smoothest web uploader, cheapest base price, and tight integration with EasyEDA. Best for first-timers.</li>
+          <li><strong>PCBWay</strong> — Slightly more flexible on specs and finishes, great for prototypes and small production runs.</li>
+          <li><strong>ALLPCB</strong> — Aggressive pricing on larger quantities and frequent free-shipping promos.</li>
+        </ul>
+
+        <p>For your first order, JLCPCB's guided uploader catches missing layers and renders a 3D preview, which removes most of the guesswork. PCBWay shines when you need unusual materials or tighter tolerances.</p>
+
+        <h2>Step 3 — Upload Your Gerbers and Configure Options</h2>
+
+        <p>Drag your ZIP onto the manufacturer's upload box. The site parses the files and shows a layer map. Confirm it detected copper, mask, silk, and drill data. Then configure the build:</p>
+
+        <h3>Board Specs to Set</h3>
+
+        <ul>
+          <li><strong>Layers</strong> — 2 for almost all beginner projects; 4 only if you need power/ground planes.</li>
+          <li><strong>Thickness</strong> — 1.6&nbsp;mm is the standard; 0.8&nbsp;mm for space-constrained enclosures.</li>
+          <li><strong>PCB color</strong> — Green is cheapest; blue, black, purple, and red usually add $1-2.</li>
+          <li><strong>Surface finish</strong> — HASL is standard; ENIG (gold) resists oxidation better for fine-pitch parts.</li>
+          <li><strong>Copper weight</strong> — 1&nbsp;oz is default; bump to 2&nbsp;oz for high-current traces.</li>
+        </ul>
+
+        <h3>Quantity and Panelization</h3>
+
+        <p>Five boards is the sweet spot—factories price the first five cheaply, and spares let you experiment. If you have several tiny boards, ask about <strong>panelization</strong>: the fab arrays them on one panel so you can snap them apart later.</p>
+
+        <h2>Step 4 — Add SMT Assembly (Optional but Powerful)</h2>
+
+        <p>This is the feature that turns a bare board into a near-finished product. For a few dollars per board, the factory mounts components for you.</p>
+
+        <ul>
+          <li>Upload your <strong>BOM</strong> (list of parts with values and designators).</li>
+          <li>Upload your <strong>CPL/CPLX</strong> (placement coordinates for each part).</li>
+          <li>The fab matches your parts against its <strong>Basic Parts</strong> library; anything it stocks gets placed automatically.</li>
+        </ul>
+
+        <p>For a first order, assemble only the tedious, tiny parts (microcontrollers, resistors in 0402 packages) and hand-solder the rest. You learn the process without betting the whole build on the fab's parts stock.</p>
+
+        <h2>Step 5 — Review the Online Preview</h2>
+
+        <p>Never skip this. Every major service renders your board in 2D and 3D. Rotate it. Look for:</p>
+
+        <ul>
+          <li>Silkscreen overlapping pads or each other.</li>
+          <li>Mounting holes missing or in the wrong spot.</li>
+          <li>Traces that look too thin or suspiciously close.</li>
+          <li>Component outlines that collide.</li>
+        </ul>
+
+        <p>If anything looks wrong, fix the source design, re-export Gerbers, and re-upload. The preview is your last free chance to catch an error.</p>
+
+        <h2>Step 6 — Pay, Track, and Receive Your Boards</h2>
+
+        <p>Checkout is like any e-commerce site. A typical first order totals $2-5 for boards plus $15-25 international shipping. Most factories ship within 24-48 hours of payment, and tracking appears in your account. Expect 5-10 days door-to-door depending on your region and the courier.</p>
+
+        <p>When the package arrives, resist the urge to pop components in immediately. Inspect first.</p>
+
+        <h2>How Much Does It Cost to Order Custom PCBs Online?</h2>
+
+        <p>Here's a realistic 2026 breakdown for five 100x100&nbsp;mm two-layer boards:</p>
+
+        <ul>
+          <li><strong>Bare boards</strong> — $2 (JLCPCB promo) to $10 (PCBWay with premium finish).</li>
+          <li><strong>Color upgrade</strong> — $0-2.</li>
+          <li><strong>SMT assembly</strong> — $3-7 per board for Basic Parts.</li>
+          <li><strong>Shipping</strong> — $15-25 expedited, occasionally free during promos.</li>
+        <li><strong>Total first order</strong> — roughly $20-40 for five finished-ish boards.</li>
+        </ul>
+
+        <p>Compare that to the cost of etching supplies, drill bits, and the value of your weekend, and online ordering is the obvious winner.</p>
+
+        <h2>Common Mistakes That Ruin a PCB Order</h2>
+
+        <p><strong>Wrong units on the drill file.</strong> Exporting inches when the fab expects millimeters (or vice versa) produces holes in the wrong places. Double-check the units dropdown before exporting.</p>
+
+        <p><strong>Forgetting the Edge.Cuts layer.</strong> Without a board outline, the fab doesn't know where to cut, and your order gets rejected or comes back as a rectangular blank.</p>
+
+        <p><strong>Mismatched footprints.</strong> A symbol labeled "SOT-23" but drawn for "0805" means parts won't fit. Always cross-check footprints against the real datasheet.</p>
+
+        <p><strong>Skipping the 3D preview.</strong> This is the single most common cause of "why did my boards come back wrong?" complaints. Look at the render.</p>
+
+        <p><strong>Ordering one board.</strong> Spares are nearly free at the five-board tier and save you a full re-order if you toast one during assembly.</p>
+
+        <h2>What to Do When Your Boards Arrive</h2>
+
+        <p>First, do a <strong>visual inspection</strong> under good light. Then check continuity with a meter before soldering anything valuable. Our <a href="best-multimeter-for-electronics.html">multimeter buying guide</a> explains which features actually matter for board testing, and our <a href="how-to-solder-circuit-boards-beginners.html">circuit board soldering tutorial</a> walks you through mounting components cleanly.</p>
+
+        <p>Set up a clean, well-lit station before you start—our <a href="diy-electronics-workbench-setup.html">workbench setup guide</a> covers layout and the tools worth buying. A steady hand, a decent iron, and the right <a href="best-soldering-station-beginners.html">soldering station</a> turn a bare board into a working device in an afternoon.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>Learning to <strong>order custom PCBs online</strong> is the moment a maker graduates from fragile breadboard prototypes to real, shippable hardware. The pipeline is short: verify your KiCad design, export clean Gerbers, pick a manufacturer, configure your specs, review the 3D preview, and wait a week. For the price of a sandwich you get factory-quality boards that look like they came out of a commercial product.</p>
+
+        <p>Start with five bare boards on your next small project. Hold one in your hand, marvel at the crisp solder mask and silkscreen, then build it. Within a few orders, sending a design to a factory will feel as routine as uploading a photo—and your projects will never look like a nest of jumper wires again.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="diy-pcb-design-beginners.html">DIY PCB Design for Beginners: EasyEDA, KiCad and Fabrication Guide</a></li>
+          <li><a href="how-to-read-circuit-schematics.html">How to Read Circuit Schematics: A Beginner's Guide to Electronics Diagrams</a></li>
+          <li><a href="how-to-solder-circuit-boards-beginners.html">How to Solder Circuit Boards: Complete Beginner's Guide</a></li>
+          <li><a href="best-multimeter-for-electronics.html">Best Multimeter for Electronics & DIY Makers in 2026</a></li>
+          <li><a href="best-soldering-station-beginners.html">Best Soldering Station for Electronics & DIY Makers in 2026</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
