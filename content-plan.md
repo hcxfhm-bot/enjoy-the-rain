@@ -361,9 +361,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 259 篇 ✅ (批次50进行中)
-- **当前批次**: 批次50
-- **剩余**: 43 篇
+- **已完成**: 285 篇 ✅ (批次51进行中)
+- **当前批次**: 批次51
+- **剩余**: 15 篇
 
 ### 批次 50：ELECTRONICS FUNDAMENTALS & ADVANCED MAKER (6篇) 🆕
 - [x] digital-electronics-beginners — Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained ✅ 2026-08-23
@@ -371,7 +371,24 @@
 - [x] best-servo-motor-arduino-projects — Best Servo Motor Projects with Arduino and ESP32 in 2026 ✅ 2026-08-25
 - [x] battery-management-systems-arduino — DIY Battery Management System (BMS) Projects with Arduino and ESP32 ✅ 2026-08-26
 - [x] custom-pcb-ordering-guide — How to Order Custom PCBs Online: From KiCad Design to Doorstep Delivery ✅ 2026-08-27
-- [ ] how-to-use-logic-analyzer-arduino — How to Use a Logic Analyzer to Debug Arduino and ESP32 Projects
+- [x] how-to-use-logic-analyzer-arduino — How to Use a Logic Analyzer to Debug Arduino and ESP32 Projects ✅ 2026-08-28
+
+### 批次 51：MAKER & SMART HOME FUNDAMENTALS (15篇) 🆕
+- [ ] raspberry-pi-pico-beginners-guide — Raspberry Pi Pico Beginner's Guide: Your First RP2040 Project
+- [ ] esp32-vs-arduino-comparison — ESP32 vs Arduino: Which Board Should You Start With?
+- [ ] i2c-vs-spi-vs-uart-protocols — I2C vs SPI vs UART: Choosing the Right Protocol for Your Project
+- [ ] mqtt-protocol-beginners-guide — MQTT Protocol for Beginners: How Your Smart Home Talks
+- [ ] how-to-use-breadboard-basics — How to Use a Breadboard: A Beginner's Wiring Guide
+- [ ] gpio-pins-explained — GPIO Pins Explained: Read and Control Them on Arduino and ESP32
+- [ ] pwm-arduino-esp32-explained — PWM on Arduino and ESP32 Explained: Dim LEDs and Drive Motors
+- [ ] raspberry-pi-os-install-guide — How to Install Raspberry Pi OS: SD Card Setup for Beginners
+- [ ] how-to-flash-esphome-esp32 — How to Flash ESPHome on an ESP32: A Beginner's Walkthrough
+- [ ] diy-wifi-smart-plug-esp32 — DIY Wi-Fi Smart Plug with ESP32 and Home Assistant
+- [ ] home-assistant-vs-openhab — Home Assistant vs openHAB: Which Open-Source Hub Wins?
+- [ ] esp32-cam-vs-devkit-comparison — ESP32-CAM vs ESP32 DevKit: Which Board for Your Project?
+- [ ] 3d-printed-raspberry-pi-case-design — 3D Printed Raspberry Pi Cases: Design Tips and Wall Mounts
+- [ ] lora-esp32-beginners — LoRa with ESP32 for Beginners: Build Long-Range DIY Sensors
+- [ ] best-breadboard-power-supply — Best Breadboard Power Supplies for Prototyping in 2026
 
 ### 批次 49：MAKER PROJECTS & IOT CONTINUED (6篇) 🆕 ✅
 - [x] diy-robot-car-arduino — How to Build a DIY Robot Car with Arduino: Line Following and Obstacle Avoidance ✅ 2026-08-15

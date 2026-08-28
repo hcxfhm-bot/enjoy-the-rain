@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use a Logic Analyzer to Debug Arduino and ESP32 Projects</title>
+  <meta name="description" content="Learn to use a logic analyzer to debug Arduino and ESP32 projects: capture and decode UART, I2C, and SPI signals, then find bugs fast. Step-by-step guide.">
+  <meta name="keywords" content="logic analyzer, logic analyzer arduino, logic analyzer esp32, logic analyzer tutorial, saleae logic analyzer, protocol analyzer, i2c spi uart debug, esp32 debugging">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="../index.html" class="nav-brand">
+      <span class="icon">🖨️</span> 3D Print <span>Starter</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../getting-started.html">Getting Started</a></li>
+      <li><a href="../printers.html">Best Printers</a></li>
+      <li><a href="../filament-guide.html">Filament Guide</a></li>
+      <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="section">
+  <div class="container">
+    <article class="article-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a> &raquo; <span>Maker Tools</span>
+      </nav>
+
+      <h1>How to Use a Logic Analyzer to Debug Arduino and ESP32 Projects</h1>
+
+      <!-- Author + Date -->
+      <div class="article-meta">
+        <span>📅 August 28, 2026</span>
+        <span>⏱️ 10 min read</span>
+        <span>✍️ 3D Print Starter Team</span>
+      </div>
+
+      <!-- Featured Image Placeholder -->
+      <div class="article-featured" style="background: linear-gradient(135deg, #1a1b30, #252640); height: 280px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 2rem;">
+        <span style="font-size: 4rem;">🔍</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>When your Arduino or ESP32 project talks to a sensor over I2C but the data never arrives, a serial print can only tell you so much. A <strong>logic analyzer</strong> lets you see the actual electrical signals flowing on the wires — every rising edge, every byte, and every timing glitch. In this guide you will learn how to set up a logic analyzer, connect it to your board, and decode UART, I2C, and SPI traffic to find bugs that a software debugger simply cannot show.</p>
+
+        <p>By the end, you will be able to capture a live signal in under two minutes and read exactly what your microcontroller is sending. This is one of the highest-leverage debugging skills you can add to your maker toolbox, right alongside knowing <a href="how-to-use-multimeter-electronics.html">how to use a multimeter</a> for checking voltages.</p>
+
+        <h2>What Is a Logic Analyzer (and Why You Need One)</h2>
+        <p>A <strong>logic analyzer</strong> is a device that samples the high and low states of digital signal lines many times per second and draws them as a timeline. Unlike an oscilloscope, it does not show the analog voltage shape — it only cares whether a pin is logic 0 or logic 1. That trade-off is exactly what makes it cheap and perfect for digital buses.</p>
+
+        <p>Most maker-grade analyzers use the popular 8-channel "FX2" board (often called a Saleae clone) and cost between $8 and $25. They connect over USB and pair with free software such as <a href="best-logic-analyzer-beginners.html">PulseView (Sigrok) or the Saleae Logic software</a>. With one of these you can watch up to 8 pins at once, which is enough for I2C, SPI, UART, and even PWM or LED protocols like WS2812.</p>
+
+        <p>The moment a logic analyzer pays for itself is when a sensor "just doesn't respond." Your code looks right, the serial monitor shows nothing useful, and you are stuck. Plug in a <strong>logic analyzer</strong>, capture the bus, and within seconds you can see whether the clock is toggling, whether the slave address is correct, and whether the ACK bit ever comes back.</p>
+
+        <h2>What You'll Need</h2>
+        <ul>
+          <li>An 8-channel USB logic analyzer (FX2 / Saleae clone)</li>
+          <li>A host computer running Windows, macOS, or Linux</li>
+          <li>PulseView (Sigrok) or Saleae Logic 2 software (free)</li>
+          <li>Your Arduino Uno, ESP32, or ESP8266 board with a test sketch</li>
+          <li>Female-to-female jumper wires and a breadboard</li>
+          <li>A target device to talk to, such as an I2C sensor or UART module</li>
+        </ul>
+
+        <p>If you have not built a test circuit before, our <a href="how-to-read-circuit-schematics.html">guide to reading circuit schematics</a> will help you map pins confidently. A solid grasp of <a href="digital-electronics-beginners.html">digital electronics fundamentals</a> also makes the decoded data far easier to interpret.</p>
+
+        <h2>Step 1 — Install the Software and Connect the Analyzer</h2>
+        <p>Download PulseView from the Sigrok website (or Logic 2 from Saleae if you have a genuine unit) and install it. Plug the analyzer into a USB port; most FX2 clones are recognized without drivers on Windows 10 and later. Open the software and you should see 8 channels labeled D0 through D7 in the capture setup.</p>
+
+        <p>Set your sampling rate well above the signal speed. A good rule is at least <strong>4 times the bus clock</strong>, and 10 times is safer. For a 115200 baud UART, pick 1 MHz or higher. For a 400 kHz I2C bus, 4 MHz is comfortable. Faster sampling uses more memory, but these cheap analyzers handle several seconds of capture at a few MHz without trouble.</p>
+
+        <h2>Step 2 — Wire the Probe to Your Board</h2>
+        <p>Connection order matters. Always attach <strong>ground first</strong>. Clip the analyzer's black ground lead to any GND pin on your Arduino or ESP32. Then connect one channel wire to the signal pin you want to watch.</p>
+
+        <h3>Connecting for UART</h3>
+        <p>UART uses two lines: TX (transmit) and RX (receive). To see what your board sends to the serial monitor, connect channel D0 to the TX pin. On an Arduino Uno that is pin 1; on most ESP32 dev boards the default TX is GPIO1. Capture D0 and you will see the exact bytes leaving the chip — handy when the onboard serial monitor lies or is unavailable.</p>
+
+        <h3>Connecting for I2C</h3>
+        <p>I2C needs two channels: SCL (clock) and SDA (data). Wire D0 to SCL and D1 to SDA. Both lines sit at 3.3 V on an ESP32 or 5 V on an Uno, pulled up by resistors on the bus. A <strong>logic analyzer</strong> reads these directly. If you see SDA stuck high and SCL never moving, the bus is not starting — often a missing pull-up or a wrong address in code.</p>
+
+        <h3>Connecting for SPI</h3>
+        <p>SPI uses four signals: SCLK, MOSI, MISO, and CS. Assign D0 to SCLK, D1 to MOSI, D2 to MISO, and D3 to CS. Because SPI can run at several MHz, raise your sampling rate to at least 8 to 10 MHz so you do not miss bits.</p>
+
+        <h2>Step 3 — Capture and Decode the Protocol</h2>
+        <p>Press the Run button in the software, then trigger the action on your board — send the I2C request, print the UART line, or toggle the SPI transfer. Stop the capture and you will see a flat band of 1s and 0s. Right-click a channel, add the matching protocol analyzer, and enter the right settings.</p>
+
+        <p>For UART, set the baud rate to match your sketch (common values are 9600, 115200, or 921600) and choose 8N1 (8 data bits, no parity, 1 stop bit). For I2C, set the speed to 100 kHz or 400 kHz. For SPI, set the bit order (usually MSB first) and the clock polarity and phase your device expects. Within a moment the analyzer overlays the decoded bytes on top of the waveform.</p>
+
+        <p>This is where the magic happens. That "garbage" on the serial line suddenly reads as clean ASCII. That I2C transaction shows the start condition, the address 0x68, the register byte, and the data coming back. You are no longer guessing — you are reading the wire.</p>
+
+        <h2>Step 4 — Find the Bug</h2>
+        <p>Most maker debugging sessions fall into a few patterns, and a <strong>logic analyzer</strong> exposes each one fast:</p>
+        <ul>
+          <li><strong>Wrong baud rate:</strong> the decoded UART text is scrambled gibberish. Match the capture baud to your sketch and it clears up.</li>
+          <li><strong>Wrong I2C address:</strong> you see a start, the address byte, and no ACK. You are calling the wrong address in Wire.beginTransmission().</li>
+          <li><strong>Missing pull-up:</strong> SDA or SCL sits flat. Add 4.7 kΩ pull-ups to 3.3 V and the bus comes alive.</li>
+          <li><strong>Timing violation:</strong> the clock runs but data changes on the wrong edge. Fix your SPI mode (CPOL and CPHA).</li>
+          <li><strong>Level mismatch:</strong> an ESP32 (3.3 V) talking to a 5 V device may read intermittently. Add a level shifter.</li>
+        </ul>
+
+        <p>When a signal looks wrong at the logic level, it also helps to confirm the voltage with a meter. Our <a href="how-to-use-multimeter-electronics.html">multimeter walkthrough</a> covers how to verify supply rails before you blame the code.</p>
+
+        <h2>Logic Analyzer vs Oscilloscope: When to Use Which</h2>
+        <p>A <strong>logic analyzer</strong> and an oscilloscope solve different problems. Reaching for the wrong one wastes time. Use this quick rule:</p>
+        <ul>
+          <li><strong>Use a logic analyzer</strong> when you care about protocol content: "Is the I2C address correct? Did the byte arrive? Is the PWM duty cycle right?" It decodes digital meaning.</li>
+          <li><strong>Use an oscilloscope</strong> when you care about analog behavior: "Is the rise time clean? Is there ringing, noise, or a voltage sag under load?" See our <a href="best-digital-storage-oscilloscope-2026.html">oscilloscope buying guide</a> for a deep comparison.</li>
+        </ul>
+
+        <p>In practice, makers reach for the logic analyzer far more often because most bugs are protocol or timing bugs, not analog ones. Keep the scope for power-supply noise and signal integrity work.</p>
+
+        <h2>Common Logic Analyzer Mistakes</h2>
+        <ul>
+          <li><strong>Forgetting ground:</strong> with no shared ground the levels are meaningless. Connect GND before any signal wire.</li>
+          <li><strong>Sampling too slow:</strong> a 115200 baud line captured at 100 kHz misses most bits. Bump the rate up 10 times.</li>
+          <li><strong>Mixing voltage domains:</strong> many FX2 clones are 5 V tolerant but not 3.3 V safe on every pin — check your board and use a divider when needed.</li>
+          <li><strong>Wrong decoder settings:</strong> a UART at 8N1 decoded as 7E1 shows nonsense. Match the protocol exactly.</li>
+          <li><strong>Watching the wrong pin:</strong> double-check the datasheet. A mislabeled MOSI vs MISO wastes an afternoon.</li>
+        </ul>
+
+        <h2>Frequently Asked Questions</h2>
+        <h3>Can a logic analyzer damage my ESP32 or Arduino?</h3>
+        <p>Not if you connect ground first and stay within the voltage rating of your analyzer. Most clone boards tolerate 5 V, but confirm the spec before probing a 3.3 V line directly.</p>
+
+        <h3>How many channels do I really need?</h3>
+        <p>Eight channels cover UART (2), I2C (2), and SPI (4) with one spare. If you only debug I2C or UART, a 4-channel model is enough, but 8 gives room to grow.</p>
+
+        <h3>Will it work with MicroPython or Arduino code?</h3>
+        <p>Yes. A <strong>logic analyzer</strong> watches the physical pins, not the language. Whether you write in C++, MicroPython, or CircuitPython, the captured waveform is the same.</p>
+
+        <h3>Is the free Sigrok software good enough?</h3>
+        <p>For maker work, absolutely. PulseView decodes dozens of protocols out of the box and costs nothing. Paid tools add faster sampling and deeper memory, which most hobby projects never need.</p>
+
+        <h2>Conclusion and Next Steps</h2>
+        <p>A <strong>logic analyzer</strong> turns "it should work" into "here is exactly what the wire is doing." For the price of a coffee, you get the power to decode UART, I2C, and SPI, catch timing bugs, and verify every signal your Arduino or ESP32 produces. Start with one I2C sensor, capture a transaction, and watch the address and data appear — that single moment changes how you debug forever.</p>
+
+        <p>Ready to go further? Build a bench that covers every failure mode: pair this tool with a good <a href="best-multimeter-for-electronics.html">multimeter for electronics</a>, learn <a href="how-to-read-circuit-schematics.html">how to read schematics</a> so you can trace any bus, and try a live capture on an <a href="esp32-web-server-tutorial.html">ESP32 web server project</a> to see your own HTTP bytes on the wire.</p>
+      </div>
+
+      <!-- AdSense Placeholder -->
+      <div class="ad-placeholder inline" style="margin: 2rem 0;">
+        📢 Advertisement — Ad Placeholder (Google AdSense)
+      </div>
+
+      <!-- Related Articles -->
+      <div class="related-articles">
+        <h2>📖 You Might Also Like</h2>
+        <ul>
+          <li><a href="best-logic-analyzer-beginners.html">Best Logic Analyzers for Makers and Hobbyists in 2026</a></li>
+          <li><a href="how-to-use-multimeter-electronics.html">How to Use a Multimeter: Complete Guide for Electronics Projects</a></li>
+          <li><a href="best-digital-storage-oscilloscope-2026.html">Best Digital Storage Oscilloscopes for Hobbyists in 2026</a></li>
+          <li><a href="how-to-read-circuit-schematics.html">How to Read Circuit Schematics: A Beginner's Guide</a></li>
+          <li><a href="esp32-web-server-tutorial.html">ESP32 Web Server Tutorial: Control Sensors from Your Browser</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🖨️ 3D Print Starter</h3>
+        <p>Your trusted guide to getting started with 3D printing and DIY maker electronics.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started</a></li>
+          <li><a href="../printers.html">Best Printers</a></li>
+          <li><a href="../filament-guide.html">Filament Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="../projects.html">Project Ideas</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 3D Print Starter. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
