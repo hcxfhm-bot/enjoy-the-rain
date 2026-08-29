@@ -361,9 +361,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 285 篇 ✅ (批次51进行中)
+- **已完成**: 286 篇 ✅ (批次51进行中)
 - **当前批次**: 批次51
-- **剩余**: 15 篇
+- **剩余**: 14 篇
 
 ### 批次 50：ELECTRONICS FUNDAMENTALS & ADVANCED MAKER (6篇) 🆕
 - [x] digital-electronics-beginners — Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained ✅ 2026-08-23
@@ -374,7 +374,7 @@
 - [x] how-to-use-logic-analyzer-arduino — How to Use a Logic Analyzer to Debug Arduino and ESP32 Projects ✅ 2026-08-28
 
 ### 批次 51：MAKER & SMART HOME FUNDAMENTALS (15篇) 🆕
-- [ ] raspberry-pi-pico-beginners-guide — Raspberry Pi Pico Beginner's Guide: Your First RP2040 Project
+- [x] raspberry-pi-pico-beginners-guide — Raspberry Pi Pico Beginner's Guide: Your First RP2040 Project ✅ 2026-08-29
 - [ ] esp32-vs-arduino-comparison — ESP32 vs Arduino: Which Board Should You Start With?
 - [ ] i2c-vs-spi-vs-uart-protocols — I2C vs SPI vs UART: Choosing the Right Protocol for Your Project
 - [ ] mqtt-protocol-beginners-guide — MQTT Protocol for Beginners: How Your Smart Home Talks
