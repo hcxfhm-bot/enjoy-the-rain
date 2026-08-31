@@ -361,9 +361,9 @@
 ## 进度
 
 - **总目标**: 300 篇
-- **已完成**: 287 篇 ✅ (批次51进行中)
+- **已完成**: 288 篇 ✅ (批次51进行中)
 - **当前批次**: 批次51
-- **剩余**: 13 篇
+- **剩余**: 12 篇
 
 ### 批次 50：ELECTRONICS FUNDAMENTALS & ADVANCED MAKER (6篇) 🆕
 - [x] digital-electronics-beginners — Digital Electronics for Beginners: Logic Gates, Binary & Ohm's Law Explained ✅ 2026-08-23
@@ -376,7 +376,7 @@
 ### 批次 51：MAKER & SMART HOME FUNDAMENTALS (15篇) 🆕
 - [x] raspberry-pi-pico-beginners-guide — Raspberry Pi Pico Beginner's Guide: Your First RP2040 Project ✅ 2026-08-29
 - [x] esp32-vs-arduino-comparison — ESP32 vs Arduino: Which Board Should You Start With? ✅ 2026-08-30
-- [ ] i2c-vs-spi-vs-uart-protocols — I2C vs SPI vs UART: Choosing the Right Protocol for Your Project
+- [x] i2c-vs-spi-vs-uart-protocols — I2C vs SPI vs UART: Choosing the Right Protocol for Your Project ✅ 2026-08-31
 - [ ] mqtt-protocol-beginners-guide — MQTT Protocol for Beginners: How Your Smart Home Talks
 - [ ] how-to-use-breadboard-basics — How to Use a Breadboard: A Beginner's Wiring Guide
 - [ ] gpio-pins-explained — GPIO Pins Explained: Read and Control Them on Arduino and ESP32

@@ -1728,4 +1728,10 @@
     <ns0:changefreq>weekly</ns0:changefreq>
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
+  <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/i2c-vs-spi-vs-uart-protocols.html</ns0:loc>
+    <ns0:lastmod>2026-08-31</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.6</ns0:priority>
+  </ns0:url>
 </ns0:urlset>
