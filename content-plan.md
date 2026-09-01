@@ -377,7 +377,7 @@
 - [x] raspberry-pi-pico-beginners-guide — Raspberry Pi Pico Beginner's Guide: Your First RP2040 Project ✅ 2026-08-29
 - [x] esp32-vs-arduino-comparison — ESP32 vs Arduino: Which Board Should You Start With? ✅ 2026-08-30
 - [x] i2c-vs-spi-vs-uart-protocols — I2C vs SPI vs UART: Choosing the Right Protocol for Your Project ✅ 2026-08-31
-- [ ] mqtt-protocol-beginners-guide — MQTT Protocol for Beginners: How Your Smart Home Talks
+- [x] mqtt-protocol-beginners-guide — MQTT Protocol for Beginners: How Your Smart Home Talks ✅ 2026-09-01
 - [ ] how-to-use-breadboard-basics — How to Use a Breadboard: A Beginner's Wiring Guide
 - [ ] gpio-pins-explained — GPIO Pins Explained: Read and Control Them on Arduino and ESP32
 - [ ] pwm-arduino-esp32-explained — PWM on Arduino and ESP32 Explained: Dim LEDs and Drive Motors
