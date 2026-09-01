@@ -1584,6 +1584,12 @@
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
   <ns0:url>
+    <ns0:loc>https://3dprintstarter.com/articles/mqtt-protocol-beginners-guide.html</ns0:loc>
+    <ns0:lastmod>2026-09-01</ns0:lastmod>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+  <ns0:url>
     <ns0:loc>https://3dprintstarter.com/articles/zigbee2mqtt-setup-guide.html</ns0:loc>
     <ns0:lastmod>2026-07-24</ns0:lastmod>
     <ns0:changefreq>monthly</ns0:changefreq>
