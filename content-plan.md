@@ -378,7 +378,7 @@
 - [x] esp32-vs-arduino-comparison — ESP32 vs Arduino: Which Board Should You Start With? ✅ 2026-08-30
 - [x] i2c-vs-spi-vs-uart-protocols — I2C vs SPI vs UART: Choosing the Right Protocol for Your Project ✅ 2026-08-31
 - [x] mqtt-protocol-beginners-guide — MQTT Protocol for Beginners: How Your Smart Home Talks ✅ 2026-09-01
-- [ ] how-to-use-breadboard-basics — How to Use a Breadboard: A Beginner's Wiring Guide
+- [x] how-to-use-breadboard-basics — How to Use a Breadboard: A Beginner's Wiring Guide ✅ 2026-09-02
 - [ ] gpio-pins-explained — GPIO Pins Explained: Read and Control Them on Arduino and ESP32
 - [ ] pwm-arduino-esp32-explained — PWM on Arduino and ESP32 Explained: Dim LEDs and Drive Motors
 - [ ] raspberry-pi-os-install-guide — How to Install Raspberry Pi OS: SD Card Setup for Beginners
